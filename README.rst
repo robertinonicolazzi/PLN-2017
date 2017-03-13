@@ -1,4 +1,4 @@
-PLN 2015: Procesamiento de Lenguaje Natural 2015
+PLN 2017: Procesamiento de Lenguaje Natural 2017
 ================================================
 
 
@@ -31,15 +31,15 @@ Instalación
 
    Para crear y activar nuestro virtualenv::
 
-    mkvirtualenv --system-site-packages --python=/usr/bin/python3.4 pln-2015
+    mkvirtualenv --system-site-packages --python=/usr/bin/python3.4 pln-2017
 
 3. Bajar el código::
 
-    git clone https://github.com/PLN-FaMAF/PLN-2015.git
+    git clone https://github.com/PLN-FaMAF/PLN-2017.git
 
 4. Instalarlo::
 
-    cd pln-2015
+    cd PLN-2017
     pip install -r requirements.txt
 
 
@@ -48,7 +48,7 @@ Ejecución
 
 1. Activar el entorno virtual con::
 
-    workon pln-2015
+    workon pln-2017
 
 2. Correr el script que uno quiera. Por ejemplo::
 
