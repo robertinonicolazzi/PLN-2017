@@ -15,7 +15,7 @@ Instalación
 
    En un sistema basado en Debian (como Ubuntu), se puede hacer::
 
-    sudo apt-get install git python-pip python3.4 python3-tk virtualenv
+    sudo apt-get install git python-pip python3 python3-tk virtualenv
 
 2. Crear y activar un nuevo
    `virtualenv <http://virtualenv.readthedocs.org/en/latest/virtualenv.html>`_.
@@ -31,7 +31,7 @@ Instalación
 
    Para crear y activar nuestro virtualenv::
 
-    mkvirtualenv --system-site-packages --python=/usr/bin/python3.4 pln-2017
+    mkvirtualenv --system-site-packages --python=/usr/bin/python3 pln-2017
 
 3. Bajar el código::
 
