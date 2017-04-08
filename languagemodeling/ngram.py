@@ -2,6 +2,8 @@
 from collections import defaultdict
 from math import log 
 
+from random import random
+
 INICIO = '<s>'
 FINAL = '</s>'
 class NGram(object):
@@ -134,3 +136,32 @@ class NGramGenerator:
  
         prev_tokens -- the previous n-1 tokens (optional only if n = 1).
         """
+
+        if not prev_tokens:
+            prev_tokens = []
+
+        assert(len(prev_tokens) == self.n-1)
+
+        """
+        ya que la 'variable aleatoria' toma cantidades finitas de valores
+        vamos a usar el siguiente algoritmo de variables continuas aleatoria
+        rias 
+        """
+        tokens_posibles = self.sorted_probs[prev_tokens]
+
+        u = random()
+
+        acumulada = 0
+        tokenElegido = ''
+
+        for token, prob in tokens_posibles:
+            acumulada += prob
+            if u <= acumulada:
+                tokenElegido = token
+                break
+
+        assert(tokenElegido != '')
+
+        return tokenElegido
+
+
