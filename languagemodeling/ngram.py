@@ -120,6 +120,10 @@ class NGramGenerator:
                     probs.update({prev_tokens: dict()}) #agregamos un elemento al diccionado probs de los n-1 tokens anteriores
                 probs[prev_tokens].update({token: model.cond_prob(token, list(prev_tokens))})
 
+        for prev_tokens, probabilidades in probs.items():
+            temp_sorted_probs = sorted(probabilidades.items(),
+                                        key= lambda x : (-x[1],x[0]))
+            sorted_probs.update({prev_tokens: temp_sorted_probs})
 
  
     def generate_sent(self):
