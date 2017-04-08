@@ -98,3 +98,35 @@ class NGram(object):
 
         tokens = prev_tokens + [token]
         return float(self.counts[tuple(tokens)]) / self.counts[tuple(prev_tokens)]
+
+class NGramGenerator:
+ 
+    def __init__(self, model):
+        """
+        model -- n-gram model.
+        """
+        self.model = model
+        self.n = model.n
+        n = self.n
+        self.probs = probs = dict()
+        self.sorted_probs = sorted_probs = dict()
+
+        #probs debe ser de la forma (n-1 tokes anteriores): {next1: prob, next2: prob}
+        for ngram in model.counts:
+            if len(ngram) == n:
+                token = ngram[n-1] #tomamos el ultimo para determinar su probabilidad a partir de los anteriores
+                prev_tokens = ngram[:n-1] #tupla de tokens previos
+                if prev_tokens not in probs:
+                    probs.update({prev_tokens: dict()}) #agregamos un elemento al diccionado probs de los n-1 tokens anteriores
+                probs[prev_tokens].update({token: model.cond_prob(token, list(prev_tokens))})
+
+
+ 
+    def generate_sent(self):
+        """Randomly generate a sentence."""
+ 
+    def generate_token(self, prev_tokens=None):
+        """Randomly generate a token, given prev_tokens.
+ 
+        prev_tokens -- the previous n-1 tokens (optional only if n = 1).
+        """
