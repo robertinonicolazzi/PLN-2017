@@ -1,3 +1,3 @@
 pln_2015.egg-info/
 **/__pycache__/
-harry*ngram
+harry[0-9]ngram
