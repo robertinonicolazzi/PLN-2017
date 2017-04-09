@@ -180,3 +180,46 @@ class NGramGenerator:
         return tokenElegido
 
 
+class AddOneNGram(NGram):
+    def __init__(self, n, sents):
+        """
+        n -- order of the model.
+        sents -- list of sentences, each one being a list of tokens.
+        """
+        assert n > 0
+        self.n = n
+        self.counts = counts = defaultdict(int)
+        vocabulary  = set()
+        for sent in sents:
+            vocabulary.update(set(sent))
+            sent = [INICIO for i in range(n-1)] + sent + [FINAL]
+            for i in range(len(sent) - n + 1):
+                ngram = tuple(sent[i: i + n])
+                counts[ngram] += 1
+                counts[ngram[:-1]] += 1
+
+        self.v = len(vocabulary)
+
+    def V(self):
+        return self.v
+
+    def cond_prob(self, token, prev_tokens=None):
+        """Conditional probability of a token.
+ 
+        token -- the token.
+        prev_tokens -- the previous n-1 tokens (optional only if n = 1).
+        """
+        if not prev_tokens:
+            prev_tokens = []
+
+        assert len(prev_tokens) == self.n - 1
+
+        tokens = prev_tokens + [token]
+        a = self.counts[tuple(tokens)]
+        b = self.counts[tuple(prev_tokens)]
+
+        res = 0
+        if b != 0:
+            res = (a+1) / float(float(b)+ self.v)
+
+        return res
