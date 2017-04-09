@@ -130,6 +130,21 @@ class NGramGenerator:
  
     def generate_sent(self):
         """Randomly generate a sentence."""
+
+        #Para evitar errores de underflow agregamos al inicio
+        prev_tokens = [INICIO for i in range(self.n-1)] 
+        sentence = []
+
+        result = self.generate_token(prev_tokens)
+
+        while result != FINAL:
+            sentence.append(result)
+            prev_tokens = prev_tokens + [result]
+            prev_tokens.pop(0)
+            result = self.generate_token(prev_tokens)
+
+        return sentence
+
  
     def generate_token(self, prev_tokens=None):
         """Randomly generate a token, given prev_tokens.
@@ -147,7 +162,7 @@ class NGramGenerator:
         vamos a usar el siguiente algoritmo de variables continuas aleatoria
         rias 
         """
-        tokens_posibles = self.sorted_probs[prev_tokens]
+        tokens_posibles = self.sorted_probs[tuple(prev_tokens)]
 
         u = random()
 
