@@ -189,7 +189,7 @@ class AddOneNGram(NGram):
         assert n > 0
         self.n = n
         self.counts = counts = defaultdict(int)
-        vocabulary  = set()
+        vocabulary  = set({FINAL})
         for sent in sents:
             vocabulary.update(set(sent))
             sent = [INICIO for i in range(n-1)] + sent + [FINAL]
