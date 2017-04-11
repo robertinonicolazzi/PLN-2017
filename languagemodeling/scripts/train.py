@@ -39,7 +39,6 @@ if __name__ == '__main__':
     # train the model
     n = int(opts['-n'])
     m = str(opts['-m'])
-    print (m)
 
     if m == "ngram":
       print ("Modelo NGram")

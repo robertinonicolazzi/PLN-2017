@@ -223,3 +223,22 @@ class AddOneNGram(NGram):
             res = (a+1) / float(float(b)+ self.v)
 
         return res
+
+def Evaluacion(self,model,testSents):
+    """
+    Recordemos que podemos escribir la probabilidad de una cadena de palabras
+    utilizando la regla de la cadena
+    """
+    nPalabras = 0
+    log_probability = 0
+
+    for sent in testSents:
+        nPalabras = len(sent) #sumamos las palabras de cada sentencia
+        log_probability += model.sent_prob(sent)
+
+    crossEntropy = log_probability / float(nPalabras)
+    perplex = pow(2,-crossEntropy)
+
+    self.log_probability = log_probability
+    self.perplexity = perplex
+    self.cross_entropy = crossEntropy
