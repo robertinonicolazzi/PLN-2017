@@ -16,6 +16,7 @@ Options:
 from docopt import docopt
 import pickle
 
+import nltk.data
 from nltk.corpus import PlaintextCorpusReader
 from languagemodeling.ngram import NGram, AddOneNGram
 from nltk.tokenize import RegexpTokenizer
@@ -34,7 +35,8 @@ if __name__ == '__main__':
     | [][.,;"'?():-_`]  
     '''
     tokenizer = RegexpTokenizer(pattern)
-    corpus = PlaintextCorpusReader(r'languagemodeling/', 'harrypotter.txt',word_tokenizer=tokenizer)
+    sent_tokenizer = nltk.data.load('tokenizers/punkt/spanish.pickle')
+    corpus = PlaintextCorpusReader(r'languagemodeling/Corpus', 'corpusTrain.txt',sent_tokenizer=sent_tokenizer,word_tokenizer=tokenizer)
     sents =  corpus.sents()
     # train the model
     n = int(opts['-n'])

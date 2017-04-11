@@ -20,11 +20,6 @@ from languagemodeling.ngram import NGramGenerator
 if __name__ == '__main__':
     opts = docopt(__doc__)
 
-    # load the data
-
-
-    corpus = PlaintextCorpusReader(r'languagemodeling/', 'harrypotter.txt')
-    sents =  corpus.sents()
     # train the model
     n = int(opts['-n'])
 
