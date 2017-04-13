@@ -81,7 +81,6 @@ tokens previo, se modifica sumando uno al numerador y sumando V al denominador
 Se crea una clase Evaluacion, la cual utilizando el calculo de la log probability de un modelo y su cross entropy obtenemos la perplexity del mismo
 
 | Modelo | 1 | 2 | 3 | 4 |
-| ------ | ------ |------ |------ |------ |
-| NGRAM |  |
-| ADDONE | | | 
+| ------ | ------ | ------ | ------ | ------ |
+| ADDONE | 1172.888 | 2992.226 | 19154.502 | 34630.520 |
 

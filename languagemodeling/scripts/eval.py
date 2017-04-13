@@ -46,6 +46,4 @@ if __name__ == '__main__':
     evaluacion = Evaluacion(model, test_sents)
     print("Archivo cargado: %s" % filepath)
     print("-------------------------------------------")
-    print("Perplexity: %f\n" % evaluacion.perplexity)
-    print("Perplexity: %f\n" % evaluacion.cross_entropy)
-    print("Perplexity: %f\n" % evaluacion.log_probability)
+    print("Perplexity: %f\n" % evaluacion.perplexity())

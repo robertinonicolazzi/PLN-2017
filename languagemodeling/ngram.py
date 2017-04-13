@@ -19,11 +19,14 @@ class NGram:
         self.counts = counts = defaultdict(int)
 
         for sent in sents:
-            sent = [INICIO for _ in range(n - 1)] + sent + [FINAL]
+            sent = self.rellenarSent(sent)
             for i in range(len(sent) - n + 1):
                 ngram = tuple(sent[i:i + n])
                 counts[ngram] += 1
                 counts[ngram[:-1]] += 1
+
+    def rellenarSent(self, sent):
+        return [INICIO for _ in range(self.n - 1)] + sent + [FINAL]
 
     def count(self, tokens):
         """Count for an n-gram or (n-1)-gram.
@@ -55,8 +58,7 @@ class NGram:
 
         sent -- the sentence as a list of tokens.
         """
-        ant = [INICIO for i in range(self.n - 1)]
-        sent = ant + sent + [FINAL]
+        sent = self.rellenarSent(sent)
         result = 1
         for i in range(self.n - 1, len(sent)):
             word = sent[i]
@@ -70,8 +72,7 @@ class NGram:
 
         sent -- the sentence as a list of tokens.
         """
-        ant = [INICIO for _ in range(self.n - 1)]
-        sent = ant + sent + [FINAL]
+        sent = self.rellenarSent(sent)
         result = 0
 
         for i in range(self.n - 1, len(sent)):
@@ -80,8 +81,8 @@ class NGram:
             temp = self.cond_prob(word, prev_tokens)
 
             if temp == 0:
-                print ("da cero")
-                print (sent)
+                print("da cero")
+                print(sent)
                 result += float('-inf')
                 break
             else:
@@ -181,15 +182,15 @@ class AddOneNGram(NGram):
 
         self.n = n
         self.counts = counts = defaultdict(int)
-        vocabulary = set({FINAL})
+        word_types = set({FINAL})
         for sent in sents:
-            vocabulary.update(set(sent))
-            sent = [INICIO for _ in range(n - 1)] + sent + [FINAL]
+            word_types.update(set(sent))  # Mantenemos unicidad
+            sent = self.rellenarSent(sent)
             for i in range(len(sent) - n + 1):
                 ngram = tuple(sent[i:i + n])
                 counts[ngram] += 1
                 counts[ngram[:-1]] += 1
-        self.v = len(vocabulary)
+        self.v = len(word_types)
 
     def V(self):
         """Size of the vocabulary.
@@ -218,15 +219,22 @@ class AddOneNGram(NGram):
 
 class Evaluacion:
     def __init__(self, model, testSents):
-
-        nPalabras = 0
-        self.log_probability = log_probability = 0
-
+        self.model = model
+        self.sents = testSents
+        self.word_types = nPalabras = 0
         for sent in testSents:
             nPalabras += len(sent)
-            log_probability += model.sent_log_prob(sent)
+        self.word_types= nPalabras
 
-        crossEntropy = log_probability / float(nPalabras)
-        self.perplexity = pow(2, -crossEntropy)
-        self.cross_entropy = crossEntropy
-        self.log_probability = log_probability
+    def log_probability(self):
+        log_probability = 0
+        for sent in self.sents:
+            log_probability += self.model.sent_log_prob(sent)
+
+        return log_probability
+
+    def cross_entropy(self):
+        return self.log_probability() / float(self.word_types)
+
+    def perplexity(self):
+        return pow(2, -self.cross_entropy())
