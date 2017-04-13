@@ -29,4 +29,5 @@ if __name__ == '__main__':
     generator = NGramGenerator(model)
 
     for _ in range(0, n):
-        print(generator.generate_sent())
+        print(' '.join(generator.generate_sent()))
+        print('\n')
