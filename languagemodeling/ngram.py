@@ -216,7 +216,7 @@ class AddOneNGram(NGram):
 
 
 class Evaluacion:
-    def __init_(self, model, testSents):
+    def __init__(self, model, testSents):
 
         nPalabras = 0
         self.log_probability = log_probability = 0

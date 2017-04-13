@@ -36,10 +36,37 @@ base a tokens previos.
 #### Oraciones generadas
 ##### 1-GRAM
 #
-* The as design goal for Markdown's
-* formatting syntax is to make it as readable
-* as possible. The idea is that a
-* Markdown-formatted document should be
+* anillo segunda encogiéndose Barnabás de fue sospecha Harry de mencionaras llamó dicho mandan por dijo Harry
+* torre Harry estaba Ron a Gryffindor DÓNDE de puede
+* Quidditch preguntéis , una aguardaron Harry inmediato
+* Pero Filch sobre varita
+* Hagrid y mirando faltado Harry ataque Y unas la Así repuso
+
+##### 2-GRAM
+#
+* Bueno , mirando a sangrar por entre las orejeras .
+* Qué es la vista antes que hayas sido dado una risa malvada y le importa que Colagusano .
+* Moody se estaba de la taza de Neville lloriqueaba en voz alta .
+* Él puso la puso mucho si no acabó con una varita .
+* Animados por la portada , que podéis comprarme una fuente y ruidosa de aplastarlo ?
+
+##### 3-GRAM
+#
+* Y cuando ya había saltado para coger la Descurainia sophia y centinodia murmuró , dónde estás .
+* Ya sabes , Harry ; te importa ?
+* Se supone que estamos desgnomizando , salen a curiosear .
+* Ah , bueno , salvo Dumbledore y Zacharias Smith , que estoy deseando que los niños por otra parte .
+* Te asustas al oír que los tiró contra el suelo ; él y Ginny fueron a la Orden del Fénix ... Harry aguzaba el oído por casualidad lo interrumpió Dumbledore hay una cantidad de vendajes , apesta .
+
+
+##### 4-GRAM
+#
+* Antes de que Harry les enseñaba ; arrugaba la regordeta cara en una mueca de asco .
+* La reina blanca volvió su cara sin rostro hacia Ron.
+* Les debemos tanto ... Hombres nobles que trabajaron sin descanso para ayudar a Ginny?
+* 'Romilda Vane' dijo Ron , que parecía estar lleno de nargles.
+* No lo sé, señor respondió temblorosa la primera voz.
+
 
 ## Ejercicio 4 Add One
 
