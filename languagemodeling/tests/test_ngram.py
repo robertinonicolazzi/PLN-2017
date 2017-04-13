@@ -118,7 +118,6 @@ class TestNGram(TestCase):
             self.assertEqual(ngram.cond_prob(token, list(prev)), p)
 
     def test_sent_prob_3gram(self):
-        ngram = NGram(3, self.sents)
         print (ngram.counts)
         sents = {
             # after '<s><s>': 'el' and 'la' have prob 0.5.

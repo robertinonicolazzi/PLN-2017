@@ -80,7 +80,10 @@ class NGram:
             temp = self.cond_prob(word, prev_tokens)
 
             if temp == 0:
+                print ("da cero")
+                print (sent)
                 result += float('-inf')
+                break
             else:
                 result += log(temp, 2)
 
@@ -208,9 +211,7 @@ class AddOneNGram(NGram):
         a = self.counts[tuple(tokens)]
         b = self.counts[tuple(prev_tokens)]
 
-        res = 0
-        if b != 0:
-            res = (a + 1) / float(float(b) + self.v)
+        res = (a + 1) / float(float(b) + self.v)
 
         return res
 
@@ -227,3 +228,5 @@ class Evaluacion:
 
         crossEntropy = log_probability / float(nPalabras)
         self.perplexity = pow(2, -crossEntropy)
+        self.cross_entropy = crossEntropy
+        self.log_probability = log_probability

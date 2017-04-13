@@ -47,3 +47,5 @@ if __name__ == '__main__':
     print("Archivo cargado: %s" % filepath)
     print("-------------------------------------------")
     print("Perplexity: %f\n" % evaluacion.perplexity)
+    print("Perplexity: %f\n" % evaluacion.cross_entropy)
+    print("Perplexity: %f\n" % evaluacion.log_probability)
