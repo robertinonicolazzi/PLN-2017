@@ -81,8 +81,6 @@ class NGram:
             temp = self.cond_prob(word, prev_tokens)
 
             if temp == 0:
-                print("da cero")
-                print(sent)
                 result += float('-inf')
                 break
             else:
@@ -110,14 +108,14 @@ class NGramGenerator:
                 token = ngram[n - 1]
                 prev_tokens = ngram[:n - 1]
                 if prev_tokens not in probs:
-                    probs.update({prev_tokens: dict()})
-                probs[prev_tokens].update(
-                    {token: model.cond_prob(token, list(prev_tokens))})
+                    probs[prev_tokens] = dict()
+                probs[prev_tokens][token] = model.cond_prob(token,
+                                                            list(prev_tokens))
 
         for prev_tokens, probabilidades in probs.items():
             temp_sorted_probs = sorted(
                 probabilidades.items(), key=lambda x: (-x[1], x[0]))
-            sorted_probs.update({prev_tokens: temp_sorted_probs})
+            sorted_probs[prev_tokens] = temp_sorted_probs
 
     def generate_sent(self):
         """Randomly generate a sentence."""
@@ -224,7 +222,7 @@ class Evaluacion:
         self.word_types = nPalabras = 0
         for sent in testSents:
             nPalabras += len(sent)
-        self.word_types= nPalabras
+        self.word_types = nPalabras
 
     def log_probability(self):
         log_probability = 0
