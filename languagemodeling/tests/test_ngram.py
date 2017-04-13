@@ -59,6 +59,38 @@ class TestNGram(TestCase):
         for gram, c in counts.items():
             self.assertEqual(ngram.count(gram), c)
 
+    def test_count_3gram(self):
+        ngram = NGram(3, self.sents)
+
+        counts = {
+            ('<s>', 'el'): 1,
+            ('el', 'gato'): 1,
+            ('gato', 'come'): 1,
+            ('come', 'pescado'): 1,
+            ('pescado', '.'): 1,
+            ('<s>', 'la'): 1,
+            ('<s>', '<s>'): 2,
+            ('la', 'gata'): 1,
+            ('gata', 'come'): 1,
+            ('come', 'salmón'): 1,
+            ('salmón', '.'): 1,
+            ('<s>','<s>', 'la'): 1,
+            ('<s>','<s>', 'el'): 1,
+            ('<s>', 'el','gato'): 1,
+            ('el','gato','come'): 1,
+            ('gato','come','pescado'): 1,
+            ('come','pescado','.'): 1,
+            ('pescado','.','</s>'): 1,
+            ('<s>', 'la','gata'): 1,
+            ('la','gata','come'): 1,
+            ('gata','come','salmón'): 1,
+            ('come','salmón','.'): 1,
+            ('salmón','.','</s>'): 1,
+
+        }
+        for gram, c in counts.items():
+            self.assertEqual(ngram.count(gram), c)
+
     def test_cond_prob_1gram(self):
         ngram = NGram(1, self.sents)
 
@@ -69,6 +101,38 @@ class TestNGram(TestCase):
         }
         for token, p in probs.items():
             self.assertEqual(ngram.cond_prob(token), p)
+
+    def test_cond_prob_3gram(self):
+        ngram = NGram(3, self.sents)
+        probs = {
+            ('pescado', ('gato', 'come')): 1/1.0,
+            ('salmón', ('gato', 'come')): 0.0,
+            ('salame', ('gato', 'come')): 0.0,
+            ('salmón', ('gata', 'come')): 1/1.0,
+            ('gata', ('<s>', 'la')): 1/1.0,
+            ('come', ('la','gata')): 1/1.0,
+            ('salmón', ('gata','come')): 1/1.0,
+        }
+        for (token, prev), p in probs.items():
+            print (prev)
+            self.assertEqual(ngram.cond_prob(token, list(prev)), p)
+
+    def test_sent_prob_3gram(self):
+        ngram = NGram(3, self.sents)
+        print (ngram.counts)
+        sents = {
+            # after '<s><s>': 'el' and 'la' have prob 0.5.
+            # el resto de las ocurrencias aparece
+            'el gato come pescado .': 0.5*1.0,
+            'la gata come salmón .': 0.5*1.0,
+            'el gato come salmón .': 0.5*0.0,
+            'la gata come pescado .': 0.5*0.0,
+            'el gato come salame .': 0.5*0.0,  # 'salame' unseen
+            'la la la': 0.0,  # 'la' after 'la' unseen
+        }
+        
+        for sent, prob in sents.items():
+            self.assertAlmostEqual(ngram.sent_prob(sent.split()), prob, msg=sent)
 
     def test_cond_prob_2gram(self):
         ngram = NGram(2, self.sents)
@@ -109,6 +173,8 @@ class TestNGram(TestCase):
         }
         for sent, prob in sents.items():
             self.assertAlmostEqual(ngram.sent_prob(sent.split()), prob, msg=sent)
+
+
 
     def test_sent_log_prob_1gram(self):
         ngram = NGram(1, self.sents)
