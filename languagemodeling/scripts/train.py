@@ -32,7 +32,9 @@ if __name__ == '__main__':
     | \w+(?:-\w+)*        # words with optional internal hyphens
     | \$?\d+(?:\.\d+)?%?  # currency and percentages, e.g. $12.40, 82%
     | \.\.\.            # ellipsis
-    | [][.,;"'?():-_`]
+    | \.\.           # ellipsis
+    | \.\.\.\.          # ellipsis
+    | [][.,;"'¿?():-_`]
     '''
     tokenizer = RegexpTokenizer(pattern)
     sent_tokenizer = nltk.data.load('tokenizers/punkt/spanish.pickle')

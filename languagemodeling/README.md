@@ -84,3 +84,6 @@ Se crea una clase Evaluacion, la cual utilizando el calculo de la log probabilit
 | ------ | ------ | ------ | ------ | ------ |
 | ADDONE | 1172.888 | 2992.226 | 19154.502 | 34630.520 |
 
+### TEST
+
+Se agrego un test de N-Gram para n de valor 3
