@@ -32,25 +32,28 @@ if __name__ == '__main__':
     | \w+(?:-\w+)*        # words with optional internal hyphens
     | \$?\d+(?:\.\d+)?%?  # currency and percentages, e.g. $12.40, 82%
     | \.\.\.            # ellipsis
-    | [][.,;"'?():-_`]  
+    | [][.,;"'?():-_`]
     '''
     tokenizer = RegexpTokenizer(pattern)
     sent_tokenizer = nltk.data.load('tokenizers/punkt/spanish.pickle')
-    corpus = PlaintextCorpusReader(r'languagemodeling/Corpus', 'corpusTrain.txt',sent_tokenizer=sent_tokenizer,word_tokenizer=tokenizer)
-    sents =  corpus.sents()
+    corpus = PlaintextCorpusReader(r'languagemodeling/Corpus',
+                                   'corpusTrain.txt',
+                                   sent_tokenizer=sent_tokenizer,
+                                   word_tokenizer=tokenizer)
+    sents = corpus.sents()
     # train the model
     n = int(opts['-n'])
     m = str(opts['-m'])
 
     if m == "ngram":
-      print ("Modelo NGram")
-      model = NGram(n, sents)
+        print("Modelo NGram")
+        model = NGram(n, sents)
     elif m == "addone":
-      print ("Modelo AddOne NGram")
-      model = AddOneNGram(n, sents)
+        print("Modelo AddOne NGram")
+        model = AddOneNGram(n, sents)
     else:
-      print ("Tipo de modelo inexistente")
-      exit()
+        print("Tipo de modelo inexistente")
+        exit()
 
     # save it
     filename = opts['-o']

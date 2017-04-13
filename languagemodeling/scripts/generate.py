@@ -13,7 +13,6 @@ Options:
 from docopt import docopt
 import pickle
 
-from nltk.corpus import PlaintextCorpusReader
 from languagemodeling.ngram import NGramGenerator
 
 
@@ -24,10 +23,10 @@ if __name__ == '__main__':
     n = int(opts['-n'])
 
     filepath = str(opts['-i'])
-    fileload = open(filepath,'rb')
+    fileload = open(filepath, 'rb')
 
     model = pickle.load(fileload)
     generator = NGramGenerator(model)
 
-    for _ in range(0,n):
-    	print (generator.generate_sent())
+    for _ in range(0, n):
+        print(generator.generate_sent())
