@@ -236,3 +236,87 @@ class Evaluacion:
 
     def perplexity(self):
         return pow(2, -self.cross_entropy())
+
+class InterpolatedNGram(NGram):
+ 
+    def __init__(self, n, sents, gamma=None, addone=True):
+        """
+        n -- order of the model.
+        sents -- list of sentences, each one being a list of tokens.
+        gamma -- interpolation hyper-parameter (if not given, estimate using
+            held-out data).
+        addone -- whether to use addone smoothing (default: True).
+        """
+        assert (n > 0)
+        self.n = n
+        self.counts = counts = defaultdict(int)
+
+        self.gamma = gamma
+        self.addone = addone
+
+        word_types = set({FINAL})
+        for sent in sents:
+            word_types.update(set(sent))  # Mantenemos unicidad
+            sent = self.rellenarSent(sent)
+            for i in range(len(sent) - n + 1):
+                ngram = tuple(sent[i:i + n])
+                counts[ngram] += 1
+                for k in range(n):
+                    counts[ngram[:k]] += 1 
+        #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
+        counts[(FINAL,)]= len(sents)
+        self.lambdas = []
+        self.v = 0
+        if addone:
+            self.v = len(word_types)
+
+    def rellenarSent(self, sent):
+        return [INICIO for _ in range(self.n - 1)] + sent + [FINAL]
+
+    def lamb(self,tokens=None):
+        self.lambdas = []
+        for k in range(self.n):
+            cantidad = self.counts[tuple(tokens[k:])]
+            b = 1
+            if k != self.n-1:
+                b = cantidad / float(cantidad + self.gamma)
+
+            a = 1 - sum(self.lambdas)
+
+            result = a*b
+            self.lambdas.append(result)
+
+
+    def qML(self, token, prev_tokens):
+        if not prev_tokens:
+            prev_tokens = []
+        tokens = prev_tokens + [token]
+        a = self.counts[tuple(tokens)]
+        b = self.counts[tuple(prev_tokens)]
+
+        res = 0
+
+        if self.addone:
+            res = (a+1)/float(b+self.v)
+        elif b != 0:
+            res = a / float(b)
+
+        return res
+
+    def cond_prob(self, token, prev_tokens=None):
+        """Conditional probability of a token.
+
+        token -- the token.
+        prev_tokens -- the previous n-1 tokens (optional only if n = 1).
+        """
+        if not prev_tokens:
+            prev_tokens = []
+        assert(len(prev_tokens) == self.n - 1)
+
+        result = 0
+        self.lamb(prev_tokens)
+        print (self.lambdas)
+        for i in range(self.n):
+            result += self.lambdas[i]*self.qML(token, prev_tokens[i:])
+
+        return result
