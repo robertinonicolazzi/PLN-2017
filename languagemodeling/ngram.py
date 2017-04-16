@@ -351,3 +351,70 @@ class InterpolatedNGram(NGram):
             result += self.lambdas[i]*self.qML(token, prev_tokens[i:])
 
         return result
+
+class BackOffNGram(NGram):
+ 
+    def __init__(self, n, sents, beta=None, addone=True):
+        """
+        Back-off NGram model with discounting as described by Michael Collins.
+ 
+        n -- order of the model.
+        sents -- list of sentences, each one being a list of tokens.
+        beta -- discounting hyper-parameter (if not given, estimate using
+            held-out data).
+        addone -- whether to use addone smoothing (default: True).
+        """
+ 
+    """
+       Todos los métodos de NGram.
+    """
+ 
+    def cond_prob(self, token, prev_tokens):
+
+        if prev_tokens == None:
+            prev_tokens = []
+
+        if token in self.A(prev_tokens):
+
+        else:
+
+
+    def A(self, tokens):
+        """Set of words with counts > 0 for a k-gram with 0 < k < n.
+ 
+        tokens -- the k-gram tuple.
+        """
+        result = set()
+
+        for palabra in self.counts:
+            if len(palabra) == 1:
+                if tokens + palabra in self.counts:
+                    result.add(palabra)
+
+        return result
+
+ 
+    def alpha(self, tokens):
+        """Missing probability mass for a k-gram with 0 < k < n.
+ 
+        tokens -- the k-gram tuple.
+        """
+        result = 1
+        denom = self.counts(tokens)
+        Aset = self.A(tokens)
+        if len(Aset) != 0 and denom != 0:
+            result = (self.beta * len(Aset))/float(denom)
+
+        return result
+ 
+    def denom(self, tokens):
+        """Normalization factor for a k-gram with 0 < k < n.
+ 
+        tokens -- the k-gram tuple.
+        """
+        sum_result = 0
+        tokens_tail = tokens[1:]
+
+        denom = self.counts(tokens_tail)
+        for tk in self.A(tokens):
+            sum_result += (self.counts(tokens_tail + tk) - self.beta)
