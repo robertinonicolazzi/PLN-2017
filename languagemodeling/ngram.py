@@ -1,6 +1,6 @@
 
 from random import random
-from math import log
+from math import log, ceil
 from collections import defaultdict
 
 INICIO = '<s>'
@@ -219,10 +219,10 @@ class Evaluacion:
     def __init__(self, model, testSents):
         self.model = model
         self.sents = testSents
-        self.word_types = nPalabras = 0
+        self.cantidad_palabras = nPalabras = 0
         for sent in testSents:
             nPalabras += len(sent)
-        self.word_types = nPalabras
+        self.cantidad_palabras = nPalabras
 
     def log_probability(self):
         log_probability = 0
@@ -232,7 +232,7 @@ class Evaluacion:
         return log_probability
 
     def cross_entropy(self):
-        return self.log_probability() / float(self.word_types)
+        return self.log_probability() / float(self.cantidad_palabras)
 
     def perplexity(self):
         return pow(2, -self.cross_entropy())
@@ -253,22 +253,54 @@ class InterpolatedNGram(NGram):
 
         self.gamma = gamma
         self.addone = addone
+        if gamma == None:
+            train_sents = sents[0:int(ceil(len(sents)*0.1))]
+            held_out = sents[int(ceil(len(sents)*0.1)):]
+            word_types = set({FINAL})
+            for sent in train_sents:
+                word_types.update(set(sent))  # Mantenemos unicidad
+                sent = self.rellenarSent(sent)
+                for i in range(len(sent) - n + 1):
+                    ngram = tuple(sent[i:i + n])
+                    counts[ngram] += 1
+                    for k in range(n):
+                        counts[ngram[:k]] += 1 
+            #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
+            counts[(FINAL,)]= len(train_sents)
+            self.lambdas = []
+            self.v = 0
+            if addone:
+                self.v = len(word_types)
 
-        word_types = set({FINAL})
-        for sent in sents:
-            word_types.update(set(sent))  # Mantenemos unicidad
-            sent = self.rellenarSent(sent)
-            for i in range(len(sent) - n + 1):
-                ngram = tuple(sent[i:i + n])
-                counts[ngram] += 1
-                for k in range(n):
-                    counts[ngram[:k]] += 1 
-        #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
-        counts[(FINAL,)]= len(sents)
-        self.lambdas = []
-        self.v = 0
-        if addone:
-            self.v = len(word_types)
+            gammas_posibles = [10.0, 100.0, 200.0]
+
+            gamma_elegido = 0
+            min_perplexity = float('inf')
+            for g in gammas_posibles:
+                p = Evaluacion(self, held_out).perplexity()
+                if p < min_perplexity:
+                    gamma_elegido = g
+                    min_perplexity = p
+
+            self.gamma = gamma_elegido
+
+
+        else:
+            word_types = set({FINAL})
+            for sent in sents:
+                word_types.update(set(sent))  # Mantenemos unicidad
+                sent = self.rellenarSent(sent)
+                for i in range(len(sent) - n + 1):
+                    ngram = tuple(sent[i:i + n])
+                    counts[ngram] += 1
+                    for k in range(n):
+                        counts[ngram[:k]] += 1 
+            #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
+            counts[(FINAL,)]= len(sents)
+            self.lambdas = []
+            self.v = 0
+            if addone:
+                self.v = len(word_types)
 
     def rellenarSent(self, sent):
         return [INICIO for _ in range(self.n - 1)] + sent + [FINAL]
@@ -315,7 +347,6 @@ class InterpolatedNGram(NGram):
 
         result = 0
         self.lamb(prev_tokens)
-        print (self.lambdas)
         for i in range(self.n):
             result += self.lambdas[i]*self.qML(token, prev_tokens[i:])
 
