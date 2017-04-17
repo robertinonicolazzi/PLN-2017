@@ -10,6 +10,8 @@ Options:
   -m <model>    Model to use [default: ngram]:
                   ngram: Unsmoothed n-grams.
                   addone: N-grams with add-one smoothing.
+                  inter: N-grams with Interpolated.
+                  backoff: N-grams with backOff discounting.
   -o <file>     Output model file.
   -h --help     Show this screen.
 """
@@ -18,7 +20,7 @@ import pickle
 
 import nltk.data
 from nltk.corpus import PlaintextCorpusReader
-from languagemodeling.ngram import NGram, AddOneNGram
+from languagemodeling.ngram import NGram, AddOneNGram,BackOffNGram,InterpolatedNGram
 from nltk.tokenize import RegexpTokenizer
 
 if __name__ == '__main__':
@@ -53,6 +55,12 @@ if __name__ == '__main__':
     elif m == "addone":
         print("Modelo AddOne NGram")
         model = AddOneNGram(n, sents)
+    elif m == "inter":
+        print("Modelo Interpolated NGram")
+        model = InterpolatedNGram(n, sents)
+    elif m == "backoff":
+        print("Modelo BackOff NGram")
+        model = BackOffNGram(n, sents)
     else:
         print("Tipo de modelo inexistente")
         exit()
