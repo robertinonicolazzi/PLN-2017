@@ -33,7 +33,7 @@ class NGram:
 
         tokens -- the n-gram or (n-1)-gram tuple.
         """
-        return self.counts[tokens]
+        return self.counts[tuple(tokens)]
 
     def cond_prob(self, token, prev_tokens=None):
         """Conditional probability of a token.
@@ -364,19 +364,51 @@ class BackOffNGram(NGram):
             held-out data).
         addone -- whether to use addone smoothing (default: True).
         """
- 
-    """
-       Todos los métodos de NGram.
-    """
- 
-    def cond_prob(self, token, prev_tokens):
+        self.n = n
+        self.counts = counts = defaultdict(int)
+        self.Aset = Aset = defaultdict(set)
+        self.beta = beta
+        self.addone = addone
+        word_types = set({FINAL})
+        
+        for sent in sents:
+            word_types.update(set(sent))  # Mantenemos unicidad
+            sent = self.rellenarSent(sent)
+            for i in range(len(sent) - n + 1):
+                ngram = tuple(sent[i:i + n])
+                Aset[tuple(sent[i:i + n-1])].update({sent[i + n-1]})
+                counts[ngram] += 1
+                for k in range(n):
+                    counts[ngram[:k]] += 1 
+        #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
+        counts[(FINAL,)]= len(sents)
+        self.lambdas = []
+        self.v = len(word_types)
+
+    def cond_prob(self, token, prev_tokens=None):
 
         if prev_tokens == None:
             prev_tokens = []
-
-        if token in self.A(prev_tokens):
-
+        res = 0
+        if len(prev_tokens) != 0:
+            if token in self.A(prev_tokens):
+                a = self.counts[tuple(prev_tokens+ [token])]- self.beta
+                b = self.counts[tuple(prev_tokens)]
+                if b != 0:
+                    res = a/float(b)
+            else:
+                a = self.alpha(prev_tokens)*self.cond_prob(token,prev_tokens[1:])
+                b = self.denom(prev_tokens)
+                if b != 0:
+                    res = a/float(b)
+            
         else:
+            if self.addone == False:
+                res = (self.counts[(token,)])/float(self.counts[tuple()])
+            else:
+                res = (self.counts[(token,)] + 1.0)/float(self.counts[tuple()] +self.v)
+
+        return res      
 
 
     def A(self, tokens):
@@ -384,14 +416,8 @@ class BackOffNGram(NGram):
  
         tokens -- the k-gram tuple.
         """
-        result = set()
 
-        for palabra in self.counts:
-            if len(palabra) == 1:
-                if tokens + palabra in self.counts:
-                    result.add(palabra)
-
-        return result
+        return self.Aset[tuple(tokens)]
 
  
     def alpha(self, tokens):
@@ -400,7 +426,7 @@ class BackOffNGram(NGram):
         tokens -- the k-gram tuple.
         """
         result = 1
-        denom = self.counts(tokens)
+        denom = self.counts[tuple(tokens)]
         Aset = self.A(tokens)
         if len(Aset) != 0 and denom != 0:
             result = (self.beta * len(Aset))/float(denom)
@@ -412,9 +438,7 @@ class BackOffNGram(NGram):
  
         tokens -- the k-gram tuple.
         """
-        sum_result = 0
-        tokens_tail = tokens[1:]
+        tokens = list(tokens)
 
-        denom = self.counts(tokens_tail)
-        for tk in self.A(tokens):
-            sum_result += (self.counts(tokens_tail + tk) - self.beta)
+        suma = sum(self.cond_prob(i,tokens[1:]) for i in self.Aset[tuple(tokens)])
+        return 1 - suma
