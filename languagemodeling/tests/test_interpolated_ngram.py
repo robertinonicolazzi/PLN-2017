@@ -11,6 +11,53 @@ class TestInterpolatedNGram(TestCase):
             'el gato come pescado .'.split(),
             'la gata come salmón .'.split(),
         ]
+    def test_count_3gram(self):
+        #from nose.tools import set_trace; set_trace()
+        models = [
+            # same test for different values of beta and addone:
+            InterpolatedNGram(3, self.sents, gamma=1.0)
+        ]
+
+        counts = {
+            (): 12,
+            ('el',): 1,
+            ('gato',): 1,
+            ('come',): 2,
+            ('pescado',): 1,
+            ('.',): 2,
+            ('</s>',): 2,
+            ('la',): 1,
+            ('gata',): 1,
+            ('salmón',): 1,
+            ('<s>', 'el'): 1,
+            ('el', 'gato'): 1,
+            ('gato', 'come'): 1,
+            ('come', 'pescado'): 1,
+            ('pescado', '.'): 1,
+            ('.', '</s>'): 2,
+            ('<s>', 'la'): 1,
+            ('la', 'gata'): 1,
+            ('gata', 'come'): 1,
+            ('come', 'salmón'): 1,
+            ('salmón', '.'): 1,
+            ('<s>', '<s>', 'la'): 1,
+            ('<s>', '<s>', 'el'): 1,
+            ('<s>', 'el', 'gato'): 1,
+            ('el', 'gato', 'come'): 1,
+            ('gato', 'come', 'pescado'): 1,
+            ('come', 'pescado', '.'): 1,
+            ('pescado', '.', '</s>'): 1,
+            ('<s>', 'la', 'gata'): 1,
+            ('la', 'gata', 'come'): 1,
+            ('gata', 'come', 'salmón'): 1,
+            ('come', 'salmón', '.'): 1,
+            ('salmón', '.', '</s>'): 1,
+
+        }
+        print (models[0].counts)
+        for model in models:
+            for gram, c in counts.items():
+                self.assertEqual(model.count(gram), c, msg=gram)
 
     def test_count_1gram(self):
         model = InterpolatedNGram(1, self.sents, gamma=1.0)
