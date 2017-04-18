@@ -80,9 +80,28 @@ tokens previo, se modifica sumando uno al numerador y sumando V al denominador
 ## Ejercicio 5 Perplexity
 Se crea una clase Evaluacion, la cual utilizando el calculo de la log probability de un modelo y su cross entropy obtenemos la perplexity del mismo
 
-| Modelo | 1 | 2 | 3 | 4 |
-| ------ | ------ | ------ | ------ | ------ |
-| ADDONE | 1172.888 | 2992.226 | 19154.502 | 34630.520 |
+| Modelo  | 1 | 2 | 3 | 4 |
+| ------  | ------ | ------ | ------ | ------ |
+| ADDONE  | 1172.888 | 2992.226 | 19154.502 | 34630.520 |
+| BACKOFF | 1618.543 | 635.193  | 605.512   | 590.621   |
+
+Archivo cargado: b1
+-------------------------------------------
+Perplexity: 1618.543874
+
+Archivo cargado: b2
+-------------------------------------------
+Perplexity: 635.193584
+
+Archivo cargado: b3
+-------------------------------------------
+Perplexity: 605.512118
+
+Archivo cargado: b4
+-------------------------------------------
+Perplexity: 590.621473
+
+
 
 ### TEST
 
