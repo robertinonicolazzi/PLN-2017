@@ -364,20 +364,21 @@ class BackOffNGram(NGram):
         n = self.n
         word_types = set({FINAL})
         for sent in sents:
+            counts[()] += len(sent) + 1
             word_types.update(set(sent))  # Mantenemos unicidad
             sent = self.rellenarSent(sent)
-            for i in range(len(sent) - n + 1):
-                ngram = tuple(sent[i:i + n])
-                Aset[ngram[:-1]].update(ngram[-1:])
-                counts[ngram] += 1
-                for k in range(n):
-                    if len(ngram[:k][:-1]) != 0:
-                        Aset[ngram[:k][:-1]].update(ngram[:k][-1:])
-                    counts[ngram[:k]] += 1 
+            n= self.n
+
+            while n != 0:
+                for i in range(len(sent) - n + 1):
+                    ngram = tuple(sent[i:i + n])
+                    Aset[ngram[:-1]].update(ngram[-1:])
+                    counts[ngram] += 1
+                n = n-1
         #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
         counts[(FINAL,)]= len(sents)
-        self.lambdas = []
-        self.v = len(word_types)
+        if self.addone:
+            self.v = len(word_types)
 
     def __init__(self, n, sents, beta=None, addone=True):
         """
@@ -393,6 +394,7 @@ class BackOffNGram(NGram):
         self.dict_alphas = defaultdict(float)
         self.beta = beta
         self.addone = addone
+        self.v = None
 
         if beta == None:
             percent = int(ceil(len(sents)*0.9))
@@ -400,9 +402,10 @@ class BackOffNGram(NGram):
                 percent -= 1
             train_sents = sents[:percent]
             held_out = sents[percent:]
-           
+            import time;
+            start_time = time.time()
             self._generar_counts_Aset(train_sents)
-            print ("Count Realizado")
+            print("--- %s seconds COUNT---" % (time.time() - start_time))
             gammas_posibles = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
 
             gamma_elegido = 0.0
@@ -411,16 +414,18 @@ class BackOffNGram(NGram):
                 self.beta = g
                 self.generar_alphas()
                 p = Evaluacion(self, held_out).perplexity()
-                print("Beta:", g, "Perplexity:", p)
                 if p < min_perplexity:
                     gamma_elegido = g
                     min_perplexity = p
             print("beta elegido",gamma_elegido)
             self.beta = gamma_elegido
         else:
+            import time
+            start_time = time.time()
             self._generar_counts_Aset(sents)
-
-        self.generar_alphas()
+            print("--- %s seconds COUNT---" % (time.time() - start_time))
+            self.generar_alphas()
+        print("Termino con grado",self.n)
 
     def cond_prob(self, token, prev_tokens=None):
 
