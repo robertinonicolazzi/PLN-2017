@@ -239,6 +239,26 @@ class Evaluacion:
 
 class InterpolatedNGram(NGram):
  
+    def _generar_counts(self,sents):
+        self.counts = counts = defaultdict(int)
+        n = self.n
+        word_types = set({FINAL})
+        for sent in sents:
+            counts[()] += len(sent) + 1
+            word_types.update(set(sent))  # Mantenemos unicidad
+            sent = self.rellenarSent(sent)
+            n= self.n
+
+            while n != 0:
+                for i in range(len(sent) - n + 1):
+                    ngram = tuple(sent[i:i + n])
+                    counts[ngram] += 1
+                n = n-1
+        #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
+        counts[(FINAL,)]= len(sents)
+        if self.addone:
+            self.v = len(word_types)
+
     def __init__(self, n, sents, gamma=None, addone=True):
         """
         n -- order of the model.
@@ -259,29 +279,17 @@ class InterpolatedNGram(NGram):
                 percent -= 1
             train_sents = sents[:percent]
             held_out = sents[percent:]
-            word_types = set({FINAL})
-            for sent in train_sents:
-                counts[()]+=len(sent)+1
-                word_types.update(set(sent))  # Mantenemos unicidad
-                sent = self.rellenarSent(sent)
-                for i in range(len(sent) - n + 1):
-                    ngram = tuple(sent[i:i + n])
-                    counts[ngram] += 1
-                    for k in range(1,n):
-                        counts[ngram[:k]] += 1 
-            #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
-            counts[(FINAL,)]= len(train_sents)
-            self.lambdas = []
-            self.v = len(word_types)
+            import time;
+            start_time = time.time()
+            self._generar_counts(train_sents)
+            print("--- %s seconds COUNT---" % (time.time() - start_time))
 
-            gammas_posibles = [1.0,10.0,20.0,50.0,300.0,100.0, 200.0]
+            gammas_posibles = [1.0,10.0,20.0,50.0,300.0,100.0, 200.0,1000.0]
 
             min_perplexity = float('inf')
             for g in gammas_posibles:
-                
                 self.gamma = g
                 p = Evaluacion(self, held_out).perplexity()
-                print("Gamma:", g, "Perplexity:", p)
                 if p < min_perplexity:
                     gamma_elegido = g
                     min_perplexity = p
@@ -290,21 +298,10 @@ class InterpolatedNGram(NGram):
 
 
         else:
-            word_types = set({FINAL})
-            for sent in sents:
-                word_types.update(set(sent))  # Mantenemos unicidad
-                sent = self.rellenarSent(sent)
-                for i in range(len(sent) - n + 1):
-                    ngram = tuple(sent[i:i + n])
-                    counts[ngram] += 1
-                    for k in range(n):
-                        counts[ngram[:k]] += 1 
-            #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
-            counts[(FINAL,)]= len(sents)
-            self.lambdas = []
-            self.v = 0
-            if addone:
-                self.v = len(word_types)
+            import time;
+            start_time = time.time()
+            self._generar_counts(sents)
+            print("--- %s seconds COUNT---" % (time.time() - start_time))
 
     def rellenarSent(self, sent):
         return [INICIO for _ in range(self.n - 1)] + sent + [FINAL]
