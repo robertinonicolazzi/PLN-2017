@@ -20,7 +20,8 @@ import pickle
 
 import nltk.data
 from nltk.corpus import PlaintextCorpusReader
-from languagemodeling.ngram import NGram, AddOneNGram,BackOffNGram,InterpolatedNGram
+from languagemodeling.ngram import NGram, AddOneNGram, BackOffNGram
+from languagemodeling.ngram import InterpolatedNGram
 from nltk.tokenize import RegexpTokenizer
 
 if __name__ == '__main__':
