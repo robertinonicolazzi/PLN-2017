@@ -237,29 +237,29 @@ class Evaluacion:
     def perplexity(self):
         return pow(2, -self.cross_entropy())
 
+
 class InterpolatedNGram(NGram):
- 
-    def rellenar2Sent(self,n,sent):
+
+    def rellenar2Sent(self, n, sent):
         return [INICIO for _ in range(n - 1)] + sent + [FINAL]
 
-    def _generar_counts(self,sents):
+    def _generar_counts(self, sents):
         self.counts = counts = defaultdict(int)
         word_types = set({FINAL})
         for sent in sents:
             word_types.update(set(sent))  # Mantenemos unicidad
-            
-            n= self.n
-            for i in range(1,n+1):
-                temp_sent = self.rellenar2Sent(i,sent)
-                for j in range(len(temp_sent)-i+1):
-                    ngram = tuple(temp_sent[j:j+i])
+
+            n = self.n
+            for i in range(1, n + 1):
+                temp_sent = self.rellenar2Sent(i, sent)
+                for j in range(len(temp_sent) - i + 1):
+                    ngram = tuple(temp_sent[j:j + i])
                     counts[ngram] += 1
-                    #if ngram[:-1] == (INICIO,)*(i-1) or i == 1:
-                    #    counts[ngram[:-1]] += 1
-                counts[(INICIO,)*(i-1)] += 1
+                counts[(INICIO,) * (i - 1)] += 1
 
             counts[()] += len(sent)
-        #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
+        # hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de
+        # palabras
         if self.addone:
             self.v = len(word_types)
 
@@ -273,36 +273,38 @@ class InterpolatedNGram(NGram):
         """
         assert (n > 0)
         self.n = n
-        self.counts = counts = defaultdict(int)
+        self.counts = defaultdict(int)
 
         self.gamma = gamma
         self.addone = addone
-        if gamma == None:
-            percent = int(ceil(len(sents)*0.9))
+        if gamma is None:
+            percent = int(ceil(len(sents) * 0.9))
             if percent == len(sents):
                 percent -= 1
             train_sents = sents[:percent]
             held_out = sents[percent:]
-            import time;
+            import time
             start_time = time.time()
             self._generar_counts(train_sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
 
-            gammas_posibles = [750.0,500.0,1000.0]
+            gammas_posibles = [600.0, 650.0, 800.0,
+                               850.0, 900.0, 950.0, 1200.0, 1300.0]
 
             min_perplexity = float('inf')
             for g in gammas_posibles:
                 self.gamma = g
+
                 p = Evaluacion(self, held_out).perplexity()
+                print("Gamma: ", g, " Perplexity: ", p)
                 if p < min_perplexity:
                     gamma_elegido = g
                     min_perplexity = p
-            print ("gamma_elegido",gamma_elegido)
+            print("Gamma Elegido", gamma_elegido)
             self.gamma = gamma_elegido
 
-
         else:
-            import time;
+            import time
             start_time = time.time()
             self._generar_counts(sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
@@ -310,19 +312,18 @@ class InterpolatedNGram(NGram):
     def rellenarSent(self, sent):
         return [INICIO for _ in range(self.n - 1)] + sent + [FINAL]
 
-    def lamb(self,tokens=None):
+    def lamb(self, tokens=None):
         self.lambdas = []
-        for k in range(self.n-1):
+        for k in range(self.n - 1):
 
             cantidad = self.counts[tuple(tokens[k:])]
             b = cantidad / float(cantidad + self.gamma)
             a = 1 - sum(self.lambdas)
-            result = a*b
+            result = a * b
             self.lambdas.append(result)
 
-        result = (1- sum(self.lambdas))
+        result = (1 - sum(self.lambdas))
         self.lambdas.append(result)
-
 
     def qML(self, token, prev_tokens):
         if not prev_tokens:
@@ -333,8 +334,8 @@ class InterpolatedNGram(NGram):
 
         res = 0
 
-        if len(prev_tokens)==0 and self.addone:
-            res = (a+1)/float(b+self.v)
+        if len(prev_tokens) == 0 and self.addone:
+            res = (a + 1) / float(b + self.v)
         elif b != 0:
             res = a / float(b)
 
@@ -350,52 +351,25 @@ class InterpolatedNGram(NGram):
             prev_tokens = []
 
         result = 0
-        #from nose.tools import set_trace; set_trace()
         self.lamb(prev_tokens)
+
         """
         Recordemos, lamda[0] corresponde a n-gram
-        lambda[1] corresponde n-1-gram 
+        lambda[1] corresponde n-1-gram
         lambda[self.n-1] corresponde a n-1-gram
         """
         for i in range(self.n):
-            result += self.lambdas[i]*self.qML(token, prev_tokens[i:])
+            result += self.lambdas[i] * self.qML(token, prev_tokens[i:])
 
         return result
 
+
 class BackOffNGram(NGram):
- 
-
-    def rellenar2Sent(self,n,sent):
-        return [INICIO for _ in range(n - 1)] + sent + [FINAL]
-
-    def _generar_counts_Aset(self, sents):
-        self.counts = counts = defaultdict(int)
-        self.Aset = Aset = defaultdict(set)
-        n = self.n
-        word_types = set({FINAL})
-        for sent in sents:
-            word_types.update(set(sent))  # Mantenemos unicidad
-            
-            n= self.n
-            for i in range(1,n+1):
-                temp_sent = self.rellenar2Sent(i,sent)
-                for j in range(len(temp_sent)-i+1):
-                    ngram = tuple(temp_sent[j:j+i])
-                    counts[ngram] += 1
-                    Aset[ngram[:-1]].update(ngram[-1:])
-                    #if ngram[:-1] == (INICIO,)*(i-1) or i == 1:
-                    #    counts[ngram[:-1]] += 1
-                counts[(INICIO,)*(i-1)] += 1
-
-            counts[()] += len(sent)
-        #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
-        if self.addone:
-            self.v = len(word_types)
 
     def __init__(self, n, sents, beta=None, addone=True):
         """
         Back-off NGram model with discounting as described by Michael Collins.
- 
+
         n -- order of the model.
         sents -- list of sentences, each one being a list of tokens.
         beta -- discounting hyper-parameter (if not given, estimate using
@@ -407,30 +381,30 @@ class BackOffNGram(NGram):
         self.beta = beta
         self.addone = addone
         self.v = None
-
-        if beta == None:
-            percent = int(ceil(len(sents)*0.9))
+        self.dict_denom = defaultdict(float)
+        if beta is None:
+            percent = int(ceil(len(sents) * 0.9))
             if percent == len(sents):
                 percent -= 1
             train_sents = sents[:percent]
             held_out = sents[percent:]
-            import time;
+            import time
             start_time = time.time()
             self._generar_counts_Aset(train_sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
-            gammas_posibles = [0.7,0.8]
+            gammas_posibles = [0.3, 0.6, 0.7, 0.8, 0.9]
 
-            gamma_elegido = 0.0
             min_perplexity = float('inf')
             for g in gammas_posibles:
                 self.beta = g
                 self.generar_alphas()
                 self.generar_denominadores()
                 p = Evaluacion(self, held_out).perplexity()
+                print("Beta: ", g, " Perplexity: ", p)
                 if p < min_perplexity:
                     gamma_elegido = g
                     min_perplexity = p
-            print("beta elegido",gamma_elegido)
+            print("Beta elegido", gamma_elegido)
             self.beta = gamma_elegido
         else:
             import time
@@ -439,37 +413,63 @@ class BackOffNGram(NGram):
             print("--- %s seconds COUNT---" % (time.time() - start_time))
             self.generar_alphas()
             self.generar_denominadores()
-        print("Termino con grado",self.n)
+
+    def rellenar2Sent(self, n, sent):
+        return [INICIO for _ in range(n - 1)] + sent + [FINAL]
+
+    def _generar_counts_Aset(self, sents):
+        self.counts = counts = defaultdict(int)
+        self.Aset = Aset = defaultdict(set)
+        n = self.n
+        word_types = set({FINAL})
+        for sent in sents:
+            word_types.update(set(sent))  # Mantenemos unicidad
+
+            n = self.n
+            for i in range(1, n + 1):
+                temp_sent = self.rellenar2Sent(i, sent)
+                for j in range(len(temp_sent) - i + 1):
+                    ngram = tuple(temp_sent[j:j + i])
+                    counts[ngram] += 1
+                    Aset[ngram[:-1]].update(ngram[-1:])
+                counts[(INICIO,) * (i - 1)] += 1
+
+            counts[()] += len(sent)
+        # hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de
+        # palabras
+        if self.addone:
+            self.v = len(word_types)
 
     def cond_prob(self, token, prev_tokens=None):
 
-        if prev_tokens == None:
+        if prev_tokens is None:
             prev_tokens = []
         res = 0
         if len(prev_tokens) != 0:
             if token in self.A(prev_tokens):
-                a = self.counts[tuple(prev_tokens+ [token])]- self.beta
+                a = self.counts[tuple(prev_tokens + [token])] - self.beta
                 b = self.counts[tuple(prev_tokens)]
                 if b != 0:
-                    res = a/float(b)
+                    res = a / float(b)
             else:
-                a = self.alpha(prev_tokens)*self.cond_prob(token,prev_tokens[1:])
+                a = self.alpha(prev_tokens) * \
+                    self.cond_prob(token, prev_tokens[1:])
                 b = self.denom(prev_tokens)
                 if b != 0:
-                    res = a/float(b)
-            
+                    res = a / float(b)
+
         else:
-            if self.addone == False:
-                res = (self.counts[(token,)])/float(self.counts[tuple()])
+            if not self.addone:
+                res = (self.counts[(token,)]) / float(self.counts[tuple()])
             else:
-                res = (self.counts[(token,)] + 1.0)/float(self.counts[tuple()] +self.v)
+                res = (self.counts[(token,)] + 1.0) / \
+                    float(self.counts[tuple()] + self.v)
 
-        return res      
-
+        return res
 
     def A(self, tokens):
         """Set of words with counts > 0 for a k-gram with 0 < k < n.
- 
+
         tokens -- the k-gram tuple.
         """
 
@@ -481,16 +481,17 @@ class BackOffNGram(NGram):
             denom = self.counts[tuple(tokens)]
             Aset = self.A(tokens)
             if len(Aset) != 0 and denom != 0:
-                result = (self.beta * len(Aset))/float(denom)
+                result = (self.beta * len(Aset)) / float(denom)
                 self.dict_alphas[tuple(tokens)] = result
 
     def generar_denominadores(self):
-        self.dict_denom = defaultdict(float)
+
         for tokens in self.counts.keys():
             denom = self.counts[tuple(tokens[1:])]
-            suma = sum(self.counts[tuple(tokens[1:])+(i,)] for i in self.Aset[tuple(tokens)])
+            suma = sum(self.counts[tuple(tokens[1:]) + (i,)]
+                       for i in self.Aset[tuple(tokens)])
             if len(tokens) == 1:
-                #hay que diferenciar unigramas, ver si aplica addone o no
+                # hay que diferenciar unigramas, ver si aplica addone o no
                 if self.addone:
                     num = suma + len(self.Aset[tuple(tokens)])
                     denom = denom + self.v
@@ -498,22 +499,22 @@ class BackOffNGram(NGram):
                     num = suma
 
             else:
-                num = suma - self.beta* len(self.Aset[tuple(tokens)])
+                num = suma - self.beta * len(self.Aset[tuple(tokens)])
 
-            if denom != 0: 
-                self.dict_denom[tuple(tokens)] = 1 - (num/float(denom))
+            if denom != 0:
+                self.dict_denom[tuple(tokens)] = 1 - (num / float(denom))
 
     def alpha(self, tokens):
         """Missing probability mass for a k-gram with 0 < k < n.
- 
+
         tokens -- the k-gram tuple.
         """
 
-        return self.dict_alphas.get(tuple(tokens),1)
- 
+        return self.dict_alphas.get(tuple(tokens), 1)
+
     def denom(self, tokens):
         """Normalization factor for a k-gram with 0 < k < n.
- 
+
         tokens -- the k-gram tuple.
         """
-        return self.dict_denom.get(tuple(tokens),1)
+        return self.dict_denom.get(tuple(tokens), 1)
