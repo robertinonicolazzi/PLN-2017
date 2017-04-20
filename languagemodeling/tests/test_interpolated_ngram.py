@@ -206,6 +206,7 @@ class TestInterpolatedNGram(TestCase):
             [[t1, t2] for t1 in prev_tokens for t2 in prev_tokens]
 
         for model in models:
+
             for prev in prevs:
                 prob_sum = sum(model.cond_prob(token, prev)
                                for token in tokens)

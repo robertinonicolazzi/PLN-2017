@@ -284,7 +284,7 @@ class InterpolatedNGram(NGram):
             self._generar_counts(train_sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
 
-            gammas_posibles = [1.0,10.0,20.0,50.0,300.0,100.0, 200.0,1000.0]
+            gammas_posibles = [350.0,500.0,750.0,1000.0,1250.0,1500.0]
 
             min_perplexity = float('inf')
             for g in gammas_posibles:
@@ -308,16 +308,18 @@ class InterpolatedNGram(NGram):
 
     def lamb(self,tokens=None):
         self.lambdas = []
-        for k in range(self.n):
+        for k in range(self.n-1):
+
             cantidad = self.counts[tuple(tokens[k:])]
-            b = 1
-            if k != self.n-1:
-                b = cantidad / float(cantidad + self.gamma)
-
+            if cantidad == 0:
+                print ("no puede ser cero", tuple(tokens[k:]))
+            b = cantidad / float(cantidad + self.gamma)
             a = 1 - sum(self.lambdas)
-
             result = a*b
             self.lambdas.append(result)
+
+        result = (1- sum(self.lambdas))
+        self.lambdas.append(result)
 
 
     def qML(self, token, prev_tokens):
@@ -344,10 +346,15 @@ class InterpolatedNGram(NGram):
         """
         if not prev_tokens:
             prev_tokens = []
-        assert(len(prev_tokens) == self.n - 1)
 
         result = 0
+        #from nose.tools import set_trace; set_trace()
         self.lamb(prev_tokens)
+        """
+        Recordemos, lamda[0] corresponde a n-gram
+        lambda[1] corresponde n-1-gram 
+        lambda[self.n-1] corresponde a n-1-gram
+        """
         for i in range(self.n):
             result += self.lambdas[i]*self.qML(token, prev_tokens[i:])
 
@@ -403,7 +410,7 @@ class BackOffNGram(NGram):
             start_time = time.time()
             self._generar_counts_Aset(train_sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
-            gammas_posibles = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
+            gammas_posibles = [0.1,0.3,0.5,0.7,0.8,0.9]
 
             gamma_elegido = 0.0
             min_perplexity = float('inf')

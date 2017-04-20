@@ -105,4 +105,8 @@ Perplexity: 590.621473
 
 ### TEST
 
-Se agrego un test de N-Gram para n de valor 3
+Se agrego un test de NGram para n de valor 3, se verifica su count y su 
+probabilidad condicional
+
+Se agrego un test que verifica el count para 3-GRAM en Interpolated
+y en BackOff
