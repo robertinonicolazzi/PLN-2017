@@ -283,10 +283,8 @@ class InterpolatedNGram(NGram):
                 percent -= 1
             train_sents = sents[:percent]
             held_out = sents[percent:]
-            import time
-            start_time = time.time()
+
             self._generar_counts(train_sents)
-            print("--- %s seconds COUNT---" % (time.time() - start_time))
 
             gammas_posibles = [600.0, 650.0, 800.0,
                                850.0, 900.0, 950.0, 1200.0, 1300.0]
@@ -304,10 +302,7 @@ class InterpolatedNGram(NGram):
             self.gamma = gamma_elegido
 
         else:
-            import time
-            start_time = time.time()
             self._generar_counts(sents)
-            print("--- %s seconds COUNT---" % (time.time() - start_time))
 
     def rellenarSent(self, sent):
         return [INICIO for _ in range(self.n - 1)] + sent + [FINAL]
@@ -388,10 +383,8 @@ class BackOffNGram(NGram):
                 percent -= 1
             train_sents = sents[:percent]
             held_out = sents[percent:]
-            import time
-            start_time = time.time()
             self._generar_counts_Aset(train_sents)
-            print("--- %s seconds COUNT---" % (time.time() - start_time))
+
             gammas_posibles = [0.3, 0.6, 0.7, 0.8, 0.9]
 
             min_perplexity = float('inf')
@@ -407,10 +400,7 @@ class BackOffNGram(NGram):
             print("Beta elegido", gamma_elegido)
             self.beta = gamma_elegido
         else:
-            import time
-            start_time = time.time()
             self._generar_counts_Aset(sents)
-            print("--- %s seconds COUNT---" % (time.time() - start_time))
             self.generar_alphas()
             self.generar_denominadores()
 
