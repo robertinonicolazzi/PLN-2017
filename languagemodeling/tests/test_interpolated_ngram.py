@@ -15,7 +15,7 @@ class TestInterpolatedNGram(TestCase):
         #from nose.tools import set_trace; set_trace()
         models = [
             # same test for different values of beta and addone:
-            InterpolatedNGram(3, self.sents, gamma=1.0)
+            InterpolatedNGram(3, self.sents, gamma=5.0)
         ]
 
         counts = {
@@ -25,6 +25,7 @@ class TestInterpolatedNGram(TestCase):
             ('come',): 2,
             ('pescado',): 1,
             ('.',): 2,
+            ('<s>',): 2,
             ('</s>',): 2,
             ('la',): 1,
             ('gata',): 1,
@@ -40,6 +41,8 @@ class TestInterpolatedNGram(TestCase):
             ('gata', 'come'): 1,
             ('come', 'salmón'): 1,
             ('salmón', '.'): 1,
+
+            ('<s>', '<s>'): 2,
             ('<s>', '<s>', 'la'): 1,
             ('<s>', '<s>', 'el'): 1,
             ('<s>', 'el', 'gato'): 1,
@@ -57,6 +60,8 @@ class TestInterpolatedNGram(TestCase):
         print (models[0].counts)
         for model in models:
             for gram, c in counts.items():
+                #from nose.tools import set_trace; set_trace()
+                model.count(gram)
                 self.assertEqual(model.count(gram), c, msg=gram)
 
     def test_count_1gram(self):
@@ -87,6 +92,7 @@ class TestInterpolatedNGram(TestCase):
             ('come',): 2,
             ('pescado',): 1,
             ('.',): 2,
+            ('<s>',): 2,
             ('</s>',): 2,
             ('la',): 1,
             ('gata',): 1,

@@ -239,23 +239,27 @@ class Evaluacion:
 
 class InterpolatedNGram(NGram):
  
+    def rellenar2Sent(self,n,sent):
+        return [INICIO for _ in range(n - 1)] + sent + [FINAL]
+
     def _generar_counts(self,sents):
         self.counts = counts = defaultdict(int)
-        n = self.n
         word_types = set({FINAL})
         for sent in sents:
-            counts[()] += len(sent) + 1
             word_types.update(set(sent))  # Mantenemos unicidad
-            sent = self.rellenarSent(sent)
+            
             n= self.n
-
-            while n != 0:
-                for i in range(len(sent) - n + 1):
-                    ngram = tuple(sent[i:i + n])
+            for i in range(1,n+1):
+                temp_sent = self.rellenar2Sent(i,sent)
+                for j in range(len(temp_sent)-i+1):
+                    ngram = tuple(temp_sent[j:j+i])
                     counts[ngram] += 1
-                n = n-1
+                    #if ngram[:-1] == (INICIO,)*(i-1) or i == 1:
+                    #    counts[ngram[:-1]] += 1
+                counts[(INICIO,)*(i-1)] += 1
+
+            counts[()] += len(sent)
         #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
-        counts[(FINAL,)]= len(sents)
         if self.addone:
             self.v = len(word_types)
 
@@ -284,7 +288,7 @@ class InterpolatedNGram(NGram):
             self._generar_counts(train_sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
 
-            gammas_posibles = [350.0,500.0,750.0,1000.0,1250.0,1500.0]
+            gammas_posibles = [750.0,500.0,1000.0]
 
             min_perplexity = float('inf')
             for g in gammas_posibles:
@@ -311,8 +315,6 @@ class InterpolatedNGram(NGram):
         for k in range(self.n-1):
 
             cantidad = self.counts[tuple(tokens[k:])]
-            if cantidad == 0:
-                print ("no puede ser cero", tuple(tokens[k:]))
             b = cantidad / float(cantidad + self.gamma)
             a = 1 - sum(self.lambdas)
             result = a*b
@@ -362,25 +364,31 @@ class InterpolatedNGram(NGram):
 
 class BackOffNGram(NGram):
  
+
+    def rellenar2Sent(self,n,sent):
+        return [INICIO for _ in range(n - 1)] + sent + [FINAL]
+
     def _generar_counts_Aset(self, sents):
         self.counts = counts = defaultdict(int)
         self.Aset = Aset = defaultdict(set)
         n = self.n
         word_types = set({FINAL})
         for sent in sents:
-            counts[()] += len(sent) + 1
             word_types.update(set(sent))  # Mantenemos unicidad
-            sent = self.rellenarSent(sent)
+            
             n= self.n
-
-            while n != 0:
-                for i in range(len(sent) - n + 1):
-                    ngram = tuple(sent[i:i + n])
-                    Aset[ngram[:-1]].update(ngram[-1:])
+            for i in range(1,n+1):
+                temp_sent = self.rellenar2Sent(i,sent)
+                for j in range(len(temp_sent)-i+1):
+                    ngram = tuple(temp_sent[j:j+i])
                     counts[ngram] += 1
-                n = n-1
+                    Aset[ngram[:-1]].update(ngram[-1:])
+                    #if ngram[:-1] == (INICIO,)*(i-1) or i == 1:
+                    #    counts[ngram[:-1]] += 1
+                counts[(INICIO,)*(i-1)] += 1
+
+            counts[()] += len(sent)
         #hay que sumar las ocurrencias de n,n-1,n-2... y la cantidad de palabras
-        counts[(FINAL,)]= len(sents)
         if self.addone:
             self.v = len(word_types)
 
@@ -410,13 +418,14 @@ class BackOffNGram(NGram):
             start_time = time.time()
             self._generar_counts_Aset(train_sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
-            gammas_posibles = [0.1,0.3,0.5,0.7,0.8,0.9]
+            gammas_posibles = [0.7,0.8]
 
             gamma_elegido = 0.0
             min_perplexity = float('inf')
             for g in gammas_posibles:
                 self.beta = g
                 self.generar_alphas()
+                self.generar_denominadores()
                 p = Evaluacion(self, held_out).perplexity()
                 if p < min_perplexity:
                     gamma_elegido = g
@@ -429,6 +438,7 @@ class BackOffNGram(NGram):
             self._generar_counts_Aset(sents)
             print("--- %s seconds COUNT---" % (time.time() - start_time))
             self.generar_alphas()
+            self.generar_denominadores()
         print("Termino con grado",self.n)
 
     def cond_prob(self, token, prev_tokens=None):
@@ -474,6 +484,25 @@ class BackOffNGram(NGram):
                 result = (self.beta * len(Aset))/float(denom)
                 self.dict_alphas[tuple(tokens)] = result
 
+    def generar_denominadores(self):
+        self.dict_denom = defaultdict(float)
+        for tokens in self.counts.keys():
+            denom = self.counts[tuple(tokens[1:])]
+            suma = sum(self.counts[tuple(tokens[1:])+(i,)] for i in self.Aset[tuple(tokens)])
+            if len(tokens) == 1:
+                #hay que diferenciar unigramas, ver si aplica addone o no
+                if self.addone:
+                    num = suma + len(self.Aset[tuple(tokens)])
+                    denom = denom + self.v
+                else:
+                    num = suma
+
+            else:
+                num = suma - self.beta* len(self.Aset[tuple(tokens)])
+
+            if denom != 0: 
+                self.dict_denom[tuple(tokens)] = 1 - (num/float(denom))
+
     def alpha(self, tokens):
         """Missing probability mass for a k-gram with 0 < k < n.
  
@@ -487,20 +516,4 @@ class BackOffNGram(NGram):
  
         tokens -- the k-gram tuple.
         """
-        denom = self.counts[tuple(tokens[1:])]
-        suma = sum(self.counts[tuple(tokens[1:])+(i,)] for i in self.Aset[tuple(tokens)])
-        if len(tokens) == 1:
-            #hay que diferenciar unigramas, ver si aplica addone o no
-            if self.addone:
-                num = suma + len(self.Aset[tuple(tokens)])
-                denom = denom + self.v
-            else:
-                num = suma
-
-        else:
-            num = suma - self.beta* len(self.Aset[tuple(tokens)])
-
-        if denom == 0: 
-            return 1
-        else:
-            return 1 - (num/float(denom))
+        return self.dict_denom.get(tuple(tokens),1)
