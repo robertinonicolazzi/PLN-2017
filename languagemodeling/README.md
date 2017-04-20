@@ -83,25 +83,34 @@ Se crea una clase Evaluacion, la cual utilizando el calculo de la log probabilit
 | Modelo  | 1 | 2 | 3 | 4 |
 | ------  | ------ | ------ | ------ | ------ |
 | ADDONE  | 1172.888 | 2992.226 | 19154.502 | 34630.520 |
-| BACKOFF | 1618.543 | 635.193  | 605.512   | 590.621   |
-
-Archivo cargado: b1
--------------------------------------------
-Perplexity: 1618.543874
-
-Archivo cargado: b2
--------------------------------------------
-Perplexity: 635.193584
-
-Archivo cargado: b3
--------------------------------------------
-Perplexity: 605.512118
-
-Archivo cargado: b4
--------------------------------------------
-Perplexity: 590.621473
+| INTER   | 1618.543 (G=600) | 745.688 (G=650) | 777.042 (G=850) | 842.837 (G=1300) |
+| BACKOFF | 1618.543 (B=0.3)| 635.193 (B=0.8) | 571.247 (B=0.8)   | 567.263 (B=0.8)  |
 
 
+## Ejercicio 6 Interpolated
+
+Se crea un diccionario conteniendo las ocurrencias para N-Gram, (N-1)-Gram hasta 1-Gram.
+Conteniendo las apareciciones de los delimitadores de inicio de oración, final de oración
+y la cantidad total de palabras. Se contabiliza la cantidad de word types, ya que 
+se utiliza suavizado addone para unigramas, si es requerido.
+
+Gammas posibles (Elegidos a partir de observaciones)
+
+[600.0,650.0,800.0,850.0,900.0,950.0,1200.0,1300.0]
+
+## Ejercicio 7 BackOOF
+
+Se crea un diccionario conteniendo las ocurrencias para N-Gram, (N-1)-Gram hasta 1-Gram.
+Conteniendo las apareciciones de los delimitadores de inicio de oración, final de oración
+y la cantidad total de palabras. Se contabiliza la cantidad de word types, ya que 
+se utiliza suavizado addone para unigramas, si es requerido.
+Se precalculan los denominadores y los alfas para optimizar el calculo de las
+probabilidades condicionales, para ellos primero se debe realizar el conteo
+
+
+Betas posibles (Elegidos a partir de observaciones)
+
+[0.3,0.6,0.7,0.8,0.9]
 
 ### TEST
 
