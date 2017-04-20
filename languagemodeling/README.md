@@ -98,7 +98,7 @@ Gammas posibles (Elegidos a partir de observaciones)
 
 [600.0,650.0,800.0,850.0,900.0,950.0,1200.0,1300.0]
 
-## Ejercicio 7 BackOOF
+## Ejercicio 7 BackOFF
 
 Se crea un diccionario conteniendo las ocurrencias para N-Gram, (N-1)-Gram hasta 1-Gram.
 Conteniendo las apareciciones de los delimitadores de inicio de oración, final de oración
