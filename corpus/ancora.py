@@ -2,7 +2,6 @@ from nltk.corpus.reader.api import SyntaxCorpusReader
 from nltk.corpus.reader import xmldocs
 from nltk import tree
 from nltk.util import LazyMap, LazyConcatenation
-from nltk.corpus.reader.util import concat
 
 
 def parsed(element):
