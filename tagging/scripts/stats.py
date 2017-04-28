@@ -20,14 +20,15 @@ if __name__ == '__main__':
     opts = docopt(__doc__)
 
     # load the data
-    corpus = SimpleAncoraCorpusReader('/home/robertnn/Facultad/ancora-3.0.1es/')
+    corpus = SimpleAncoraCorpusReader('/media/robertnn/DatosLinux/ancora-3.0.1es/')
     sents = list(corpus.tagged_sents())
 
     total_tokens = 0
     vocabulary = set({})
     tags = set({})
     dict_tags = defaultdict(int)
-    dict_words = defaultdict(lambda : defaultdict(int))
+    dict_tag_words = defaultdict(lambda : defaultdict(int))
+    dict_words_tag = defaultdict(lambda : defaultdict(int))
 
     for sent in sents:
         total_tokens += len(sent)
@@ -35,7 +36,8 @@ if __name__ == '__main__':
             vocabulary.add(tuple_word[0])
             tags.add(tuple_word[1])
             dict_tags[tuple_word[1]] += 1
-            dict_words[tuple_word[1]][tuple_word[0]] += 1
+            dict_tag_words[tuple_word[1]][tuple_word[0]] += 1
+            dict_words_tag[tuple_word[0]][tuple_word[1]] += 1
 
     total_vocabulary = len(vocabulary)
     total_tags = len(tags)
@@ -49,10 +51,32 @@ if __name__ == '__main__':
     print ('{:26} {}'.format(' Cantidad de Palabras:',total_vocabulary))
     print ('{:26} {}'.format(' Cantidad de Etiquetas:',total_tags))
 
-    print (redWhite('Etiquetas Mas Frecuentes'))
-    import pdb;pdb.set_trace() 
+    print ('\n',redWhite('Etiquetas Mas Frecuentes'),'\n')
+
     total_values_tag = sum(dict_tags.values())
-    print (dict_words)
-    print ('{:^10}  {:^15}  {:^16}  {:^20}'.format('TAG', '#Apariciones' ,'Frecuencia', '5 Palabras Mas Frecuentes'))
+
+    print ('{:^23}   {:^28}    {:^29}  {:^40}'.format(redWhite('TAG'), redWhite('#Apariciones') ,redWhite('Frecuencia'),redWhite('5 Palabras Mas Frecuentes')))
     for i in range(0,10):
-        print ('{:^10}  {:^15}  {:^16}  {:^20}'.format(tags_ordenados[i][0], tags_ordenados[i][1] ,round(tags_ordenados[i][1]/float(total_values_tag),3), dict_words[tags_ordenados[i][0]]))
+        temp_list = sorted(dict_tag_words[tags_ordenados[i][0]].items(), key = lambda x : -x[1])[:5]
+        words ="" 
+        for a in temp_list:
+            words += a[0] + " | "
+
+        print ('{:^10}  {:^15}  {:^16}  {:<40}'.format(tags_ordenados[i][0], tags_ordenados[i][1] ,round(tags_ordenados[i][1]/float(total_values_tag),3), words))
+
+    print ('\n')
+    print ('\n')
+    print ('{:^23}   {:^28}    {:^29}  {:^40}'.format(redWhite('Ambiguedad'), redWhite('#Apariciones') ,redWhite('Frecuencia'),redWhite('5 Palabras Mas Frecuentes')))
+
+    grados_ambiguedad = defaultdict(int)
+    grado_palabra_count = defaultdict(lambda : defaultdict(int))
+    for key in dict_words_tag.keys():
+        grados_ambiguedad[len(dict_words_tag[key])] += 1
+        grado_palabra_count[len(dict_words_tag[key])][key] += sum(dict_words_tag[key].values())
+
+    for i in range(1,10):
+        temp_list = sorted(grado_palabra_count[i].items(), key = lambda x : -x[1])[:5]
+        words ="" 
+        for a in temp_list:
+            words += a[0] + " | "
+        print ('{:^10}  {:^15}  {:^16}  {:<40}'.format(i,grados_ambiguedad[i], 5, words))
