@@ -80,9 +80,44 @@ class ViterbiTagger:
         """
         hmm -- the HMM.
         """
+        self.hmm = hmm
+        self._pi = pi = defaultdict(dict)
+        self.trans = self.hmm.trans
+        self.trans_prob = self.hmm.trans_prob
+        self.out_prob = self.hmm.out_prob
+        self.tagset = self.hmm.tagset
+        self.n = self.hmm.n
+
+        pi[0][tuple(['<s>']*(self.hmm.n-1))] = (0,[])
+
  
     def tag(self, sent):
         """Returns the most probable tagging for a sentence.
  
         sent -- the sentence.
         """
+        m = len(sent)
+        pi = self._pi
+        for k in range(1,m+1):
+        	for tag in self.tagset:
+        		for prev_tags, (prob, tags) in pi[k-1].items():
+        			q = self.hmm.trans_prob(tag,prev_tags)
+        			e = self.hmm.out_prob(sent[k-1],tag)
+
+        			if not e:
+        				continue
+        			prob+=log2(e)+log2(q)
+        			prev_tags = (prev_tags + (tag,))[1:]
+        			if prev_tags not in pi[k] or prob > pi[k][prev_tags][0]:
+        				pi[k][prev_tags] = (prob, tags + [tag])
+
+        max_prob = float('-inf')
+        resul_tag = []
+        for prev_tags, (prob, tags) in pi[m].items():
+        	q = self.hmm.trans_prob('</s>', prev_tags)
+        	if q > 0.0
+        		prob += log2(q)
+        		if max_prob < prob:
+        			max_prob = prob
+        			result_tag = tags
+        return result_tag
