@@ -177,3 +177,118 @@ class ViterbiTagger:
         			max_prob = prob
         			result_tag = tags
         return result_tag
+
+
+class MLHMM(HMM):
+ 
+    def __init__(self, n, tagged_sents, addone=True):
+        """
+        n -- order of the model.
+        tagged_sents -- training sentences, each one being a list of pairs.
+        addone -- whether to use addone smoothing (default: True).
+        """
+        self.n = n
+
+
+        #Para estimar q vamos a necesitar generar n-gram de tags
+        #y tener la cuenta de n-tuples de tags y (n-1)-tuplas
+
+        #para e necesitamos la cantidad de veces que aparece cada tag
+        #y necesitamos el conteo de (w,t)
+        self.vocabulary = set()
+        
+
+        count_word_tag = defaultdict(lambda: defaultdict(int))
+
+        self.trans = defaultdict(lambda: defaultdict(float))
+        self.out = defaultdict(lambda: defaultdict(float))
+
+        self.tag_set = set()
+        count_per_tag = defaultdict(int)
+        self.counts_tag = counts_tag = defaultdict(int)
+
+        for sent in tagged_sents:
+            tags = tuple(tag for (_,tag) in sent)
+            words = tuple(word for (word,_) in sent)
+            self.vocabulary.union(words)
+            tag_set.union(tags)
+            tags = ('<s>')*(n-1) + tags + ('</s>')
+            words = ('<s>')*(n-1) + words + ('</s>')
+
+            for i in range(len(tags) - n-1):
+                ngram = tuple(tags[i:i+n])
+                counts_tag[ngram] +=1
+                counts_tag[ngram[:-1]] +=1
+                self.count_word_tag[tags[i+n-1]][words[i+n-1]] +=1
+                count_per_tag[tags[i+n-1]] += 1
+
+        #calculas las e 
+        for words in count_word_tag.values():
+            for k, v in words.items():
+                self.out[k]=v/float(count_per_tag[k])
+        self.out =dict(self.out)
+
+        #calculamos q
+        for ngram in counts_tag:
+            if ngram != n:
+                continue
+            num = ngram[ngram]
+            denom = ngram[ngram[:-1]]
+            if self.addone:
+                num +=1
+                denom += len(tag_set)
+            self.trans[ng[:-1]][ng[-1]] = num/float(denom)
+
+        self.trans = dict(self.trans)
+
+ 
+    def tcount(self, tokens):
+        """Count for an n-gram or (n-1)-gram of tags.
+ 
+        tokens -- the n-gram or (n-1)-gram tuple of tags.
+        """
+        return self.counts_tag.get(tuple(tokens),0)
+ 
+    def unknown(self, w):
+        """Check if a word is unknown for the model.
+ 
+        w -- the word.
+        """
+        return w not in self.vocabulary
+
+
+    def out_prob(self, word, tag):
+        """Probability of a word given a tag.
+ 
+        word -- the word.
+        tag -- the tag.
+        """
+        result = 0
+        if self.addone and self.unknown(word):
+            result = 1/float(len(self.vocabulary))
+        else:
+            result = self.out.get(tag,{}).get(word,0.0)
+
+
+
+        return result
+ 
+    def tag_prob(self, y):
+        """
+        Probability of a tagging.
+        Warning: subject to underflow problems.
+ 
+        y -- tagging.
+
+        """
+        #Generar el producto de los q
+        prob = 1.0
+        temp_y = ['<s>']*(self.n-1)+ list(y) + ['</s>']
+        n = self.n
+        for i in range(n-1,len(temp_y)):
+            tag = temp_y[i]
+            prev_tags = temp_y[i-n+1:i]
+            trans_p = self.trans_prob(tag,prev_tags)
+            prob *= trans_p
+
+        return prob
