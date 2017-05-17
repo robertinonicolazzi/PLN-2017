@@ -160,7 +160,7 @@ class ViterbiTagger:
         			q = self.hmm.trans_prob(tag,prev_tags)
         			e = self.hmm.out_prob(sent[k-1],tag)
 
-        			if not e:
+        			if e*q<=0:
         				continue
         			prob+=log2(e)+log2(q)
         			prev_tags = (prev_tags + (tag,))[1:]
