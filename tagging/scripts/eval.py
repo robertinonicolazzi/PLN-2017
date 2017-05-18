@@ -12,8 +12,9 @@ from docopt import docopt
 import pickle
 import sys
 
+from collections import Counter
 from corpus.ancora import SimpleAncoraCorpusReader
-
+from sklearn.metrics import confusion_matrix
 
 def progress(msg, width=None):
     """Ouput the progress of something on the same line."""
@@ -42,12 +43,21 @@ if __name__ == '__main__':
     # tag
     hits, total,total_u,total_k,hits_k,hits_u = 0, 0,0,0,0,0
     n = len(sents)
+
+
+
+    #listas para la matrix de confusion
+
+    matrix_tags_model = []
+    matrix_tags_gold = []
     for i, sent in enumerate(sents):
         word_sent, gold_tag_sent = zip(*sent)
 
         model_tag_sent = model.tag(word_sent)
         assert len(model_tag_sent) == len(gold_tag_sent), i
 
+        matrix_tags_gold += list(gold_tag_sent)
+        matrix_tags_model += model_tag_sent
         # global score
         hits_sent = [m == g for m, g in zip(model_tag_sent, gold_tag_sent)]
         hits += sum(hits_sent)
@@ -79,3 +89,24 @@ if __name__ == '__main__':
 
     print('')
     print('Total: {:2.2f}%, Known: {:2.2f}%, Unknown: {:2.2f}%'.format(acc * 100,acc_k*100,acc_u*100))
+
+    most_frequent_taq = [tag for (tag,_) in Counter(matrix_tags_gold).most_common(10)]
+    matrix_confusion = confusion_matrix(matrix_tags_gold, matrix_tags_model, most_frequent_taq)
+
+    #para obtener la frecuencia hacemos 
+    matrix_confusion = (matrix_confusion/float(total))*100
+
+    columnwidth = max([len(x) for x in most_frequent_taq] + [7])  # 5 is value length
+    empty_cell = " " * columnwidth
+
+    print("    " + empty_cell, end=" ")
+    for label in most_frequent_taq:
+        print(" %{0}s ".format(columnwidth) % label, end=" ")
+    print()
+
+    for i, label1 in enumerate(most_frequent_taq):
+        print("    %{0}s |".format(columnwidth) % label1, end=" ")
+        for j in range(len(most_frequent_taq)):
+            cell = "%{0}.3f |".format(columnwidth) % matrix_confusion[i, j]
+            print(cell, end=" ")
+        print()
