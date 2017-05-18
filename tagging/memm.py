@@ -37,8 +37,9 @@ class MEMM:
         ])
 
         #Para entrenar necesitamos las historias y los tags
+        print (self.sents_histories(tagged_sents),self.sents_tags(tagged_sents))
 
-        self.text_clf = self.text_clf.fit(self.sents_histories(tagged_sents),self.sents_tags(tagged_sents))
+        #self.text_clf = self.text_clf.fit(self.sents_histories(tagged_sents),self.sents_tags(tagged_sents))
 
 
     def sents_histories(self, tagged_sents):
@@ -66,7 +67,7 @@ class MEMM:
         tags = ['<s>']*(n-1) + tags
 
         for i in range(len(sent)):
-            histories.append(History(sent,tags[i:i+n-1],i))
+            histories.append(History(sent,tuple(tags[i:i+n-1]),i))
 
         return histories
 

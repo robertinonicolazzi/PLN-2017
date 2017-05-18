@@ -168,7 +168,7 @@ class ViterbiTagger:
         				pi[k][prev_tags] = (prob, tags + [tag])
 
         max_prob = float('-inf')
-        resul_tag = []
+        result_tag = []
         for prev_tags, (prob, tags) in pi[m].items():
         	q = self.hmm.trans_prob('</s>', prev_tags)
         	if q > 0.0:
