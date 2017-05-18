@@ -138,9 +138,6 @@ class ViterbiTagger:
         """
         self.hmm = hmm
         self._pi = pi = defaultdict(dict)
-        self.trans = self.hmm.trans
-        self.trans_prob = self.hmm.trans_prob
-        self.out_prob = self.hmm.out_prob
         self.tag_set = self.hmm.tag_set
         self.n = self.hmm.n
 
@@ -155,27 +152,30 @@ class ViterbiTagger:
         m = len(sent)
         pi = self._pi
         for k in range(1,m+1):
-        	for tag in self.tag_set:
-        		for prev_tags, (prob, tags) in pi[k-1].items():
-        			q = self.hmm.trans_prob(tag,prev_tags)
-        			e = self.hmm.out_prob(sent[k-1],tag)
-
-        			if e*q<=0:
-        				continue
-        			prob+=log2(e)+log2(q)
-        			prev_tags = (prev_tags + (tag,))[1:]
-        			if prev_tags not in pi[k] or prob > pi[k][prev_tags][0]:
-        				pi[k][prev_tags] = (prob, tags + [tag])
+            for tag in self.tag_set:
+                e = self.hmm.out_prob(sent[k-1],tag)
+                if e <= 0:
+                    continue
+                for prev_tags, (prob, tags) in pi[k-1].items():
+                    q = self.hmm.trans_prob(tag,prev_tags)
+                    
+                    if q<=0:
+                        continue
+                    prob+=log2(e)+log2(q)
+                    prev_tags = (prev_tags + (tag,))[1:]
+                    if prev_tags not in pi[k] or prob > pi[k][prev_tags][0]:
+                        pi[k][prev_tags] = (prob, tags + [tag])
 
         max_prob = float('-inf')
+        self._pi = dict(self._pi)
         result_tag = []
         for prev_tags, (prob, tags) in pi[m].items():
-        	q = self.hmm.trans_prob('</s>', prev_tags)
-        	if q > 0.0:
-        		prob += log2(q)
-        		if max_prob < prob:
-        			max_prob = prob
-        			result_tag = tags
+            q = self.hmm.trans_prob('</s>', prev_tags)
+            if q > 0.0:
+                prob += log2(q)
+                if max_prob < prob:
+                    max_prob = prob
+                    result_tag = tags
         return result_tag
 
 
@@ -202,10 +202,11 @@ class MLHMM(HMM):
 
         self.trans = defaultdict(lambda: defaultdict(float))
         self.out = defaultdict(lambda: defaultdict(float))
+        self.counts_tag = counts_tag = defaultdict(int)
 
         self.tag_set = set()
         count_per_tag = defaultdict(int)
-        self.counts_tag = counts_tag = defaultdict(int)
+        
         self.addone = addone
         for sent in tagged_sents:
             tags = tuple(tag for (_,tag) in sent)
@@ -233,19 +234,16 @@ class MLHMM(HMM):
                 self.out[words[0]][k]=v/float(count_per_tag[words[0]])
 
         self.out =dict(self.out)
-
         #calculamos q
         for ngram in counts_tag:
             if len(ngram) != n:
                 continue
             num = counts_tag[ngram]
             denom = counts_tag[ngram[:-1]]
-            if self.addone:
-                num +=1
-                denom += len(self.tag_set)
             self.trans[ngram[:-1]][ngram[-1]] = num/float(denom)
 
         self.trans = dict(self.trans)
+        self.counts_tag = dict(self.counts_tag)
  
     def tcount(self, tokens):
         """Count for an n-gram or (n-1)-gram of tags.
@@ -284,11 +282,12 @@ class MLHMM(HMM):
         tag -- the tag.
         prev_tags -- tuple with the previous n-1 tags (optional only if n = 1).
         """
-        trans_prev_tags = self.trans.get(tuple(prev_tags),{})
-        unknowTag = tag not in self.tag_set
-        if self.addone and unknowTag:
-            result = 1.0/(self.tcount(prev_tags)+len(self.tag_set) + 1)
+
+
+        if self.addone:
+            len_tag_set = len(self.tag_set) + 1
+            result = (self.tcount(prev_tags+(tag,)) + 1)/float(self.tcount(prev_tags) + len_tag_set) 
         else:
-            result = trans_prev_tags.get(tag,0.0)
+            result = self.trans.get(tuple(prev_tags),{}).get(tag,0.0)
 
         return result
