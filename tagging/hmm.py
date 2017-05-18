@@ -246,7 +246,6 @@ class MLHMM(HMM):
             self.trans[ngram[:-1]][ngram[-1]] = num/float(denom)
 
         self.trans = dict(self.trans)
-        print (self.vocabulary)
  
     def tcount(self, tokens):
         """Count for an n-gram or (n-1)-gram of tags.

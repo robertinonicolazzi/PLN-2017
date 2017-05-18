@@ -16,8 +16,10 @@ class BaselineTagger:
 
         for wordd, tag_dict in dict_word_tags.items():
             dict_word_freq_tag[wordd] = tag_dict.most_common(1)[0][0]
-        print (dict_word_tags)
         self.vocabulary = vocabulary
+
+        dict_word_tags = dict(dict_word_tags)
+        dict_word_freq_tag = dict(dict_word_freq_tag)
 
     def tag(self, sent):
         """Tag a sentence.

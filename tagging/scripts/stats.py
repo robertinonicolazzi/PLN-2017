@@ -55,18 +55,18 @@ if __name__ == '__main__':
 
     total_values_tag = sum(dict_tags.values())
 
-    print ('{:^23}   {:^28}    {:^29}  {:^40}'.format(redWhite('TAG'), redWhite('#Apariciones') ,redWhite('Frecuencia'),redWhite('5 Palabras Mas Frecuentes')))
+    print ('{:^23}  | {:^28}  |  {:^29} | {:^40}'.format(redWhite('TAG'), redWhite('#Apariciones') ,redWhite('Frecuencia'),redWhite('5 Palabras Mas Frecuentes')))
     for i in range(0,10):
         temp_list = sorted(dict_tag_words[tags_ordenados[i][0]].items(), key = lambda x : -x[1])[:5]
         words ="" 
         for a in temp_list:
             words += a[0] + " | "
 
-        print ('{:^10}  {:^15}  {:^16}  {:<40}'.format(tags_ordenados[i][0], tags_ordenados[i][1] ,round(tags_ordenados[i][1]/float(total_values_tag),3), words))
+        print ('{:^10} | {:^15} | {:^16} | {:<40}'.format(tags_ordenados[i][0], tags_ordenados[i][1] ,round(100*tags_ordenados[i][1]/float(total_values_tag),3), words))
 
     print ('\n')
     print ('\n')
-    print ('{:^23}   {:^28}    {:^29}  {:^40}'.format(redWhite('Ambiguedad'), redWhite('#Apariciones') ,redWhite('Frecuencia'),redWhite('5 Palabras Mas Frecuentes')))
+    print ('{:^23}  | {:^28}  |  {:^29} | {:^40}'.format(redWhite('Ambiguedad'), redWhite('#Apariciones') ,redWhite('Frecuencia'),redWhite('5 Palabras Mas Frecuentes')))
 
     grados_ambiguedad = defaultdict(int)
     grado_palabra_count = defaultdict(lambda : defaultdict(int))
@@ -78,5 +78,5 @@ if __name__ == '__main__':
         temp_list = sorted(grado_palabra_count[i].items(), key = lambda x : -x[1])[:5]
         words ="" 
         for a in temp_list:
-            words += a[0] + " | "
-        print ('{:^10}  {:^15}  {:^16}  {:<40}'.format(i,grados_ambiguedad[i], 5, words))
+            words += a[0] + " \ "
+        print ('{:^10} | {:^15} | {:^16} | {:<40}'.format(i,grados_ambiguedad[i], round(100*grados_ambiguedad[i]/float(total_vocabulary),3), words))
