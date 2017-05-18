@@ -206,41 +206,47 @@ class MLHMM(HMM):
         self.tag_set = set()
         count_per_tag = defaultdict(int)
         self.counts_tag = counts_tag = defaultdict(int)
-
+        self.addone = addone
         for sent in tagged_sents:
             tags = tuple(tag for (_,tag) in sent)
             words = tuple(word for (word,_) in sent)
-            self.vocabulary.union(words)
-            tag_set.union(tags)
-            tags = ('<s>')*(n-1) + tags + ('</s>')
-            words = ('<s>')*(n-1) + words + ('</s>')
+            self.vocabulary=self.vocabulary.union(words)
+            self.tag_set =  self.tag_set.union(tags)
+            count_per_tag[()] += len(tags)
 
-            for i in range(len(tags) - n-1):
+            tags = ('<s>',)*(n-1) + tags + ('</s>',)
+            words = ('<s>',)*(n-1) + words + ('</s>',)
+
+            for i in range(len(tags) -n+1):
                 ngram = tuple(tags[i:i+n])
                 counts_tag[ngram] +=1
                 counts_tag[ngram[:-1]] +=1
-                self.count_word_tag[tags[i+n-1]][words[i+n-1]] +=1
+                count_word_tag[tags[i+n-1]][words[i+n-1]] +=1
+
                 count_per_tag[tags[i+n-1]] += 1
 
         #calculas las e 
-        for words in count_word_tag.values():
-            for k, v in words.items():
-                self.out[k]=v/float(count_per_tag[k])
+        count_per_tag['<s>'] = len(tagged_sents)
+        for words in count_word_tag.items():
+            
+            for (k, v) in words[1].items():
+                self.out[words[0]][k]=v/float(count_per_tag[words[0]])
+
         self.out =dict(self.out)
 
         #calculamos q
         for ngram in counts_tag:
-            if ngram != n:
+            if len(ngram) != n:
                 continue
-            num = ngram[ngram]
-            denom = ngram[ngram[:-1]]
+            num = counts_tag[ngram]
+            denom = counts_tag[ngram[:-1]]
             if self.addone:
                 num +=1
-                denom += len(tag_set)
-            self.trans[ng[:-1]][ng[-1]] = num/float(denom)
+                denom += len(self.tag_set)
+            self.trans[ngram[:-1]][ngram[-1]] = num/float(denom)
 
         self.trans = dict(self.trans)
-
+        print (self.vocabulary)
  
     def tcount(self, tokens):
         """Count for an n-gram or (n-1)-gram of tags.
@@ -273,22 +279,17 @@ class MLHMM(HMM):
 
         return result
  
-    def tag_prob(self, y):
-        """
-        Probability of a tagging.
-        Warning: subject to underflow problems.
+    def trans_prob(self, tag, prev_tags):
+        """Probability of a tag.
  
-        y -- tagging.
-
+        tag -- the tag.
+        prev_tags -- tuple with the previous n-1 tags (optional only if n = 1).
         """
-        #Generar el producto de los q
-        prob = 1.0
-        temp_y = ['<s>']*(self.n-1)+ list(y) + ['</s>']
-        n = self.n
-        for i in range(n-1,len(temp_y)):
-            tag = temp_y[i]
-            prev_tags = temp_y[i-n+1:i]
-            trans_p = self.trans_prob(tag,prev_tags)
-            prob *= trans_p
+        trans_prev_tags = self.trans.get(tuple(prev_tags),{})
+        unknowTag = tag not in self.tag_set
+        if self.addone and unknowTag:
+            result = 1.0/(self.tcount(prev_tags)+len(self.tag_set) + 1)
+        else:
+            result = trans_prev_tags.get(tag,0.0)
 
-        return prob
+        return result
