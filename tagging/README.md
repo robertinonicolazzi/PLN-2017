@@ -5,8 +5,11 @@
 
 ##### Estadísticas básicas
 Cantidad de Oraciones:    17378
+
 Cantidad de Tokens:       517194
+
 Cantidad de Palabras:     46501
+
 Cantidad de Etiquetas:    85
 
 
@@ -77,7 +80,9 @@ por los distintos modelos
 RESULTADOS BASELINE 
 
 Total Accuracy: 87.58%
+
 Known Words: 95.26%
+
 Unknown Words: 18.01%
 
 |            |   sp000 |  nc0s000|   da0000|   aq0000|     fc  | nc0p000 |   rg    |  np00000|    fp   |     cc  |
@@ -193,14 +198,19 @@ MLHMM = 4
 Se implementaron los siguientes features básicos
 
 *word_lower: la palabra actual en minúsculas.
+
 *word_istitle: la palabra actual empieza en mayúsculas.
+
 *word_isupper: la palabra actual está en mayúsculas.
+
 *word_isdigit: la palabra actual es un número.
 
 También implementar los siguientes features paramétricos:
 
 *NPrevTags(n): la tupla de los últimos n tags.
-*PrevWord(f): Dado un feature f, aplicarlo sobre la palabra anterior en lugar de la actual.
+
+*PrevWord(f): Dado un feature f, aplicarlo sobre la palabra anterior 
+en lugar de la actual.
 
 ## Ejercicio 7: MEMM
 
