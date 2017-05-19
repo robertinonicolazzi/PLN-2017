@@ -121,6 +121,7 @@ class TestMLHMM(TestCase):
 
         known = {'el', 'gato', 'come', 'pescado', '.', 'la', 'gata', 'salmón'}
         for w in known:
+            print (w)
             self.assertFalse(hmm.unknown(w))
 
         unknown = {'perro', 'salame'}

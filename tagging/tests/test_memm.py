@@ -11,7 +11,7 @@ class TestMEMM(TestCase):
         self.tagged_sents = [
             list(zip('el gato come pescado .'.split(),
                  'D N V N P'.split())),
-            list(zip('la gata come salmón .'.split(),
+            list(zip('la gata come salmon .'.split(),
                  'D N V N P'.split())),
         ]
 
@@ -66,7 +66,7 @@ class TestMEMM(TestCase):
         hs = list(model.sents_histories(self.tagged_sents))
 
         sent0 = 'el gato come pescado .'.split()
-        sent1 = 'la gata come salmón .'.split()
+        sent1 = 'la gata come salmon .'.split()
         hs2 = [
             History(sent0, ('<s>', '<s>'), 0),
             History(sent0, ('<s>', 'D'), 1),
