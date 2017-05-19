@@ -190,11 +190,39 @@ MLHMM = 4
 
 ## Ejercicio 6: Features para Etiquetado de Secuencias
 
-Implementar en features.py los siguientes features básicos:
-word_lower: la palabra actual en minúsculas.
-word_istitle: la palabra actual empieza en mayúsculas.
-word_isupper: la palabra actual está en mayúsculas.
-word_isdigit: la palabra actual es un número.
+Se implementaron los siguientes features básicos
+
+*word_lower: la palabra actual en minúsculas.
+*word_istitle: la palabra actual empieza en mayúsculas.
+*word_isupper: la palabra actual está en mayúsculas.
+*word_isdigit: la palabra actual es un número.
+
 También implementar los siguientes features paramétricos:
-NPrevTags(n): la tupla de los últimos n tags.
-PrevWord(f): Dado un feature f, aplicarlo sobre la palabra anterior en lugar de la actual.
+
+*NPrevTags(n): la tupla de los últimos n tags.
+*PrevWord(f): Dado un feature f, aplicarlo sobre la palabra anterior en lugar de la actual.
+
+## Ejercicio 7: MEMM
+
+### Clasificador: LogisticRegression
+
+| n |   Total   |    Known    |    Unknown   |      Tiempo     |
+|---|---------- |-------------|--------------|-----------------|
+| 1 |   91.10%  |    94.55%   |     59.84%   |    31 seg       |
+| 2 |   90.68%  |    94.14%   |     59.31%   |    1 min 2seg   |
+| 3 |   90.87%  |    94.24%   |     60.41%   |    1 min        |
+| 4 |   90.86%  |    94.22%   |     60.37%   |    1 min  |
+
+
+### Clasificador: MultinomialNB
+### Clasificador: LinearSVC
+
+
+| n |   Total   |    Known    |    Unknown   |      Tiempo     |
+|---|---------- |-------------|--------------|-----------------|
+| 1 |   93.59%  |    97.11%   |     61.74%   |    1 min 2 seg       |
+| 2 |   93.56%  |    97.04%|61.98%|57 seg|
+| 3 | 93.68% | 97.10%| 62.73% | 1 min 15 seg
+
+
+
