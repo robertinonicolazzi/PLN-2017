@@ -215,6 +215,19 @@ También implementar los siguientes features paramétricos:
 
 
 ### Clasificador: MultinomialNB
+
+Se evaluaron las 4 de manera simultanea
+
+| n |   Total   |    Known    |    Unknown   |      Tiempo     |
+|---|---------- |-------------|--------------|-----------------|
+| 1 |   77.02% | 81.47% | 36.72%   |   1 hora  15 min     |
+| 2 |   61.48% | 65.10% | 28.73% | 1 hora 15 min  |
+
+| 3 | 61.76% | 65.19% | 30.66% | 1 hora 15 min  |
+
+| 4 |60.27% | 63.35% | 32.41% | 1 hora 15 min  |
+
+
 ### Clasificador: LinearSVC
 
 
@@ -223,6 +236,8 @@ También implementar los siguientes features paramétricos:
 | 1 |   93.59%  |    97.11%   |     61.74%   |    1 min 2 seg       |
 | 2 |   93.56%  |    97.04%|61.98%|57 seg|
 | 3 | 93.68% | 97.10%| 62.73% | 1 min 15 seg
+| 4 |93.69%| 97.13% | 62.54% | 2 min 5 seg |
+
 
 
 
