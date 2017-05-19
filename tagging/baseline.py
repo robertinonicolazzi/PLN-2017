@@ -1,5 +1,6 @@
 from collections import defaultdict, Counter
 
+
 class BaselineTagger:
 
     def __init__(self, tagged_sents):
