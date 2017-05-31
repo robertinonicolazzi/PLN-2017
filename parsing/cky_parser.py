@@ -1,8 +1,13 @@
 from collections import defaultdict
 from nltk.tree import Tree
 
+def printDifc(dicta):
+
+    for a in dicta.items():
+        print (a)
+
 class CKYParser:
- 
+    
     def __init__(self, grammar):
         """
         grammar -- a binarised NLTK PCFG.
@@ -13,9 +18,12 @@ class CKYParser:
         #Extraemos las probabilidades de q(X->YZ) y de q(X->xi)
         self._probs_dict = _probs_dict = defaultdict(dict)
         for p in grammar.productions():
-            lhs = p.lhs()
+            lhs = p.lhs().symbol()
             rhs = p.rhs()
-            _probs_dict[tuple(rhs)][lhs] = p.logprob()
+            if len(rhs) == 2:
+                rhs = rhs[0].symbol(),rhs[1].symbol()
+
+            _probs_dict[rhs][lhs] = p.logprob()
 
 
     def parse(self, sent):
@@ -39,10 +47,12 @@ class CKYParser:
         for l in range(1,n):
             for i in range(1,n+1-l):
                 j = l + i
-
+                pi[(i,j)] = {}
+                bp[(i,j)] = {}
                 #Agarramos los YZ tal que X->YZ para cada s E {i...(j-1)}
                 for s in range(i,j):
                     #Generamos posibles YZ
+                    #from nose.tools import set_trace; set_trace()
 
                     for Y in pi[(i,s)].keys():
                         for Z in pi[(s+1,j)].keys():
@@ -51,7 +61,7 @@ class CKYParser:
                             for X, logprob in probs_dict.get((Y,Z),{}).items():
                                 pi_y = pi[(i,s)][Y]
                                 pi_z = pi[(s+1,j)][Z]
-                                log_prob = log_prob + pi_z + pi_y
+                                log_prob = logprob + pi_z + pi_y
 
                                 if log_prob > pi[(i,j)].get(X,float('-inf')):
                                     pi[(i,j)][X] = log_prob
@@ -62,5 +72,5 @@ class CKYParser:
         result_prob = pi[(1,n)].get(self.grammar.start().symbol(), float('-inf'))
         result_tree = bp[(1,n)].get(self.grammar.start().symbol(),None)
 
-        print (pi)
+        printDifc(bp)
         return (result_prob, result_tree)
