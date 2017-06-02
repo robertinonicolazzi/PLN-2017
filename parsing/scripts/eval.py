@@ -36,14 +36,14 @@ if __name__ == '__main__':
 
     print('Loading corpus...')
     files = '3LB-CAST/.*\.tbf\.xml'
-    corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/', files)
+    corpus = SimpleAncoraCorpusReader('/media/robertnn/DatosLinux/ancora-3.0.1es/', files)
     parsed_sents = list(corpus.parsed_sents())
 
     print('Parsing...')
     hits, total_gold, total_model = 0, 0, 0
     n = len(parsed_sents)
-    format_str = '{:3.1f}% ({}/{}) (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
-    progress(format_str.format(0.0, 0, n, 0.0, 0.0, 0.0))
+    format_str = '{} {:3.1f}% ({}/{}) (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
+    progress(format_str.format("",0.0, 0, n, 0.0, 0.0, 0.0))
     for i, gold_parsed_sent in enumerate(parsed_sents):
         tagged_sent = gold_parsed_sent.pos()
 
@@ -62,7 +62,17 @@ if __name__ == '__main__':
         rec = float(hits) / total_gold * 100
         f1 = 2 * prec * rec / (prec + rec)
 
-        progress(format_str.format(float(i+1) * 100 / n, i+1, n, prec, rec, f1))
+        #Obtenemos los spans e ignoramos el label
+        u_gold_spans = [(i,j) for n,i,j in gold_spans]
+        u_model_spans = [(i,j) for n,i,j in model_spans]
+        u_hits+= len(u_gold_spans & u_model_spans)
+
+        u_prec = float(u_hits) / total_model * 100
+        u_rec = float(u_hits) / total_gold * 100
+        u_f1 = 2 * u_prec * u_rec / (u_prec + u_rec)
+
+        progress(format_str.format('Labeled',float(i+1) * 100 / n, i+1, n, prec, rec, f1))
+        progress(format_str.format('UnLabeled',float(i+1) * 100 / n, i+1, n, u_prec, u_rec, u_f1))
 
     print('')
     print('Parsed {} sentences'.format(n))
@@ -70,3 +80,7 @@ if __name__ == '__main__':
     print('  Precision: {:2.2f}% '.format(prec))
     print('  Recall: {:2.2f}% '.format(rec))
     print('  F1: {:2.2f}% '.format(f1))
+    print('UnLabeled')
+    print('  Precision: {:2.2f}% '.format(u_prec))
+    print('  Recall: {:2.2f}% '.format(u_rec))
+    print('  F1: {:2.2f}% '.format(u_f1))
