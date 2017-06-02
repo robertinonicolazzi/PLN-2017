@@ -2,6 +2,7 @@
 
 Usage:
   train.py [-m <model>] -o <file>
+  train.py -m upcfg [--hM <n> ] -o <file>
   train.py -h | --help
 
 Options:
@@ -9,6 +10,8 @@ Options:
                   flat: Flat trees
                   rbranch: Right branching trees
                   lbranch: Left branching trees
+                  upcfg: Unlexicalized PCFG
+  --hM <n>       horzMarkov order n
   -o <file>     Output model file.
   -h --help     Show this screen.
 """
@@ -17,13 +20,13 @@ import pickle
 
 from corpus.ancora import SimpleAncoraCorpusReader
 
-from parsing.baselines import Flat, RBranch, LBranch
-
+from parsing.baselines import Flat, RBranch
+from parsing.upcfg import UPCFG
 
 models = {
     'flat': Flat,
     'rbranch': RBranch,
-    'lbranch': LBranch,
+    'upcfg': UPCFG
 }
 
 
@@ -32,10 +35,14 @@ if __name__ == '__main__':
 
     print('Loading corpus...')
     files = 'CESS-CAST-(A|AA|P)/.*\.tbf\.xml'
-    corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/', files)
+    corpus = SimpleAncoraCorpusReader('/media/robertnn/DatosLinux/ancora-3.0.1es/', files)
 
     print('Training model...')
-    model = models[opts['-m']](corpus.parsed_sents())
+    if opts['--hM'] is None:
+      model = models[opts['-m']](corpus.parsed_sents())
+    else:
+      model = models[opts['-m']](corpus.parsed_sents(),int(opts['-hM']))
+
 
     print('Saving...')
     filename = opts['-o']
