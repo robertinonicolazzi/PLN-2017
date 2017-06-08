@@ -85,6 +85,7 @@ por el parser se lexicaliza y se lo vuelve a la forma original (Se deshace el Ch
 En caso que el parser no devuelva un árbol valida, se devuelve un árbol plano
 
 Parsed 1444 sentences
+
 |Labeled
 |-
 |Precision: 72.59% 
