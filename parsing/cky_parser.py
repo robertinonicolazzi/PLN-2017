@@ -1,10 +1,6 @@
 from collections import defaultdict
 from nltk.tree import Tree
 
-def printDifc(dicta):
-
-    for a in dicta.items():
-        print (a)
 
 class CKYParser:
     
@@ -72,5 +68,5 @@ class CKYParser:
         result_prob = pi[(1,n)].get(self.grammar.start().symbol(), float('-inf'))
         result_tree = bp[(1,n)].get(self.grammar.start().symbol(),None)
 
-        printDifc(bp)
+
         return (result_prob, result_tree)
