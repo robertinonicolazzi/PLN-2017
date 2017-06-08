@@ -55,6 +55,7 @@ De esta forma se contruye la un diccionario para la tabla pi y los backpointers
 Podemos interpretar que alicia llam oa bob, ella estando en Cardiff o que alicia llamo a un tal bob el cual se encuentra en cardiff
 
 Con esta gramatica elegimos el árbol de la derecha
+
 |GRAMÁTICA
 |-
 |S -> NP VP      [1.0]
