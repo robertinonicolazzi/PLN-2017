@@ -52,9 +52,9 @@ De esta forma se contruye la un diccionario para la tabla pi y los backpointers
 ##### Oración ambigua agregada
 'Alice called Bob from Cardiff'
 
-Podemos interpretar que alicia llam oa bob, ella estando en Cardiff o que alicia llamo a un tal bob el cual se encuentra en cardiff
+Podemos interpretar que alicia llamo a bob, ella estando en Cardiff o que alicia llamo a un tal bob el cual se encuentra en cardiff
 
-Con esta gramatica elegimos el árbol de la derecha
+Con esta gramatica elegimos el árbol de la izquierda
 
 |GRAMÁTICA
 |-
