@@ -41,7 +41,7 @@ if __name__ == '__main__':
     if opts['--hM'] is None:
       model = models[opts['-m']](corpus.parsed_sents())
     else:
-      model = models[opts['-m']](corpus.parsed_sents(),int(opts['--hM']))
+      model = models[opts['-m']](corpus.parsed_sents(),horzMarkov=int(opts['--hM']))
 
 
     print('Saving...')
