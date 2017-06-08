@@ -9,6 +9,7 @@ que viene dentro de ancora.
 Se obtienen las metricas de precision, recall y F1 para Labeled y Unlabeled
 
 Flat: 1444 sentences
+
 |Labeled|
 |-------|
 |  Precision: 99.93% |
@@ -25,6 +26,7 @@ Tiempo Evaluación: 0m9.276s
 
 
 RBranch: 1444 sentences
+
 |Labeled
 |-
 |Precision: 8.81% 
@@ -52,16 +54,18 @@ De esta forma se contruye la un diccionario para la tabla pi y los backpointers
 Podemos interpretar que alicia llam oa bob, ella estando en Cardiff o que alicia llamo a un tal bob el cual se encuentra en cardiff
 
 Con esta gramatica elegimos el árbol de la derecha
-S -> NP VP      [1.0]
-NP -> NP PP     [0.25] 
-VP -> V NP      [0.40] 
-VP -> VP PP     [0.60]
-PP -> P NP      [1.0]
-NP -> 'Alice'   [0.25] 
-NP -> 'Bob'     [0.25] 
-NP -> 'Cardiff' [0.25] 
-V -> 'called'   [1.0]
-P -> 'from'     [1.0]
+
+|-
+|S -> NP VP      [1.0]
+|NP -> NP PP     [0.25] 
+|VP -> V NP      [0.40] 
+|VP -> VP PP     [0.60]
+|PP -> P NP      [1.0]
+|NP -> 'Alice'   [0.25] 
+|NP -> 'Bob'     [0.25] 
+|NP -> 'Cardiff' [0.25] 
+|V -> 'called'   [1.0]
+|P -> 'from'     [1.0]
 
 ![](arbol1.png)
 ![](arbol2.png)
