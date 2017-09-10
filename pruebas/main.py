@@ -21,7 +21,9 @@ f = open(r'/media/robertnn/DatosLinux/PLN-2017/pruebas/Tagger.tag', 'rb')
 taggerSample = pickle.load(f)
 f.close()
 
-
+f = open(r'/media/robertnn/DatosLinux/PLN-2017/pruebas/parser', 'rb')
+parserSample = pickle.load(f)
+f.close()
 with open('TrainData.json', 'r') as data_file:
 	data = json.load(data_file)
 
@@ -31,7 +33,7 @@ mapeoDate = { 'birthDate': ["nació","nacio"]}
 
 class ClassAnswerType:
 
-	def __init__(self, questions, tagger):
+	def __init__(self, questions, tagger, parser):
 
 		self.model_POS = tagger
 		self.all_words = set()
@@ -141,11 +143,19 @@ class ClassAnswerType:
 
 
 
-test_question = "¿Chilena 68?"
+test_question = "¿ Es Michelle Obama la mujer de Barack Obama ?"
+
+tagged_sent = taggerSample.tag(test_question)
+tagged_keywords = list(zip(word_tokenize(test_question),tagged_sent))
+print (parserSample.parse(tagged_keywords))
+
+
+"""
 keywords_test ="anfitrión, BBC Wildlife"
 answerTypeClass = ClassAnswerType(questionsSample,tagger=taggerSample)
 resp = answerTypeClass.answer_question(test_question,keywords_test)
 print(resp)
+"""
 
 
 """
