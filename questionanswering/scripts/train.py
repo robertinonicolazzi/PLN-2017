@@ -9,23 +9,26 @@ Options:
   -h --help     Show this screen.
 """
 from docopt import docopt
-import pickle
+import dill as pickle
 import json
 
 from questionanswering.main import ClassAnswerType
-
-
+from stanfordcorenlp import StanfordCoreNLP
+text = ["alcalde Cordoba", "gobernado Buenos Aires"] 
+dbo = ["mayor"]
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
 
     print('Loading corpus...')
 
-    with open('TrainData.json', 'r') as data_file:
+    with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json', 'r') as data_file:
       data = json.load(data_file)
     questionsSample = data["questions"]
 
     print('Loading Property Mapping extra corpus')
+
+    propertyCorpus = [[],[]]
 
     print('Loading StanfordCoreNLP...')
 
@@ -33,7 +36,7 @@ if __name__ == '__main__':
 
 
     print('Training model...')
-    model = ClassAnswerType(questions=questionsSample,nlp=nlp)
+    model = ClassAnswerType(questions=questionsSample,nlp=nlp,propCorpus=propertyCorpus)
 
     print('Saving...')
     filename = opts['-o']

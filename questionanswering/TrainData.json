@@ -108,7 +108,7 @@
 				{
 					"language": "es",
 					"string": "¿Cómo de alta el faro de Colombo?",
-					"keywords": "alta, Faro de Colombo"
+					"keywords": "alta, Faro de Colombo?"
 				}
 				
 				
@@ -388,7 +388,7 @@
 				
 			],
 			"query": {
-				"sparql": "SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/product> <http://dbpedia.org/resource/Slack_(software)> . }"
+				"sparql": "SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Slack_(software)>  <http://dbpedia.org/ontology/developer> ?uri. }"
 			},
 			"answers": [{
 				"head": {
@@ -500,7 +500,7 @@
 				
 			],
 			"query": {
-				"sparql": "PREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:The_Storm_on_the_Sea_of_Galilee dbp:artist ?uri .\n}"
+				"sparql": "PREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:The_Storm_on_the_Sea_of_Galilee dbo:author ?uri .\n}"
 			},
 			"answers": [{
 				"head": {
@@ -530,7 +530,7 @@
 				{
 					"language": "es",
 					"string": "¿Por qué ciudades pasa el río Weser?",
-					"keywords": "ciudad, pasa, Weser"
+					"keywords": "cuidad, pasa, Weser"
 				}
 				
 				

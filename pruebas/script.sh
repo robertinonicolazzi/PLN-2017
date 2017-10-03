@@ -1,1 +1,0 @@
-python tagging/scripts/train.py -m mlhmm -n 1 -o /media/robertnn/DatosLinux/PLN-2017/pruebas/TaggerEspanol.tag
