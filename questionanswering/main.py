@@ -135,7 +135,7 @@ class ClassAnswerType:
 		query ='''
 		PREFIX esdbr: <http://es.dbpedia.org/resource/> 
 		SELECT ?same WHERE {{ 
-		esdbr:{}   dbpedia-owl:wikiPageRedirects* ?resource .  ?resource owl:sameAs ?same.
+		<http://es.dbpedia.org/resource/{}>    dbpedia-owl:wikiPageRedirects* ?resource .  ?resource owl:sameAs ?same.
 		}}
 		'''.format(entity)
 
@@ -191,7 +191,7 @@ class ClassAnswerType:
 
 			query = '''PREFIX esdbp: <http://es.dbpedia.org/property/>
 					PREFIX esdbr: <http://es.dbpedia.org/resource/>
-					ASK {{ esdbr:{}   ?p    ?o .}}'''.format(e)
+					ASK {{ <http://es.dbpedia.org/resource/{}>    ?p    ?o .}}'''.format(e)
 
 			sparql.setQuery(query)			
 			results = sparql.query().convert()
@@ -205,7 +205,7 @@ class ClassAnswerType:
 					name = name[x-1] + "_" +name[y-1]
 					query = '''PREFIX esdbp: <http://es.dbpedia.org/property/>
 					PREFIX esdbr: <http://es.dbpedia.org/resource/>
-					ASK {{ esdbr:{}   ?p    ?o .}}'''.format(name)
+					ASK {{ <http://es.dbpedia.org/resource/{}>    ?p    ?o .}}'''.format(name)
 					sparql.setQuery(query)			
 					results = sparql.query().convert()
 					if results["boolean"] is True:
@@ -227,7 +227,7 @@ class ClassAnswerType:
 							name = w
 							query = '''PREFIX esdbp: <http://es.dbpedia.org/property/>
 							PREFIX esdbr: <http://es.dbpedia.org/resource/>
-							ASK {{ esdbr:{}   ?p    ?o .}}'''.format(name)
+							ASK {{ <http://es.dbpedia.org/resource/{}>    ?p    ?o .}}'''.format(name)
 							sparql.setQuery(query)			
 							results = sparql.query().convert()
 							if results["boolean"] is True:
@@ -488,7 +488,7 @@ class ClassAnswerType:
 		query ='''
 		PREFIX esdbr: <http://es.dbpedia.org/resource/> 
 		SELECT ?abstract WHERE {{
-		esdbr:{}   dbpedia-owl:wikiPageRedirects* ?resource .
+		<http://es.dbpedia.org/resource/{}>    dbpedia-owl:wikiPageRedirects* ?resource .
 				?resource dbpedia-owl:abstract ?abstract.
 		FILTER langMatches(lang(?abstract),'es')
 
@@ -546,10 +546,109 @@ class ClassAnswerType:
 				print(properti[0])
 
 
+		elif len(entities_total) == 2:
+
+			print('{:18} {}'.format('INIT ENTITIES: ','|'.join([x for (x,y) in named_entities])))
+			print('{:18} {}'.format('Found ENTITIES: ','|'.join([x for x in entities])))
+			print('{:18} {}'.format('Found AMB ENTITIES: ','|'.join([x+","+y for (x,y) in amb_entities])))
+
+
+
+			props, st_filter = self.two_entities_prop_filter(q,keys_restantes)
+			if type(entities_total[0]) is tuple:
+				pr_entity_es = entities_total[0][0]
+			else:
+				pr_entity_es = entities_total[0]
+
+			if type(entities_total[1]) is tuple:
+				sn_entity_es = entities_total[1][0]
+			else:
+				sn_entity_es = entities_total[1]
+
+			pr_entity_en = self.get_english_dbpedia(pr_entity_es)
+			sn_entity_en = self.get_english_dbpedia(sn_entity_es)
+			if sn_entity_en is None:
+				sn_entity_en = entities_total[1]
+			answers = self.two_entities_answer(pr_entity_en,sn_entity_en,props[0],st_filter)
 		else:
 			answers = []
 
+
 		return answers
+
+	def two_entities_prop_filter(self,question,keys_restantes):
+		prop = []
+		st_filter = ""
+		if "antes" in question:
+			st_filter = "FILTER (?x < ?y)"
+			prop.append("date")
+		elif "despues" in question:
+			st_filter = "FILTER (?x > ?y)"
+			prop.append("date")
+		elif "menor" in question:
+			st_filter = "FILTER (?x < ?y)"
+			prop = self.get_question_property(keys_restantes)
+		elif "mayor" in question or "grande" in question:
+			st_filter = "FILTER (?x > ?y)"
+			prop = self.get_question_property(keys_restantes)
+		elif "misma" in question or "igual" in question or "mismos" in question:
+			st_filter = "same"
+			prop = self.get_question_property(keys_restantes)
+		else:
+			prop = self.get_question_property(keys_restantes)
+			#la igualdad es viendo si pertenece
+			st_filter = ""
+
+		return prop, st_filter
+
+	def two_entities_answer(self,pr_entity,sn_entity,properti,st_filter):
+
+		if st_filter == "same":
+			query ='''
+				ASK 
+				WHERE {{
+				<http://dbpedia.org/resource/{}> dbo:{} ?result .
+				<http://dbpedia.org/resource/{}> dbo:{} ?result .
+				}}
+				'''.format(pr_entity,properti,sn_entity,properti)
+		elif not st_filter == "":
+			query ='''
+				ASK 
+				WHERE {{
+				<http://dbpedia.org/resource/{}> dbo:{} ?x .
+				<http://dbpedia.org/resource/{}> dbo:{} ?y . {}
+				}}
+				'''.format(pr_entity,properti,sn_entity,properti,st_filter)
+		else:
+			bind = '''ASK 
+				WHERE {{
+				<http://dbpedia.org/resource/{}> dbo:{} ?result. FILTER (BOUND(?result))
+				}}'''.format(pr_entity,properti)
+			sparql = self.sparqlEn
+			sparql.setQuery(bind)			
+			results = sparql.query().convert()
+
+			if results["boolean"]:
+				query ='''
+					ASK 
+					WHERE {{
+					<http://dbpedia.org/resource/{}> dbo:{} <http://dbpedia.org/resource/{}> .
+					}}
+					'''.format(pr_entity,properti,sn_entity)
+			else:
+				query ='''
+					ASK 
+					WHERE {{
+					<http://dbpedia.org/resource/{}> dbo:{} <http://dbpedia.org/resource/{}> .
+					}}
+					'''.format(sn_entity,properti,pr_entity)
+
+		print (query)
+		sparql = self.sparqlEn
+		sparql.setQuery(query)			
+		results = sparql.query().convert()
+
+		return results["boolean"]
 	# ------------------------------------------------------------------------
 	# ---------------------- RESPONDER PREGUNTAS -----------------------------
 	# ------------------------------------------------------------------------

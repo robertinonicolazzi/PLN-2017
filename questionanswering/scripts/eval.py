@@ -73,7 +73,6 @@ if __name__ == '__main__':
 	print('Parsing...')
 	hits, total_gold, total_model = 0, 0, 0
 	total = 0
-
 	n = len(questionsSample)
 	#format_str = '{:3.1f}% ({}/{}) (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
 
@@ -85,6 +84,7 @@ if __name__ == '__main__':
 		if  quest["answertype"] == "boolean":
 			
 			st_quest, st_keys = getQuestAnKey(quest)
+
 			answer_golden = getAnswer(quest,quest["answertype"])
 			answers_model = model.answer_question(st_quest,st_keys)
 			print(st_quest)
@@ -92,13 +92,10 @@ if __name__ == '__main__':
 			if answers_model == answer_golden:
 				hits +=1
 				print ("CORRECTO")
-			if not answers_model == []:
-				total +=1
+
+			total +=1
 		else:
-			continue
-			st_dbo = parseQuery(quest["query"]["sparql"])
-			if st_dbo == "":
-				continue
+			
 
 			out = open('myfile','a')
 

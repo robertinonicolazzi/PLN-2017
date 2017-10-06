@@ -1683,8 +1683,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Tienen el príncipe Harry y el prínciple William la misma madre?",
-					"keywords": "príncipe Harry, príncipe William, la misma madre"
+					"string": "¿Tienen el príncipe Harry y el prínciple William los mismos padres?",
+					"keywords": "príncipe Harry, príncipe William, mismos padres"
 				},
 				{
 					"language": "it",
@@ -3322,7 +3322,7 @@
 				{
 					"language": "es",
 					"string": "¿Fué la crisis de cuba antes de la invasión de bahía de cochinos?",
-					"keywords": "crísis de cuba, anterior a la invasión de bahía de cochinos?"
+					"keywords": "Crisis de Cuba, anterior,Invasión de Bahía de Cochinos"
 				},
 				{
 					"language": "it",
@@ -6883,7 +6883,7 @@
 				{
 					"language": "es",
 					"string": "¿Qué películas ha rodado Kurosawa?",
-					"keywords": "película, rodada, Kurosawa?"
+					"keywords": "película, rodada, Kurosawa"
 				},
 				{
 					"language": "it",
@@ -7490,7 +7490,7 @@
 				{
 					"language": "es",
 					"string": "¿En que ciudad murió Nikos Kazantzakis?",
-					"keywords": "ciudad, murió, Nikos Kazantzakis?"
+					"keywords": "ciudad, murió, Nikos Kazantzakis"
 				},
 				{
 					"language": "it",

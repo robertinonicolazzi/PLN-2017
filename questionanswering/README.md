@@ -1,9 +1,9 @@
 El sistema maneja Una entidad y una propiedad, salvo en caso Booleanos
 donde se admiten dos entidades y se busca la relacion entre ellos
 
-####Flujo de ejecución
+#### Flujo de ejecución
 
-#####Caso Pregunta NO Booleana
+##### Caso Pregunta NO Booleana
 
 - Extraemos el tipo de pregunta 
 - Extraemos los Sustantivos Propios como entidades desde los keywords
@@ -25,3 +25,73 @@ donde se admiten dos entidades y se busca la relacion entre ellos
 
 - Verificamos que si la entidad es Entidad_(desambiguation), buscamos la propiedad requerida en los ***WikiPageDisambiguates***
 	
+### Aggregation 
+---------
+¿==Cuántos== idiomas se hablan en Colombia?
+idiomas, Colombia
+---------
+¿== Cuántos == idiomas se hablan en Turkmenistán?
+idiomas, Turkmenistán
+---------
+¿==Cuántas== veces ha estado casada Jane Fonda?
+Jane Fonda, casada, cuántas veces
+---------
+¿==Cuántos== hijos tuvo Benjamin Franklin?
+Benjamin Franklin, hijos
+---------
+¿==Cuántos== grupos étnicos viven en Eslovenia?
+grupos étnicos, Eslovenia
+---------
+¿Cuál es el país más grande del mundo?
+país, más grande mundo
+---------
+¿Cuál fue la última película con Alec Guinness?
+última película, Alec Guinness
+---------
+¿Todavía vive Frank Herbert?
+Frank Herbert, vive
+---------
+¿Fué la crisis de cuba antes de la invasión de bahía de cochinos?
+Crisis de Cuba, anterior,Invasión de Bahía de Cochinos
+---------
+¿Tiene Breaking Bad más episodios que Game of Thrones?
+Breaking Bad, episodios, más que, Game of Thrones
+---------
+
+¿Cuál es el hijo mas mayor de Meryl Streep?
+hijo mas mayor, Meryl Streep
+---------
+¿Qué empresa de la India tiene el mayor número de empleados?
+empresa India, mayor número empleados
+---------
+¿Que ciudad tiene la mayor población?
+ciudad, mayor población
+---------
+
+¿Qué películas ha rodado Kurosawa?
+película, rodada, Kurosawa
+---------
+¿Que libro tiene el mayor numero de paginas?
+libro, mayor numero paginas
+---------
+¿Cuál fue el primer álbum de Queen?
+primer álbum, Queen
+---------
+¿Qué puente tiene el mayor largo del vano?
+puente, mayor largo del vano
+---------
+Quien es el jugador de baloncesto mas alto?
+jugador baloncesto, mas alto
+---------
+¿Que ciudad tiene la menor población?
+ciudad, menor población
+---------
+¿Qué museo en Nueva York tiene el mayor numero de visitantes?
+museo Nueva York, mayor numero visitantes
+---------
+¿Quién es el jugador mas jóven de dardos?
+jugador más jóven dardos
+
+¿Cuál es el estadio más grande de España?
+estadio más grande España
+---------
