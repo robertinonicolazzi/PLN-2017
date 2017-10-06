@@ -388,7 +388,8 @@ class ClassAnswerType:
 	def check_aggregation(self,answer_type,st_question):
 		cuantoBool = bool(re.search('cu(a|á)nt(o|a)s', st_question))
 		boolNumber = (answer_type == "number")
-		result = "no aggregation"
+		result = "none"
+		
 		if cuantoBool and boolNumber:
 			result = "count"
 

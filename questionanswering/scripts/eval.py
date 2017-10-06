@@ -68,6 +68,8 @@ if __name__ == '__main__':
 	print('Loading corpus...')
 	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
 	  data = json.load(data_file)
+
+	
 	questionsSample = data["questions"]
 
 	print('Parsing...')
@@ -95,7 +97,7 @@ if __name__ == '__main__':
 
 			total +=1
 		else:
-			
+
 
 			out = open('myfile','a')
 
