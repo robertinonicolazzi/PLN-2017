@@ -66,7 +66,7 @@ if __name__ == '__main__':
 	f.close()
 
 	print('Loading corpus...')
-	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
+	with open(r'/home/robert/Facultad/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
 	  data = json.load(data_file)
 
 	

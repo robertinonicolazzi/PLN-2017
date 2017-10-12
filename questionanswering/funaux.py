@@ -3,6 +3,15 @@
 import unicodedata
 from nltk.tokenize import word_tokenize
 
+def resolveQuery(sparql, query):
+	answers = []
+	sparql.setQuery(query)
+	results = sparql.query().convert()
+	for result in results["results"]["bindings"]:
+		answers.append(result["result"]["value"])
+		
+	return answers
+
 def delete_tildes(content):
 	new_list = []
 	for c in unicodedata.normalize('NFD', content):

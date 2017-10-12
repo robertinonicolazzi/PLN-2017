@@ -22,7 +22,10 @@ if __name__ == '__main__':
 
     print('Loading corpus...')
 
-    with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json', 'r') as data_file:
+    pathTrainData = r'/home/robert/Facultad/PLN-2017/questionanswering/TrainData.json'
+    pathStandford = r'/home/robert/stanford-corenlp-full-2017-06-09/'
+
+    with open(pathTrainData, 'r') as data_file:
       data = json.load(data_file)
     questionsSample = data["questions"]
 
@@ -31,8 +34,8 @@ if __name__ == '__main__':
     propertyCorpus = [[],[]]
 
     print('Loading StanfordCoreNLP...')
-
-    nlp = StanfordCoreNLP(r'/media/robertnn/DatosLinux/Standford/stanford-corenlp-full-2017-06-09/', lang='es')
+    import pdb; pdb.set_trace()
+    nlp = StanfordCoreNLP(pathStandford, lang='es',memory='2g')
 
 
     print('Training model...')
