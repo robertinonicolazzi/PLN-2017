@@ -3,6 +3,18 @@
 import unicodedata
 from nltk.tokenize import word_tokenize
 
+def lenEntity(entity):
+	entity = entity.replace('_',' ')
+	entity = entity.split()
+
+	return len(entity)
+
+def prepareGroup(group):
+	group = group.strip()
+	group = group.replace(' ','_')
+	group = str(group[0].upper() + group[1:])
+	return group
+
 def resolveQuery(sparql, query):
 	answers = []
 	sparql.setQuery(query)

@@ -100,3 +100,41 @@ def getPassage(self,question, question_keywords, answertype):
 					result.append(k)
 
 		return result
+
+
+	def get_english_ans(self, entity, properti, dism=""):
+		sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+		sparql.setReturnFormat(JSON)
+		answers = []
+
+		if not dism == "":
+			query = '''
+			select distinct ?result ?abstract
+			where {{
+
+			<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?resource.
+			?resource dbo:wikiPageRedirects* ?redirect.					
+			?redirect dbo:{} ?result.
+			?redirect dbo:abstract ?abstract.
+			FILTER langMatches(lang(?abstract),'es')
+
+			}}'''.format(entity,properti)
+		else:
+			if "disambiguation" in entity:
+				query = '''
+						SELECT ?result WHERE {{
+						<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates ?resource.
+						?resource dbo:{} ?result
+						}}'''.format(entity,properti)
+			else:
+				query = '''
+						select distinct ?result 
+						where {{
+							<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?resource.
+							?resource dbo:{} ?result
+						}}
+						'''.format(entity,properti)
+
+		answers = resolveQuery(sparql,query)
+
+		return set(answers)
