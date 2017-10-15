@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-
-import json
-import re
-
-import nltk.classify.util
-
-from nltk.tokenize import RegexpTokenizer
 from SPARQLWrapper import SPARQLWrapper, JSON
+
 from questionanswering.funaux import *
-import nltk
+from questionanswering.booleanHelper import BooleanHelper
+from questionanswering.aggregationHelper import AggregationHelper
+
+import json, re, nltk,nltk.classify.util,numpy as np
+
 from nltk.corpus import stopwords
 from nltk import Tree
 
@@ -18,10 +16,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 
-import numpy as np
-
 from heapq import nlargest
-import spacy
+
 
 class ClassAnswerType:
 
@@ -33,6 +29,8 @@ class ClassAnswerType:
 		self.sparqlEn = SPARQLWrapper("http://dbpedia.org/sparql")
 		self.sparqlEn.setReturnFormat(JSON)
 
+		train_prop_x = []
+		train_prop_y = []
 		self.all_words = set()
 		self.pipeline = None
 		train_answer_type = []
@@ -57,13 +55,14 @@ class ClassAnswerType:
 			train_answer_type.append((feat_question,st_answer_type))
 
 			# Intento de mapeo de propiedades
-			st_dbo = parseQuery(quest["query"]["sparql"])
-			if st_dbo != "":
-				keys.append(delete_tildes(st_keywords))
-				dbo.append(st_dbo)
+
+			temp_train_x,temp_train_y = self.generate_train_by_entity(quest["query"]["sparql"])
+			train_prop_x += temp_train_x
+			train_prop_y += temp_train_y
+
 		self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)
 
-		self.pipeline = self.init_pipeline(keys,dbo,propCorpus)
+		self.pipeline = self.init_pipeline(train_prop_x,train_prop_y,propCorpus)
 		
 
 	# -------------------------------------------------------------
@@ -95,7 +94,47 @@ class ClassAnswerType:
 	# -------------------------------------------------------------
 	# --GET PROPERTY ----------------------------------------------
 	# -------------------------------------------------------------
+	def generate_train_by_entity(self, query):
 
+		temp_prop_x = []
+		temp_prop_y = []
+		st_dbo = parseQuery(query)
+		if st_dbo == "":
+			return [],[]
+
+		st_ent = getEntity(query)
+		if st_ent == "":
+			return [],[]
+		
+
+		st_keywords = delete_tildes(st_keywords)
+		
+		x = (st_keywords,st_dbo)
+		y = 1
+		temp_prop_x.append(x)
+		temp_prop_y.append(y)
+
+		sparql = self.sparqlEn
+		query = '''
+		SELECT distinct ?p WHERE {{
+			<http://dbpedia.org/resource/{}> ?p ?v.
+
+		}}
+		'''.format(entity)
+
+		sparql.setQuery(query)
+		results = sparql.query().convert()
+		for result in results["results"]["bindings"]:
+			value = result["p"]["value"]
+			if "ontology" in value or "property" in value:
+				prop = value.split('/')[4]
+				if not prop == st_dbo 
+					x = (st_keywords,prop)
+					y = 0
+					temp_prop_x.append(x)
+					temp_prop_y.append(y)
+
+		return temp_prop_x, temp_prop_y
 
 	def init_pipeline(self,x,y,extraCorpus):
 		esp_stopwords = stopwords.words('spanish')
@@ -112,16 +151,32 @@ class ClassAnswerType:
 		pipeline.fit(x,y)
 		return pipeline
 
-	def get_question_property(self,keys):
+	def get_question_property(self,entity,keys):
 		st_keys = " ".join(keys)
 		st_keys = delete_tildes(st_keys)
-		temp = self.pipeline.predict_proba([st_keys])
-		temp = temp.tolist()
-		nmax = nlargest(2, enumerate(temp[0]), key=lambda x:x[1])
-		properties = []
-		for i,v in nmax:
-			properties.append(self.pipeline.steps[-1][-1].classes_[i])
-		return properties
+
+		sparql = self.sparqlEn
+		query = '''
+		SELECT distinct ?p WHERE {{
+			<http://dbpedia.org/resource/{}> ?p ?v.
+
+		}}
+		'''.format(entity)
+		properti = ""
+		sparql.setQuery(query)
+		results = sparql.query().convert()
+		for result in results["results"]["bindings"]:
+			value = result["p"]["value"]
+			if "ontology" in value or "property" in value:
+				prop = value.split('/')[4]
+				temp = self.pipeline.predict_proba([(st_keys,prop)])
+				if temp == 1:
+					properti = prop
+					break
+
+		
+
+		return properti
 
 
 	# -------------------------------------------------------------
@@ -153,28 +208,25 @@ class ClassAnswerType:
 
 		return entity
 
-
-	def get_named_entities(self,st_keys):
-
-		keys= [x.strip() for x in st_keys.split(',')]
-		keys_restantes = [x.strip() for x in st_keys.split(',')]
-		entities = []
-
 	def get_entities(self, keywords):
 
 		found_entities = []
-		for group in noum_group:
-			group = prepareGroup(group)
+		keys= [x.strip() for x in st_keys.split(',')]
 
-			if self.check_ent_dbES(group):
-				es_ent = group
-				en_ent = self.get_english_dbpedia(group)
-				found_entities.append((es_ent,en_ent,lenEntity(es_ent)))
-			else:
-				if self.check_ent_dbEN(group):
+		for key in keys:
+			noum_group = getNounGroups(key)
+			for group in noum_group:
+				group = prepareGroup(group)
+
+				if self.check_ent_dbES(group):
 					es_ent = group
-					en_ent = group
+					en_ent = self.get_english_dbpedia(group)
 					found_entities.append((es_ent,en_ent,lenEntity(es_ent)))
+				else:
+					if self.check_ent_dbEN(group):
+						es_ent = group
+						en_ent = group
+						found_entities.append((es_ent,en_ent,lenEntity(es_ent)))
 
 		found_entities = sorted(found_entities, key=itemgetter(2),reverse=True)
 
@@ -270,7 +322,7 @@ class ClassAnswerType:
 			query = '''
 					select distinct ?result 
 					where {{
-							<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?resource.
+							<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates ?resource.
 							?resource dbo:{} ?result
 					}}
 					'''.format(entity,properti)

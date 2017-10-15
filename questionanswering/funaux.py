@@ -60,6 +60,21 @@ def parseQuery(st_query):
 
 	return dbo
 
+def getEntity(st_query):
+
+	st_query = st_query[st_query.find("{")+1:st_query.find("}")]
+	st_query = st_query.replace('.','')
+	st_query = st_query.split()
+	ent = ""
+	if len(st_query) == 3:
+		ent = st_query[0]
+		if ent[0] =="<":
+			ent = (ent.split("/")[-1])[:-1]
+		else:
+			ent = ent.split(":")[1]
+
+	return ent
+
 def getFirstTag(listTuple):
 
 	# par (word, tag)
