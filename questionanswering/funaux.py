@@ -52,11 +52,15 @@ def parseQuery(st_query):
 	st_query = st_query.split()
 	dbo = ""
 	if len(st_query) == 3:
-		dbo = st_query[1]
-		if dbo[0] =="<":
-			dbo = (dbo.split("/")[-1])[:-1]
-		else:
-			dbo = dbo.split(":")[1]
+		try:
+			dbo = st_query[1]
+			if dbo[0] =="<":
+				dbo = (dbo.split("/")[-1])[:-1]
+			else:
+				dbo = dbo.split(":")[1]
+		except:
+			dbo = ""
+			print (st_query, "Exception")
 
 	return dbo
 
@@ -68,10 +72,15 @@ def getEntity(st_query):
 	ent = ""
 	if len(st_query) == 3:
 		ent = st_query[0]
+		if ent[0] =="?":
+			ent = st_query[2]
+
 		if ent[0] =="<":
 			ent = (ent.split("/")[-1])[:-1]
-		else:
+		elif ent[0] == "r":
 			ent = ent.split(":")[1]
+		else:
+			return ""
 
 	return ent
 

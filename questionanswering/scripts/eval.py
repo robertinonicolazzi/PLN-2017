@@ -66,7 +66,7 @@ if __name__ == '__main__':
 	f.close()
 
 	print('Loading corpus...')
-	with open(r'/home/robert/Facultad/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
+	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
 	  data = json.load(data_file)
 
 	
@@ -84,7 +84,7 @@ if __name__ == '__main__':
 			continue;
 
 		if  quest["answertype"] == "boolean":
-			
+			continue
 			st_quest, st_keys = getQuestAnKey(quest)
 
 			answer_golden = getAnswer(quest,quest["answertype"])
@@ -117,22 +117,18 @@ if __name__ == '__main__':
 			
 			correcta = False;
 			
-			for seta in answers_model:
-				if len(seta) == 0:
-					continue
-				if seta == set(answers_gold):
-					out.write("RESPUETA CORRECTA\n")
-					correcta = True
-					hits +=1
+
+			if answers_model == set(answers_gold):
+				out.write("RESPUETA CORRECTA\n")
+				correcta = True
+				hits +=1
 			total +=1
 
 			if not correcta:
 				for a in answers_gold:
 					out.write(str(a)+"--- Gold\n")
 				for seta in answers_model:
-					for a in seta:
-						out.write((a)+"----Model Rank: "+str(rank)+"\n")
-					rank += 1
+					out.write((seta)+"----Model Rank: ")
 				out.write(quest["query"]["sparql"])
 			out.write('----------------------------\n')
 			out.close()
@@ -144,23 +140,3 @@ if __name__ == '__main__':
 	print ("TOTAL:", total)
 	print ("Accurancy:", hits/total)
 	
-
-
-'''
-		total_gold += len(gold_spans)
-		total_model += len(model_spans)
-
-		# compute labeled partial results
-		prec = float(hits) / total_model * 100
-		rec = float(hits) / total_gold * 100
-		f1 = 2 * prec * rec / (prec + rec)
-
-		progress(format_str.format(float(i+1) * 100 / n, i+1, n, prec, rec, f1))
-
-	print('')
-	print('Parsed {} sentences'.format(n))
-	print('Labeled')
-	print('  Precision: {:2.2f}% '.format(prec))
-	print('  Recall: {:2.2f}% '.format(rec))
-	print('  F1: {:2.2f}% '.format(f1))
-'''

@@ -1,0 +1,49 @@
+¿Cuándo tuvo lugar la batalla de Gettysburg?
+RESPUETA CORRECTA
+----------------------------
+¿Cómo de alta el faro de Colombo?
+RESPUETA CORRECTA
+----------------------------
+¿Quién fué la mujer del presidente americano Lincoln?
+http://dbpedia.org/resource/Mary_Todd_Lincoln--- Gold
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+SELECT DISTINCT ?uri 
+WHERE {
+	res:Abraham_Lincoln dbo:spouse ?uri.
+}----------------------------
+¿Quién es el anfitrión de los especiales de la BBC Wildlife?
+RESPUETA CORRECTA
+----------------------------
+¿Cuanto costo Pulp Fiction?
+RESPUETA CORRECTA
+----------------------------
+¿En qué ciudad esta la fábrica de cerveza Heineken?
+http://dbpedia.org/resource/Amsterdam--- Gold
+http://dbpedia.org/resource/Heineken_brands----Model Rank: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Heineken> <http://dbpedia.org/ontology/manufacturer> ?x . ?x <http://dbpedia.org/ontology/locationCity> ?uri . }----------------------------
+¿Cuándo tuvo lugar la batalla de Gettysburg?
+RESPUETA CORRECTA
+----------------------------
+¿Cómo de alta el faro de Colombo?
+RESPUETA CORRECTA
+----------------------------
+¿Quién fué la mujer del presidente americano Lincoln?
+http://dbpedia.org/resource/Mary_Todd_Lincoln--- Gold
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+SELECT DISTINCT ?uri 
+WHERE {
+	res:Abraham_Lincoln dbo:spouse ?uri.
+}----------------------------
+¿Quién es el anfitrión de los especiales de la BBC Wildlife?
+RESPUETA CORRECTA
+----------------------------
+¿Cuanto costo Pulp Fiction?
+RESPUETA CORRECTA
+----------------------------
+¿En qué ciudad esta la fábrica de cerveza Heineken?
+http://dbpedia.org/resource/Amsterdam--- Gold
+http://dbpedia.org/resource/Heineken_brands----Model Rank: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Heineken> <http://dbpedia.org/ontology/manufacturer> ?x . ?x <http://dbpedia.org/ontology/locationCity> ?uri . }----------------------------
+¿Cuándo comenzó la operación Overlord?
+1944-08-30--- Gold
+SELECT DISTINCT ?d WHERE { <http://dbpedia.org/resource/Operation_Overlord> <http://dbpedia.org/ontology/date> ?d . } ----------------------------

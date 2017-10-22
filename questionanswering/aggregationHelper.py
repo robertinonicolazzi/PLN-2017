@@ -1,3 +1,6 @@
+from SPARQLWrapper import SPARQLWrapper, JSON
+import re
+
 class AggregationHelper:
 
 	# -------------------------------------------------------------

@@ -23,7 +23,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuándo tuvo lugar la batalla de Gettysburg?",
-					"keywords": "batalla de Gettysburg"
+					"keywords": "fecha,batalla de Gettysburg"
 				},
 				{
 					"language": "it",
@@ -765,7 +765,7 @@
 				{
 					"language": "es",
 					"string": "¿Por qué ciudades pasa el río Weser?",
-					"keywords": "cuidad, pasa, Weser"
+					"keywords": "ciudad, pasa, Weser"
 				},
 				{
 					"language": "it",
@@ -3167,7 +3167,7 @@
 		},
 		{
 			"id": "55",
-			"answertype": "resource",
+			"answertype": "boolean",
 			"aggregation": false,
 			"onlydbo": true,
 			"hybrid": false,

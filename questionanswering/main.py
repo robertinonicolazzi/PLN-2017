@@ -2,23 +2,22 @@
 #!/usr/bin/python
 
 from SPARQLWrapper import SPARQLWrapper, JSON
-
 from questionanswering.funaux import *
 from questionanswering.booleanHelper import BooleanHelper
 from questionanswering.aggregationHelper import AggregationHelper
+from questionanswering.entityExtractor import EntityExtractor
+from questionanswering.propertyExtractor import PropertyExtractor
 
-import json, re, nltk,nltk.classify.util,numpy as np
-
-from nltk.corpus import stopwords
-from nltk import Tree
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.pipeline import Pipeline
-
-from heapq import nlargest
+import sys, json, re, nltk,nltk.classify.util,numpy as np
 
 
+def progress(msg, width=None):
+	"""Ouput the progress of something on the same line."""
+	if not width:
+		width = len(msg)
+	print('\b' * width + msg, end='')
+	sys.stdout.flush()
+	
 class ClassAnswerType:
 
 	def __init__(self, questions, nlp,propCorpus=[[],[]]):
@@ -28,27 +27,33 @@ class ClassAnswerType:
 		self.sparql.setReturnFormat(JSON)
 		self.sparqlEn = SPARQLWrapper("http://dbpedia.org/sparql")
 		self.sparqlEn.setReturnFormat(JSON)
-
+		self.propertyExtractor = PropertyExtractor(nlp)
 		train_prop_x = []
 		train_prop_y = []
 		self.all_words = set()
-		self.pipeline = None
+
 		train_answer_type = []
 		keys = []
 		dbo = []
+		format_str = 'Answ Type ({}/{}) (Preg={}, Total={}), Prop {}'
 
+		progress(format_str.format(0,len(questions), 0, len(questions),0))
+
+		i=0
+		j=0
 		for quest in questions:
+			i +=1
 			idiomas = quest["question"]
 			st_keywords = ""
 			st_question = ""
 			for idiom in idiomas:
 				if idiom["language"] == "es":
 					st_question = idiom["string"]
-					st_keywords = cleanKeywords(idiom["keywords"])
+					st_keywords = idiom["keywords"]
 					break
 			if st_question == "":
 				continue
-			
+
 			# Generamos features para tipo de respuesta
 			feat_question = self.features_answer_type(st_question)
 			st_answer_type = quest["answertype"]
@@ -56,14 +61,22 @@ class ClassAnswerType:
 
 			# Intento de mapeo de propiedades
 
-			temp_train_x,temp_train_y = self.generate_train_by_entity(quest["query"]["sparql"])
+			temp_train_x,temp_train_y = self.propertyExtractor.generate_train_by_entity(quest["query"]["sparql"],st_keywords)
+			if not len(temp_train_x) == 0:
+				j += 1
+			progress(format_str.format(i,len(questions), i, len(questions),j))
 			train_prop_x += temp_train_x
 			train_prop_y += temp_train_y
 
 		self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)
 
-		self.pipeline = self.init_pipeline(train_prop_x,train_prop_y,propCorpus)
-		
+		self.propertyExtractor.train(train_prop_x,train_prop_y,propCorpus,self.nlp_api.word_tokenize)
+		self.entityExtractor = EntityExtractor(self.nlp_api)
+
+
+
+
+
 
 	# -------------------------------------------------------------
 	# --GET ANSWER TYPE--------------------------------------------
@@ -91,171 +104,7 @@ class ClassAnswerType:
 		feat["art_sust2"]   = (getFirstTag(tag_word) == 'da0000') and (getSecondTag(tag_word).startswith('n'))
 		return feat
 
-	# -------------------------------------------------------------
-	# --GET PROPERTY ----------------------------------------------
-	# -------------------------------------------------------------
-	def generate_train_by_entity(self, query):
 
-		temp_prop_x = []
-		temp_prop_y = []
-		st_dbo = parseQuery(query)
-		if st_dbo == "":
-			return [],[]
-
-		st_ent = getEntity(query)
-		if st_ent == "":
-			return [],[]
-		
-
-		st_keywords = delete_tildes(st_keywords)
-		
-		x = (st_keywords,st_dbo)
-		y = 1
-		temp_prop_x.append(x)
-		temp_prop_y.append(y)
-
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			<http://dbpedia.org/resource/{}> ?p ?v.
-
-		}}
-		'''.format(entity)
-
-		sparql.setQuery(query)
-		results = sparql.query().convert()
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				if not prop == st_dbo 
-					x = (st_keywords,prop)
-					y = 0
-					temp_prop_x.append(x)
-					temp_prop_y.append(y)
-
-		return temp_prop_x, temp_prop_y
-
-	def init_pipeline(self,x,y,extraCorpus):
-		esp_stopwords = stopwords.words('spanish')
-		vectorizer = CountVectorizer(analyzer='word',
-										 tokenizer=self.nlp_api.word_tokenize,
-										 lowercase=True,
-										 stop_words=esp_stopwords)
-
-		classifier = LogisticRegression()
-		pipeline = Pipeline([("vec", vectorizer), ("clas", classifier)])
-
-		x = x + extraCorpus[0]
-		y = y + extraCorpus[1]
-		pipeline.fit(x,y)
-		return pipeline
-
-	def get_question_property(self,entity,keys):
-		st_keys = " ".join(keys)
-		st_keys = delete_tildes(st_keys)
-
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			<http://dbpedia.org/resource/{}> ?p ?v.
-
-		}}
-		'''.format(entity)
-		properti = ""
-		sparql.setQuery(query)
-		results = sparql.query().convert()
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				temp = self.pipeline.predict_proba([(st_keys,prop)])
-				if temp == 1:
-					properti = prop
-					break
-
-		
-
-		return properti
-
-
-	# -------------------------------------------------------------
-	# --ENTITY WORKFLOW -------------------------------------------
-	# -------------------------------------------------------------
-	def get_english_dbpedia(self, entity):
-
-		query ='''
-		SELECT ?same WHERE {{ 
-			<http://es.dbpedia.org/resource/{}>
-			dbpedia-owl:wikiPageRedirects* 
-			?resource . 
-			?resource 
-			owl:sameAs 
-			?same.
-		}}
-		'''.format(entity)
-
-		sparql = self.sparql
-		sparql.setQuery(query)			
-		results = sparql.query().convert()
-
-		bindings = results["results"]["bindings"]
-
-		for result in bindings:
-			same = result["same"]["value"]
-			if "http://dbpedia.org/" in same:
-				return same.split('/')[4]
-
-		return entity
-
-	def get_entities(self, keywords):
-
-		found_entities = []
-		keys= [x.strip() for x in st_keys.split(',')]
-
-		for key in keys:
-			noum_group = getNounGroups(key)
-			for group in noum_group:
-				group = prepareGroup(group)
-
-				if self.check_ent_dbES(group):
-					es_ent = group
-					en_ent = self.get_english_dbpedia(group)
-					found_entities.append((es_ent,en_ent,lenEntity(es_ent)))
-				else:
-					if self.check_ent_dbEN(group):
-						es_ent = group
-						en_ent = group
-						found_entities.append((es_ent,en_ent,lenEntity(es_ent)))
-
-		found_entities = sorted(found_entities, key=itemgetter(2),reverse=True)
-
-		return found_entities
-
-
-	def check_ent_dbES(self,entity):
-		sparql = self.sparql
-		query ='''
-				ASK {{
-					<http://es.dbpedia.org/resource/{}> ?p ?v
-				}}'''.format(entity)
-
-		sparql.setQuery(query)			
-		result = sparql.query().convert()
-
-		return result["boolean"]
-
-	def check_ent_dbEN(self,entity):
-		sparql = self.sparqlEn
-		query ='''
-				ASK {{
-					<http://dbpedia.org/resource/{}> ?p ?v
-				}}'''.format(entity)
-
-		sparql.setQuery(query)			
-		result = sparql.query().convert()
-
-		return result["boolean"]
 
 	# -------------------------------------------------------------
 	# --GET SIMPLE ANSWERS WORKFLOW -------------------------------
@@ -270,7 +119,7 @@ class ClassAnswerType:
 		query = '''
 				select distinct ?result 
 				where {{
-					dbr:{} dbo:{} ?result
+					<http://dbpedia.org/resource/{}> dbo:{} ?result
 				}}
 				'''.format(entity,properti)
 
@@ -280,7 +129,7 @@ class ClassAnswerType:
 			query = '''
 				select distinct ?result 
 				where {{
-					dbr:{} dbp:{} ?result
+					<http://dbpedia.org/resource/{}> dbp:{} ?result
 				}}
 				'''.format(entity,properti)
 
@@ -411,23 +260,26 @@ class ClassAnswerType:
 
 		print ('---------------------------------------------------------------')
 		
-		st_property = ""
-		en_entity = ""
-		entidad_elegida = ""
+
+		self.entityExtractor.parseQuestion(q)
+
+
 		answers = []
 		answer_type = self.get_answer_type(q)
 		
 		print('{:18} {}'.format('QUESTION: ',q))		
 		print('{:18} {}'.format('ANSWER TYPE: ',answer_type))
-		
 
-		entities = self.get_entities(q_keys)
-		keys_restantes = self.resolve_context
-		print(entities)
+		entities,keys_restantes = self.entityExtractor.get_entities(q_keys,answer_type)
 
-		return
+		print("Entitdades: ", entities)
+		print("Keys Restastes: ",keys_restantes)
 		if len(entities) > 1 and not answer_type == "boolean":
 			print ("System not allow complex questios")
+			return []
+
+		if len(entities) == 0:
+			print ("Entities not Found")
 			return []
 
 		if answer_type == "boolean":
@@ -439,13 +291,14 @@ class ClassAnswerType:
 		es_entity = entities[0][0]
 		en_entity = entities[0][1]
 
-		st_property = self.get_question_property(keys_restantes)
+		st_property = self.propertyExtractor.get_question_property(en_entity,keys_restantes)
 
 		print("Entidad Espanol:",es_entity)
 		print("Entidad Ingles :",en_entity)
 		print("Propiedad      :",st_property)
 
 		answers = self.get_english_ans(en_entity, st_property)
+		print("Respuesta:",answers)
 
 		if answer_type == "number" and keyAggregation == "count" and not len(answers) == 0:
 			try:
