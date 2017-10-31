@@ -10,13 +10,13 @@ Options:
   -h --help     Show this screen.
 """
 from docopt import docopt
-import dill as pickle
-import json
+import dill
 
+import json
+import spacy
 from questionanswering.main import ClassAnswerType
 from stanfordcorenlp import StanfordCoreNLP
-text = ["alcalde Cordoba", "gobernado Buenos Aires"] 
-dbo = ["mayor"]
+
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
@@ -35,20 +35,24 @@ if __name__ == '__main__':
       questionsSample = questionsSample[:n]
     print('Loading Property Mapping extra corpus')
 
-    propertyCorpus = [[],[]]
+    nlp = spacy.load('es_default', parser=False)
+    propertyCorpus = [[{'leader,presidente':True}],[1]]
 
-    print('Loading StanfordCoreNLP...')
+    """print('Loading StanfordCoreNLP...')
 
     pathStandford = r'/media/robertnn/DatosLinux/Standford/stanford-corenlp-full-2017-06-09/'
     nlp = StanfordCoreNLP(pathStandford, lang='es',memory='2g')
-
+    """
     
     print('Training model...')
-    model = ClassAnswerType(questions=questionsSample,nlp=nlp,propCorpus=propertyCorpus)
+    model = ClassAnswerType(questions=questionsSample,propCorpus=propertyCorpus,nlp=nlp)
 
     print('Saving...')
     filename = opts['-o']
     f = open(filename, 'wb')
-    pickle.dump(model, f)
+    model.nlp_api = None
+    model.entityExtractor.nlp_api = None
+    model.propertyExtractor.nlp_api = None
+    dill.dump(model, f)
     f.close()
     

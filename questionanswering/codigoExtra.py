@@ -1,140 +1,95 @@
-def getPassage(self,question, question_keywords, answertype):
-
-		string_question = question.replace('?',' ?')
-		string_question = question.replace('¿','¿ ')
-		string_list = word_tokenize(string_question)
-		tagged_sent = self.model_POS.tag(string_list)
-		print (tagged_sent)
-
-		tagged = self.model_POS.tag([ word.strip() for word in question_keywords.split(',')])
-		tagged_keywords = list(zip([ word.strip() for word in question_keywords.split(',')],tagged))
-
-		print (tagged_keywords)
-
-		sustPropios = []
-		sustComunes = []
-		verbos = []
-
-		propiedad = []
-		subPropiedad = []
-		for w,t in tagged_keywords:
-			w = w.strip()
-			w.replace(' ','_')
-			if t == "np00000":
-				sustPropios.append(w)
-			if t.startswith("n") and not t == "np00000":
-				sustComunes.append(w)
-			if t.startswith("v"):
-				verbos.append(w)
-
-		import pdb; pdb.set_trace()
-		# Veamos si empieza con preposición, el primer sustantivo es la subpropiedad
-		# del verbo que determina la propiedad padre
-		empiezaConPreposicion = (tagged_sent[1] == "sp000")
-		if empiezaConPreposicion:
-			subPropiedad.append(sustComunes[0])
-			sustComunes.pop(0)
-
-		if answertype == "date":
-
-			for key in mapeoDate.keys():
-				bind = mapeoDate.get(key)
-				for verb in verbos:
-					if verb in bind:
-						propiedad.append(key)
-
-			if not len(sustPropios) == 0:
-				resource = sustPropios[0]
-			else:
-				resource = sustComunes[0]
-
-			if not len(acciones) == 0:
-				pregunta = propiedad[0]
-			else:
-				pregunta = "fecha"
-
+	def features_answer_type(self,st_question):
+		feat = {}
+		st_question = cleanQuestion(st_question)
+		tag_word = self.nlp_api.pos_tag(st_question)
 
 		
-		return answertype, ','.join(sustPropios) + ','+ ','.join(sustCo
+		feat["ask_cuanto"] = bool(re.search('cu(a|á)nt(o|a)(s|) ', st_question))
+		feat["init_dame"] = (st_question.split(" ")[0] == 'dame')
+		feat["ask_cuando"] = bool(re.search('cu(a|á)ndo ', st_question))
+		feat["init_verb"]  = getFirstTag(tag_word).startswith('v')
+		feat["init_verb2"]  = getFirstTag(tag_word).startswith('v')
+		feat["art_sust"]   = (getFirstTag(tag_word) == 'da0000') and (getSecondTag(tag_word).startswith('n'))
+		feat["art_sust2"]   = (getFirstTag(tag_word) == 'da0000') and (getSecondTag(tag_word).startswith('n'))
+		return feat
 
 
+def parseQuestion(self,q):
 
-	def generarQuery(self,answertype, entidades, propiedades):
-		dbo = "PREFIX dbo: <http://dbpedia.org/ontology/>\n"
-		res = "PREFIX res: <http://dbpedia.org/resource/>\n"
+		st = self.nlp_api.parse(q)
+		tree = Tree.fromstring(st)
+		tree.draw()
 
-		resEs = "PREFIX res: <http://es.dbpedia.org/resource/>\n"
-		propEs = "PREFIX dpo: <http://es.dbpedia.org/property/>\n"
+	def getNounGroups(self,key):
+		st = self.nlp_api.parse(key)
+		tree = Tree.fromstring(st)
+		tree.draw()
+		phases = self.ExtractPhrases(tree,"grup.nom")
 
-		resElegido = ""
-		dboElegido = ""
+		nouns = []
+		for p in phases:
+			nouns.append(" ".join(p.leaves()))
 
-		resElegido = resEs
-		dboElegido = propEs
-		query = dboElegido + resElegido + select + where
+		return nouns
 
+	def get_entities(self, keywords,answer_type):
 
-		
-		sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-		sparql.setQuery(query)
-		sparql.setReturnFormat(JSON)
-		results = sparql.query().convert()
-		where = "WHERE {\n        res:"+entPropias[0]+" dbo:"+pregunta+" ?result .\n}"
-		respuesta = ""
-		for result in results["results"]["bindings"]:
-			print("RESPUESTA: ",result["result"]["value"])
-			print()
-			respuesta = result["result"]["value"]
-			break
+		found_entities = []
+		keys= [x.strip() for x in keywords.split(',')]
+		keys_restantes= [x.strip() for x in keywords.split(',')]
+		keyid = -1
+		for key in keys:
+			keyid += 1
+			noum_group = self.getNounGroups(key)
+			
+			for group in noum_group:
+				tag_word = self.nlp_api.pos_tag(group)
+				dbpedia_group = prepareGroup(group)
 
-
-	def extract_posibly_property(self, keywords):
-		keywords = keywords.split()
-
-		result = []
-		for k in keywords:
-			k = k.split()
-			if len(k) == 1:
-				tag = self.model_POS.tag(k)
-				if tag.startswith('v') or tag.startswith('n'):
-					result.append(k)
-
-		return result
+				hasProp = False
+				for w,t in tag_word:
+					if t == "np00000":
+						hasProp = True
+						break
 
 
-	def get_english_ans(self, entity, properti, dism=""):
-		sparql = SPARQLWrapper("http://dbpedia.org/sparql")
-		sparql.setReturnFormat(JSON)
-		answers = []
+				if not hasProp and lenEntity(dbpedia_group) == 1:
+					continue
 
-		if not dism == "":
-			query = '''
-			select distinct ?result ?abstract
-			where {{
+				if self.check_ent_dbES(dbpedia_group):
+					es_ent = dbpedia_group
+					en_ent = self.get_english_dbpedia(dbpedia_group)
+					context = key.replace(group,' ')
+					found_entities.append((es_ent,en_ent,context,lenEntity(es_ent),hasProp,keyid))
+				else:
+					if self.check_ent_dbEN(dbpedia_group):
+						es_ent = dbpedia_group
+						en_ent = dbpedia_group
+						context = key.replace(group,' ')
+						found_entities.append((es_ent,en_ent,context,lenEntity(es_ent),hasProp,keyid))
 
-			<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?resource.
-			?resource dbo:wikiPageRedirects* ?redirect.					
-			?redirect dbo:{} ?result.
-			?redirect dbo:abstract ?abstract.
-			FILTER langMatches(lang(?abstract),'es')
+		found_entities = sorted(found_entities, key=operator.itemgetter(3),reverse=True)
 
-			}}'''.format(entity,properti)
+		result_entities = []
+
+		if len(found_entities) == 0:
+			return [],keys_restantes
+
+		if not answer_type == "boolean":
+			for enti in found_entities:
+				if enti[4]:
+					result_entities.append((enti[0],enti[1],enti[2]))
+					keys_restantes.pop(enti[5])
+					break;
+			if len(result_entities) == 0:
+				result_entities.append((found_entities[0][0],found_entities[0][1],found_entities[0][2]))
+				keys_restantes.pop(found_entities[0][5])
 		else:
-			if "disambiguation" in entity:
-				query = '''
-						SELECT ?result WHERE {{
-						<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates ?resource.
-						?resource dbo:{} ?result
-						}}'''.format(entity,properti)
-			else:
-				query = '''
-						select distinct ?result 
-						where {{
-							<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?resource.
-							?resource dbo:{} ?result
-						}}
-						'''.format(entity,properti)
+			bool_ent = []
+			for enti in found_entities:
+				if enti[4]:
+					result_entities.append((enti[0],enti[1]))
+					break;
 
-		answers = resolveQuery(sparql,query)
+		return result_entities, keys_restantes
 
-		return set(answers)

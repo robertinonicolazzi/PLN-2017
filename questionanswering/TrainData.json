@@ -2975,7 +2975,7 @@
 				{
 					"language": "es",
 					"string": "¿Donde están situadas las Casas del Parlamento?",
-					"keywords": "localización, casas del parlamento"
+					"keywords": "localización, Casas del Parlamento"
 				},
 				{
 					"language": "it",
@@ -8236,7 +8236,7 @@
 				}
 			],
 			"query": {
-				"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eritrea> <http://dbpedia.org/ontology/leader> ?uri . <http://dbpedia.org/resource/Eritrea> <http://dbpedia.org/ontology/leaderTitle> 'President'@en . }  "
+				"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eritrea> <http://dbpedia.org/ontology/leader> ?uri .}  "
 			},
 			"answers": [{
 				"head": {
@@ -15067,7 +15067,7 @@
 				{
 					"language": "es",
 					"string": "Dame todos los miembros de la banda Prodigy.",
-					"keywords": "miembros de la banda Prodigy"
+					"keywords": "miembros de la banda, Prodigy"
 				},
 				{
 					"language": "it",

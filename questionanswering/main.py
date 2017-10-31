@@ -9,6 +9,7 @@ from questionanswering.entityExtractor import EntityExtractor
 from questionanswering.propertyExtractor import PropertyExtractor
 
 import sys, json, re, nltk,nltk.classify.util,numpy as np
+import spacy
 
 
 def progress(msg, width=None):
@@ -20,14 +21,14 @@ def progress(msg, width=None):
 	
 class ClassAnswerType:
 
-	def __init__(self, questions, nlp,propCorpus=[[],[]]):
+	def __init__(self, questions,propCorpus=[[],[]],nlp=None):
 
 		self.nlp_api = nlp
 		self.sparql = SPARQLWrapper("http://es.dbpedia.org/sparql")
 		self.sparql.setReturnFormat(JSON)
 		self.sparqlEn = SPARQLWrapper("http://dbpedia.org/sparql")
 		self.sparqlEn.setReturnFormat(JSON)
-		self.propertyExtractor = PropertyExtractor(nlp)
+		self.propertyExtractor = PropertyExtractor(self.nlp_api)
 		train_prop_x = []
 		train_prop_y = []
 		self.all_words = set()
@@ -57,6 +58,7 @@ class ClassAnswerType:
 			# Generamos features para tipo de respuesta
 			feat_question = self.features_answer_type(st_question)
 			st_answer_type = quest["answertype"]
+
 			train_answer_type.append((feat_question,st_answer_type))
 
 			# Intento de mapeo de propiedades
@@ -67,12 +69,13 @@ class ClassAnswerType:
 			progress(format_str.format(i,len(questions), i, len(questions),j))
 			train_prop_x += temp_train_x
 			train_prop_y += temp_train_y
+			
 
 		self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)
 
-		self.propertyExtractor.train(train_prop_x,train_prop_y,propCorpus,self.nlp_api.word_tokenize)
+		self.propertyExtractor.train(train_prop_x,train_prop_y,propCorpus)
 		self.entityExtractor = EntityExtractor(self.nlp_api)
-
+		print(train_prop_x)
 
 
 
@@ -86,22 +89,32 @@ class ClassAnswerType:
 
 		question_features_test = self.features_answer_type(st_question)
 
+
 		type_question = self.clas_tipo.classify(question_features_test)
 		return type_question
 
 	def features_answer_type(self,st_question):
 		feat = {}
 		st_question = cleanQuestion(st_question)
-		tag_word = self.nlp_api.pos_tag(st_question)
+		tag_word = self.nlp_api(st_question)
+
+		tag_word = [(word.text,word.tag_) for word in tag_word]
+		#print(tag_word)
 
 		
 		feat["ask_cuanto"] = bool(re.search('cu(a|á)nt(o|a)(s|) ', st_question))
 		feat["init_dame"] = (st_question.split(" ")[0] == 'dame')
 		feat["ask_cuando"] = bool(re.search('cu(a|á)ndo ', st_question))
-		feat["init_verb"]  = getFirstTag(tag_word).startswith('v')
-		feat["init_verb2"]  = getFirstTag(tag_word).startswith('v')
-		feat["art_sust"]   = (getFirstTag(tag_word) == 'da0000') and (getSecondTag(tag_word).startswith('n'))
-		feat["art_sust2"]   = (getFirstTag(tag_word) == 'da0000') and (getSecondTag(tag_word).startswith('n'))
+		feat["init_verb"]  = 'VERB' in getFirstTag(tag_word) or 'AUX' in getFirstTag(tag_word)
+		
+		second_tag = getSecondTag(tag_word)
+		articulo = 'PronType=Art' in getFirstTag(tag_word) and 'DET' in getFirstTag(tag_word)
+
+		feat["art_sust2"]   = articulo and (('NOUN' in second_tag) or ('PROPN' in second_tag))
+
+
+		#feat["init_verb2"]  = getFirstTag(tag_word) == 'VERB'
+		#feat["art_sust"]   = (getFirstTag(tag_word) == 'DET') and (second_tag== 'NOUN' or second_tag=='PROPN')
 		return feat
 
 
@@ -187,7 +200,7 @@ class ClassAnswerType:
 	# ---------------------- PREGUNTAS BOOLEAN ------------------------------
 	# -----------------------------------------------------------------------
 
-	def boolean_answerer(self,q,q_keys,entities):
+	def boolean_answerer(self,q,q_keys):
 
 		
 		pr_entity_es = ""
@@ -196,56 +209,75 @@ class ClassAnswerType:
 		q = cleanQuestion(q)
 		h_boolean = BooleanHelper()
 
+
+		entities,keys_restantes = self.entityExtractor.get_entities(q_keys,'boolean')
+		if len(entities) == 0:
+			print ("Entities not Found")
+			return []
+		print("Entidades     : ", entities)
+		print("Keys Restantes: ", keys_restantes)
+
 		if len(entities) == 1:
 			pr_entity_es = entities[0][0]
 			pr_entity_en = entities[0][1]
 			bool_key, properti = h_boolean.boolean_key_one_entity(q)
-
+			print("Bool_key:",bool_key)
+			print("PropertiTemp:",properti)
 			if bool_key == "type":
 				answers = h_boolean.get_type_answer(pr_entity_es, properti)
 			elif bool_key == "exist":
 				answers = h_boolean.get_exist_answer(pr_entity_es, properti)
 			else:
-				properti = self.get_question_property(keys_restantes)
-				answers = h_boolean.get_properti_answer(pr_entity_en,properti[0])
+				properti = self.propertyExtractor.get_question_property(pr_entity_en,keys_restantes)
+				answers = h_boolean.get_properti_answer(pr_entity_en,properti)
 
 		elif len(entities) == 2:
 
-			props, st_filter = self.two_entities_prop_filter(q,keys_restantes)
 
-			pr_entity_es = entities[0][0]
 			pr_entity_en = entities[0][1]
-
-			sn_entity_es = entities[1][0]
 			sn_entity_en = entities[1][1]
 			
-			answers = h_boolean.two_entities_answer(pr_entity_en,sn_entity_en,props[0],st_filter)
+
+			props, st_filter = self.two_entities_prop_filter(q,pr_entity_en,sn_entity_en,keys_restantes)
+
+			if props == "":
+				return []
+			
+			answers = h_boolean.two_entities_answer(pr_entity_en,sn_entity_en,props,st_filter)
 		else:
 			answers = []
 
 
 		return answers
 
-	def two_entities_prop_filter(self,question,keys_restantes):
-		prop = []
+	def two_entities_prop_filter(self,question,entity,sn_entity,keys_restantes):
+		prop = ""
 		st_filter = ""
 		if "antes" in question:
 			st_filter = "FILTER (?x < ?y)"
-			prop.append("date")
+			prop="date"
 		elif "despues" in question:
 			st_filter = "FILTER (?x > ?y)"
-			prop.append("date")
+			prop="date"
 		elif "menor" in question:
 			st_filter = "FILTER (?x < ?y)"
-			prop = self.get_question_property(keys_restantes)
+			prop = self.propertyExtractor.get_question_property(entity,keys_restantes)
+			if prop == "":
+				prop = self.propertyExtractor.get_question_property(sn_entity,keys_restantes)
 		elif "mayor" in question or "grande" in question:
 			st_filter = "FILTER (?x > ?y)"
-			prop = self.get_question_property(keys_restantes)
+			prop = self.propertyExtractor.get_question_property(entity,keys_restantes)
+			if prop == "":
+				prop = self.propertyExtractor.get_question_property(sn_entity,keys_restantes)
 		elif "misma" in question or "igual" in question or "mismos" in question:
 			st_filter = "same"
-			prop = self.get_question_property(keys_restantes)
+			prop = self.propertyExtractor.get_question_property(entity,keys_restantes)
+			if prop == "":
+				prop = self.propertyExtractor.get_question_property(sn_entity,keys_restantes)
 		else:
-			prop = self.get_question_property(keys_restantes)
+			prop = self.propertyExtractor.get_question_property(entity,keys_restantes)
+			if prop == "":
+				prop = self.propertyExtractor.get_question_property(sn_entity,keys_restantes)
 			#la igualdad es viendo si pertenece
 			st_filter = ""
 
@@ -261,33 +293,33 @@ class ClassAnswerType:
 		print ('---------------------------------------------------------------')
 		
 
-		self.entityExtractor.parseQuestion(q)
-
-
 		answers = []
 		answer_type = self.get_answer_type(q)
 		
 		print('{:18} {}'.format('QUESTION: ',q))		
 		print('{:18} {}'.format('ANSWER TYPE: ',answer_type))
+	
+
+
+
+		if answer_type == "boolean":
+			
+			return self.boolean_answerer(q,q_keys)
+
+		#Resto de los tipos
+
+		h_aggregation = AggregationHelper()
+		keyAggregation = h_aggregation.check_aggregation(answer_type,q, q_keys)
+
+		if not keyAggregation == "none":
+			return self.aggregation_answerer(h_aggregation,q,q_keys,keyAggregation,answer_type)
 
 		entities,keys_restantes = self.entityExtractor.get_entities(q_keys,answer_type)
-
-		print("Entitdades: ", entities)
-		print("Keys Restastes: ",keys_restantes)
-		if len(entities) > 1 and not answer_type == "boolean":
-			print ("System not allow complex questios")
-			return []
-
 		if len(entities) == 0:
 			print ("Entities not Found")
 			return []
-
-		if answer_type == "boolean":
-			return self.boolean_answerer(q,q_keys,entities)
-
-		#Resto de los tipos
-		h_aggregation = AggregationHelper()
-		keyAggregation = h_aggregation.check_aggregation(answer_type,q)
+		print("Entidades     : ", entities)
+		print("Keys Restantes: ", keys_restantes)
 		es_entity = entities[0][0]
 		en_entity = entities[0][1]
 
@@ -300,17 +332,58 @@ class ClassAnswerType:
 		answers = self.get_english_ans(en_entity, st_property)
 		print("Respuesta:",answers)
 
-		if answer_type == "number" and keyAggregation == "count" and not len(answers) == 0:
-			try:
-				val = float(answers[0])
-			except ValueError:
-				answers = h_aggregation.answer_aggregation("count",en_entity,st_property)
-
 		if len(answers) == 0 and answer_type == "date":
 			answers = self.default_ans(en_entity,answer_type)
 
 		if len(answers) == 0 and answer_type == "resource":
+			print("Reverse")
+			st_property = self.propertyExtractor.get_question_property_rev(en_entity,keys_restantes)
 			answers = self.get_english_ans_reverse(en_entity,st_property)
 
 		print('---------------------------------------------------------------')
 		return answers
+
+	def aggregation_answerer(self,h_aggregation,aq,q_keys,key,answer_type):
+		q_keys = delete_tildes(q_keys)
+		answers = []
+		if key == "count":
+			entities,keys_restantes = self.entityExtractor.get_entities(q_keys,answer_type)
+			if len(entities) == 0:
+				print ("Entities not Found")
+				return []
+			print("Entidades     : ", entities)
+			print("Keys Restantes: ", keys_restantes)
+
+			es_entity = entities[0][0]
+			en_entity = entities[0][1]
+			
+			st_property = self.propertyExtractor.get_question_property(en_entity,keys_restantes)
+			answers = self.get_english_ans(en_entity, st_property)
+			if key == "count" and not len(answers) == 0:
+				if 'resource' in list(answers)[0]:
+					answers = h_aggregation.get_aggregation_count(en_entity,st_property)
+
+		if "asc" in key or "desc" in key:
+			q_keys = h_aggregation.clean_key_rule(key,q_keys)
+			entities,keys_restantes = self.entityExtractor.get_entities(q_keys,answer_type)
+			print("Entidades     : ", entities)
+			print("Keys Restantes: ", keys_restantes)
+			import pdb; pdb.set_trace()
+			if len(entities) == 0:
+				st_property = ""
+				st_type,q_keys = h_aggregation.get_type(q_keys)
+				if len(keys_restantes) == 0:
+					st_property = self.propertyExtractor.get_question_property_type(st_type,keys_restantes)
+
+				if st_property == "":
+					for st_property in h_aggregation.default_comparatives:
+						answers = h_aggregation.get_aggregation_order_type(st_type,st_property,key)
+						if not len(answers) == 0:
+							break
+			else:
+				return []
+				es_entity = entities[0][0]
+				en_entity = entities[0][1]
+				answers = h_aggregation.get_aggregation_order(key,en_entity,st_property,q_keys,True)
+		print("Respuesta:",answers)
+		return set(answers)

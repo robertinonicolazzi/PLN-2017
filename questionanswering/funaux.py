@@ -2,6 +2,14 @@
 #!/usr/bin/python
 import unicodedata
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+
+def removeStopWords(keys):
+	keys_list = keys.split()
+	important_words = [word for word in keys_list if word not in set(stopwords.words('spanish'))]
+
+	return " ".join(important_words)
+
 
 def lenEntity(entity):
 	entity = entity.replace('_',' ')

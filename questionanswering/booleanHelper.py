@@ -1,6 +1,8 @@
-import SPARQLWrapper
+from SPARQLWrapper import SPARQLWrapper, JSON
+from questionanswering.funaux import *
 import questionanswering.funaux
 import csv
+import re
 import json
 
 
@@ -21,7 +23,7 @@ class BooleanHelper:
 
 		q_clean = delete_tildes(q_clean)
 
-		b_tipo = bool(re.search('es una ', q_clean))
+
 		if "tipo" in q_clean:
 			q_list = q_clean.split(" ")
 			indextipo = q_list.index("tipo")
@@ -72,7 +74,7 @@ class BooleanHelper:
 		query ='''
 		ASK 
 		WHERE {{
-		dbr:{} dbo:{} ?result .
+		<http://dbpedia.org/resource/{}> dbo:{} ?result .
 
 		}}
 		'''.format(entity,properti)

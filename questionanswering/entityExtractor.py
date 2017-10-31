@@ -42,39 +42,51 @@ class EntityExtractor:
 
 		return entity
 
-	def ExtractPhrases(self, myTree, phrase):
-	    """ 
-	    Extract phrases from a parsed (chunked) tree
-	    Phrase = tag for the string phrase (sub-tree) to extract
-	    Returns: List of deep copies;  Recursive
-	    """
-	    myPhrases = []
-	    if (myTree.label() == phrase):
-	        myPhrases.append( myTree.copy(True) )
-	    for child in myTree:
-	        if (type(child) is nltk.Tree):
-	            list_of_phrases = self.ExtractPhrases(child, phrase)
-	            if (len(list_of_phrases) > 0):
-	                myPhrases.extend(list_of_phrases)
-	    return myPhrases
-
-
-	def parseQuestion(self,q):
-
-		st = self.nlp_api.parse(q)
-		tree = Tree.fromstring(st)
-		tree.draw()
 
 	def getNounGroups(self,key):
-		st = self.nlp_api.parse(key)
-		tree = Tree.fromstring(st)
-		tree.draw()
-		phases = self.ExtractPhrases(tree,"grup.nom")
-
+		conectores = [
+			'ADP__AdpType=Prep',
+			'DET__Definite=Def|Gender=Masc|Number=Sing|PronType=Art',
+			'ADP__AdpType=Preppron|Gender=Masc|Number=Sing',
+			'CCONJ___',
+			'DET__Definite=Def|Gender=Fem|Number=Sing|PronType=Art',
+			'DET__Definite=Def|Gender=Masc|Number=Plur|PronType=Art',
+			'DET__Definite=Def|Gender=Fem|Number=Plur|PronType=Art'
+			]
+		tag_word = self.nlp_api(key)
+		tag_word = [(word.text,word.tag_) for word in tag_word]
 		nouns = []
-		for p in phases:
-			nouns.append(" ".join(p.leaves()))
+		g = []
+		hasProp = False
 
+		if len(key) == 0:
+			return []
+
+
+		for w,t in tag_word:
+
+			if "NOUN" in t:
+				g.append(w)
+			elif "PROPN" in t:
+				g.append(w)
+				hasProp = True
+			elif t in conectores:
+				g.append(w)
+			else:
+				if not len(g) == 0:
+
+					nouns.append((" ".join(g),hasProp))
+					hasProp = False
+					g = []
+		if not len(g)== 0:
+			nouns.append((" ".join(g),hasProp))
+
+		st_ket_f = key.split()[1:]
+		nouns += self.getNounGroups(" ".join(st_ket_f))
+		st_ket_f = key.split()[:-1]
+		nouns += self.getNounGroups(" ".join(st_ket_f))
+
+		nouns = list(set(nouns))
 		return nouns
 
 	def get_entities(self, keywords,answer_type):
@@ -84,23 +96,15 @@ class EntityExtractor:
 		keys_restantes= [x.strip() for x in keywords.split(',')]
 		keyid = -1
 		for key in keys:
+
 			keyid += 1
 			noum_group = self.getNounGroups(key)
+
 			
-			for group in noum_group:
-				tag_word = self.nlp_api.pos_tag(group)
+			for group,hasProp in noum_group:
 				dbpedia_group = prepareGroup(group)
-
-				hasProp = False
-				for w,t in tag_word:
-					if t == "np00000":
-						hasProp = True
-						break
-
-
-				if not hasProp and lenEntity(dbpedia_group) == 1:
+				if hasProp == False and lenEntity(dbpedia_group) == 1:
 					continue
-
 				if self.check_ent_dbES(dbpedia_group):
 					es_ent = dbpedia_group
 					en_ent = self.get_english_dbpedia(dbpedia_group)
@@ -131,10 +135,23 @@ class EntityExtractor:
 				keys_restantes.pop(found_entities[0][5])
 		else:
 			bool_ent = []
+			chose = 0
+			first_entity = ""
+			keys_restantes_copy = list(keys_restantes)
 			for enti in found_entities:
-				if enti[4]:
-					result_entities.append((enti[0],enti[1]))
-					break;
+				if chose == 2:
+					break
+
+				if enti[4] and not enti[0] in first_entity or first_entity == "":
+					chose += 1
+
+					result_entities.append((enti[0],enti[1],enti[2]))
+					first_entity = enti[0]
+					elem = keys_restantes_copy[enti[5]]
+					keys_restantes.remove(elem)
+			if len(result_entities) == 0:
+				result_entities.append((found_entities[0][0],found_entities[0][1],found_entities[0][2]))
+				keys_restantes.pop(found_entities[0][5])
 
 		return result_entities, keys_restantes
 
