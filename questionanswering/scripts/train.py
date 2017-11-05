@@ -51,8 +51,8 @@ if __name__ == '__main__':
     filename = opts['-o']
     f = open(filename, 'wb')
     model.nlp_api = None
-    model.entityExtractor.nlp_api = None
-    model.propertyExtractor.nlp_api = None
+    model.eExtractor.nlp_api = None
+    model.pExtractor.nlp_api = None
     dill.dump(model, f)
     f.close()
     

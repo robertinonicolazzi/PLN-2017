@@ -85,7 +85,7 @@ def getEntity(st_query):
 
 		if ent[0] =="<":
 			ent = (ent.split("/")[-1])[:-1]
-		elif ent[0] == "r":
+		elif ent[0] == "r" or ent[0] == "d":
 			ent = ent.split(":")[1]
 		else:
 			return ""

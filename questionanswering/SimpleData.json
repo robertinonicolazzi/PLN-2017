@@ -155,8 +155,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién fué la mujer del presidente americano Lincoln?",
-					"keywords": "presidente americano Lincoln, mujer"
+					"string": "¿Quién fué la mujer del presidente americano Kennedy?",
+					"keywords": "presidente americano Kennedy, mujer"
 				},
 				{
 					"language": "it",
@@ -180,7 +180,7 @@
 				}
 			],
 			"query": {
-				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:Abraham_Lincoln dbo:spouse ?uri.\n}"
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:John_F._Kennedy dbo:spouse ?uri.\n}"
 			},
 			"answers": [{
 				"head": {
@@ -192,7 +192,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Mary_Todd_Lincoln"
+							"value": "http://dbpedia.org/resource/Jacqueline_Kennedy_Onassis"
 						}
 					}]
 				}
@@ -2525,77 +2525,7 @@
 				}
 			}]
 		},
-		{
-			"id": "45",
-			"answertype": "resource",
-			"aggregation": true,
-			"onlydbo": true,
-			"hybrid": false,
-			"question": [{
-					"language": "en",
-					"string": "What was the last movie with Alec Guinness?",
-					"keywords": "Alec Guinness, last, movie"
-				},
-				{
-					"language": "fa",
-					"string": "آخرین فیلم الک گینس چه بود؟",
-					"keywords": "آخرین، فیلم، الک گینس"
-				},
-				{
-					"language": "de",
-					"string": "Was war der letzte Film mit Alec Guinness?",
-					"keywords": "Alec Guinness, letzter, Film"
-				},
-				{
-					"language": "es",
-					"string": "¿Cuál fue la última película con Alec Guinness?",
-					"keywords": "última película, Alec Guinness"
-				},
-				{
-					"language": "it",
-					"string": "Qual è l'ultimo film con Alec Guinness?",
-					"keywords": "Alec Guinness, ultimo film"
-				},
-				{
-					"language": "fr",
-					"string": "Quel est le dernier film d'Alec Guinness?",
-					"keywords": "Alec Guiness, dernier film"
-				},
-				{
-					"language": "nl",
-					"string": "Wat was de laatste film met Alec Guinness?",
-					"keywords": "Alec Guinness, laatste, film"
-				},
-				{
-					"language": "hi_IN",
-					"string": "एलेक गिनीज की आखिरी फिल्म क्या थी?",
-					"keywords": "एलेक गिनीज, आखिरी फिल्म"
-				},
-				{
-					"language": "ro",
-					"string": "Care a fost ultimul film cu Alec Guinness?",
-					"keywords": "Alec Guinness, ultim, film"
-				}
-			],
-			"query": {
-				"sparql": "SELECT DISTINCT ?uri WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> .  ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Alec_Guinness> .  ?uri <http://dbpedia.org/ontology/releaseDate> ?date . } ORDER BY DESC(?date) LIMIT 1 "
-			},
-			"answers": [{
-				"head": {
-					"vars": [
-						"uri"
-					]
-				},
-				"results": {
-					"bindings": [{
-						"uri": {
-							"type": "uri",
-							"value": "http://dbpedia.org/resource/Kafka_(film)"
-						}
-					}]
-				}
-			}]
-		},
+
 
 		{
 			"id": "48",
@@ -3000,52 +2930,14 @@
 			"query": {
 				"sparql": "SELECT DISTINCT ?uri WHERE {  <http://dbpedia.org/resource/Carrot_cake> <http://dbpedia.org/ontology/ingredient> ?uri . } "
 			},
-			"answers": [{
-				"head": {
-					"vars": [
-						"uri"
-					]
-				},
-				"results": {
-					"bindings": [{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Almond"
-							}
-						},
-						{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Carrot"
-							}
-						},
-						{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Egg_(food)"
-							}
-						},
-						{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Flour"
-							}
-						},
-						{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Baking_powder"
-							}
-						},
-						{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Sugar"
-							}
-						}
-					]
-				}
-			}]
+			"answers": [{ "head": { "link": [], "vars": ["uri"] },
+  "results": { "distinct": false, "ordered": true, "bindings": [
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Flour" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Egg_(food)" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Sugar" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Baking_powder" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Carrots" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Almonds" }} ] } }]
 		},
 		{
 			"id": "55",
@@ -3419,7 +3311,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "76068"
+							"value": "399457"
 						}
 					}]
 				}
@@ -5328,7 +5220,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuál es el hijo mas mayor de Meryl Streep?",
-					"keywords": "hijo mas mayor, Meryl Streep"
+					"keywords": "hijos mas mayor, Meryl Streep"
 				},
 				{
 					"language": "it",
@@ -5712,7 +5604,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Indian_Railways"
+							"value": "http://dbpedia.org/resource/Railway_Board"
 						}
 					}]
 				}
@@ -5779,7 +5671,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Karachi"
+							"value": "http://dbpedia.org/resource/Carei"
 						}
 					}]
 				}
@@ -8195,28 +8087,12 @@
 			"query": {
 				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbp: <http://dbpedia.org/property/>\nSELECT DISTINCT ?uri \nWHERE {\n        res:Yenisei_River dbp:country ?uri .\n}"
 			},
-			"answers": [{
-				"head": {
-					"vars": [
-						"uri"
-					]
-				},
-				"results": {
-					"bindings": [{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Russia"
-							}
-						},
-						{
-							"uri": {
-								"type": "uri",
-								"value": "http://dbpedia.org/resource/Mongolia"
-							}
-						}
-					]
-				}
-			}]
+			"answers": [{ "head": { "link": [], "vars": ["uri"] },
+  "results": { "distinct": false, "ordered": true, "bindings": [
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Brazil" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Colombia" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Ecuador" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Peru" }} ] } }]
 		},
 		{
 			"id": "150",
@@ -9406,7 +9282,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "8848.0"
+							"value": "8163.0"
 						}
 					}]
 				}
@@ -10397,7 +10273,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Greenhorn,_Oregon"
+							"value": "http://dbpedia.org/resource/Bakhdida"
 						}
 					}]
 				}
@@ -11178,7 +11054,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Museum_of_Motherhood"
+							"value": "http://dbpedia.org/resource/Metropolitan_Museum_of_Art"
 						}
 					}]
 				}
@@ -11424,21 +11300,14 @@
 			"query": {
 				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:Pirates_of_the_Caribbean_(film_series) dbo:musicComposer ?uri .\n}"
 			},
-			"answers": [{
-				"head": {
-					"vars": [
-						"uri"
-					]
-				},
-				"results": {
-					"bindings": [{
-						"uri": {
-							"type": "uri",
-							"value": "http://dbpedia.org/resource/Cat_Stevens"
-						}
-					}]
-				}
-			}]
+			"answers": [
+{ "head": { "link": [], "vars": ["uri"] },
+  "results": { "distinct": false, "ordered": true, "bindings": [
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Klaus_Badelt" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Hans_Zimmer" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Eric_Whitacre" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Geoff_Zanelli" }},
+    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Rodrigo_y_Gabriela" }} ] } }]
 		},
 		{
 			"id": "204",
@@ -11645,7 +11514,7 @@
 				}
 			],
 			"query": {
-				"sparql": "SELECT (COUNT(DISTINCT ?uri) as ?c) WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Language> .  <http://dbpedia.org/resource/Colombia> <http://dbpedia.org/ontology/language> ?uri . } "
+				"sparql": "SELECT (COUNT(DISTINCT ?uri) as ?c) WHERE {<http://dbpedia.org/resource/Colombia> <http://dbpedia.org/ontology/language> ?uri . } "
 			},
 			"answers": [{
 				"head": {
@@ -11657,7 +11526,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "2"
+							"value": "3"
 						}
 					}]
 				}
@@ -11687,7 +11556,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuál es el estadio más grande de España?",
-					"keywords": "estadio más grande España"
+					"keywords": "estadio más grande ,España"
 				},
 				{
 					"language": "it",

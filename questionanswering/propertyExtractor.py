@@ -121,8 +121,7 @@ class PropertyExtractor:
 
 		return pipeline
 
-
-	def get_question_property_type(self,type,keys):
+	def get_question_property_type(self,st_type,keys):
 		st_keys = " ".join(keys)
 		
 		st_keys = removeStopWords(st_keys)
@@ -131,10 +130,10 @@ class PropertyExtractor:
 		sparql = self.sparqlEn
 		query = '''
 		SELECT distinct ?p WHERE {{
-			?p rdfs:domain ?class . 
-  			dbo:{} rdfs:subClassOf+ ?class.
+			?instance a <http://dbpedia.org/ontology/{}> . 
+         	?instance ?p ?obj .
 		}}
-		'''.format(entity)
+		'''.format(st_type)
 		properti = ""
 		sparql.setQuery(query)
 		results = sparql.query().convert()
@@ -146,9 +145,47 @@ class PropertyExtractor:
 				continue
 			if "ontology" in value or "property" in value:
 				prop = value.split('/')[4]
-				key_st = prop+","+st_keys
+				test = {}
+				for k in st_keys.split():
+					test[prop+","+k] = True
+				test[prop+","+st_keys] = True
 
-				test = {key_st:True}
+				temp = self.pipeline.predict([test])
+				if temp[0] == 1:
+					print(test)	
+					properti = prop		
+
+		return properti
+
+	def get_question_property_type_fast(self,st_type,keys):
+		st_keys = " ".join(keys)
+		
+		st_keys = removeStopWords(st_keys)
+		st_keys = delete_tildes(st_keys)
+		st_keys = self.only_noun_verb(st_keys)
+		sparql = self.sparqlEn
+		query = '''
+		SELECT distinct ?p WHERE {{
+			?p rdfs:domain ?class . 
+  			dbo:{} rdfs:subClassOf+ ?class.
+		}}
+		'''.format(st_type)
+		properti = ""
+		sparql.setQuery(query)
+		results = sparql.query().convert()
+
+		for result in results["results"]["bindings"]:
+			value = result["p"]["value"]
+
+			if "wiki" in value or "abstract" in value or "thumbnail" in value:
+				continue
+			if "ontology" in value or "property" in value:
+				prop = value.split('/')[4]
+				test = {}
+				for k in st_keys.split():
+					test[prop+","+k] = True
+				test[prop+","+st_keys] = True
+
 				temp = self.pipeline.predict([test])
 				if temp[0] == 1:
 					print(test)	
@@ -160,8 +197,9 @@ class PropertyExtractor:
 		st_keys = " ".join(keys)
 		
 		st_keys = removeStopWords(st_keys)
-		st_keys = delete_tildes(st_keys)
 		st_keys = self.only_noun_verb(st_keys)
+		st_keys = delete_tildes(st_keys)
+		print(st_keys)
 		sparql = self.sparqlEn
 		query = '''
 		SELECT distinct ?p WHERE {{

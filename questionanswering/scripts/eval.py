@@ -16,8 +16,8 @@ import sys
 from questionanswering.funaux import *
 
 #correctas = []
-correctas= ['0', '2', '4', '5', '7', '11', '13', '17', '22', '25', '28', '32', '35', '36', '38', '40', '41', '48', '49', '61', '66', '68', '70', '71', '72', '74', '79', '80', '93', '97', '98', '104', '108', '114', '118', '119', '121', '125', '126', '127', '134', '136', '145', '146', '152', '153', '154', '159', '162', '167', '169', '171', '174', '175', '176', '189', '191', '192', '207', '213', '18', '19', '21', '29', '30', '42', '113', '160', '164', '204']
-correctas_bool = []
+correctas= ['0', '2', '3', '4', '5', '7', '11', '13', '17', '18', '19', '20', '21', '22', '28', '29', '30', '31', '32', '33', '35', '36', '37', '38', '39', '40', '41', '42', '43', '48', '49', '55', '59', '61', '68', '70', '71', '72', '74', '79', '80', '81', '87', '93', '96', '97', '98', '101', '104', '108', '109', '111', '113', '114', '115', '118', '119', '121', '125', '126', '127', '128', '134', '136', '139', '144', '145', '146', '152', '153', '154', '155', '159', '160', '162', '164', '167', '169', '171', '174', '175', '176', '180', '185', '189', '191', '192', '201', '204', '207', '212', '213', '12', '25', '54', '63', '203', '208', '24', '99', '112', '149', '182', '200', '85', '105', '107', '135', '151', '197', '166']
+
 
 def getQuestAnKey(quest):
 	idiomas = quest["question"]
@@ -72,94 +72,92 @@ if __name__ == '__main__':
 
 	nlp = spacy.load('es_default', parser=False)
 	model.nlp_api = nlp
-	model.propertyExtractor.nlp_api = nlp
-	model.entityExtractor.nlp_api = nlp 
+	model.pExtractor.nlp_api = nlp
+	model.eExtractor.nlp_api = nlp 
 	print('Loading corpus...')
 	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
 	  data = json.load(data_file)
 
-	
-	questionsSample = data["questions"]
+	vistos = ['0', '2', '3', '4', '5', '6', '7', '9', '10', '11', '12', '13', '17', '18', '19', '20', '21', '22', '23', '24', '25', '28', '29', '30', '31', '32', '33', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '48', '49', '50', '52', '54', '55', '58', '59', '60', '61', '63', '64', '65']
+
+
+	questionsSample = data["questions"][:50]
 
 	print('Parsing...')
-	hits, total_gold, total_model = 0, 0, 0
-	total = 0
+	hits = len(correctas)
+	total = len(correctas)
+	total_gold, total_model = 0, 0
 	n = len(questionsSample)
 	#format_str = '{:3.1f}% ({}/{}) (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
 
+	out = open('Log/aggregation.log','w').close()
+	out = open('Log/bool.log','w').close()
+	out = open('Log/simple.log','w').close()
+	out = open('Log/complex.log','w').close()
 	#progress(format_str.format(0.0, 0, n, 0.0, 0.0, 0.0))
+	agg = 10
 	for i, quest in enumerate(questionsSample):
-		if 	quest["id"] in correctas:
-			continue;
+		#if 	quest["id"] in correctas:
+		#	continue;
 
-		if  quest["answertype"] == "list":
-			continue;
-		
+		if quest["aggregation"]:
+			agg = agg - 1
+			vistos.append(quest["id"])
+			if agg == 0:
+				break
+		else:
+			continue
+		st_quest, st_keys = getQuestAnKey(quest)
+		answers_gold = getAnswer(quest,quest["answertype"])
+		answers_model = model.answer_question(st_quest,st_keys)
 
 		if  quest["answertype"] == "boolean":
 			continue
-			st_quest, st_keys = getQuestAnKey(quest)
-			answer_golden = getAnswer(quest,quest["answertype"])
-			answers_model = model.answer_question(st_quest,st_keys)
-
-			if answers_model == answer_golden:
+			if answers_model == answers_gold:
 				hits +=1
 				print ("CORRECTO")
-				correctas_bool.append(quest["id"])
+				correctas.append(quest["id"])
 			else:
-				out = open('myfile','a')
+				out = open('Log/bool.log','a')
 				out.write(str(st_quest) + "\n")
-				out.write('----------------------------\n')
+				out.write(str(st_keys) + "\n")
+				out.write(quest["query"]["sparql"])
+				out.write('---------------------------------------\n')
 				out.close()
 
 			total +=1
-			print ("Accurancy:", hits/total)
-			print(correctas_bool)
 		else:
-			if not quest["aggregation"]:
-				continue
-			#st_dbo = parseQuery(quest["query"]["sparql"])
-			#if st_dbo == "":
-			#	continue
-
-			out = open('myfile','a')
-
-			st_quest, st_keys = getQuestAnKey(quest)
-			answers_gold = getAnswer(quest,quest["answertype"])
-			answers_model = model.answer_question(st_quest,st_keys)
-
-			out.write(str(st_quest) + "\n")
-
-			rank = 1
+	
 			if type(answers_model) is bool:
 				total +=1
-				continue
-				
-
-
-			
-			correcta = False;
-			
+				continue		
 
 			if answers_model == set(answers_gold):
-				out.write("RESPUETA CORRECTA\n")
+				print ("CORRECTO")
 				correctas.append(quest["id"])
-				correcta = True
 				hits +=1
-			total +=1
-
-			if not correcta:
-				for a in answers_gold:
-					out.write(str(a)+"--- Gold\n")
-				for seta in answers_model:
-					out.write((seta)+"----Model Rank: \n")
+			else:
+				if 	quest["aggregation"]:
+					out = open('Log/aggregation.log','a')
+				else:
+					st_dbo = parseQuery(quest["query"]["sparql"])
+					if st_dbo == "":
+						out = open('Log/complex.log','a')
+					else:
+						out = open('Log/simple.log','a')
+				out.write(str(st_quest) + "\n")
+				out.write(str(st_keys) + "\n")
 				out.write(quest["query"]["sparql"])
-			out.write('----------------------------\n')
-			out.close()
-			
-			print ("HITS:", hits)
-			print ("TOTAL:", total)
-
+				out.write('RESPUESTAS \n')
+				for seta in answers_model:
+					out.write((seta)+"----Model: \n")
+				out.write('---------------------------------------\n')
+				out.close()
+			total +=1
+		#print (correctas)
+		print ("HITS:", hits)
+		print ("TOTAL:", total)
+	print (vistos)
 	print ("HITS:", hits)
 	print ("TOTAL:", total)
 	print ("Accurancy:", hits/total)
