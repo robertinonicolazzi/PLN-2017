@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"ans",
+				"answer_type"
+			],
+			[
+				"lo",
+				"log_dict"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"log",
+				"log"
+			],
+			[
+				"an",
+				"answer_type"
+			],
+			[
+				"nou",
+				"noum_group"
+			],
+			[
+				"questions",
+				"questionanswering"
+			],
+			[
 				"rs",
 				"rs_entity"
 			],
@@ -28,10 +56,6 @@
 				"default_comparatives"
 			],
 			[
-				"an",
-				"anwer_type"
-			],
-			[
 				"q",
 				"q_id"
 			],
@@ -46,14 +70,6 @@
 			[
 				"key",
 				"key_st"
-			],
-			[
-				"ans",
-				"answers"
-			],
-			[
-				"nou",
-				"nouns"
 			],
 			[
 				"st",
@@ -498,87 +514,64 @@
 			[
 				"in",
 				"inf"
-			],
-			[
-				"log",
-				"log_prob"
-			],
-			[
-				"cou",
-				"counts_tag"
-			],
-			[
-				"hit",
-				"hits_k"
-			],
-			[
-				"model",
-				"model_tag_sent"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"contents": "# -*- coding: utf-8 -*-\n#!/usr/bin/python\n\nfrom SPARQLWrapper import SPARQLWrapper, JSON\nfrom questionanswering.funaux import *\nfrom questionanswering.booleanHelper import BooleanHelper\nfrom questionanswering.aggregationHelper import AggregationHelper\nfrom questionanswering.entityExtractor import EntityExtractor\nfrom questionanswering.propertyExtractor import PropertyExtractor\nfrom questionanswering.templates import *\nimport sys\nimport json\nimport re\nimport nltk\nimport nltk.classify.util\nimport numpy as np\nimport spacy\n\n\ndef progress(msg, width=None):\n    \"\"\"Ouput the progress of something on the same line.\"\"\"\n    if not width:\n        width = len(msg)\n    print('\\b' * width + msg, end='')\n    sys.stdout.flush()\n\n\nclass ClassAnswerType:\n\n    def __init__(self, questions, propCorpus=[[], []], nlp=None):\n\n        self.nlp_api = nlp\n        self.sparql = SPARQLWrapper(\"http://es.dbpedia.org/sparql\")\n        self.sparql.setReturnFormat(JSON)\n        self.sparqlEn = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n        self.sparqlEn.setReturnFormat(JSON)\n        self.pExtractor = PropertyExtractor(self.nlp_api)\n        train_prop_x = []\n        train_prop_y = []\n        self.all_words = set()\n\n        train_answer_type = []\n        keys = []\n        dbo = []\n        format_str = 'Answ Type ({}/{}) (Preg={}, Total={}), Prop {} '\n\n        progress(format_str.format(0, len(questions), 0, len(questions), 0))\n\n        i = 0\n        j = 0\n        for quest in questions:\n            i += 1\n            idiomas = quest[\"question\"]\n            st_keywords = \"\"\n            st_question = \"\"\n            for idiom in idiomas:\n                if idiom[\"language\"] == \"es\":\n                    st_question = idiom[\"string\"]\n                    st_keywords = idiom[\"keywords\"]\n                    break\n            if st_question == \"\":\n                continue\n\n            # Generamos features para tipo de respuesta\n            feat_question = self.features_answer_type(st_question)\n            st_answer_type = quest[\"answertype\"]\n\n            train_answer_type.append((feat_question, st_answer_type))\n\n            # Intento de mapeo de propiedades\n\n            temp_train_x, temp_train_y = self.pExtractor.generate_train_by_entity(\n                quest[\"query\"][\"sparql\"], st_keywords)\n            if not len(temp_train_x) == 0:\n                j += 1\n            progress(\n                format_str.format(\n                    i,\n                    len(questions),\n                    i,\n                    len(questions),\n                    j))\n            train_prop_x += temp_train_x\n            train_prop_y += temp_train_y\n\n        self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)\n\n        self.pExtractor.train(train_prop_x, train_prop_y, propCorpus)\n        self.eExtractor = EntityExtractor(self.nlp_api)\n\n    # -------------------------------------------------------------\n    # --GET ANSWER TYPE--------------------------------------------\n    # -------------------------------------------------------------\n\n    def get_answer_type(self, st_question):\n\n        question_features_test = self.features_answer_type(st_question)\n\n        type_question = self.clas_tipo.classify(question_features_test)\n        return type_question\n\n    def features_answer_type(self, st_question):\n        feat = {}\n        st_question = cleanQuestion(st_question)\n        tag_word = self.nlp_api(st_question)\n\n        tag_word = [(word.text, word.tag_) for word in tag_word]\n        # print(tag_word)\n\n        feat[\"ask_cuanto\"] = bool(\n            re.search(\n                'cu(a|á)nt(o|a)(s|) ',\n                st_question))\n        feat[\"init_dame\"] = (st_question.split(\" \")[0] == 'dame')\n        feat[\"ask_cuando\"] = bool(re.search('cu(a|á)ndo ', st_question))\n        feat[\"init_verb\"] = 'VERB' in getFirstTag(\n            tag_word) or 'AUX' in getFirstTag(tag_word)\n\n        second_tag = getSecondTag(tag_word)\n        articulo = 'PronType=Art' in getFirstTag(\n            tag_word) and 'DET' in getFirstTag(tag_word)\n\n        feat[\"art_sust2\"] = articulo and (\n            ('NOUN' in second_tag) or (\n                'PROPN' in second_tag))\n\n        #feat[\"init_verb2\"]  = getFirstTag(tag_word) == 'VERB'\n        #feat[\"art_sust\"]   = (getFirstTag(tag_word) == 'DET') and (second_tag== 'NOUN' or second_tag=='PROPN')\n        return feat\n\n    # -------------------------------------------------------------\n    # --GET SIMPLE ANSWERS WORKFLOW -------------------------------\n    # -------------------------------------------------------------\n    def default_ans(self, entity, answertype):\n        sparql = self.sparqlEn\n        answers = []\n        properti = \"\"\n        if answertype == \"date\":\n            properti = \"date\"\n\n        query = '''\n\t\t\t\tselect distinct ?result\n\t\t\t\twhere {{\n\t\t\t\t\t<http://dbpedia.org/resource/{}> dbp:{} ?result\n\t\t\t\t}}\n\t\t\t\t'''.format(entity, properti)\n\n        answers = resolveQuery(sparql, query)\n\n        return set(answers)\n\n    def get_english_ans_reverse(self, entity, properti):\n        sparql = self.sparqlEn\n        query = templates.get('simple_rev',\"\")\n        query = query.format(res=entity, prop=properti)\n        answers = resolveQuery(sparql, query)\n        return set(answers)\n\n    def get_english_ans(self, entity, properti):\n        sparql = self.sparqlEn\n        query = templates.get('simple',\"\")\n        query = query.format(res=entity, prop=properti)\n        answers = resolveQuery(sparql, query)\n\n        if len(answers) == 0:\n            query = templates.get('simple_amb',\"\")\n            query = query.format(res=entity, prop=properti)\n            answers = resolveQuery(sparql, query)\n        return set(answers)\n\n    # -----------------------------------------------------------------------\n    # ---------------------- PREGUNTAS BOOLEAN ------------------------------\n    # -----------------------------------------------------------------------\n\n    def boolean_answerer(self, q, q_keys):\n\n        pr_entity_es = \"\"\n        sn_entity_es = \"\"\n        answers = False\n        q = cleanQuestion(q)\n        h_boolean = BooleanHelper()\n\n        entities, k_rest = self.eExtractor.get_entities(\n            q_keys, 'boolean')\n        if len(entities) == 0:\n            print(\"Entities not Found\")\n            return []\n        print(\"Entidades     : \", entities)\n        print(\"Keys Restantes: \", k_rest)\n\n        if len(entities) == 1:\n            pr_entity_es = entities[0][0]\n            pr_entity_en = entities[0][1]\n\n            bool_key, properti = h_boolean.boolean_key_one_entity(q)\n            print(\"Bool_key:\", bool_key)\n            print(\"PropertiTemp:\", properti)\n            if bool_key == \"type\":\n                answers = h_boolean.get_type_answer(pr_entity_es, properti)\n            elif bool_key == \"exist\":\n                answers = h_boolean.get_exist_answer(pr_entity_es, properti)\n            else:\n                properti = self.pExtractor.get_question_property(\n                    pr_entity_en, k_rest)\n                answers = h_boolean.get_properti_answer(pr_entity_en, properti)\n\n        elif len(entities) == 2:\n\n            pr_entity_en = entities[0][1]\n            sn_entity_en = entities[1][1]\n\n            props, st_filter = self.two_entities_prop_filter(\n                q, pr_entity_en, sn_entity_en, k_rest)\n\n            if props == \"\":\n                return []\n\n            answers = h_boolean.two_entities_answer(\n                pr_entity_en, sn_entity_en, props, st_filter)\n        else:\n            answers = []\n\n        return answers\n\n    def two_entities_prop_filter(\n            self, question, entity, sn_entity, k_rest):\n        prop = \"\"\n        st_filter = \"\"\n        if \"antes\" in question:\n            st_filter = \"FILTER (?x < ?y)\"\n            prop = \"date\"\n        elif \"despues\" in question:\n            st_filter = \"FILTER (?x > ?y)\"\n            prop = \"date\"\n        elif \"menor\" in question:\n            st_filter = \"FILTER (?x < ?y)\"\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n        elif \"mayor\" in question or \"grande\" in question:\n            st_filter = \"FILTER (?x > ?y)\"\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n        elif \"misma\" in question or \"igual\" in question or \"mismos\" in question:\n            st_filter = \"same\"\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n        else:\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n            # la igualdad es viendo si pertenece\n            st_filter = \"\"\n\n        return prop, st_filter\n\n    # ------------------------------------------------------------------------\n    # ---------------------- RESPONDER PREGUNTAS -----------------------------\n    # ------------------------------------------------------------------------\n\n    def answer_question(self, q, q_keys,log=False):\n\n        log_dict = {}\n\n        print('---------------------------------------------------------------')\n\n        answers = []\n        answer_type = self.get_answer_type(q)\n\n        print('{:15} | {}'.format('QUESTION: ', q))\n        print('{:15} | {}'.format('ANSWER TYPE: ', answer_type))\n\n        if answer_type == \"boolean\":\n            return self.boolean_answerer(q, q_keys)\n\n        h_agg = AggregationHelper(nlp=self.nlp_api)\n        keyAggregation = h_agg.check_aggregation(answer_type, q, q_keys)\n\n        if not keyAggregation == \"none\":\n            return self.aggregation_answerer(\n                h_agg, q, q_keys, keyAggregation, answer_type)\n\n        entities, k_rest = self.eExtractor.get_entities(\n            q_keys, answer_type)\n\n        if len(entities) == 0:\n            print(\"Entities not Found\")\n            return []\n\n        print(\"Entidades     : \", entities)\n        print('{:15} | {:10}'.format(\"1 Keys\", \"|\".join(k_rest)))\n\n        es_entity = entities[0][0]\n        en_entity = entities[0][1]\n\n        st_property = self.pExtractor.get_question_property(\n            en_entity, k_rest)\n\n        print(\"Entidad Espanol:\", es_entity)\n        print(\"Entidad Ingles :\", en_entity)\n        print(\"Propiedad      :\", st_property)\n\n        answers = self.get_english_ans(en_entity, st_property)\n        print(\"Respuesta:\", answers)\n\n        if len(answers) == 0 and answer_type == \"date\":\n            answers = self.default_ans(en_entity, answer_type)\n\n        if len(answers) == 0 and answer_type == \"resource\":\n            print(\"Reverse\")\n            st_property = self.pExtractor.get_question_property_rev(\n                en_entity, k_rest)\n            answers = self.get_english_ans_reverse(en_entity, st_property)\n\n        print('---------------------------------------------------------------')\n\n        log_dict[\"answer_type\"] = answer_type\n        log_dict[\"entity\"] = \"ES: \"+es_entity + \" | EN: \" + en_entity\n        log_dict[\"property\"] = st_property\n        log_dict[\"answers\"] = \"\\n\".join([a for a in answers])\n\n        if log:\n            return log_dict\n\n        return answers\n\n    def aggregation_answerer(self, h_agg, q,\n                             q_keys, key, answer_type):\n        q_keys = delete_tildes(q_keys)\n        answers = []\n        if key == \"count\":\n            entities, k_rest = self.eExtractor.get_entities(\n                q_keys,\n                answer_type\n            )\n            if len(entities) == 0:\n                print(\"Entities not Found\")\n                return []\n            print(\"Entidades     : \", entities)\n            print(\"Keys Restantes: \", k_rest)\n\n            es_entity = entities[0][0]\n            en_entity = entities[0][1]\n\n            st_property = self.pExtractor.get_question_property(\n                en_entity, k_rest)\n            answers = self.get_english_ans(en_entity, st_property)\n            if key == \"count\" and not len(answers) == 0:\n                if 'resource' in list(answers)[0]:\n                    answers = h_agg.get_aggregation_count(\n                        en_entity, st_property)\n\n        if \"asc\" in key or \"desc\" in key:\n            entities, k_rest = self.eExtractor.get_entities(\n                q_keys, answer_type)\n\n            #import pdb; pdb.set_trace()\n            st_place = \"\"\n            if len(entities) == 1:\n                st_place, k_rest = h_agg.check_entity(\n                    entities[0], q_keys, k_rest)\n                if not st_place == \"\":\n                    print('{:15} | {:10}'.format(\"Lugar\", st_place))\n                    entities = []\n            if len(entities) == 0:\n                st_property = \"\"\n                k_rest, st_subproperty = h_agg.get_sub_property(\n                    key, k_rest)               \n                print('{:15} | {:10}'.format(\"SubPropiedad\", st_subproperty))\n                print('{:15} | {:10}'.format(\"1 Keys\", \",\".join(k_rest)))\n\n                st_type, k_rest = h_agg.get_type(k_rest)\n                print('{:15} | {:10}'.format('Tipo Entidad', st_type))\n                print('{:15} | {:10}'.format(\"2 Keys\", \",\".join(k_rest)))\n\n                if not len(k_rest) == 0:\n                    st_property = self.pExtractor.get_question_property_type(\n                        st_type, k_rest)\n\n                if st_property == \"\":\n                    if len(answers) == 0:\n                        for st_property in h_agg.get_default(\n                                st_subproperty):\n                            answers = h_agg.get_aggregation_order_type(\n                                st_type, st_property, key)\n                            if not len(answers) == 0:\n                                break\n                else:\n                    if not st_place == \"\":\n                        answers = h_agg.get_aggregation_order_type_place(\n                            st_type, st_property, key, st_place)\n                    else:\n                        answers = h_agg.get_aggregation_order_type(\n                            st_type, st_property, key)\n\n\n            else:\n                # Tenemos la Entidad\n                es_entity = entities[0][0]\n                en_entity = entities[0][1]\n\n                # Obtenemos la subpropiedad para comparar los resultados\n                # child--BirthDate\n                k_rest, st_subproperty = h_agg.get_sub_property(\n                    key, k_rest)                \n\n                # Vemos que se quiere saber de la entidad (propiedad) Ej:\n                # Hijos--child\n                st_property = self.pExtractor.get_question_property(\n                    en_entity, k_rest)\n\n                print('{:15} | {:10}'.format('Entidad', en_entity))\n                print('{:15} | {:10}'.format(\"SubPropiedad\", st_subproperty))\n                print('{:15} | {:10}'.format(\"Keys Restantes\", \"|\".join(k_rest)))\n                print('{:15} | {:10}'.format(\"Propiedad\", st_property))\n\n                answers = h_agg.get_subprop_answer(\n                    en_entity, st_property, st_subproperty, key)\n                if len(answers) == 0:\n                    for st_sub in h_agg.get_default(st_subproperty):\n                        answers = h_agg.get_subprop_answer(\n                            en_entity, st_property, st_sub, key)\n                        if not len(answers) == 0:\n                            break\n        print(\"Respuesta:\", answers)\n        return set(answers)\n",
+			"file": "main.py",
+			"file_size": 15762,
+			"file_write_time": 131544605130000821,
+			"settings":
+			{
+				"buffer_size": 15759,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "entityExtractor.py",
+			"settings":
+			{
+				"buffer_size": 4842,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/testQuestion.py",
+			"settings":
+			{
+				"buffer_size": 1714,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "scripts/gen.py",
 			"settings":
 			{
-				"buffer_size": 988,
+				"buffer_size": 950,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "# -*- coding: utf-8 -*-\n#!/usr/bin/python\n\nfrom SPARQLWrapper import SPARQLWrapper, JSON\nfrom questionanswering.funaux import *\nfrom questionanswering.booleanHelper import BooleanHelper\nfrom questionanswering.aggregationHelper import AggregationHelper\nfrom questionanswering.entityExtractor import EntityExtractor\nfrom questionanswering.propertyExtractor import PropertyExtractor\n\nimport sys\nimport json\nimport re\nimport nltk\nimport nltk.classify.util\nimport numpy as np\nimport spacy\n\n\ndef progress(msg, width=None):\n    \"\"\"Ouput the progress of something on the same line.\"\"\"\n    if not width:\n        width = len(msg)\n    print('\\b' * width + msg, end='')\n    sys.stdout.flush()\n\n\nclass ClassAnswerType:\n\n    def __init__(self, questions, propCorpus=[[], []], nlp=None):\n\n        self.nlp_api = nlp\n        self.sparql = SPARQLWrapper(\"http://es.dbpedia.org/sparql\")\n        self.sparql.setReturnFormat(JSON)\n        self.sparqlEn = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n        self.sparqlEn.setReturnFormat(JSON)\n        self.pExtractor = PropertyExtractor(self.nlp_api)\n        train_prop_x = []\n        train_prop_y = []\n        self.all_words = set()\n\n        train_answer_type = []\n        keys = []\n        dbo = []\n        format_str = 'Answ Type ({}/{}) (Preg={}, Total={}), Prop {} '\n\n        progress(format_str.format(0, len(questions), 0, len(questions), 0))\n\n        i = 0\n        j = 0\n        for quest in questions:\n            i += 1\n            idiomas = quest[\"question\"]\n            st_keywords = \"\"\n            st_question = \"\"\n            for idiom in idiomas:\n                if idiom[\"language\"] == \"es\":\n                    st_question = idiom[\"string\"]\n                    st_keywords = idiom[\"keywords\"]\n                    break\n            if st_question == \"\":\n                continue\n\n            # Generamos features para tipo de respuesta\n            feat_question = self.features_answer_type(st_question)\n            st_answer_type = quest[\"answertype\"]\n\n            train_answer_type.append((feat_question, st_answer_type))\n\n            # Intento de mapeo de propiedades\n\n            temp_train_x, temp_train_y = self.pExtractor.generate_train_by_entity(\n                quest[\"query\"][\"sparql\"], st_keywords)\n            if not len(temp_train_x) == 0:\n                j += 1\n            progress(\n                format_str.format(\n                    i,\n                    len(questions),\n                    i,\n                    len(questions),\n                    j))\n            train_prop_x += temp_train_x\n            train_prop_y += temp_train_y\n\n        self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)\n\n        self.pExtractor.train(train_prop_x, train_prop_y, propCorpus)\n        self.eExtractor = EntityExtractor(self.nlp_api)\n\n    # -------------------------------------------------------------\n    # --GET ANSWER TYPE--------------------------------------------\n    # -------------------------------------------------------------\n\n    def get_answer_type(self, st_question):\n\n        question_features_test = self.features_answer_type(st_question)\n\n        type_question = self.clas_tipo.classify(question_features_test)\n        return type_question\n\n    def features_answer_type(self, st_question):\n        feat = {}\n        st_question = cleanQuestion(st_question)\n        tag_word = self.nlp_api(st_question)\n\n        tag_word = [(word.text, word.tag_) for word in tag_word]\n        # print(tag_word)\n\n        feat[\"ask_cuanto\"] = bool(\n            re.search(\n                'cu(a|á)nt(o|a)(s|) ',\n                st_question))\n        feat[\"init_dame\"] = (st_question.split(\" \")[0] == 'dame')\n        feat[\"ask_cuando\"] = bool(re.search('cu(a|á)ndo ', st_question))\n        feat[\"init_verb\"] = 'VERB' in getFirstTag(\n            tag_word) or 'AUX' in getFirstTag(tag_word)\n\n        second_tag = getSecondTag(tag_word)\n        articulo = 'PronType=Art' in getFirstTag(\n            tag_word) and 'DET' in getFirstTag(tag_word)\n\n        feat[\"art_sust2\"] = articulo and (\n            ('NOUN' in second_tag) or (\n                'PROPN' in second_tag))\n\n        #feat[\"init_verb2\"]  = getFirstTag(tag_word) == 'VERB'\n        #feat[\"art_sust\"]   = (getFirstTag(tag_word) == 'DET') and (second_tag== 'NOUN' or second_tag=='PROPN')\n        return feat\n\n    # -------------------------------------------------------------\n    # --GET SIMPLE ANSWERS WORKFLOW -------------------------------\n    # -------------------------------------------------------------\n    def default_ans(self, entity, answertype):\n        sparql = self.sparqlEn\n        answers = []\n        properti = \"\"\n        if answertype == \"date\":\n            properti = \"date\"\n\n        query = '''\n\t\t\t\tselect distinct ?result\n\t\t\t\twhere {{\n\t\t\t\t\t<http://dbpedia.org/resource/{}> dbp:{} ?result\n\t\t\t\t}}\n\t\t\t\t'''.format(entity, properti)\n\n        answers = resolveQuery(sparql, query)\n\n        return set(answers)\n\n    def get_english_ans_reverse(self, entity, properti):\n        sparql = self.sparqlEn\n        answers = []\n        query = '''\n\t\t\t\tselect distinct ?result, ?resource\n\t\t\t\twhere {{\n\n\t\t\t\t<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?resource.\n\t\t\t\t?result {}:{} ?resource\n\n\t\t\t\t}}\n\t\t\t\t'''.format(entity, \"dbo\", properti)\n\n        answers = resolveQuery(sparql, query)\n\n        return set(answers)\n\n    def get_english_ans(self, entity, properti):\n        sparql = self.sparqlEn\n        answers = []\n\n        query = '''\n\t\t\t\tselect distinct ?result\n\t\t\t\twhere {{\n\t\t\t\t\t\t<http://dbpedia.org/resource/{}> dbo:{} ?result\n\n\t\t\t\t}}\n\t\t\t\t'''.format(entity, properti)\n        answers = resolveQuery(sparql, query)\n\n        if len(answers) == 0:\n            query = '''\n\t\t\t\t\tselect distinct ?result\n\t\t\t\t\twhere {{\n\t\t\t\t\t\t\t<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates ?resource.\n\t\t\t\t\t\t\t?resource dbo:{} ?result\n\t\t\t\t\t}}\n\t\t\t\t\t'''.format(entity, properti)\n\n            answers = resolveQuery(sparql, query)\n\n        return set(answers)\n\n    # -----------------------------------------------------------------------\n    # ---------------------- PREGUNTAS BOOLEAN ------------------------------\n    # -----------------------------------------------------------------------\n\n    def boolean_answerer(self, q, q_keys):\n\n        pr_entity_es = \"\"\n        sn_entity_es = \"\"\n        answers = False\n        q = cleanQuestion(q)\n        h_boolean = BooleanHelper()\n\n        entities, k_rest = self.eExtractor.get_entities(\n            q_keys, 'boolean')\n        if len(entities) == 0:\n            print(\"Entities not Found\")\n            return []\n        print(\"Entidades     : \", entities)\n        print(\"Keys Restantes: \", k_rest)\n\n        if len(entities) == 1:\n            pr_entity_es = entities[0][0]\n            pr_entity_en = entities[0][1]\n            bool_key, properti = h_boolean.boolean_key_one_entity(q)\n            print(\"Bool_key:\", bool_key)\n            print(\"PropertiTemp:\", properti)\n            if bool_key == \"type\":\n                answers = h_boolean.get_type_answer(pr_entity_es, properti)\n            elif bool_key == \"exist\":\n                answers = h_boolean.get_exist_answer(pr_entity_es, properti)\n            else:\n                properti = self.pExtractor.get_question_property(\n                    pr_entity_en, k_rest)\n                answers = h_boolean.get_properti_answer(pr_entity_en, properti)\n\n        elif len(entities) == 2:\n\n            pr_entity_en = entities[0][1]\n            sn_entity_en = entities[1][1]\n\n            props, st_filter = self.two_entities_prop_filter(\n                q, pr_entity_en, sn_entity_en, k_rest)\n\n            if props == \"\":\n                return []\n\n            answers = h_boolean.two_entities_answer(\n                pr_entity_en, sn_entity_en, props, st_filter)\n        else:\n            answers = []\n\n        return answers\n\n    def two_entities_prop_filter(\n            self, question, entity, sn_entity, k_rest):\n        prop = \"\"\n        st_filter = \"\"\n        if \"antes\" in question:\n            st_filter = \"FILTER (?x < ?y)\"\n            prop = \"date\"\n        elif \"despues\" in question:\n            st_filter = \"FILTER (?x > ?y)\"\n            prop = \"date\"\n        elif \"menor\" in question:\n            st_filter = \"FILTER (?x < ?y)\"\n            prop = self.pExtractor.get_question_property(\n                entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(\n                    sn_entity, k_rest)\n        elif \"mayor\" in question or \"grande\" in question:\n            st_filter = \"FILTER (?x > ?y)\"\n            prop = self.pExtractor.get_question_property(\n                entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(\n                    sn_entity, k_rest)\n        elif \"misma\" in question or \"igual\" in question or \"mismos\" in question:\n            st_filter = \"same\"\n            prop = self.pExtractor.get_question_property(\n                entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(\n                    sn_entity, k_rest)\n        else:\n            prop = self.pExtractor.get_question_property(\n                entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(\n                    sn_entity, k_rest)\n            # la igualdad es viendo si pertenece\n            st_filter = \"\"\n\n        return prop, st_filter\n\n    # ------------------------------------------------------------------------\n    # ---------------------- RESPONDER PREGUNTAS -----------------------------\n    # ------------------------------------------------------------------------\n\n    def answer_question(self, q, q_keys):\n\n        print('---------------------------------------------------------------')\n\n        answers = []\n        answer_type = self.get_answer_type(q)\n\n        print('{:18} {}'.format('QUESTION: ', q))\n        print('{:18} {}'.format('ANSWER TYPE: ', answer_type))\n\n        if answer_type == \"boolean\":\n            return self.boolean_answerer(q, q_keys)\n\n        h_agg = AggregationHelper(nlp=self.nlp_api)\n        keyAggregation = h_agg.check_aggregation(answer_type, q, q_keys)\n\n        if not keyAggregation == \"none\":\n            return self.aggregation_answerer(\n                h_agg, q, q_keys, keyAggregation, answer_type)\n\n        entities, k_rest = self.eExtractor.get_entities(\n            q_keys, answer_type)\n\n        if len(entities) == 0:\n            print(\"Entities not Found\")\n            return []\n\n        print(\"Entidades     : \", entities)\n        print('{:15} | {:10}'.format(\"1 Keys\", \"|\".join(k_rest)))\n\n        es_entity = entities[0][0]\n        en_entity = entities[0][1]\n\n        st_property = self.pExtractor.get_question_property(\n            en_entity, k_rest)\n\n        print(\"Entidad Espanol:\", es_entity)\n        print(\"Entidad Ingles :\", en_entity)\n        print(\"Propiedad      :\", st_property)\n\n        answers = self.get_english_ans(en_entity, st_property)\n        print(\"Respuesta:\", answers)\n\n        if len(answers) == 0 and answer_type == \"date\":\n            answers = self.default_ans(en_entity, answer_type)\n\n        if len(answers) == 0 and answer_type == \"resource\":\n            print(\"Reverse\")\n            st_property = self.pExtractor.get_question_property_rev(\n                en_entity, k_rest)\n            answers = self.get_english_ans_reverse(en_entity, st_property)\n\n        print('---------------------------------------------------------------')\n        return answers\n\n    def aggregation_answerer(self, h_agg, q,\n                             q_keys, key, answer_type):\n        q_keys = delete_tildes(q_keys)\n        answers = []\n        if key == \"count\":\n            entities, k_rest = self.eExtractor.get_entities(\n                q_keys,\n                answer_type\n            )\n            if len(entities) == 0:\n                print(\"Entities not Found\")\n                return []\n            print(\"Entidades     : \", entities)\n            print(\"Keys Restantes: \", k_rest)\n\n            es_entity = entities[0][0]\n            en_entity = entities[0][1]\n\n            st_property = self.pExtractor.get_question_property(\n                en_entity, k_rest)\n            answers = self.get_english_ans(en_entity, st_property)\n            if key == \"count\" and not len(answers) == 0:\n                if 'resource' in list(answers)[0]:\n                    answers = h_agg.get_aggregation_count(\n                        en_entity, st_property)\n\n        if \"asc\" in key or \"desc\" in key:\n            entities, k_rest = self.eExtractor.get_entities(\n                q_keys, answer_type)\n\n            #import pdb; pdb.set_trace()\n            st_place = \"\"\n            if len(entities) == 1:\n                st_place, k_rest = h_agg.check_entity(\n                    entities[0], q_keys, k_rest)\n                if not st_place == \"\":\n                    print('{:15} | {:10}'.format(\"Lugar\", st_place))\n                    entities = []\n            if len(entities) == 0:\n                st_property = \"\"\n                k_rest, st_subproperty = h_agg.get_sub_property(\n                    key, k_rest)\n                print('{:15} | {:10}'.format(\"SubPropiedad\", st_subproperty))\n                print('{:15} | {:10}'.format(\"1 Keys\", \",\".join(k_rest)))\n\n                st_type, k_rest = h_agg.get_type(k_rest)\n                print('{:15} | {:10}'.format('Tipo Entidad', st_type))\n                print('{:15} | {:10}'.format(\"2 Keys\", \",\".join(k_rest)))\n\n                if not len(k_rest) == 0:\n                    st_property = self.pExtractor.get_question_property_type(\n                        st_type, k_rest)\n\n                if not st_place == \"\" and not st_property == \"\":\n                    answers = h_agg.get_aggregation_order_type_place(\n                        st_type, st_property, key, st_place)\n                if not st_property == \"\" and st_place == \"\":\n                    answers = h_agg.get_aggregation_order_type(\n                        st_type, st_property, key)\n\n                if len(answers) == 0:\n                    for st_property in h_agg.get_default(\n                            st_subproperty):\n                        answers = h_agg.get_aggregation_order_type(\n                            st_type, st_property, key)\n                        if not len(answers) == 0:\n                            break\n            else:\n                # Tenemos la Entidad\n                es_entity = entities[0][0]\n                en_entity = entities[0][1]\n                print('{:15} | {:10}'.format('Entidad', en_entity))\n                print('{:15} | {:10}'.format(\"1 Keys\", \"|\".join(k_rest)))\n\n                # Obtenemos la subpropiedad para comparar los resultados\n                # child--BirthDate\n                k_rest, st_subproperty = h_agg.get_sub_property(\n                    key, k_rest)\n                print('{:15} | {:10}'.format(\"SubPropiedad\", st_subproperty))\n                print('{:15} | {:10}'.format(\"2 Keys\", \"|\".join(k_rest)))\n\n                # Vemos que se quiere saber de la entidad (propiedad) Ej:\n                # Hijos--child\n                st_property = self.pExtractor.get_question_property(\n                    en_entity, k_rest)\n                print('{:15} | {:10}'.format(\"Propiedad\", st_property))\n\n                answers = h_agg.get_subprop_answer(\n                    en_entity, st_property, st_subproperty, key)\n                if len(answers) == 0:\n                    for st_sub in h_agg.get_default(st_subproperty):\n                        answers = h_agg.get_subprop_answer(\n                            en_entity, st_property, st_sub, key)\n                        if not len(answers) == 0:\n                            break\n        print(\"Respuesta:\", answers)\n        return set(answers)\n",
-			"file": "main.py",
-			"file_size": 15883,
-			"file_write_time": 131542037056166443,
+			"contents": "['0', '2', '3', '4', '5', '6', '7', '9', '10', '11', '12', '13', '17', '18', '19', '20', '21', '22', '23', '24', '25', '28', '29', '30', '31', '32', '33', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '48', '49', '50', '52', '54', '55', '58', '59', '60', '61', '63', '64', '65']\n\n",
 			"settings":
 			{
-				"buffer_size": 15882,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Log/complex.log",
-			"settings":
-			{
-				"buffer_size": 1370,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"buffer_size": 294,
+				"line_ending": "Unix",
+				"name": "['0', '2', '3', '4', '5', '6', '7', '9', '10', '11"
 			}
 		},
 		{
 			"file": "scripts/eval.py",
 			"settings":
 			{
-				"buffer_size": 4401,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "{\n  \"dataset\" : {\n    \"id\" : \"qald-7-test-multilingual\"\n  },\n  \"questions\" : [\n  {\n    \"id\" : \"2\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Are there any castles in the United States?\",\n      \"keywords\" : \"castles, United States\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gibt es irgendwelche Schlösser in den Vereinigten Staaten?\",\n      \"keywords\" : \"Schlösser, Vereinigte Staaten\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Ci sono castelli negli Stati Uniti?\",\n      \"keywords\" : \"castelli, Stati Uniti\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Y a-t-il des châteaux aux États-Unis?\",\n      \"keywords\" : \"châteaux, États-Unis\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"3\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Can you find frescoes in Crete?\",\n      \"keywords\" : \"frescoes, Crete\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Können Sie Fresken in Kreta finden?\",\n      \"keywords\" : \"Fresken, Kreta\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Si possono trovare affreschi a Creta?\",\n      \"keywords\" : \"affreschi, Creta\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Peut-on trouver des fresques en Crète?\",\n      \"keywords\" : \"fresques, Crète\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"4\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Do Urdu and Persian have a common root?\",\n      \"keywords\" : \"Urdu, Persian, common root\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Haben Urdu und Perser eine gemeinsame Wurzel?\",\n      \"keywords\" : \"Urdu, Perser, gemeinsame Wurzel\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Urdu e Persiano hanno le stesse radici?\",\n      \"keywords\" : \"Urdu, Persiano, stesse, radici\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Est-ce que l'ourdou et le persan ont une origine commune?\",\n      \"keywords\" : \"ourdou, persan, origine commune\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"5\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Does the Ford Motor Company have a manufacturing plant in Malaysia?\",\n      \"keywords\" : \"Ford Motor Company, manufacturing plant, Malaysia\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Hat Ford eine Frabik in Malaysia?\",\n      \"keywords\" : \"Ford, Fabrik, Malaysia\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"La Ford ha una fabbrica in Malesia?\",\n      \"keywords\" : \"Ford, fabbrica, Malesia\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Est-ce que Ford possède une usine en Malaisie?\",\n      \"keywords\" : \"Ford, usine, Malaisie\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"6\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"How many years was the Ford Model T manufactured?\",\n      \"keywords\" : \"years, Ford Model T, manufactured\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie viele Jahre wurde das Ford Model T hergestellt?\",\n      \"keywords\" : \"Jahre, Ford Model T, hergestellt\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Per quanti anni fu prodotta la Ford T?\",\n      \"keywords\" : \"anni, Ford T, prodotta\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Pendant combien d'années la Ford T a-t-elle été fabriquée?\",\n      \"keywords\" : \"années, Ford T, frabriquée\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"7\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Give me all American presidents in the last 20 years.\",\n      \"keywords\" : \"American presidents, last 20 years\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gib mir alle Amerikanischen Präsidenten der letzten 20 Jahre.\",\n      \"keywords\" : \"Amerikanische Präsidenten, letzten 20 Jahre\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Dammi tutti i presidenti americani degli ultimi 20 anni.\",\n      \"keywords\" : \"presidenti americani, ultimi 20 anni\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Donnez-moi le nom des présidents américains des 20 dernières années.\",\n      \"keywords\" : \"présidents américains, 20 dernières années\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"8\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Give me all gangsters from the prohibition era.\",\n      \"keywords\" : \"gangsters, prohibition era\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gib mir alle Gangster der Prohibitions Ära.\",\n      \"keywords\" : \"Gangster, Prohibitions Ära\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Dammi tutti i gangster dell'era del proibizionismo.\",\n      \"keywords\" : \"gangster, era, proibizionismo\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Donnez-moi le nom de tous les gangsters de la Prohibition.\",\n      \"keywords\" : \"gangsters, Prohibition\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"9\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Give me all Seven Wonders of the Ancient World.\",\n      \"keywords\" : \"Seven Wonders of the Ancient World\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gib mir alle Sieben Wunder der Antiken Welt.\",\n      \"keywords\" : \"Sieben Wunder der Antiken Welt\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Dammi tutte le Sette Meraviglie del Mondo Antico.\",\n      \"keywords\" : \"Sette Meraviglie del Mondo Antico\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Donnez-moi le nom des Sept Merveilles du Monde antique.\",\n      \"keywords\" : \"Sept Merveilles du Monde antique\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"11\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Give me all chemical elements.\",\n      \"keywords\" : \"chemical elements\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gib mir alle Chemischen Elemente.\",\n      \"keywords\" : \"Chemische Elemente\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Dammi tutti gli elementi chimici.\",\n      \"keywords\" : \"elementi chimici\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Donnez-moi le nom de tous les éléments chimiques.\",\n      \"keywords\" : \"éléments chimiques\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"13\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"How many rivers and lakes are in South Carolina?\",\n      \"keywords\" : \"rivers, lakes, South Carolina\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie viele Flüsse und Seen gibt es in South Carolina?\",\n      \"keywords\" : \"Flüsse, Seen, South Carolina\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quanti fiumi e laghi ci sono in Carolina del Sud?\",\n      \"keywords\" : \"fiumi, laghi, Carolina del Sud\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Combien de rivières et de lacs y a-t-il en Caroline du Sud?\",\n      \"keywords\" : \"rivières, lacs, Caroline du Sud\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"14\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"How many states are in Mexico?\",\n      \"keywords\" : \"states, Mexico\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie viele Staaten gibt es in Mexiko?\",\n      \"keywords\" : \"Staaten, Mexiko\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quanti stati ci sono in Messico?\",\n      \"keywords\" : \"stati, Messico\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Combien d'états y a-t-il au Mexique?\",\n      \"keywords\" : \"états, Mexique\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"15\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"How many theories did Albert Einstein come up with?\",\n      \"keywords\" : \"theories, Albert Einstein, come up\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie viele Theorien hat Albert Einstein formuliert?\",\n      \"keywords\" : \"Theorien, Albert Einstein, formuliert\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quante teorie formulò Albert Einstein?\",\n      \"keywords\" : \"teorie, formulò, Albert Einstein\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Combien de théories a Albert Einstein formulé?\",\n      \"keywords\" : \"théories, Albert Einstein, formulé\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"16\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Is horse racing a sport?\",\n      \"keywords\" : \"horse racing, sport\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Ist Pferderennen ein Sport\",\n      \"keywords\" : \"Pferderennen, Sport\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"L'ippica è uno sport?\",\n      \"keywords\" : \"ippica, sport\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Est-ce que les courses hippiques sont un sport?\",\n      \"keywords\" : \"courses hippiques, sport\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"17\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Is Pluto really a planet?\",\n      \"keywords\" : \"Pluto, planet\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Ist Pluto wirklich ein Planet?\",\n      \"keywords\" : \"Pluto, Planet\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Plutone è veramente un pianeta?\",\n      \"keywords\" : \"Plutone, pianeta\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Est-ce que Pluton est réellement une planète?\",\n      \"keywords\" : \"Pluton, planète\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"18\",\n    \"answertype\" : \"boolean\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Was Sigmund Freud married?\",\n      \"keywords\" : \"Sigmund Freud, married\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"War Sigmund Freud verheiratet?\",\n      \"keywords\" : \"Sigmund Freud, verheiratet\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Sigmund Freud era sposato?\",\n      \"keywords\" : \"Sigmund Freud, sposato\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Est-ce que Sigmund Freud était marié?\",\n      \"keywords\" : \"Sigmund Freud, marié\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"19\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What form of government is found in South Africa?\",\n      \"keywords\" : \"form, government, South Africa\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Welche Regierungsform hat Südafrika?\",\n      \"keywords\" : \"Regierungsform, Südafrika\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Che forma di governo c'è in Sudafrica?\",\n      \"keywords\" : \"forma, governo, Sudafrica\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelle forme de gouvernement y a-t-il en Afrique du Sud?\",\n      \"keywords\" : \"forme, gouvernement, Afrique du Sud\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"22\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What is the largest state in the United States?\",\n      \"keywords\" : \"largest state, United States\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was ist der größte Staat in den Vereinigten Staaten?\",\n      \"keywords\" : \"größte Staat, Vereinigten Staaten\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Qual è lo stato più esteso degli Stati Uniti?\",\n      \"keywords\" : \"stato più esteso, Stati Uniti\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quel est le plus grand état des États-Unis?\",\n      \"keywords\" : \"le plus grand état, États-Unis\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"23\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What is the longest river in the world?\",\n      \"keywords\" : \"longest river, world\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was ist der längste Fluss der Welt?\",\n      \"keywords\" : \"längste Fluss, Welt\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Qual è il fiume più lungo del mondo?\",\n      \"keywords\" : \"fiume più lungo, mondo\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelle est la rivière la plus longue au monde?\",\n      \"keywords\" : \"rivière, la plus longue, monde\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"24\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Which building after the Burj Khalifa has the most floors?\",\n      \"keywords\" : \"building, after, Burj Khalifa, most floors\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Welches Gebäude nach dem Burj Khalifa hat die meisten Etagen\",\n      \"keywords\" : \"Gebäude, nach, Burj Khalifa, meisten Etagen\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quale edificio dopo il Burj Khalifa ha più piani?\",\n      \"keywords\" : \"edificio, dopo, Burj Khalifa, più piani\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quel édifice a le plus grand nombre d'étages après le Burj Khalifa?\",\n      \"keywords\" : \"édifice, le plus grand nombre d'étages, après, Burj Khalifa \"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"25\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What is the wavelength of indigo?\",\n      \"keywords\" : \"wavelength, indigo\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was ist die Wellenlänge von Indigo?\",\n      \"keywords\" : \"Wellenlänge, Indigo\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Qual è la lunghezza d'onda dell'indaco?\",\n      \"keywords\" : \"lunghezza d'onda, indaco\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelle est la longueur d'onde de l'indigo?\",\n      \"keywords\" : \"longueur d'onde, indigo\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"26\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What was the name of the famous battle in 1836 in San Antonio?\",\n      \"keywords\" : \"famous battle, 1836, San Antonio\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie ist der Name der berühmten Schlacht von 1836 in San Antonio?\",\n      \"keywords\" : \"berühmte Schlacht, 1836, San Antonio\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quale fu il nome della famosa battaglia di San Antonio del 1836?\",\n      \"keywords\" : \"famosa battaglia, San Antonio, 1836\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quel est le nom de la célèbre bataille de San Antonio en 1836?\",\n      \"keywords\" : \"célèbre bataille, San Antonio, 1836\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"27\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What were the names of the three ships used by Columbus?\",\n      \"keywords\" : \"three ships, used, Columbus\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was waren die Namen der drei Schiffe, die Columbus benutzte?\",\n      \"keywords\" : \"drei Schiffe, Columbus, benutzte\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quali furono i nomi delle tre navi utilizzate da Colombo?\",\n      \"keywords\" : \"tre navi, utilizzate, Colombo\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quels sont les noms des trois bateaux utilisés par Colomb?\",\n      \"keywords\" : \"trois bateaux, utilisés, Colomb\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"28\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What were the original 13 British colonies?\",\n      \"keywords\" : \"original 13 British colonies\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was waren die Originalen 13 Britischen Kolonien?\",\n      \"keywords\" : \"Originalen 13 Britischen Kolonien\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quali furono le 13 originarie colonie britanniche?\",\n      \"keywords\" : \"13 originarie colonie britanniche\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelles étaient les 13 colonnies britanniques originales?\",\n      \"keywords\" : \"13 colonnies britanniques originales\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"29\",\n    \"answertype\" : \"date\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"When did Muhammad die?\",\n      \"keywords\" : \"Muhammad, die\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wann ist Muhammad gestorben?\",\n      \"keywords\" : \"Muhammad, gestorben\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quando morì Maometto?\",\n      \"keywords\" : \"morì, Maometto\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quand est mort Mahomet?\",\n      \"keywords\" : \"mort, Mahomet\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"30\",\n    \"answertype\" : \"date\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"When was the De Beers company founded?\",\n      \"keywords\" : \"De Beers company, founded\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wann wurde De Beers gegründet?\",\n      \"keywords\" : \"De Beers, gegründet\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quando fu fondata l'azienda De Beers?\",\n      \"keywords\" : \"fondata, De Beers\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quand a été fondée la société De Beers?\",\n      \"keywords\" : \"fondée, société De Beers\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"31\",\n    \"answertype\" : \"date\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"When was John Adams born?\",\n      \"keywords\" : \"John Adams, born\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wann wurde John Adams geboren?\",\n      \"keywords\" : \"John Adams, geboren\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quando nacque John Adams?\",\n      \"keywords\" : \"nacque, John Adams\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quand est né John Adams?\",\n      \"keywords\" : \"né, John Adams\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"32\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Which American presidents were in office during the Vietnam War?\",\n      \"keywords\" : \"American presidents, office, Vietnam War\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Welche Amerikanischen Präsidenten waren während des Vietnamkriegs im Amt?\",\n      \"keywords\" : \"Amerikanischer Präsidenten, Vietnamkriegs, Amt\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quali presidenti americani erano in carica durante la Guerra del Vietnam?\",\n      \"keywords\" : \"presidenti americani, in carica, Guerra del Vietnam\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quels présidents américains étaient au pouvoir pendant la guerre du Vietnam?\",\n      \"keywords\" : \"président américain, au pouvoir, guerre du Vietnam\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"33\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Which city has the oldest running metro?\",\n      \"keywords\" : \"city, oldest running metro\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Welche Stadt hat die älteste funktionierende U-Bahn?\",\n      \"keywords\" : \"Stadt, älteste funktionierende U-Bahn\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quale città ha la più antica metropolitana in funzione?\",\n      \"keywords\" : \"città, più antica metropolitana, in funzione\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelle ville a le plus vieux métro en fonction?\",\n      \"keywords\" : \"ville, le plus vieux métro, en fonction\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"34\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Which holidays are celebrated around the world?\",\n      \"keywords\" : \"holidays, celebrated, world\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Welche Feiertage werden auf der Welt gefeiert?\",\n      \"keywords\" : \"Feiertage, Welt, gefeiert\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quali festività sono celebrate nel mondo?\",\n      \"keywords\" : \"festività, celebrate, mondo\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelles fêtes sont célébrées autour du monde?\",\n      \"keywords\" : \"fêtes, célébrées, monde\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"35\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Who assassinated President McKinley?\",\n      \"keywords\" : \"assassinated, President McKinley\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wer hat Präsident McKinley ermordet?\",\n      \"keywords\" : \"Präsident McKinley, ermordet\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Chi assassinò il presidente McKinley?\",\n      \"keywords\" : \"assassinò, presidente McKinley\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Qui a assassiné le président McKinley?\",\n      \"keywords\" : \"assassiné, président McKinley\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"36\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Who discovered Pluto?\",\n      \"keywords\" : \"discovered, Pluto\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wer hat Pluto entdeckt?\",\n      \"keywords\" : \"Pluto, entdeckt\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Chi scoprì Plutone?\",\n      \"keywords\" : \"scoprì, Plutone\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Qui a découvert Pluton?\",\n      \"keywords\" : \"découvert, Pluton\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"37\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Who killed Caesar?\",\n      \"keywords\" : \"killed, Caesar\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wer hat Caesar getötet?\",\n      \"keywords\" : \"Caesar, getötet\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Chi uccise Giulio Cesare?\",\n      \"keywords\" : \"uccise, Giulio Cesare\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Qui a tué César?\",\n      \"keywords\" : \"tué, César\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"38\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Who was buried in the Great Pyramid of Giza?\",\n      \"keywords\" : \"buried, Great Pyramid of Giza\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wer wurde in der Cheops-Pyramide begraben?\",\n      \"keywords\" : \"Cheops-Pyramide, begraben\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Chi fu sepolto nella Grande Piramide di Giza?\",\n      \"keywords\" : \"sepolto, Grande Piramide di Giza\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Qui est enterré dans la grande pyramide de Gizeh?\",\n      \"keywords\" : \"enterré, grande pyramide de Gizeh\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"39\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Who was the first King of England?\",\n      \"keywords\" : \"first King of England\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wer war der erste König von England?\",\n      \"keywords\" : \"erste König von England\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Chi fu il primo Re d'Inghilterra?\",\n      \"keywords\" : \"primo Re d'Inghilterra\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Qui était le premier roi d'Angleterre?\",\n      \"keywords\" : \"premier roi d'Angleterre\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"41\",\n    \"answertype\" : \"string\",\n    \"aggregation\" : true,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What was the final result of the War of the Roses?\",\n      \"keywords\" : \"result, War of Roses\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was war das Endergebnis der Rosenkriege?\",\n      \"keywords\" : \"Endergebnis, Rosenkriege\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quale fu il risultato finale della Guerra delle Due Rose?\",\n      \"keywords\" : \"risultato, Guerra delle Due Rose\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quel a été le résultat final de la Guerre des Rose?\",\n      \"keywords\" : \"résultat final, Guerre des Rose\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"42\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Who writes the Farmers' Almanac?\",\n      \"keywords\" : \"writes, Farmers' Almanac\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wer schreibt das Farmes' Almanac?\",\n      \"keywords\" : \"schreibt, Farmers' Almanac\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Chi scrive il Farmers' Almanac?\",\n      \"keywords\" : \"scrive, Farmers' Almanac\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Qui écrit l'Almanach des fermiers?\",\n      \"keywords\" : \"écrit, Almanach des fermiers\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"43\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"How big is the earth's diameter?\",\n      \"keywords\" : \"big, earth, diameter\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie groß ist der Durchmesser der Erde?\",\n      \"keywords\" : \"groß, Durchmesser, Erde\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quanto è grande il diametro della Terra?\",\n      \"keywords\" : \"grande, diametro, Terra\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelle est la longueur du diamètre de la Terre?\",\n      \"keywords\" : \"longueur, diamètre, Terre\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"44\",\n    \"answertype\" : \"date\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"When did Paraguay proclaim its independence?\",\n      \"keywords\" : \"Paraguay, proclaim, independence\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wann hat Paraguay seine Unabhängigkeit verkündet?\",\n      \"keywords\" : \"Paraguay, Unabhängigkeit, verkündet\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quando si dichiarò indipendente il Paraguay?\",\n      \"keywords\" : \"dichiarò, indipendente, Paraguay\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quand est-ce que le Paraguay a prononcé son indépendance?\",\n      \"keywords\" : \"Paraguay, prononcé, indépendance\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"45\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"How many people live in Eurasia?\",\n      \"keywords\" : \"people, Eurasia\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Wie viele Menschen leben in Eurasien?\",\n      \"keywords\" : \"Menschen, Eurasien\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quante persone vivono in Eurasia?\",\n      \"keywords\" : \"persone, Eurasia\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Combien de personnes vivent en Eurasie?\",\n      \"keywords\" : \"personnes, Eurasie\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"47\",\n    \"answertype\" : \"number\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Give me the runtime of Toy Story.\",\n      \"keywords\" : \"runtime, Toy Story\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gib mir die Laufzeit von Toy Story.\",\n      \"keywords\" : \"Laufzeit, Toy Story\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Dammi la durata di Toy Story.\",\n      \"keywords\" : \"durata, Toy Story\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Donnez-moi la durée de Toy Story.\",\n      \"keywords\" : \"durée, Toy Story\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"48\",\n    \"answertype\" : \"string\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"What was the first name of the band Queens of the Stone Age?\",\n      \"keywords\" : \"first name, Queens of the Stone Age\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Was war der erste Name der Band Queens of the Stone Age?\",\n      \"keywords\" : \"erste Name, Queens of the Stone Age\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Qual è stato il primo nome del gruppo Queens of the Stone Age?\",\n      \"keywords\" : \"primo nome, Queens of the Stone Age\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quel était le premier nom du groupe Queens of the Stone Age?\",\n      \"keywords\" : \"premier nom, Queens of the Stone Age\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"49\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Give me the birth place of Frank Sinatra.\",\n      \"keywords\" : \"birth place, Frank Sinatra\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Gib mir den Geburtsort von Frank Sinatra.\",\n      \"keywords\" : \"Geburtsort, Frank Sinatra\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Dammi il luogo di nascita di Frank Sinatra.\",\n      \"keywords\" : \"luogo di nascita, Frank Sinatra\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Donnez-moi le lieu de naissance de Frank Sinatra.\",\n      \"keywords\" : \"lieu de naissance, Frank Sinatra\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  }, {\n    \"id\" : \"50\",\n    \"answertype\" : \"resource\",\n    \"aggregation\" : false,\n    \"onlydbo\" : false,\n    \"hybrid\" : false,\n    \"question\" : [ {\n      \"language\" : \"en\",\n      \"string\" : \"Which university did Angela Merkel attend?\",\n      \"keywords\" : \"university, Angela Merkel\"\n    }, {\n      \"language\" : \"fa\"\n    }, {\n      \"language\" : \"de\",\n      \"string\" : \"Welche Universiät hat Angela Merkel besucht?\",\n      \"keywords\" : \"Universität, Angela Merkel\"\n    }, {\n      \"language\" : \"es\"\n    }, {\n      \"language\" : \"it\",\n      \"string\" : \"Quale università ha frequentato Angela Merkel?\",\n      \"keywords\" : \"università, frequentato, Angela Merkel\"\n    }, {\n      \"language\" : \"fr\",\n      \"string\" : \"Quelle université a Angela Merkel fréquenté?\",\n      \"keywords\" : \"université, Angela Merkel, fréquenté\"\n    }, {\n      \"language\" : \"nl\"\n    }, {\n      \"language\" : \"ro\"\n    } ]\n  } ]\n}",
-			"settings":
-			{
-				"buffer_size": 37087,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "customTrain.json",
-			"settings":
-			{
-				"buffer_size": 7762,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "TrainData.json",
-			"settings":
-			{
-				"buffer_size": 425014,
+				"buffer_size": 4804,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -591,7 +584,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 159.0,
 		"last_filter": "",
 		"selected_items":
 		[
@@ -634,10 +627,24 @@
 	},
 	"expanded_folders":
 	[
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering"
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts"
 	],
 	"file_history":
 	[
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/interfaz.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customTrain.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/templates.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/back.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/main.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/index.html",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/complex.log",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/qans.sublime-project",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/train.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/simple.log",
@@ -648,11 +655,8 @@
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/myfile",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data/types",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
 		"/media/robertnn/DatosLinux/SimpleDataCopy",
 		"/home/robertnn/Descargas/project_21812_citations.txt",
@@ -757,19 +761,11 @@
 		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app.json",
 		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app/VideoWindow.js",
 		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/index.html",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/sass/src/view/main/Main.scss",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/ext/packages/ux/classic/src/desktop/TaskBar.js",
-		"/media/robertnn/DatosLinux/ext-6.2.0/examples/classic/desktop/sass/src/App.scss",
-		"/media/robertnn/DatosLinux/ext-6.2.0/examples/classic/desktop/app.json",
-		"/media/robertnn/DatosLinux/ext-6.2.0/examples/classic/desktop/sass/config.rb",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/sass/var/all.scss",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/sass/etc/all.scss",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app/TabWindow.js",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app/SystemStatus.js"
+		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/sass/src/view/main/Main.scss"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -784,6 +780,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"import pd",
 			"h_agg",
 			"h_aggregation.",
 			"self.entExtractor",
@@ -910,8 +907,7 @@
 			"self.question_features",
 			"self.classifier",
 			"Es",
-			"answertype\": \"date\"",
-			"nació"
+			"answertype\": \"date\""
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1005,29 +1001,118 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "scripts/gen.py",
+					"file": "main.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 988,
+						"buffer_size": 15759,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								373,
-								373
+								14026,
+								14026
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6210.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "entityExtractor.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4842,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3286,
+								3286
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1620.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "scripts/testQuestion.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1714,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1697,
+								1658
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 648.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "scripts/gen.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 950,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								950,
+								950
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -1038,42 +1123,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "main.py",
+					"buffer": 4,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15882,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1299,
-								1299
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1652.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Log/complex.log",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1370,
+						"buffer_size": 294,
 						"regions":
 						{
 						},
@@ -1081,37 +1135,36 @@
 						[
 							[
 								0,
-								0
+								294
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"auto_name": "['0', '2', '3', '4', '5', '6', '7', '9', '10', '11",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "scripts/eval.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4401,
+						"buffer_size": 4804,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2142,
-								2142
+								2012,
+								2012
 							]
 						],
 						"settings":
@@ -1120,97 +1173,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 918.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 37087,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1136,
-								1136
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 864.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "customTrain.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7762,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6380,
-								6380
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3311.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "TrainData.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 425014,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								45487,
-								45487
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 29834.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
 					"type": "text"
 				}
 			]

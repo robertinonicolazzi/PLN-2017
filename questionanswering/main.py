@@ -154,7 +154,6 @@ class ClassAnswerType:
         query = templates.get('simple_rev',"")
         query = query.format(res=entity, prop=properti)
         answers = resolveQuery(sparql, query)
-
         return set(answers)
 
     def get_english_ans(self, entity, properti):
@@ -167,7 +166,6 @@ class ClassAnswerType:
             query = templates.get('simple_amb',"")
             query = query.format(res=entity, prop=properti)
             answers = resolveQuery(sparql, query)
-
         return set(answers)
 
     # -----------------------------------------------------------------------
@@ -193,7 +191,7 @@ class ClassAnswerType:
         if len(entities) == 1:
             pr_entity_es = entities[0][0]
             pr_entity_en = entities[0][1]
-            
+
             bool_key, properti = h_boolean.boolean_key_one_entity(q)
             print("Bool_key:", bool_key)
             print("PropertiTemp:", properti)
@@ -262,7 +260,9 @@ class ClassAnswerType:
     # ---------------------- RESPONDER PREGUNTAS -----------------------------
     # ------------------------------------------------------------------------
 
-    def answer_question(self, q, q_keys):
+    def answer_question(self, q, q_keys,log=False):
+
+        log_dict = {}
 
         print('---------------------------------------------------------------')
 
@@ -315,6 +315,15 @@ class ClassAnswerType:
             answers = self.get_english_ans_reverse(en_entity, st_property)
 
         print('---------------------------------------------------------------')
+
+        log_dict["answer_type"] = answer_type
+        log_dict["entity"] = "ES: "+es_entity + " | EN: " + en_entity
+        log_dict["property"] = st_property
+        log_dict["answers"] = "\n".join([a for a in answers])
+
+        if log:
+            return log_dict
+
         return answers
 
     def aggregation_answerer(self, h_agg, q,
@@ -358,7 +367,7 @@ class ClassAnswerType:
             if len(entities) == 0:
                 st_property = ""
                 k_rest, st_subproperty = h_agg.get_sub_property(
-                    key, k_rest)
+                    key, k_rest)               
                 print('{:15} | {:10}'.format("SubPropiedad", st_subproperty))
                 print('{:15} | {:10}'.format("1 Keys", ",".join(k_rest)))
 
@@ -370,38 +379,41 @@ class ClassAnswerType:
                     st_property = self.pExtractor.get_question_property_type(
                         st_type, k_rest)
 
-                if not st_place == "" and not st_property == "":
-                    answers = h_agg.get_aggregation_order_type_place(
-                        st_type, st_property, key, st_place)
-                if not st_property == "" and st_place == "":
-                    answers = h_agg.get_aggregation_order_type(
-                        st_type, st_property, key)
-
-                if len(answers) == 0:
-                    for st_property in h_agg.get_default(
-                            st_subproperty):
+                if st_property == "":
+                    if len(answers) == 0:
+                        for st_property in h_agg.get_default(
+                                st_subproperty):
+                            answers = h_agg.get_aggregation_order_type(
+                                st_type, st_property, key)
+                            if not len(answers) == 0:
+                                break
+                else:
+                    if not st_place == "":
+                        answers = h_agg.get_aggregation_order_type_place(
+                            st_type, st_property, key, st_place)
+                    else:
                         answers = h_agg.get_aggregation_order_type(
                             st_type, st_property, key)
-                        if not len(answers) == 0:
-                            break
+
+
             else:
                 # Tenemos la Entidad
                 es_entity = entities[0][0]
                 en_entity = entities[0][1]
-                print('{:15} | {:10}'.format('Entidad', en_entity))
-                print('{:15} | {:10}'.format("1 Keys", "|".join(k_rest)))
 
                 # Obtenemos la subpropiedad para comparar los resultados
                 # child--BirthDate
                 k_rest, st_subproperty = h_agg.get_sub_property(
-                    key, k_rest)
-                print('{:15} | {:10}'.format("SubPropiedad", st_subproperty))
-                print('{:15} | {:10}'.format("2 Keys", "|".join(k_rest)))
+                    key, k_rest)                
 
                 # Vemos que se quiere saber de la entidad (propiedad) Ej:
                 # Hijos--child
                 st_property = self.pExtractor.get_question_property(
                     en_entity, k_rest)
+
+                print('{:15} | {:10}'.format('Entidad', en_entity))
+                print('{:15} | {:10}'.format("SubPropiedad", st_subproperty))
+                print('{:15} | {:10}'.format("Keys Restantes", "|".join(k_rest)))
                 print('{:15} | {:10}'.format("Propiedad", st_property))
 
                 answers = h_agg.get_subprop_answer(

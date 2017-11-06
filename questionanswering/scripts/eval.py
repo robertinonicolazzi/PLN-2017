@@ -100,13 +100,14 @@ if __name__ == '__main__':
 		#if 	quest["id"] in correctas:
 		#	continue;
 
-		if quest["aggregation"]:
+		'''if quest["aggregation"]:
 			agg = agg - 1
 			vistos.append(quest["id"])
 			if agg == 0:
 				break
 		else:
 			continue
+		'''
 		st_quest, st_keys = getQuestAnKey(quest)
 		answers_gold = getAnswer(quest,quest["answertype"])
 		answers_model = model.answer_question(st_quest,st_keys)

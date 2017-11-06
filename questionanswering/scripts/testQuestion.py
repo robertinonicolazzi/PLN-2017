@@ -13,6 +13,7 @@ Options:
 from docopt import docopt
 import dill as pickle
 import json
+import spacy
 import sys
 from questionanswering.funaux import *
 
@@ -64,13 +65,16 @@ if __name__ == '__main__':
     f = open(filename, 'rb')
     model = pickle.load(f)
     f.close()
-
+    nlp = spacy.load('es_default', parser=False)
+    model.nlp_api = nlp
+    model.pExtractor.nlp_api = nlp
+    model.eExtractor.nlp_api = nlp 
     st_quest = str(opts['-q'])
     st_keys = str(opts['-k'])
 
 
     
-    print (model.get_answer_type(st_quest))
+
     print (model.answer_question(st_quest,st_keys))
 
 

@@ -53,15 +53,17 @@ class EntityExtractor:
 			'DET__Definite=Def|Gender=Masc|Number=Plur|PronType=Art',
 			'DET__Definite=Def|Gender=Fem|Number=Plur|PronType=Art'
 			]
+		if len(key) == 0:
+			return []
+
 		tag_word = self.nlp_api(key)
 		tag_word = [(word.text,word.tag_) for word in tag_word]
+		
 		nouns = []
 		g = []
 		hasProp = False
 
-		if len(key) == 0:
-			return []
-
+		
 
 		for w,t in tag_word:
 
@@ -82,9 +84,11 @@ class EntityExtractor:
 			nouns.append((" ".join(g),hasProp))
 
 		st_ket_f = key.split()[1:]
-		nouns += self.getNounGroups(" ".join(st_ket_f))
+		if not len(st_ket_f) == 0:
+			nouns += self.getNounGroups(" ".join(st_ket_f))
 		st_ket_f = key.split()[:-1]
-		nouns += self.getNounGroups(" ".join(st_ket_f))
+		if not len(st_ket_f) == 0:
+			nouns += self.getNounGroups(" ".join(st_ket_f))
 
 		nouns = list(set(nouns))
 		return nouns
@@ -99,7 +103,7 @@ class EntityExtractor:
 
 			keyid += 1
 			noum_group = self.getNounGroups(key)
-
+			print(noum_group)
 			
 			for group,hasProp in noum_group:
 				dbpedia_group = prepareGroup(group)
@@ -118,7 +122,7 @@ class EntityExtractor:
 						found_entities.append((es_ent,en_ent,context,lenEntity(es_ent),hasProp,keyid))
 
 		found_entities = sorted(found_entities, key=operator.itemgetter(3),reverse=True)
-
+		print(found_entities)
 		result_entities = []
 
 		if len(found_entities) == 0:

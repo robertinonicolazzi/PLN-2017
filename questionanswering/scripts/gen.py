@@ -44,3 +44,5 @@ def generate(st_id,st_type,agg,q,q_keys,st_query)
 	out = open('customTrain.json','a')
 	out.write(final)
 	out.close()
+
+id_n = 
