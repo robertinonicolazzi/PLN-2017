@@ -3,6 +3,44 @@
 import unicodedata
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import pickle
+
+def save_obj(obj, name ):
+	with open('obj/'+ name + '.pkl', 'wb+') as f:
+		pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def ft_translate(st_keywords,st_dbo_clean,n=0):
+    temp_prop_x = []
+    ls_dbo = re.split(r'([A-Z][a-z]*)', st_dbo_clean)
+
+    if len(ls_dbo) == 1 and len(st_keywords.split()) == 1:
+        ls_es_en = es_to_en(st_keywords)
+        ls_en_es = en_to_es(st_dbo_clean)
+        
+
+        
+
+        if len(ls_en_es) == 0 or len(ls_es_en) == 0:
+            return [], []
+        if not n==0:
+            ls_en_es = ls_en_es[:n]
+            ls_es_en = ls_es_en[:n]
+        ls_comb = list(itertools.product(ls_es_en, ls_en_es))
+        for en, es in ls_comb:
+            es = delete_tildes(es)
+            x = {'estoen':en, 'entoes':es, 'en=estoen':(st_dbo_clean == en), 'es=entoes':(st_keywords == es)}
+            x.update({en: True,es: True})
+            temp_prop_x.append(x)
+
+    else:
+        print("complex", st_dbo_clean, st_keywords)
+        return [], []
+
+    return temp_prop_x
+
+def load_obj(name):
+	with open('obj/' + name + '.pkl', 'rb') as f:
+		return pickle.load(f)
 
 def removeStopWords(keys):
 	keys_list = keys.split()

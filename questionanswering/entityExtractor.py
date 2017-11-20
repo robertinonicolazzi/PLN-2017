@@ -103,7 +103,6 @@ class EntityExtractor:
 
 			keyid += 1
 			noum_group = self.getNounGroups(key)
-			print(noum_group)
 			
 			for group,hasProp in noum_group:
 				dbpedia_group = prepareGroup(group)
@@ -122,7 +121,6 @@ class EntityExtractor:
 						found_entities.append((es_ent,en_ent,context,lenEntity(es_ent),hasProp,keyid))
 
 		found_entities = sorted(found_entities, key=operator.itemgetter(3),reverse=True)
-		print(found_entities)
 		result_entities = []
 
 		if len(found_entities) == 0:

@@ -4,6 +4,138 @@
 		"selected_items":
 		[
 			[
+				"p",
+				"properti"
+			],
+			[
+				"get_pr",
+				"get_properti"
+			],
+			[
+				"es",
+				"esp_sins"
+			],
+			[
+				"id",
+				"id_n"
+			],
+			[
+				"st",
+				"st_query"
+			],
+			[
+				"q",
+				"q_keys"
+			],
+			[
+				"st_",
+				"st_type"
+			],
+			[
+				"get",
+				"get_text"
+			],
+			[
+				"sin",
+				"sinonimos"
+			],
+			[
+				"ls",
+				"ls_dbo"
+			],
+			[
+				"dbo",
+				"dbo_props_trans"
+			],
+			[
+				"tex",
+				"text_copy"
+			],
+			[
+				"k",
+				"knows"
+			],
+			[
+				"dbo_",
+				"dbo_trans"
+			],
+			[
+				"db",
+				"dbo_props_trans"
+			],
+			[
+				"ls_",
+				"ls_dbo_trans"
+			],
+			[
+				"fin",
+				"findAll"
+			],
+			[
+				"trans",
+				"trans_es_to_en"
+			],
+			[
+				"si",
+				"sinonimos"
+			],
+			[
+				"print",
+				"printGraph"
+			],
+			[
+				"clas",
+				"classifier"
+			],
+			[
+				"cla",
+				"classifier"
+			],
+			[
+				"tran",
+				"trans_dbo"
+			],
+			[
+				"retur",
+				"return_trans_dbo"
+			],
+			[
+				"ento",
+				"en_to_es"
+			],
+			[
+				"temp",
+				"temp_prop_y"
+			],
+			[
+				"ent",
+				"en_to_es"
+			],
+			[
+				"esto",
+				"es_to_en"
+			],
+			[
+				"st_d",
+				"st_dbo"
+			],
+			[
+				"tmep",
+				"temp_prop_y"
+			],
+			[
+				"ls_E",
+				"ls_en_es"
+			],
+			[
+				"tem",
+				"temp_prop_x"
+			],
+			[
+				"keys",
+				"keys_result"
+			],
+			[
 				"ans",
 				"answer_type"
 			],
@@ -44,24 +176,12 @@
 				"st_place"
 			],
 			[
-				"st_",
-				"st_subproperty"
-			],
-			[
 				"sub",
 				"sub_prop"
 			],
 			[
 				"de",
 				"default_comparatives"
-			],
-			[
-				"q",
-				"q_id"
-			],
-			[
-				"tem",
-				"template_ans"
 			],
 			[
 				"str",
@@ -72,24 +192,12 @@
 				"key_st"
 			],
 			[
-				"st",
-				"st_ket_f"
-			],
-			[
-				"get",
-				"getNounGroups"
-			],
-			[
 				"ke",
 				"keys_restantes_copy"
 			],
 			[
 				"kes",
 				"keys_restantes"
-			],
-			[
-				"tran",
-				"train_prop_x"
 			],
 			[
 				"resul",
@@ -102,10 +210,6 @@
 			[
 				"enti",
 				"entities"
-			],
-			[
-				"db",
-				"dbpedia_group"
 			],
 			[
 				"len",
@@ -132,10 +236,6 @@
 				"important_words"
 			],
 			[
-				"k",
-				"k"
-			],
-			[
 				"e",
 				"e"
 			],
@@ -150,14 +250,6 @@
 			[
 				"res",
 				"result_entities"
-			],
-			[
-				"ent",
-				"enti"
-			],
-			[
-				"temp",
-				"temp_prop_x"
 			],
 			[
 				"Extra",
@@ -210,10 +302,6 @@
 			[
 				"en",
 				"en_ent"
-			],
-			[
-				"es",
-				"es_ent"
 			],
 			[
 				"get_e",
@@ -344,10 +432,6 @@
 				"nlp_api"
 			],
 			[
-				"keys",
-				"keys_restantes"
-			],
-			[
 				"clean",
 				"cleanQuestion"
 			],
@@ -366,10 +450,6 @@
 			[
 				"spli",
 				"split_comma"
-			],
-			[
-				"clas",
-				"clas_propiedades"
 			],
 			[
 				"fea",
@@ -394,10 +474,6 @@
 			[
 				"resE",
 				"resElegido"
-			],
-			[
-				"dbo",
-				"dboElegido"
 			],
 			[
 				"keywo",
@@ -438,141 +514,108 @@
 			[
 				"class",
 				"classify"
-			],
-			[
-				"test",
-				"test_sentence"
-			],
-			[
-				"test_",
-				"test_sent_features"
-			],
-			[
-				"strin",
-				"string_question"
-			],
-			[
-				"aux",
-				"auxNewVar"
-			],
-			[
-				"gol",
-				"gold_parsed_sent"
-			],
-			[
-				"eva",
-				"evalBool"
-			],
-			[
-				"tre",
-				"tree_temp"
-			],
-			[
-				"parse",
-				"parsed_sents"
-			],
-			[
-				"resu",
-				"result_tree"
-			],
-			[
-				"pi",
-				"pi_y"
-			],
-			[
-				"prob",
-				"probs_dict"
-			],
-			[
-				"clasi",
-				"clasificador"
-			],
-			[
-				"his",
-				"histories"
-			],
-			[
-				"total",
-				"total"
-			],
-			[
-				"matri",
-				"matrix_confusion"
-			],
-			[
-				"matrix",
-				"matrix_confusion"
-			],
-			[
-				"most",
-				"most_frequent_taq"
-			],
-			[
-				"confusio",
-				"confusion_matrix"
-			],
-			[
-				"in",
-				"inf"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "# -*- coding: utf-8 -*-\n#!/usr/bin/python\n\nfrom SPARQLWrapper import SPARQLWrapper, JSON\nfrom questionanswering.funaux import *\nfrom questionanswering.booleanHelper import BooleanHelper\nfrom questionanswering.aggregationHelper import AggregationHelper\nfrom questionanswering.entityExtractor import EntityExtractor\nfrom questionanswering.propertyExtractor import PropertyExtractor\nfrom questionanswering.templates import *\nimport sys\nimport json\nimport re\nimport nltk\nimport nltk.classify.util\nimport numpy as np\nimport spacy\n\n\ndef progress(msg, width=None):\n    \"\"\"Ouput the progress of something on the same line.\"\"\"\n    if not width:\n        width = len(msg)\n    print('\\b' * width + msg, end='')\n    sys.stdout.flush()\n\n\nclass ClassAnswerType:\n\n    def __init__(self, questions, propCorpus=[[], []], nlp=None):\n\n        self.nlp_api = nlp\n        self.sparql = SPARQLWrapper(\"http://es.dbpedia.org/sparql\")\n        self.sparql.setReturnFormat(JSON)\n        self.sparqlEn = SPARQLWrapper(\"http://dbpedia.org/sparql\")\n        self.sparqlEn.setReturnFormat(JSON)\n        self.pExtractor = PropertyExtractor(self.nlp_api)\n        train_prop_x = []\n        train_prop_y = []\n        self.all_words = set()\n\n        train_answer_type = []\n        keys = []\n        dbo = []\n        format_str = 'Answ Type ({}/{}) (Preg={}, Total={}), Prop {} '\n\n        progress(format_str.format(0, len(questions), 0, len(questions), 0))\n\n        i = 0\n        j = 0\n        for quest in questions:\n            i += 1\n            idiomas = quest[\"question\"]\n            st_keywords = \"\"\n            st_question = \"\"\n            for idiom in idiomas:\n                if idiom[\"language\"] == \"es\":\n                    st_question = idiom[\"string\"]\n                    st_keywords = idiom[\"keywords\"]\n                    break\n            if st_question == \"\":\n                continue\n\n            # Generamos features para tipo de respuesta\n            feat_question = self.features_answer_type(st_question)\n            st_answer_type = quest[\"answertype\"]\n\n            train_answer_type.append((feat_question, st_answer_type))\n\n            # Intento de mapeo de propiedades\n\n            temp_train_x, temp_train_y = self.pExtractor.generate_train_by_entity(\n                quest[\"query\"][\"sparql\"], st_keywords)\n            if not len(temp_train_x) == 0:\n                j += 1\n            progress(\n                format_str.format(\n                    i,\n                    len(questions),\n                    i,\n                    len(questions),\n                    j))\n            train_prop_x += temp_train_x\n            train_prop_y += temp_train_y\n\n        self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)\n\n        self.pExtractor.train(train_prop_x, train_prop_y, propCorpus)\n        self.eExtractor = EntityExtractor(self.nlp_api)\n\n    # -------------------------------------------------------------\n    # --GET ANSWER TYPE--------------------------------------------\n    # -------------------------------------------------------------\n\n    def get_answer_type(self, st_question):\n\n        question_features_test = self.features_answer_type(st_question)\n\n        type_question = self.clas_tipo.classify(question_features_test)\n        return type_question\n\n    def features_answer_type(self, st_question):\n        feat = {}\n        st_question = cleanQuestion(st_question)\n        tag_word = self.nlp_api(st_question)\n\n        tag_word = [(word.text, word.tag_) for word in tag_word]\n        # print(tag_word)\n\n        feat[\"ask_cuanto\"] = bool(\n            re.search(\n                'cu(a|á)nt(o|a)(s|) ',\n                st_question))\n        feat[\"init_dame\"] = (st_question.split(\" \")[0] == 'dame')\n        feat[\"ask_cuando\"] = bool(re.search('cu(a|á)ndo ', st_question))\n        feat[\"init_verb\"] = 'VERB' in getFirstTag(\n            tag_word) or 'AUX' in getFirstTag(tag_word)\n\n        second_tag = getSecondTag(tag_word)\n        articulo = 'PronType=Art' in getFirstTag(\n            tag_word) and 'DET' in getFirstTag(tag_word)\n\n        feat[\"art_sust2\"] = articulo and (\n            ('NOUN' in second_tag) or (\n                'PROPN' in second_tag))\n\n        #feat[\"init_verb2\"]  = getFirstTag(tag_word) == 'VERB'\n        #feat[\"art_sust\"]   = (getFirstTag(tag_word) == 'DET') and (second_tag== 'NOUN' or second_tag=='PROPN')\n        return feat\n\n    # -------------------------------------------------------------\n    # --GET SIMPLE ANSWERS WORKFLOW -------------------------------\n    # -------------------------------------------------------------\n    def default_ans(self, entity, answertype):\n        sparql = self.sparqlEn\n        answers = []\n        properti = \"\"\n        if answertype == \"date\":\n            properti = \"date\"\n\n        query = '''\n\t\t\t\tselect distinct ?result\n\t\t\t\twhere {{\n\t\t\t\t\t<http://dbpedia.org/resource/{}> dbp:{} ?result\n\t\t\t\t}}\n\t\t\t\t'''.format(entity, properti)\n\n        answers = resolveQuery(sparql, query)\n\n        return set(answers)\n\n    def get_english_ans_reverse(self, entity, properti):\n        sparql = self.sparqlEn\n        query = templates.get('simple_rev',\"\")\n        query = query.format(res=entity, prop=properti)\n        answers = resolveQuery(sparql, query)\n        return set(answers)\n\n    def get_english_ans(self, entity, properti):\n        sparql = self.sparqlEn\n        query = templates.get('simple',\"\")\n        query = query.format(res=entity, prop=properti)\n        answers = resolveQuery(sparql, query)\n\n        if len(answers) == 0:\n            query = templates.get('simple_amb',\"\")\n            query = query.format(res=entity, prop=properti)\n            answers = resolveQuery(sparql, query)\n        return set(answers)\n\n    # -----------------------------------------------------------------------\n    # ---------------------- PREGUNTAS BOOLEAN ------------------------------\n    # -----------------------------------------------------------------------\n\n    def boolean_answerer(self, q, q_keys):\n\n        pr_entity_es = \"\"\n        sn_entity_es = \"\"\n        answers = False\n        q = cleanQuestion(q)\n        h_boolean = BooleanHelper()\n\n        entities, k_rest = self.eExtractor.get_entities(\n            q_keys, 'boolean')\n        if len(entities) == 0:\n            print(\"Entities not Found\")\n            return []\n        print(\"Entidades     : \", entities)\n        print(\"Keys Restantes: \", k_rest)\n\n        if len(entities) == 1:\n            pr_entity_es = entities[0][0]\n            pr_entity_en = entities[0][1]\n\n            bool_key, properti = h_boolean.boolean_key_one_entity(q)\n            print(\"Bool_key:\", bool_key)\n            print(\"PropertiTemp:\", properti)\n            if bool_key == \"type\":\n                answers = h_boolean.get_type_answer(pr_entity_es, properti)\n            elif bool_key == \"exist\":\n                answers = h_boolean.get_exist_answer(pr_entity_es, properti)\n            else:\n                properti = self.pExtractor.get_question_property(\n                    pr_entity_en, k_rest)\n                answers = h_boolean.get_properti_answer(pr_entity_en, properti)\n\n        elif len(entities) == 2:\n\n            pr_entity_en = entities[0][1]\n            sn_entity_en = entities[1][1]\n\n            props, st_filter = self.two_entities_prop_filter(\n                q, pr_entity_en, sn_entity_en, k_rest)\n\n            if props == \"\":\n                return []\n\n            answers = h_boolean.two_entities_answer(\n                pr_entity_en, sn_entity_en, props, st_filter)\n        else:\n            answers = []\n\n        return answers\n\n    def two_entities_prop_filter(\n            self, question, entity, sn_entity, k_rest):\n        prop = \"\"\n        st_filter = \"\"\n        if \"antes\" in question:\n            st_filter = \"FILTER (?x < ?y)\"\n            prop = \"date\"\n        elif \"despues\" in question:\n            st_filter = \"FILTER (?x > ?y)\"\n            prop = \"date\"\n        elif \"menor\" in question:\n            st_filter = \"FILTER (?x < ?y)\"\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n        elif \"mayor\" in question or \"grande\" in question:\n            st_filter = \"FILTER (?x > ?y)\"\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n        elif \"misma\" in question or \"igual\" in question or \"mismos\" in question:\n            st_filter = \"same\"\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n        else:\n            prop = self.pExtractor.get_question_property(entity, k_rest)\n            if prop == \"\":\n                prop = self.pExtractor.get_question_property(sn_entity, k_rest)\n            # la igualdad es viendo si pertenece\n            st_filter = \"\"\n\n        return prop, st_filter\n\n    # ------------------------------------------------------------------------\n    # ---------------------- RESPONDER PREGUNTAS -----------------------------\n    # ------------------------------------------------------------------------\n\n    def answer_question(self, q, q_keys,log=False):\n\n        log_dict = {}\n\n        print('---------------------------------------------------------------')\n\n        answers = []\n        answer_type = self.get_answer_type(q)\n\n        print('{:15} | {}'.format('QUESTION: ', q))\n        print('{:15} | {}'.format('ANSWER TYPE: ', answer_type))\n\n        if answer_type == \"boolean\":\n            return self.boolean_answerer(q, q_keys)\n\n        h_agg = AggregationHelper(nlp=self.nlp_api)\n        keyAggregation = h_agg.check_aggregation(answer_type, q, q_keys)\n\n        if not keyAggregation == \"none\":\n            return self.aggregation_answerer(\n                h_agg, q, q_keys, keyAggregation, answer_type)\n\n        entities, k_rest = self.eExtractor.get_entities(\n            q_keys, answer_type)\n\n        if len(entities) == 0:\n            print(\"Entities not Found\")\n            return []\n\n        print(\"Entidades     : \", entities)\n        print('{:15} | {:10}'.format(\"1 Keys\", \"|\".join(k_rest)))\n\n        es_entity = entities[0][0]\n        en_entity = entities[0][1]\n\n        st_property = self.pExtractor.get_question_property(\n            en_entity, k_rest)\n\n        print(\"Entidad Espanol:\", es_entity)\n        print(\"Entidad Ingles :\", en_entity)\n        print(\"Propiedad      :\", st_property)\n\n        answers = self.get_english_ans(en_entity, st_property)\n        print(\"Respuesta:\", answers)\n\n        if len(answers) == 0 and answer_type == \"date\":\n            answers = self.default_ans(en_entity, answer_type)\n\n        if len(answers) == 0 and answer_type == \"resource\":\n            print(\"Reverse\")\n            st_property = self.pExtractor.get_question_property_rev(\n                en_entity, k_rest)\n            answers = self.get_english_ans_reverse(en_entity, st_property)\n\n        print('---------------------------------------------------------------')\n\n        log_dict[\"answer_type\"] = answer_type\n        log_dict[\"entity\"] = \"ES: \"+es_entity + \" | EN: \" + en_entity\n        log_dict[\"property\"] = st_property\n        log_dict[\"answers\"] = \"\\n\".join([a for a in answers])\n\n        if log:\n            return log_dict\n\n        return answers\n\n    def aggregation_answerer(self, h_agg, q,\n                             q_keys, key, answer_type):\n        q_keys = delete_tildes(q_keys)\n        answers = []\n        if key == \"count\":\n            entities, k_rest = self.eExtractor.get_entities(\n                q_keys,\n                answer_type\n            )\n            if len(entities) == 0:\n                print(\"Entities not Found\")\n                return []\n            print(\"Entidades     : \", entities)\n            print(\"Keys Restantes: \", k_rest)\n\n            es_entity = entities[0][0]\n            en_entity = entities[0][1]\n\n            st_property = self.pExtractor.get_question_property(\n                en_entity, k_rest)\n            answers = self.get_english_ans(en_entity, st_property)\n            if key == \"count\" and not len(answers) == 0:\n                if 'resource' in list(answers)[0]:\n                    answers = h_agg.get_aggregation_count(\n                        en_entity, st_property)\n\n        if \"asc\" in key or \"desc\" in key:\n            entities, k_rest = self.eExtractor.get_entities(\n                q_keys, answer_type)\n\n            #import pdb; pdb.set_trace()\n            st_place = \"\"\n            if len(entities) == 1:\n                st_place, k_rest = h_agg.check_entity(\n                    entities[0], q_keys, k_rest)\n                if not st_place == \"\":\n                    print('{:15} | {:10}'.format(\"Lugar\", st_place))\n                    entities = []\n            if len(entities) == 0:\n                st_property = \"\"\n                k_rest, st_subproperty = h_agg.get_sub_property(\n                    key, k_rest)               \n                print('{:15} | {:10}'.format(\"SubPropiedad\", st_subproperty))\n                print('{:15} | {:10}'.format(\"1 Keys\", \",\".join(k_rest)))\n\n                st_type, k_rest = h_agg.get_type(k_rest)\n                print('{:15} | {:10}'.format('Tipo Entidad', st_type))\n                print('{:15} | {:10}'.format(\"2 Keys\", \",\".join(k_rest)))\n\n                if not len(k_rest) == 0:\n                    st_property = self.pExtractor.get_question_property_type(\n                        st_type, k_rest)\n\n                if st_property == \"\":\n                    if len(answers) == 0:\n                        for st_property in h_agg.get_default(\n                                st_subproperty):\n                            answers = h_agg.get_aggregation_order_type(\n                                st_type, st_property, key)\n                            if not len(answers) == 0:\n                                break\n                else:\n                    if not st_place == \"\":\n                        answers = h_agg.get_aggregation_order_type_place(\n                            st_type, st_property, key, st_place)\n                    else:\n                        answers = h_agg.get_aggregation_order_type(\n                            st_type, st_property, key)\n\n\n            else:\n                # Tenemos la Entidad\n                es_entity = entities[0][0]\n                en_entity = entities[0][1]\n\n                # Obtenemos la subpropiedad para comparar los resultados\n                # child--BirthDate\n                k_rest, st_subproperty = h_agg.get_sub_property(\n                    key, k_rest)                \n\n                # Vemos que se quiere saber de la entidad (propiedad) Ej:\n                # Hijos--child\n                st_property = self.pExtractor.get_question_property(\n                    en_entity, k_rest)\n\n                print('{:15} | {:10}'.format('Entidad', en_entity))\n                print('{:15} | {:10}'.format(\"SubPropiedad\", st_subproperty))\n                print('{:15} | {:10}'.format(\"Keys Restantes\", \"|\".join(k_rest)))\n                print('{:15} | {:10}'.format(\"Propiedad\", st_property))\n\n                answers = h_agg.get_subprop_answer(\n                    en_entity, st_property, st_subproperty, key)\n                if len(answers) == 0:\n                    for st_sub in h_agg.get_default(st_subproperty):\n                        answers = h_agg.get_subprop_answer(\n                            en_entity, st_property, st_sub, key)\n                        if not len(answers) == 0:\n                            break\n        print(\"Respuesta:\", answers)\n        return set(answers)\n",
-			"file": "main.py",
-			"file_size": 15762,
-			"file_write_time": 131544605130000821,
-			"settings":
-			{
-				"buffer_size": 15759,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "entityExtractor.py",
-			"settings":
-			{
-				"buffer_size": 4842,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/testQuestion.py",
-			"settings":
-			{
-				"buffer_size": 1714,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "scripts/gen.py",
 			"settings":
 			{
-				"buffer_size": 950,
+				"buffer_size": 1475,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "['0', '2', '3', '4', '5', '6', '7', '9', '10', '11', '12', '13', '17', '18', '19', '20', '21', '22', '23', '24', '25', '28', '29', '30', '31', '32', '33', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '48', '49', '50', '52', '54', '55', '58', '59', '60', '61', '63', '64', '65']\n\n",
+			"file": "Corpus/SimpleDataCustom.json",
 			"settings":
 			{
-				"buffer_size": 294,
-				"line_ending": "Unix",
-				"name": "['0', '2', '3', '4', '5', '6', '7', '9', '10', '11"
+				"buffer_size": 30566,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "propertyExtractor.py",
+			"settings":
+			{
+				"buffer_size": 10240,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "scripts/eval.py",
 			"settings":
 			{
-				"buffer_size": 4804,
+				"buffer_size": 4986,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Log/bool.log",
+			"settings":
+			{
+				"buffer_size": 2574,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Corpus/SimpleData.json",
+			"settings":
+			{
+				"buffer_size": 283233,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.py",
+			"settings":
+			{
+				"buffer_size": 15657,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "booleanHelper.py",
+			"settings":
+			{
+				"buffer_size": 3873,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates.py",
+			"settings":
+			{
+				"buffer_size": 1076,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/testMap.csv",
+			"settings":
+			{
+				"buffer_size": 7964,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n\tAnsw Type (41/226) (Preg=41, Total=226), Prop 32 keys:  principio\nSinonimos  principio\nAnsw Type (43/226) (Preg=43, Total=226), Prop 33 keys:  actor\nSinonimos  actor\nAnsw Type (44/226) (Preg=44, Total=226), Prop 34 keys:  idiomas\nSinonimos  idiomas\nAnsw Type (46/226) (Preg=46, Total=226), Prop 35 keys:  pais origen\nSinonimos  pais\nSinonimos  origen\nAnsw Type (47/226) (Preg=47, Total=226), Prop 36 keys:  ano nacio\nSinonimos  ano\nSinonimos  nacio\nAnsw Type (48/226) (Preg=48, Total=226), Prop 37 keys:  democrata\nSinonimos  democrata\nAnsw Type (49/226) (Preg=49, Total=226), Prop 38 keys:  lugar nacimiento\nSinonimos  lugar\nSinonimos  nacimiento\nAnsw Type (50/226) (Preg=50, Total=226), Prop 39 keys:  casada veces\nSinonimos  casada\nSinonimos  veces\nAnsw Type (51/226) (Preg=51, Total=226), Prop 40 keys:  primero ascender\nSinonimos  primero\nSinonimos  ascender\nAnsw Type (52/226) (Preg=52, Total=226), Prop 41 keys:  personas habitan\nSinonimos  personas\nSinonimos  habitan\nAnsw Type (53/226) (Preg=53, Total=226), Prop 42 keys:  localizacion\nSinonimos  localizacion\nAnsw Type (54/226) (Preg=54, Total=226), Prop 43 keys:  actua\nSinonimos  actua\nAnsw Type (55/226) (Preg=55, Total=226), Prop 44 keys:  pais\nSinonimos  pais\nAnsw Type (59/226) (Preg=59, Total=226), Prop 45 keys:  creador\nSinonimos  creador\n\n\nAnsw Type (63/226) (Preg=63, Total=226), Prop 48 keys:  ingredientes galleta chocolate\nSinonimos  ingredientes\nSinonimos  galleta\nSinonimos  chocolate\nAnsw Type (65/226) (Preg=65, Total=226), Prop 49 keys:  ingredientes tarta zanahorias\nSinonimos  ingredientes\nSinonimos  tarta\nSinonimos  zanahorias\nAnsw Type (66/226) (Preg=66, Total=226), Prop 50 keys:  jugador\nSinonimos  jugador\nAnsw Type (72/226) (Preg=72, Total=226), Prop 51 keys:  disolvio\nSinonimos  disolvio\nAnsw Type (74/226) (Preg=74, Total=226), Prop 52 keys:  poblacion total\nSinonimos  poblacion\nSinonimos  total\nAnsw Type (77/226) (Preg=77, Total=226), Prop 53 keys:  ciudad grande\nSinonimos  ciudad\nSinonimos  grande\nAnsw Type (79/226) (Preg=79, Total=226), Prop 54 keys:  alcalde\nSinonimos  alcalde\nAnsw Type (81/226) (Preg=81, Total=226), Prop 55 keys:  creador comic\nSinonimos  creador\nSinonimos  comic\nAnsw Type (82/226) (Preg=82, Total=226), Prop 56 keys:  actor\nSinonimos  actor\nAnsw Type (83/226) (Preg=83, Total=226), Prop 57 keys:  lenguaje programacion\nSinonimos  lenguaje\nSinonimos  programacion\nAnsw Type (84/226) (Preg=84, Total=226), Prop 58 keys:  imperio antiguo pagar granos cacao\nSinonimos  imperio\nSinonimos  antiguo\nSinonimos  pagar\nSinonimos  granos\nSinonimos  cacao\nAnsw Type (85/226) (Preg=85, Total=226), Prop 59 keys:  editor\nSinonimos  editor\nAnsw Type (90/226) (Preg=90, Total=226), Prop 60 keys:  pertenece\nSinonimos  pertenece\nAnsw Type (91/226) (Preg=91, Total=226), Prop 61 keys:  capital\nSinonimos  capital\nAnsw Type (103/226) (Preg=103, Total=226), Prop 62 keys:  \nAnsw Type (104/226) (Preg=104, Total=226), Prop 63 keys:  forma gobierno\nSinonimos  forma\nSinonimos  gobierno\n\nAnsw Type (109/226) (Preg=109, Total=226), Prop 66 keys:  region\nSinonimos  region\nAnsw Type (111/226) (Preg=111, Total=226), Prop 67 keys:  rana verde anfibio\nSinonimos  rana\nSinonimos  verde\nSinonimos  anfibio\nAnsw Type (112/226) (Preg=112, Total=226), Prop 68 keys:  actua\nSinonimos  actua\nAnsw Type (113/226) (Preg=113, Total=226), Prop 69 keys:  juegos\nSinonimos  juegos\nAnsw Type (115/226) (Preg=115, Total=226), Prop 70 keys:  aeropuertos\nSinonimos  aeropuertos\nAnsw Type (117/226) (Preg=117, Total=226), Prop 71 keys:  color expresa lealtad\nSinonimos  color\nSinonimos  expresa\nSinonimos  lealtad\n\nAnsw Type (124/226) (Preg=124, Total=226), Prop 76 keys:  peliculas director\nSinonimos  peliculas\nSinonimos  director\nAnsw Type (125/226) (Preg=125, Total=226), Prop 77 keys:  fecha acabado\nSinonimos  fecha\nSinonimos  acabado\nAnsw Type (126/226) (Preg=126, Total=226), Prop 78 keys:  numero paginas\nSinonimos  numero\nSinonimos  paginas\nAnsw Type (129/226) (Preg=129, Total=226), Prop 79 keys:  altura\nSinonimos  altura\nAnsw Type (130/226) (Preg=130, Total=226), Prop 80 keys:  vicepresidente\nSinonimos  vicepresidente\nAnsw Type (132/226) (Preg=132, Total=226), Prop 81 keys:  sucesor\nSinonimos  sucesor\nAnsw Type (133/226) (Preg=133, Total=226), Prop 82 keys:  compositor banda sonora\nSinonimos  compositor\nSinonimos  banda\nSinonimos  sonora\nAnsw Type (136/226) (Preg=136, Total=226), Prop 83 keys:  zona horaria\nSinonimos  zona\nSinonimos  horaria\n\nAnsw Type (138/226) (Preg=138, Total=226), Prop 85 keys:  desarrolladores\nSinonimos  desarrolladores\nAnsw Type (142/226) (Preg=142, Total=226), Prop 86 keys:  padre\nSinonimos  padre\nAnsw Type (145/226) (Preg=145, Total=226), Prop 87 keys:  conflicto militar\nSinonimos  conflicto\nSinonimos  militar\nAnsw Type (147/226) (Preg=147, Total=226), Prop 88 keys:  pais origen\nSinonimos  pais\nSinonimos  origen\nAnsw Type (150/226) (Preg=150, Total=226), Prop 89 keys:  hijos\nSinonimos  hijos\nAnsw Type (155/226) (Preg=155, Total=226), Prop 90 keys:  esposa\nSinonimos  esposa\nAnsw Type (156/226) (Preg=156, Total=226), Prop 91 keys:  prefijo\nSinonimos  prefijo\nAnsw Type (157/226) (Preg=157, Total=226), Prop 92 keys:  actores\nSinonimos  actores\nAnsw Type (158/226) (Preg=158, Total=226), Prop 93 keys:  apodo\nSinonimos  apodo\nAnsw Type (160/226) (Preg=160, Total=226), Prop 94 keys:  paises fluye\nSinonimos  paises\nSinonimos  fluye\nAnsw Type (163/226) (Preg=163, Total=226), Prop 95 keys:  pais origen\nSinonimos  pais\nSinonimos  origen\nAnsw Type (164/226) (Preg=164, Total=226), Prop 96 keys:  esposa\nSinonimos  esposa\nAnsw Type (165/226) (Preg=165, Total=226), Prop 97 keys:  capital\nSinonimos  capital\nAnsw Type (166/226) (Preg=166, Total=226), Prop 98 keys:  persona inpiracion\nSinonimos  persona\nSinonimos  inpiracion\nAnsw Type (168/226) (Preg=168, Total=226), Prop 99 keys:  presidente unidos guerra\nSinonimos  presidente\nSinonimos  unidos\nSinonimos  guerra\nAnsw Type (169/226) (Preg=169, Total=226), Prop 100 keys:  escritor\nSinonimos  escritor\n\n\nAnsw Type (171/226) (Preg=171, Total=226), Prop 102 keys:  fin carrera\nSinonimos  fin\nSinonimos  carrera\nAnsw Type (172/226) (Preg=172, Total=226), Prop 103 keys:  tipo uva crece\nSinonimos  tipo\nSinonimos  uva\nSinonimos  crece\nAnsw Type (173/226) (Preg=173, Total=226), Prop 104 keys:  altura\nSinonimos  altura\nAnsw Type (175/226) (Preg=175, Total=226), Prop 105 keys:  escritor libro\nSinonimos  escritor\nSinonimos  libro\nAnsw Type (177/226) (Preg=177, Total=226), Prop 106 keys:  altura\nSinonimos  altura\nAnsw Type (178/226) (Preg=178, Total=226), Prop 107 keys:  supervisor doctoral\nSinonimos  supervisor\nSinonimos  doctoral\nAnsw Type (180/226) (Preg=180, Total=226), Prop 108 keys:  moneda republica checa\nSinonimos  moneda\nSinonimos  republica\nSinonimos  checa\nAnsw Type (181/226) (Preg=181, Total=226), Prop 109 keys:  influencia\nSinonimos  influencia\nAnsw Type (182/226) (Preg=182, Total=226), Prop 110 keys:  zona horaria\nSinonimos  zona\nSinonimos  horaria\nAnsw Type (185/226) (Preg=185, Total=226), Prop 111 keys:  fundador\nSinonimos  fundador\nAnsw Type (186/226) (Preg=186, Total=226), Prop 112 keys:  fundada\nSinonimos  fundada\nAnsw Type (187/226) (Preg=187, Total=226), Prop 113 keys:  \nAnsw Type (191/226) (Preg=191, Total=226), Prop 114 keys:  premio nobel fisica\nSinonimos  premio\nSinonimos  nobel\nSinonimos  fisica\nAnsw Type (194/226) (Preg=194, Total=226), Prop 115 keys:  proinsulina\nSinonimos  proinsulina\nAnsw Type (195/226) (Preg=195, Total=226), Prop 116 keys:  padres\nSinonimos  padres\nAnsw Type (196/226) (Preg=196, Total=226), Prop 117 keys:  hijos\nSinonimos  hijos\nAnsw Type (198/226) (Preg=198, Total=226), Prop 118 keys:  ganador\nSinonimos  ganador\nAnsw Type (200/226) (Preg=200, Total=226), Prop 119 keys:  encuentra americano\nSinonimos  encuentra\nSinonimos  americano\nAnsw Type (202/226) (Preg=202, Total=226), Prop 120 keys:  enterrado\nSinonimos  enterrado\nAnsw Type (203/226) (Preg=203, Total=226), Prop 121 keys:  zona horaria\nSinonimos  zona\nSinonimos  horaria\nAnsw Type (206/226) (Preg=206, Total=226), Prop 122 keys:  libros\nSinonimos  libros\nAnsw Type (209/226) (Preg=209, Total=226), Prop 123 keys:  alta\nSinonimos  alta\nAnsw Type (212/226) (Preg=212, Total=226), Prop 124 keys:  videojuego desarrollar\nSinonimos  videojuego\nSinonimos  desarrollar\nAnsw Type (214/226) (Preg=214, Total=226), Prop 125 keys:  musica compositor\nSinonimos  musica\nSinonimos  compositor\nAnsw Type (215/226) (Preg=215, Total=226), Prop 126 keys:  miembros banda\nSinonimos  miembros\nSinonimos  banda\nAnsw Type (218/226) (Preg=218, Total=226), Prop 127 keys:  \nAnsw Type (222/226) (Preg=222, Total=226), Prop 128 keys:  condados\nSinonimos  condados\nAnsw Type (223/226) (Preg=223, Total=226), Prop 129 keys:  bebida\nSinonimos  bebida\nAnsw Type (224/226) (Preg=224, Total=226), Prop 130 keys:  fecha fallecimiento\nSinonimos  fecha\nSinonimos  fallecimiento\nAnsw Type (226/226) (Preg=226, Total=226), Prop 131 Saving...\n",
+			"file": "Sinonimos",
+			"file_size": 9245,
+			"file_write_time": 131553161993954129,
+			"settings":
+			{
+				"buffer_size": 8914,
 				"line_ending": "Unix"
 			}
 		}
@@ -628,36 +671,47 @@
 	"expanded_folders":
 	[
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts"
 	],
 	"file_history":
 	[
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/interfaz.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/train.py",
+		"/media/robertnn/DatosLinux/untitled.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleDataCustom.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Sinonimos",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customEval.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/spacy",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/main.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customTrain.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/templates.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/WordReferenceWrapper.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testMap.csv",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/obj/x_train.pkl",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
+		"/home/robertnn/.conkyrc",
+		"/etc/conky/conky.conf",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testQuestion.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/interfaz.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/back.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/main.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/index.html",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/complex.log",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/qans.sublime-project",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/train.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/simple.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/aggregation.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/aggregationHelper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/main.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/bool.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/myfile",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data/types",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
 		"/media/robertnn/DatosLinux/SimpleDataCopy",
 		"/home/robertnn/Descargas/project_21812_citations.txt",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/helpers.py",
@@ -672,7 +726,6 @@
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimplesLog",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/out.txt",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/simple_questions.csv",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testQuestion.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/EvalData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/evalDev.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/script.sh",
@@ -751,17 +804,7 @@
 		"/media/robertnn/DatosLinux/PLN-2017/parsing/tests/test_util.py",
 		"/media/robertnn/DatosLinux/PLN-2017/.gitignore",
 		"/media/robertnn/DatosLinux/PLN-2017/tagging/README.md",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/scripts/stats.py",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/baseline.py",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/baseTrained.txt",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/tests/test_memm.py",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/tests/test_ml_hmm.py",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/features.py",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app/Application.js",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app.json",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/app/VideoWindow.js",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/index.html",
-		"/media/robertnn/DatosLinux/ProyectosExtJS/DirectApp/sass/src/view/main/Main.scss"
+		"/media/robertnn/DatosLinux/PLN-2017/tagging/scripts/stats.py"
 	],
 	"find":
 	{
@@ -777,9 +820,31 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"Natalie",
+			"origen",
+			"fecha",
+			"lugar de n",
+			"result\"",
+			"poblaci",
+			"museo",
+			"altura",
+			"episodios",
+			", ",
+			"Dame",
+			"trans_en_to_es",
+			"list",
+			"print",
+			"print ",
+			"print (",
+			"print",
+			"poblacion':",
+			"poblaci",
+			"st_ent",
+			"pri",
+			"print",
 			"import pd",
 			"h_agg",
 			"h_aggregation.",
@@ -885,36 +950,16 @@
 			"print",
 			"bindin",
 			"nlp_ap",
-			"Prince",
-			"princi",
-			"nlp_api",
-			"boolean",
-			"spouse",
-			"birthDa",
-			"nació",
-			"naci",
-			"birth",
-			"number",
-			"dbo:number",
-			"dbo:nu",
-			"True",
-			"nació",
-			"True",
-			"Obama",
-			"spouse",
-			"obtener_propiedad",
-			"question_ty",
-			"self.question_features",
-			"self.classifier",
-			"Es",
-			"answertype\": \"date\""
+			"Prince"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"uri\"",
+			",",
 			"h_agg.",
 			"self.eExtractor",
 			"self.pExtractor",
@@ -996,59 +1041,29 @@
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
-		"wrap": true
+		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "main.py",
+					"file": "scripts/gen.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15759,
+						"buffer_size": 1475,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14026,
-								14026
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6210.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "entityExtractor.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4842,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3286,
-								3286
+								1461,
+								1461
 							]
 						],
 						"settings":
@@ -1057,7 +1072,36 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1620.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Corpus/SimpleDataCustom.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 30566,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30564,
+								30564
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 11093.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
@@ -1065,19 +1109,19 @@
 				},
 				{
 					"buffer": 2,
-					"file": "scripts/testQuestion.py",
+					"file": "propertyExtractor.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1714,
+						"buffer_size": 10240,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1697,
-								1658
+								9683,
+								9683
 							]
 						],
 						"settings":
@@ -1087,27 +1131,174 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 648.0,
+						"translation.y": 3471.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "scripts/gen.py",
+					"file": "scripts/eval.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 950,
+						"buffer_size": 4986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								950,
-								950
+								847,
+								847
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 702.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Log/bool.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2574,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Corpus/SimpleData.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 283233,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								276456,
+								276460
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 90.0,
+						"translation.y": 138425.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15657,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7213,
+								7213
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2067.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "booleanHelper.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3873,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2287,
+								2287
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1248.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "templates.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								927,
+								937
 							]
 						],
 						"settings":
@@ -1119,64 +1310,63 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 9,
+					"file": "scripts/testMap.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 294,
+						"buffer_size": 7964,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								294
+								7883,
+								7883
 							]
 						],
 						"settings":
 						{
-							"auto_name": "['0', '2', '3', '4', '5', '6', '7', '9', '10', '11",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "scripts/eval.py",
+					"buffer": 10,
+					"file": "Sinonimos",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4804,
+						"buffer_size": 8914,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2012,
-								2012
+								4270,
+								4270
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1080.0,
+						"translation.y": 403.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1184,7 +1374,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 21.0
 	},
 	"input":
 	{
@@ -1221,7 +1411,7 @@
 	"project": "qans.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 70.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -3,8 +3,206 @@
 		"id": "qald-7-train-multilingual"
 	},
 	"questions": [
-	
+
 	{
+	"id": "1000",
+	"answertype": "resource",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuáles son los grupos étnicos de Taiwan?",
+			"keywords": "grupos étnicos,Taiwan"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?uri WHERE {  dbr:Taiwan dbo:ethnicGroup ?uri . }"
+	},
+	
+	"answers": [{"results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Hoklo_people"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Han_Chinese"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Taiwanese_aborigines"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Hakka_people"}}]}, "head": {"link": [], "vars": ["uri"]}}]
+},{
+	"id": "1001",
+	"answertype": "number",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuánta es la población de Argentina?",
+			"keywords": "población, Argentina"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?uri WHERE {  dbr:Argentina dbo:populationTotal ?uri . }"
+	},
+	
+	"answers": [{"results": {"bindings": [{"uri": {"value": "43417000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "type": "typed-literal"}}], "ordered": true, "distinct": false}, "head": {"link": [], "vars": ["uri"]}}]
+},{
+	"id": "1002",
+	"answertype": "resource",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Quién es el hijo de Sylvester Stallone?",
+			"keywords": "hijo, Sylvester Stallone"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?uri WHERE {  dbr:Sylvester_Stallone dbo:child ?uri . }"
+	},
+	
+	"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"value": "http://dbpedia.org/resource/Sage_Stallone", "type": "uri"}}]}}]
+},{
+	"id": "1003",
+	"answertype": "number",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuánto es el largo del vano del puente Golden Gate?",
+			"keywords": "Golden Gate, largo del vano"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?uri WHERE {  dbr:Golden_Gate_Bridge dbo:mainspan ?uri . }"
+	},
+	
+	"answers": [{"results": {"distinct": false, "ordered": true, "bindings": [{"uri": {"value": "1280.16", "datatype": "http://www.w3.org/2001/XMLSchema#double", "type": "typed-literal"}}]}, "head": {"link": [], "vars": ["uri"]}}]
+},{
+	"id": "1004",
+	"answertype": "number",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuántos empleado tiene Google?",
+			"keywords": "Google, numero de empleados"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?result WHERE {dbr:Google dbo:numberOfEmployees ?result}"
+	},
+	
+	"answers": [{"results": {"ordered": true, "distinct": false, "bindings": [{"result": {"datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100", "type": "typed-literal"}}]}, "head": {"vars": ["result"], "link": []}}]
+},{
+	"id": "1005",
+	"answertype": "number",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuántos visitantes tiene Museo del Louvre?",
+			"keywords": "Museo del Louvre, numero de visitantes"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?result WHERE {dbr:Louvre dbo:numberOfVisitors ?result}"
+	},
+	
+	"answers": [{"results": {"distinct": false, "ordered": true, "bindings": [{"result": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"result": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"result": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}, "head": {"vars": ["result"], "link": []}}]
+},{
+	"id": "1006",
+	"answertype": "resource",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Quién es el pintor de la Mona Lisa?",
+			"keywords": "Mona Lisa, pintor"
+		}
+	],
+	"query": {
+		"sparql": "select DISTINCT ?result Where { dbr:Mona_Lisa dbo:author ?result }"
+	},
+	
+	"answers": [{"head": {"vars": ["result"], "link": []}, "results": {"distinct": false, "ordered": true, "bindings": [{"result": {"type": "uri", "value": "http://dbpedia.org/resource/Leonardo_da_Vinci"}}]}}]
+},{
+	"id": "1007",
+	"answertype": "resource",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuales son los ingredientes de un Banana split?",
+			"keywords": "ingredientes, Banana split"
+		}
+	],
+	"query": {
+		"sparql": "select DISTINCT ?result  Where { dbr:Banana_split dbo:ingredient ?result }"
+	},
+	
+	"answers": [{"head": {"link": [], "vars": ["result"]}, "results": {"ordered": true, "bindings": [{"result": {"type": "uri", "value": "http://dbpedia.org/resource/Banana"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Pineapple"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Vanilla"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Strawberry"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Chocolate"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Whipped_cream"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Maraschino_cherry"}}, {"result": {"type": "uri", "value": "http://dbpedia.org/resource/Nut_(fruit)"}}], "distinct": false}}]
+},{
+	"id": "1008",
+	"answertype": "resource",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Quién es el alcade de Rennes?",
+			"keywords": "alcalde, Rennes"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}"
+	},
+	
+	"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Nathalie_Appéré"}}], "distinct": false, "ordered": true}}]
+},{
+	"id": "1009",
+	"answertype": "resource",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Quién pintó La Última Cena ?",
+			"keywords": "pintor, La Última Cena"
+		}
+	],
+	"query": {
+		"sparql": "SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/The_Last_Supper_(Leonardo_da_Vinci)> dbo:author ?uri .}"
+	},
+	
+	"answers": [{"results": {"distinct": false, "ordered": true, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Leonardo_da_Vinci"}}]}, "head": {"vars": ["uri"], "link": []}}]
+},{
+	"id": "1010",
+	"answertype": "number",
+	"aggregation": false,
+	"onlydbo": true,
+	"hybrid": false,
+	"question": [
+		{
+			"language": "es",
+			"string": "¿Cuántos episodios tiene Game of Thrones?",
+			"keywords": "episodios, Game of Thrones"
+		}
+	],
+	"query": {
+		"sparql": "select distinct ?c where { dbr:Game_of_Thrones dbo:numberOfEpisodes ?c }"
+	},
+	
+	"answers": [{"head": {"link": [], "vars": ["c"]}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"value": "60", "type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
+},{
 			"id": "0",
 			"answertype": "date",
 			"aggregation": false,
@@ -13,7 +211,7 @@
 			"question": [{
 					"language": "en",
 					"string": "When was the Battle of Gettysburg?",
-					"keywords": "Battle of Gettysburg"
+					"keywords": "Battle of Gettysburg,fecha"
 				},
 				{
 					"language": "de",
@@ -23,7 +221,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuándo tuvo lugar la batalla de Gettysburg?",
-					"keywords": "fecha,batalla de Gettysburg"
+					"keywords": "batalla de Gettysburg,fecha"
 				},
 				{
 					"language": "it",
@@ -59,13 +257,97 @@
 					"bindings": [{
 						"date": {
 							"type": "literal",
-							"value": "--07-01"
+							"value": "1863-07-03"
 						}
 					}]
 				}
 			}]
 		},
-
+		{
+			"id": "1",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "List all the musicals with music by Elton John.",
+					"keywords": "musicals, music by, Elton John"
+				},
+				{
+					"language": "de",
+					"string": "Liste alle Musicals mit Musik von Elton John auf.",
+					"keywords": "Musicals, Musik von, Elton John"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos los musicales con música de Elton John.",
+					"keywords": "musicales, música, Elton John"
+				},
+				{
+					"language": "it",
+					"string": "Elenca tutti i musicals con musiche di Elton John.",
+					"keywords": "musicals, musiche, Elton John"
+				},
+				{
+					"language": "fr",
+					"string": "Donne-moi tous les musicals avec de la musique de de Elton John.",
+					"keywords": "musicals, musique, Elton John"
+				},
+				{
+					"language": "nl",
+					"string": "Toen een lijst van alle musicals met muziek van Elton John.",
+					"keywords": "musicals, muziek van, Elton John"
+				},
+				{
+					"language": "hi_IN",
+					"string": "एल्टन जॉन द्वारा संगीत के साथ सभी संगीतों को सूचीबद्ध करें।",
+					"keywords": "एल्टन जॉन का संगीत"
+				},
+				{
+					"language": "ro",
+					"string": "Listează toate muzicalurile cu muzică de Elton John.",
+					"keywords": "muzicaluri, muzică de Elton John"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nSELECT DISTINCT ?uri\nWHERE { \n        ?uri rdf:type dbo:Musical .\n        ?uri dbo:musicBy res:Elton_John .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Lion_King_(musical)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Lestat_(musical)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Billy_Elliot_the_Musical"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Aida_(musical)"
+							}
+						}
+					]
+				}
+			}]
+		},
 		{
 			"id": "2",
 			"answertype": "number",
@@ -131,7 +413,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "15.0"
+							"value": "29.0"
 						}
 					}]
 				}
@@ -156,7 +438,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién fué la mujer del presidente americano Kennedy?",
-					"keywords": "presidente americano Kennedy, mujer"
+					"keywords": "presidente Americano, Kennedy, mujer"
 				},
 				{
 					"language": "it",
@@ -222,7 +504,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién es el anfitrión de los especiales de la BBC Wildlife?",
-					"keywords": "anfitrión, BBC Wildlife Specials"
+					"keywords": "anfitrión, BBC Wildlife"
 				},
 				{
 					"language": "it",
@@ -483,6 +765,77 @@
 			}]
 		},
 		{
+			"id": "8",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "In which city does the Chile Route 68 end?",
+					"keywords": "city, Chile Route 68, ends"
+				},
+				{
+					"language": "fa",
+					"string": "در کدام شهر مسیر 68 شیلی پایان می یابد؟",
+					"keywords": "شهر، مسیر 68 شیلی، پایان"
+				},
+				{
+					"language": "de",
+					"string": "In welcher Stadt hört die Ruta 68 auf?",
+					"keywords": "Stadt, aufhören, Ruta 68"
+				},
+				{
+					"language": "es",
+					"string": "¿En que ciudad termina la ruta Chilena 68?",
+					"keywords": "ciudad, termina, ruta Chilena 68"
+				},
+				{
+					"language": "it",
+					"string": "In quale città termina la Route 68 in Cile?",
+					"keywords": "città, termina, Route 68, Cile"
+				},
+				{
+					"language": "fr",
+					"string": "Dans quelle ville se termine la route 68 chilienne?",
+					"keywords": "route 68, chili, ville, terminaison"
+				},
+				{
+					"language": "nl",
+					"string": "In welke stad eindigt de Route 68 in Chili?",
+					"keywords": "stad, eindigt, Route 68, Chili"
+				},
+				{
+					"language": "hi_IN",
+					"string": "चिली रूट 68 का अंत कौनसे शहर में होता है?",
+					"keywords": "चिली रूट 68, शहर"
+				},
+				{
+					"language": "ro",
+					"string": "În ce oraș se termină Route 68 din Chile?",
+					"keywords": "oraș, termină, Route 68, Chile"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  <http://dbpedia.org/resource/Chile_Route_68> <http://dbpedia.org/ontology/routeEnd> ?uri . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Valparaíso"
+						}
+					}]
+				}
+			}]
+		},
+		{
 			"id": "9",
 			"answertype": "resource",
 			"aggregation": false,
@@ -572,7 +925,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién estuvo casado con el presidente Chirac?",
-					"keywords": "casado con, presidente Chirac"
+					"keywords": "casado con, presidented Chirac"
 				},
 				{
 					"language": "it",
@@ -638,7 +991,7 @@
 				{
 					"language": "es",
 					"string": "¿De qué murió Bruce Carver?",
-					"keywords": "Bruce Carver, muerte"
+					"keywords": "Bruce Caver, muerte"
 				},
 				{
 					"language": "it",
@@ -698,8 +1051,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién pintó el Cristo en la tormenta en el mar de Galilea?",
-					"keywords": "la tormenta en el mar de Galilea, pintor"
+					"string": "¿Quién pintó el Cristo en la tormenta en el lago de Galilea?",
+					"keywords": "Cristo en la tormenta en el lago de Galilea, pintor"
 				},
 				{
 					"language": "it",
@@ -723,7 +1076,7 @@
 				}
 			],
 			"query": {
-				"sparql": "PREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:The_Storm_on_the_Sea_of_Galilee dbo:author ?uri .\n}"
+				"sparql": "PREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:The_Storm_on_the_Sea_of_Galilee dbp:artist ?uri .\n}"
 			},
 			"answers": [{
 				"head": {
@@ -735,7 +1088,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Rembrandt_van_Rijn"
+							"value": "http://dbpedia.org/resource/Rembrandt"
 						}
 					}]
 				}
@@ -849,7 +1202,239 @@
 				}
 			}]
 		},
-
+		{
+			"id": "14",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "How many seats does the home stadium of FC Porto have?",
+					"keywords": "How many seats, stadium of FC Porto"
+				},
+				{
+					"language": "fa",
+					"string": "ورزشگاه باشگاه پورتو چند صندلی دارد؟",
+					"keywords": "ورزشگاه باشگاه پورتو، چند صندلی"
+				},
+				{
+					"language": "de",
+					"string": "Wieviele Plätze hat das Heimstadium des FC Porto?",
+					"keywords": "FC Porto, Heimstadium, wieviele, Plätze"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuántos asientos tiene el estadio del FC Porto?",
+					"keywords": "asientos, estadio FC Porto"
+				},
+				{
+					"language": "it",
+					"string": "Quanti posti a sedere ha lo stadio del FC Porto",
+					"keywords": "posti a sedere, stadio del FC Porto"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le nombre de sièges dans le stade de FC Porto?",
+					"keywords": "nombre de sièges, stade, FC Porto"
+				},
+				{
+					"language": "nl",
+					"string": "Hoeveel plaatsen heeft het stadion van FC Porto?",
+					"keywords": "plaatsen, stadion, FC Porto"
+				},
+				{
+					"language": "hi_IN",
+					"string": "एफसी पोर्टो के घर स्टेडियम में कितनी सीटें हैं?",
+					"keywords": "एफसी पोर, सीटें, स्टेडियम"
+				},
+				{
+					"language": "ro",
+					"string": "Câte locuri are stadionul lui FC Porto?",
+					"keywords": "Câte locuri, stadionul lui FC Porto"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?n WHERE { <http://dbpedia.org/resource/FC_Porto> <http://dbpedia.org/ontology/ground> ?x . ?x <http://dbpedia.org/ontology/seatingCapacity> ?n . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "50035"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "15",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who is the daughter of Robert Kennedy married to?",
+					"keywords": "Robert Kennedy, daughter, married"
+				},
+				{
+					"language": "fa",
+					"string": "دختر رابرت کندی با چه کسی ازدواج کرده است؟",
+					"keywords": "دختر، رابرت کندی، ازدواج"
+				},
+				{
+					"language": "de",
+					"string": "Mit wem ist die Tochter von Robert Kennedy verheiratet?",
+					"keywords": "Robert Kennedy, Tochter, verheiratet"
+				},
+				{
+					"language": "es",
+					"string": "¿Con quién está casada la hija de Robert Kennedy?",
+					"keywords": "Robert Kennedy, hija, casada"
+				},
+				{
+					"language": "it",
+					"string": "Con chi è sposata la figlia di Robert Kennedy?",
+					"keywords": "Robert Kennedy, figlia, sposata"
+				},
+				{
+					"language": "fr",
+					"string": "Qui est l'époux de la fille de Robert Kennedy?",
+					"keywords": "épou, fille, Ingrid Bergman"
+				},
+				{
+					"language": "nl",
+					"string": "Met wie is de dochter van Robert Kennedy getrouwd?",
+					"keywords": "Robert Kennedy, dochter, getrouwd"
+				},
+				{
+					"language": "hi_IN",
+					"string": "रॉबर्ट कैनेडी की बेटी की कौन से शादी हुइ है?",
+					"keywords": "रॉबर्ट कैनेडी, बेटी, शादी"
+				},
+				{
+					"language": "ro",
+					"string": "Cu cine este căsătorită fiica lui Robert Kennedy?",
+					"keywords": "Robert Kennedy, fiică, căsătorită"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  <http://dbpedia.org/resource/Robert_F._Kennedy> <http://dbpedia.org/ontology/child> ?child .  ?child <http://dbpedia.org/ontology/spouse> ?uri . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Cheryl_Hines"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Andrew_Cuomo"
+							}
+						}
+					]
+				}
+			}]
+		},
+		{
+			"id": "16",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which books by Kerouac were published by Viking Press?",
+					"keywords": "book, Kerouac, publish, Viking Press"
+				},
+				{
+					"language": "fa",
+					"string": "چه کتاب هایی اثر کرواک توسط انتشارات وایکینگ منتشر شدند؟",
+					"keywords": "کتاب هایی، کرواک، انتشارات وایکینگ، منتشر"
+				},
+				{
+					"language": "de",
+					"string": "Welche Bücher von Kerouac wurden von Viking Press verlegt?",
+					"keywords": "Buch, Kerouac, verlegen, Viking Press"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué libros de Kerouac han sido publicados por Viking Press?",
+					"keywords": "libro, Kerouac, publicado, Viking Press"
+				},
+				{
+					"language": "it",
+					"string": "Quali libri di Kerouac furono pubblicati da Viking Press?",
+					"keywords": "libro, Kerouac, pubblicare, Viking Press"
+				},
+				{
+					"language": "fr",
+					"string": "Quels lives de Kerouac ont été publiés par Viking Press?",
+					"keywords": "lives de Kerouac, publiés, Viking Press"
+				},
+				{
+					"language": "nl",
+					"string": "Welke boeken van Jack Kerouac werden uitgegeven door Viking Press?",
+					"keywords": "boek, Jack Kerouac, uitgever, Viking Press"
+				},
+				{
+					"language": "hi_IN",
+					"string": "वाइकिंग प्रेस द्वारा कैरौक की कौन सी किताबें प्रकाशित की गई थीं?",
+					"keywords": "वाइकिंग प्रेस, कैरौक, प्रकाशित"
+				},
+				{
+					"language": "ro",
+					"string": "Ce cărți de Kerouac a fost publicate de Viking Press?",
+					"keywords": "carte, Kerouac, publica, Viking Press"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Book> .  ?uri <http://dbpedia.org/ontology/publisher> <http://dbpedia.org/resource/Viking_Press> .  ?uri <http://dbpedia.org/ontology/author> <http://dbpedia.org/resource/Jack_Kerouac> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/On_the_Road"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Door_Wide_Open"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Atop_an_Underwood:_Early_Stories_and_Other_Writings"
+							}
+						}
+					]
+				}
+			}]
+		},
 		{
 			"id": "17",
 			"answertype": "number",
@@ -939,8 +1524,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿En qué museo está expuesto El Grito de Munch?",
-					"keywords": "museo, El Grito"
+					"string": "¿En qué museo está expuesto el Grito de Munch?",
+					"keywords": "museo, El Grito, Munch"
 				},
 				{
 					"language": "it",
@@ -1005,8 +1590,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién escribió el libro Los pilares de la Tierra?",
-					"keywords": "escritor, libro, Los pilares de la Tierra"
+					"string": "¿Quen escribió el libro Los pilares de la Tierra?",
+					"keywords": "escritor, libro, Pilares de la Tierra"
 				},
 				{
 					"language": "it",
@@ -1397,7 +1982,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién es el alcalde de París?",
-					"keywords": "alcalde, París"
+					"keywords": "alcalde París"
 				},
 				{
 					"language": "it",
@@ -1439,6 +2024,143 @@
 						"uri": {
 							"type": "uri",
 							"value": "http://dbpedia.org/resource/Anne_Hidalgo"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "26",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who is the coach of Ankara's ice hockey team?",
+					"keywords": "coach, ice hockey team, Ankara"
+				},
+				{
+					"language": "fa",
+					"string": "سرمربی تیم هاکی آنکارا کیست؟",
+					"keywords": "سرمربی، تیم هاکی آنکارا"
+				},
+				{
+					"language": "de",
+					"string": "Wer ist der Trainer von Ankaras Eishockeymannschaft?",
+					"keywords": "Ankara, Eishockeymannschaft, Trainer"
+				},
+				{
+					"language": "es",
+					"string": "¿Quién es el entrenador del equipo de hockey sobre hielo de Ankara?",
+					"keywords": "entrenador, equipo hockey sobre hielo, Ankara"
+				},
+				{
+					"language": "it",
+					"string": "Chi è l'allenatore della squadra di hockey di Ankara?",
+					"keywords": "allenatore, squadra di hockey, Ankara"
+				},
+				{
+					"language": "fr",
+					"string": "Qui est le coach de l'équipe d'hockey sur glace d'Ankara?",
+					"keywords": "coach, hockey sur glace, Ankara"
+				},
+				{
+					"language": "nl",
+					"string": "Wie is de coach van het ijshockey team van Ankara.",
+					"keywords": "coach, ijshockey team, Ankara"
+				},
+				{
+					"language": "hi_IN",
+					"string": "अंकारा के आइस हॉकी टीम का कोच कौन है?",
+					"keywords": "अंकारा, आइस हॉकी टीम, कोच"
+				},
+				{
+					"language": "ro",
+					"string": "Cine este antrenorul echipei de hochei pe gheață din Ankara?",
+					"keywords": "antrenor, echipa de hochei pe gheață, Ankara"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/city> <http://dbpedia.org/resource/Ankara> . ?x <http://dbpedia.org/ontology/league> <http://dbpedia.org/resource/Turkish_Ice_Hockey_First_League> . ?x <http://dbpedia.org/ontology/coach> ?uri . }"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/İbrahim_Oğuz"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "27",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who is the mayor of the capital of French Polynesia?",
+					"keywords": "mayor, capital, French Polynesia"
+				},
+				{
+					"language": "de",
+					"string": "Wer ist der Bürgermeister der Hauptstadt von Französisch-Polynesien?",
+					"keywords": "Bürgermeister, Hauptstadt, Französisch-Polynesien"
+				},
+				{
+					"language": "es",
+					"string": "¿Quien es el alcalde de la capital de la Polinesia Francesa?",
+					"keywords": "alcalde, capital Polinesia Francesa"
+				},
+				{
+					"language": "it",
+					"string": "Chi è il sindaco della capitale della Polinesia Francese?",
+					"keywords": "sindaco, capitale, Polinesia Francese"
+				},
+				{
+					"language": "fr",
+					"string": "Qui est le maire de la capitale de la Polynésie Francaise?",
+					"keywords": "maire, capitale, Polynésie Francaise"
+				},
+				{
+					"language": "nl",
+					"string": "Wie is de burgermeester van de hoofdstad van Frans-Polynesië?",
+					"keywords": "burgermeester, hoofdstad, Frans-Polynesië"
+				},
+				{
+					"language": "hi_IN",
+					"string": "फ्रेंच पोलिनेशिया की राजधानी का महापौर कौन है?",
+					"keywords": "फ्रेंच पोलिनेशिया, राजधानी, महापौर"
+				},
+				{
+					"language": "ro",
+					"string": "Cine este primarul capitaliei Polineziei Franceze?",
+					"keywords": "primar, capitală, Polinezia Franceză"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE { \n        res:French_Polynesia dbo:capital ?x .\n        ?x dbo:mayor ?uri .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Michel_Buillard"
 						}
 					}]
 				}
@@ -1683,8 +2405,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Tienen el príncipe Harry y el prínciple William los mismos padres?",
-					"keywords": "príncipe Harry, príncipe William, mismos padres"
+					"string": "¿Tienen el príncipe Harry y el prínciple William la misma madre?",
+					"keywords": "príncipe Harry, príncipe William, la misma madre"
 				},
 				{
 					"language": "it",
@@ -1865,7 +2587,84 @@
 				}
 			}]
 		},
-
+		{
+			"id": "34",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "In which films did Julia Roberts as well as Richard Gere play?",
+					"keywords": "film, play, Julia Roberts, Richard Gere"
+				},
+				{
+					"language": "fa",
+					"string": "در چه فیلم هایی جولیا رابرتس همچنین ریچارد گییر بازی کردند؟",
+					"keywords": "فیلم هایی، جولیا رابرتس، ریچارد گییر، بازی"
+				},
+				{
+					"language": "de",
+					"string": "In welchen Filmen spielen sowohl Julia Roberts als auch Richard Gere mit?",
+					"keywords": "Film, mitspielen, Julia Roberts, Richard Gere"
+				},
+				{
+					"language": "es",
+					"string": "¿En qué películas actúan Julia Roberts y Richard Gere?",
+					"keywords": "película, actores, Julia Roberts, Richard Gere"
+				},
+				{
+					"language": "it",
+					"string": "In quali film recitano sia Julia Roberts che Richard Gere?",
+					"keywords": "film, recitare, Julia Roberts, Richard Gere"
+				},
+				{
+					"language": "fr",
+					"string": "Dans quels films jouent Julia Roberts et Richard Gere?",
+					"keywords": "films, Julia Roberts, Richard Gere"
+				},
+				{
+					"language": "nl",
+					"string": "In welke films speelden zowel Julia Roberts als Richard Gere?",
+					"keywords": "film, speel, Julia Roberts, Richard Gere"
+				},
+				{
+					"language": "hi_IN",
+					"string": "जूलिया रॉबर्ट्स और रिचर्ड गेरे ने किस फिल्म में अभिनय किया था?",
+					"keywords": "जूलिया रॉबर्ट्स, रिचर्ड गेरे, फिल्म, अभिनय"
+				},
+				{
+					"language": "ro",
+					"string": "În ce filme joacă Julia Roberts precum și Richard Gere?",
+					"keywords": "film, joacă, Julia Roberts, Richard Gere"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> .  ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Julia_Roberts> .  ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Richard_Gere> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Runaway_Bride_(film)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Pretty_Woman"
+							}
+						}
+					]
+				}
+			}]
+		},
 		{
 			"id": "35",
 			"answertype": "resource",
@@ -2407,11 +3206,40 @@
 			"query": {
 				"sparql": "SELECT ?uri WHERE {  <http://dbpedia.org/resource/Palace_of_Westminster> <http://dbpedia.org/ontology/location> ?uri . } "
 			},
-			"answers": [
-{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/London" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/City_of_Westminster" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Greater_London"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/United_Kingdom"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/England"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/City_of_Westminster"
+							}
+						}
+					]
+				}
+			}]
 		},
 		{
 			"id": "43",
@@ -2431,8 +3259,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Actúa Christian Bale en The Fighter?",
-					"keywords": "Christian Bale, actúa, The Fighter"
+					"string": "¿Actúa Christian Bale en Batman Begins?",
+					"keywords": "Christian Bale, actúa, Batman Begins"
 				},
 				{
 					"language": "it",
@@ -2456,12 +3284,12 @@
 				}
 			],
 			"query": {
-				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nASK \nWHERE {\n\tres:The_Fighter dbo:starring res:Christian_Bale .\n}"
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nASK \nWHERE {\n\tres:Batman_Begins dbo:starring res:Christian_Bale .\n}"
 			},
 			"answers": [{
 				"head": {},
 				"results": {},
-				"boolean": true
+				"boolean": false
 			}]
 		},
 		{
@@ -2525,8 +3353,189 @@
 				}
 			}]
 		},
-
-
+		{
+			"id": "45",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "What was the last movie with Alec Guinness?",
+					"keywords": "Alec Guinness, last, movie"
+				},
+				{
+					"language": "fa",
+					"string": "آخرین فیلم الک گینس چه بود؟",
+					"keywords": "آخرین، فیلم، الک گینس"
+				},
+				{
+					"language": "de",
+					"string": "Was war der letzte Film mit Alec Guinness?",
+					"keywords": "Alec Guinness, letzter, Film"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuál fue la última película con Alec Guinness?",
+					"keywords": "última película, Alec Guinness"
+				},
+				{
+					"language": "it",
+					"string": "Qual è l'ultimo film con Alec Guinness?",
+					"keywords": "Alec Guinness, ultimo film"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le dernier film d'Alec Guinness?",
+					"keywords": "Alec Guiness, dernier film"
+				},
+				{
+					"language": "nl",
+					"string": "Wat was de laatste film met Alec Guinness?",
+					"keywords": "Alec Guinness, laatste, film"
+				},
+				{
+					"language": "hi_IN",
+					"string": "एलेक गिनीज की आखिरी फिल्म क्या थी?",
+					"keywords": "एलेक गिनीज, आखिरी फिल्म"
+				},
+				{
+					"language": "ro",
+					"string": "Care a fost ultimul film cu Alec Guinness?",
+					"keywords": "Alec Guinness, ultim, film"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> .  ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Alec_Guinness> .  ?uri <http://dbpedia.org/ontology/releaseDate> ?date . } ORDER BY DESC(?date) LIMIT 1 "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Kafka_(film)"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "46",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "What is the highest mountain in Australia?",
+					"keywords": "Australia, highest mountain"
+				},
+				{
+					"language": "de",
+					"string": "Was ist der höchste Berg in Australien?",
+					"keywords": "Australien, höchster Berg"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuál es la montaña más alta de Australia?",
+					"keywords": "Australia, montaña más alta"
+				},
+				{
+					"language": "it",
+					"string": "Qual è la montagna più alta d'Australia?",
+					"keywords": "Australia, montagna più alta"
+				},
+				{
+					"language": "fr",
+					"string": "Quelle est la plus haute montagne d'Australie?",
+					"keywords": "plus haute montagne, Australie"
+				},
+				{
+					"language": "nl",
+					"string": "Wat is de hoogste berg van Australië?",
+					"keywords": "Australië, hoogste berg"
+				},
+				{
+					"language": "hi_IN",
+					"string": "ऑस्ट्रेलिया में सर्वोच्च पर्वत कोनसा है?",
+					"keywords": "ऑस्ट्रेलिया, सर्वोच्च पर्वत"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri \nWHERE {\n\t?uri rdf:type dbo:Mountain .\n        ?uri dbo:locatedInArea res:Australia .\n        ?uri dbo:elevation ?elevation .\n} \nORDER BY DESC(?elevation) LIMIT 1"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Mawson_Peak"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "47",
+			"answertype": "boolean",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Is Frank Herbert still alive?",
+					"keywords": "Frank Herbert, alive"
+				},
+				{
+					"language": "de",
+					"string": "Lebt Frank Herbert noch?",
+					"keywords": "Frank Herbert, leben"
+				},
+				{
+					"language": "es",
+					"string": "¿Todavía vive Frank Herbert?",
+					"keywords": "Frank Herbert, vive"
+				},
+				{
+					"language": "it",
+					"string": "Frank Herbert è ancora vivo?",
+					"keywords": "Frank Herbert, vivente"
+				},
+				{
+					"language": "fr",
+					"string": "Frank Herbert est-il encore en vie?",
+					"keywords": "Frank Herbert, en vie"
+				},
+				{
+					"language": "nl",
+					"string": "Leeft Frank Herbert nog?",
+					"keywords": "Frank Herbert, leeft"
+				},
+				{
+					"language": "hi_IN",
+					"string": "क्या फ्रैंक हरबर्ट अभी भी जीवित है?",
+					"keywords": "फ्रैंक हरबर्ट, जीवित"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nASK \nWHERE {\n\tOPTIONAL { res:Frank_Herbert dbo:deathDate ?date . }\n        FILTER (!BOUND(?date))\n}"
+			},
+			"answers": [{
+				"head": {},
+				"results": {},
+				"boolean": false
+			}]
+		},
 		{
 			"id": "48",
 			"answertype": "resource",
@@ -2748,7 +3757,144 @@
 				}
 			}]
 		},
-
+		{
+			"id": "51",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Give me all actors starring in movies directed by William Shatner.",
+					"keywords": "actor, starring, movie, direct, William Shatner"
+				},
+				{
+					"language": "fa",
+					"string": "تمام بازیگرانی که در فیلم های کارگردانی شده توسط ویلیام شاتنر بازی کرده اند را لیست کن.",
+					"keywords": "بازیگرانی، فیلم های، کارگردانی شده، ویلیام شاتنر، بازی کرده اند"
+				},
+				{
+					"language": "de",
+					"string": "Gib mir alle Schauspieler von Filmen, in denen William Shatner Regie geführt hat.",
+					"keywords": "Schauspieler, Film, Regie, William Shatner"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos los actores de películas dirigidas por William Shatner.",
+					"keywords": "actor, película, director, William Shatner"
+				},
+				{
+					"language": "it",
+					"string": "Dammi tutti gli attori che recitano in film diretti da William Shatner.",
+					"keywords": "attore, recitare, film, diretto, William Shatner"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi tous les acteurs qui ont joué dans des films réalisés par Williams Shatner.",
+					"keywords": "acteur, film, réalisé, William Shatner"
+				},
+				{
+					"language": "nl",
+					"string": "Geef alle acteurs van films waar William Shatner de regie van voerde.",
+					"keywords": "acteur, film, regisseur, William Shatner"
+				},
+				{
+					"language": "hi_IN",
+					"string": "विलियम शेटनेर द्वारा निर्देशित फिल्मों में सभी कलाकारों की सूचि दे।",
+					"keywords": "विलियम शेटनेर, निर्देशित फिल्म, कलाकार"
+				},
+				{
+					"language": "ro",
+					"string": "Dă-mi toți actorii care joacă roluri principale în filme regizate de William Shatner.",
+					"keywords": "actor, rol principal, film, regiza, William Shatner"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  ?x <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/William_Shatner> .  ?x <http://dbpedia.org/ontology/starring> ?uri . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Tom_Towles"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/William_Shatner"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Brenda_Bakke"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/John_Prosky"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Dan_Martin_(actor)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Duane_Whitaker"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/J.T._Colosa"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Chuck_Williams_(actor)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Dick_Van_Patten"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Dan_Gauthier"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Amy_Acker"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Rickey_Medlocke"
+							}
+						}
+					]
+				}
+			}]
+		},
 		{
 			"id": "52",
 			"answertype": "resource",
@@ -2772,8 +3918,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Qué contiene una galleta con chispas de chocolate?",
-					"keywords": "ingredientes, galleta con chispas de chocolate"
+					"string": "¿Qué contiene una galleta de chocolate?",
+					"keywords": "ingredientes, galleta de chocolate"
 				},
 				{
 					"language": "it",
@@ -2876,6 +4022,74 @@
 			}]
 		},
 		{
+			"id": "53",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Give me all professional skateboarders from Sweden.",
+					"keywords": "professional, skateboarder, Sweden"
+				},
+				{
+					"language": "de",
+					"string": "Gib mir alle Profiskateboarder aus Schweden.",
+					"keywords": "Profiskateboarder, Schweden"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos las skateboarders profesionales de Suecia.",
+					"keywords": "skateboarder profesional, Suecia"
+				},
+				{
+					"language": "it",
+					"string": "Dammi tutti gli skateboarders professionisti di Svezia.",
+					"keywords": "skateboarders professionisti, Svezia"
+				},
+				{
+					"language": "fr",
+					"string": "Donne-moi tous les skateboarders professionnels de Suède.",
+					"keywords": "skateboarders professionnels, Suède"
+				},
+				{
+					"language": "nl",
+					"string": "Noem alle professionele skateboarders uit Zweden.",
+					"keywords": "skateboarder, professioneel, Zweden"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मुझे स्वीडन से सभी पेशेवर स्केटबोर्डर की सूचि दो।",
+					"keywords": "स्वीडन, पेशेवर स्केटबोर्डर, सूचि"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\t?uri dbo:occupation res:Skateboarding . \n        { ?uri dbo:birthPlace res:Sweden . }\n        UNION\n        { ?uri dbo:birthPlace ?place . \n          ?place dbo:country res:Sweden . }\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Ali_Boulala"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Tony_Magnusson"
+							}
+						}
+					]
+				}
+			}]
+		},
+		{
 			"id": "54",
 			"answertype": "resource",
 			"aggregation": false,
@@ -2898,8 +4112,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Qué ingredientes son necesarios para una tarta de zanahoria?",
-					"keywords": "ingredientes, tarta de zanahoria"
+					"string": "¿Qué ingredientes son necesarios para una tarta de zanahorias?",
+					"keywords": "ingredientes, tarta de zanahorias"
 				},
 				{
 					"language": "it",
@@ -2930,18 +4144,56 @@
 			"query": {
 				"sparql": "SELECT DISTINCT ?uri WHERE {  <http://dbpedia.org/resource/Carrot_cake> <http://dbpedia.org/ontology/ingredient> ?uri . } "
 			},
-			"answers": [{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Flour" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Egg_(food)" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Sugar" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Baking_powder" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Carrots" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Almonds" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Almond"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Carrot"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Egg_(food)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Flour"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Baking_powder"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Sugar"
+							}
+						}
+					]
+				}
+			}]
 		},
 		{
 			"id": "55",
-			"answertype": "boolean",
+			"answertype": "resource",
 			"aggregation": false,
 			"onlydbo": true,
 			"hybrid": false,
@@ -2995,12 +4247,163 @@
 				"sparql": "ASK WHERE { <http://dbpedia.org/resource/Neymar> <http://dbpedia.org/ontology/team> <http://dbpedia.org/resource/Real_Madrid_C.F.> . }"
 			},
 			"answers": [{
-				"head": {},
-				"results": {},
-				"boolean": false
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "false"
+						}
+					}]
+				}
 			}]
 		},
-
+		{
+			"id": "56",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which computer scientist won an oscar?",
+					"keywords": "computer scientist, win, oscar"
+				},
+				{
+					"language": "fa",
+					"string": "کدام دانشمند کامپیوتر اسکار برده است؟",
+					"keywords": "دانشمند کامپیوتر، اسکار"
+				},
+				{
+					"language": "de",
+					"string": "Welcher Informatiker hat einen Oscar gewonnen?",
+					"keywords": "Informatiker, Oscar, gewonnen"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué ingeniero informático ganó un Oscar?",
+					"keywords": "ingeniero informático, ganó, Oscar"
+				},
+				{
+					"language": "it",
+					"string": "Quale informatico ha vinto un Oscar?",
+					"keywords": "informatico, vincere, Oscar"
+				},
+				{
+					"language": "fr",
+					"string": "Quel informaticien a gagné un Oscar?",
+					"keywords": "informaticient, gagné, Oscar"
+				},
+				{
+					"language": "nl",
+					"string": "Welke informaticus won een Oscar?",
+					"keywords": "informaticus, winnen, Oscar"
+				},
+				{
+					"language": "hi_IN",
+					"string": "किस कंप्यूटर वैज्ञानिक ने ऑस्कर जीता?",
+					"keywords": "कंप्यूटर वैज्ञानिक, ऑस्कर, जीत"
+				},
+				{
+					"language": "ro",
+					"string": "Care informatician a câștigat un Oscar?",
+					"keywords": "informatician, câștigat, Oscar"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { { ?uri <http://dbpedia.org/ontology/field> <http://dbpedia.org/resource/Computer_science> . } UNION { ?uri <http://purl.org/dc/elements/1.1/description> ?s . FILTER regex(?s,'computer scientist','i') } ?uri <http://dbpedia.org/ontology/award> <http://dbpedia.org/resource/Academy_Awards> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Edwin_Catmull"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "57",
+			"answertype": "number",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "How many companies were founded in the same year as Google?",
+					"keywords": "companies, founded, same year, Google"
+				},
+				{
+					"language": "fa",
+					"string": "چه تعداد شرکت در سال یکسانی با گوگل تأسیس شدند؟",
+					"keywords": "شرکت، سال یکسانی، گوگل، تأسیس"
+				},
+				{
+					"language": "de",
+					"string": "Wieviele Firmen wurden im selben Jahr wie Google gegründet?",
+					"keywords": "Firmen, gegründet, selbes Jahr, Google"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuántas compañías fueron fundadas en el mismo año que Google?",
+					"keywords": "compañías, fundadas, mismo año Google"
+				},
+				{
+					"language": "it",
+					"string": "Quante società sono state fondate nello stesso anno di Google?",
+					"keywords": "società, fondate, stesso anno, Google"
+				},
+				{
+					"language": "fr",
+					"string": "Combien de companies ont été fondées la même année que Google?",
+					"keywords": "nombre, companies, fondées, même année, Google"
+				},
+				{
+					"language": "nl",
+					"string": "Hoeveel bedrijven werden opgericht in hetzelfde jaar als Google?",
+					"keywords": "bedrijven, opgericht, hetzelfde jaar, Google"
+				},
+				{
+					"language": "hi_IN",
+					"string": "कितनी कंपनियां स्थापित की गईं जिस वर्ष में गूगल हुइ?",
+					"keywords": "कंपनिया, वर्ष, गूगल, स्थापित"
+				},
+				{
+					"language": "ro",
+					"string": "Câte companii au fost înființate în același an cu Google?",
+					"keywords": "companii, înființate, același an, Google"
+				}
+			],
+			"query": {
+				"sparql": "SELECT (COUNT(DISTINCT ?uri) as ?c) WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Company> .  ?uri <http://dbpedia.org/ontology/foundingYear> ?year .  <http://dbpedia.org/resource/Google> <http://dbpedia.org/ontology/foundingYear> ?year . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"c"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"c": {
+							"type": "literal",
+							"value": "0"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "58",
 			"answertype": "resource",
@@ -3086,7 +4489,7 @@
 				{
 					"language": "es",
 					"string": "¿Fué la crisis de cuba antes de la invasión de bahía de cochinos?",
-					"keywords": "Crisis de Cuba, anterior,Invasión de Bahía de Cochinos"
+					"keywords": "crísis de cuba, anterior, la invasión de bahía de cochinos"
 				},
 				{
 					"language": "it",
@@ -3250,7 +4653,140 @@
 				}
 			}]
 		},
-
+		{
+			"id": "62",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "List all episodes of the first season of the HBO television series The Sopranos!",
+					"keywords": "HBO, television series, Sopranos, first season, episode"
+				},
+				{
+					"language": "de",
+					"string": "Liste alle Episoden der ersten Staffel der HBO-Fernsehserie Die Sopranos auf.",
+					"keywords": "HBO-Fernsehserie, Sopranos, erste Staffel, Episode"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos los episodios de la prímera época de la serie de HBO Los Sporanos.",
+					"keywords": "serie televisiva de HBO, Los Sopranos, primera época, episodios"
+				},
+				{
+					"language": "it",
+					"string": "Elenca tutti gli episodi della prima stagione della serie televisiva di HBO i Sopranos!",
+					"keywords": "serie televisiva di HBO, i Sopranos, prima stagione, episodio"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi tous les épisodes de la première saison de la série télévisée de HBO les Sopranos.",
+					"keywords": "épisodes de la première saison, HBO, les Sopranos"
+				},
+				{
+					"language": "nl",
+					"string": "Noem alle afleveringen van het eerste seizoen van de HBO-serie The Sopranos.",
+					"keywords": "HBO-serie, The Sopranos, eerste seizoen, aflevering"
+				},
+				{
+					"language": "hi_IN",
+					"string": "एचबीओ टेलीविजन श्रृंखला द सोप्रानोस! के पहले सीज़न के सभी एपिसोड की सूची बनाएं ।",
+					"keywords": "एचबीओ, टेलीविजन श्रृंखला, द सोप्रानोस!, पहले सीज़न, सभी एपिसोड"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\t?uri dbo:series res:The_Sopranos  .\n        ?uri dbo:seasonNumber 1 .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Isabella_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Meadowlands_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Legend_of_Tennessee_Moltisanti"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/I_Dream_of_Jeannie_Cusamano"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Boca_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Nobody_Knows_Anything"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Pax_Soprana"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/A_Hit_Is_a_Hit"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Denial,_Anger,_Acceptance"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/College_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/46_Long"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Sopranos_(episode)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Down_Neck"
+							}
+						}
+					]
+				}
+			}]
+		},
 		{
 			"id": "63",
 			"answertype": "number",
@@ -3269,8 +4805,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Cuál es la población total de Miami?",
-					"keywords": "población total, Miami"
+					"string": "¿Cuál es la población total de Melbourne, Florida?",
+					"keywords": "población total, Melbourne Florida"
 				},
 				{
 					"language": "it",
@@ -3311,7 +4847,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "399457"
+							"value": "76068"
 						}
 					}]
 				}
@@ -3677,6 +5213,145 @@
 			}]
 		},
 		{
+			"id": "69",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "List all episodes of the first season of the HBO television series The Sopranos.",
+					"keywords": "HBO, television series, Sopranos, first season, episode"
+				},
+				{
+					"language": "de",
+					"string": "Liste alle Episoden der ersten Staffel der HBO-Fernsehserie Die Sopranos auf.",
+					"keywords": "HBO-Fernsehserie, Sopranos, erste Staffel, Episode"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos los episodios de la prímera época de la serie de HBO Los Sporanos.",
+					"keywords": "serie televisiva de HBO, Los Sopranos, primera época, episodios"
+				},
+				{
+					"language": "it",
+					"string": "Elenca tutti gli episodi della prima stagione della serie televisiva di HBO i Sopranos.",
+					"keywords": "serie televisiva di HBO, i Sopranos, prima stagione, episodio"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi tous les épisodes de la première saison de la série télévisée de HBO les Sopranos.",
+					"keywords": "épisodes de la première saison, HBO, les Sopranos"
+				},
+				{
+					"language": "nl",
+					"string": "Noem alle afleveringen van het eerste seizoen van de HBO-serie The Sopranos.",
+					"keywords": "HBO-serie, The Sopranos, eerste seizoen, aflevering"
+				},
+				{
+					"language": "hi_IN",
+					"string": "एचओओ टेलीविजन श्रृंखला द सोप्रानोस के पहले सीज़न के सभी एपिसोड की सूची बनाएं। '",
+					"keywords": "एचओओ टेलीविजन श्रृंखला, द सोप्रानोस, पहले सीज़न, एपिसोड"
+				},
+				{
+					"language": "ro",
+					"string": "Listează toate episodele din primul sezon al serialului HBO de televiziune The Sopranos",
+					"keywords": "HBO, serial de televiziune, Sopranos, primul sezon, episod"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n        ?uri dbo:series res:The_Sopranos  .\n        ?uri dbo:seasonNumber 1 .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Isabella_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Meadowlands_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Legend_of_Tennessee_Moltisanti"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/I_Dream_of_Jeannie_Cusamano"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Boca_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Nobody_Knows_Anything"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Pax_Soprana"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/A_Hit_Is_a_Hit"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Denial,_Anger,_Acceptance"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/College_(The_Sopranos)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/46_Long"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Sopranos_(episode)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Down_Neck"
+							}
+						}
+					]
+				}
+			}]
+		},
+		{
 			"id": "70",
 			"answertype": "resource",
 			"aggregation": false,
@@ -3700,7 +5375,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién creó Batman?",
-					"keywords": "creador, Batman"
+					"keywords": "creador, comic, Capitán América"
 				},
 				{
 					"language": "it",
@@ -4032,6 +5707,216 @@
 						"uri": {
 							"type": "uri",
 							"value": "http://dbpedia.org/resource/Steve_Forbes"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "75",
+			"answertype": "number",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "How many people live in the capital of Australia?",
+					"keywords": "Australia, capital, people, live"
+				},
+				{
+					"language": "de",
+					"string": "Wieviele Menschen leben in der Hauptstadt Australiens?",
+					"keywords": "Australien, Hauptstadt, Menschen, leben"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuánta gente vive en la capital de Australia?",
+					"keywords": "Australia, capital, habitantes"
+				},
+				{
+					"language": "it",
+					"string": "Quante persone vivono nella capitale dell'Australia?",
+					"keywords": "Australia, capitale, abitanti"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le nombre d'habitants de la capitale de l'Australie?",
+					"keywords": "nombre d'habitants, capitale, Australie"
+				},
+				{
+					"language": "nl",
+					"string": "Hoeveel mensen wonen er in de hoofdstad van Australië?",
+					"keywords": "inwoners, hoofdstad van Australië"
+				},
+				{
+					"language": "hi_IN",
+					"string": "कितने लोग ऑस्ट्रेलिया की राजधानी में रहते हैं?",
+					"keywords": "ऑस्ट्रेलिया, राजधानी, आबादी"
+				},
+				{
+					"language": "ro",
+					"string": "Câți oameni locuiesc in capitala Australiei?",
+					"keywords": "Australia, captital, oameni, locui"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?num \nWHERE {\n        res:Australia dbo:capital ?x .\n        ?x dbo:populationTotal ?num .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"c"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"c": {
+							"type": "literal",
+							"value": "381488"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "76",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which professional surfers were born in Australia?",
+					"keywords": "professional surfer, born, Australia"
+				},
+				{
+					"language": "de",
+					"string": "Welche Profisurfer wurden in Australien geboren?",
+					"keywords": "Profisurfer, geboren, Australien"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué surfistas profesionales nacieron en Australia?",
+					"keywords": "surfista profesional, nacido, Australia"
+				},
+				{
+					"language": "it",
+					"string": "Quali surfisti professionisti sono nati in Australia?",
+					"keywords": "surfista professionista, nato, Australia"
+				},
+				{
+					"language": "fr",
+					"string": "Quels surfeurs professionels sont nés en Australie?",
+					"keywords": "surfeurs professionels, Australie"
+				},
+				{
+					"language": "nl",
+					"string": "Welke professionele surfers werden geboren in Australië?",
+					"keywords": "professionele surfer, Australië"
+				},
+				{
+					"language": "hi_IN",
+					"string": "कौन से पेशेवर सर्फरस ऑस्ट्रेलिया में पैदा हुए थे?",
+					"keywords": "पेशेवर सर्फरस, ऑस्ट्रेलिया, पैदा"
+				},
+				{
+					"language": "ro",
+					"string": "Ce surferi profesioniști s-au născut în Australia?",
+					"keywords": "surfer profesionist, născut, Australia"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX res: <http://dbpedia.org/resource/> \nSELECT DISTINCT ?uri \nWHERE { \n        ?uri dbo:occupation res:Surfing .  \n        ?uri dbo:birthPlace res:Australia . \n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Ian_Cairns"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Midget_Farrelly"
+							}
+						}
+					]
+				}
+			}]
+		},
+		{
+			"id": "77",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which electronics companies were founded in Beijing?",
+					"keywords": "electronics companies, founded, Beijing"
+				},
+				{
+					"language": "fa",
+					"string": "چه شرکت های الکترونیکی در پکن تأسیس شدند؟",
+					"keywords": "شرکت های الکترونیکی، پکن، تأسیس"
+				},
+				{
+					"language": "de",
+					"string": "Welche Elektronikunternehmen wurden in Peking gegründet?",
+					"keywords": "Elektronikunternehmen, gegründet in, Peking"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué compañías de electrónica fueron fundadas en Pekín?",
+					"keywords": "compañías de electrónica, fundadas, Pekín"
+				},
+				{
+					"language": "it",
+					"string": "Quali società di elettronica sono state fondate a Pechino?",
+					"keywords": "società di elettronica, fondate, Pechino"
+				},
+				{
+					"language": "fr",
+					"string": "Quelles sont les companies d'électronique fondées à Beijing?",
+					"keywords": "companies d'électronique, fondées, Beijing"
+				},
+				{
+					"language": "nl",
+					"string": "Welke elektronica bedrijven zijn opgericht in Peking?",
+					"keywords": "elektronica bedrijven, opgericht in, Peking"
+				},
+				{
+					"language": "hi_IN",
+					"string": "बीजिंग में कौन से इलेक्ट्रॉनिक्स कंपनियां स्थापित की गई थीं?",
+					"keywords": "बीजिंग, इलेक्ट्रॉनिक्स कंपनियां, स्थापित"
+				},
+				{
+					"language": "ro",
+					"string": "Care companii de electronice au fost fondate în Beijing?",
+					"keywords": "companii de electronice, fondat, Beijing"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { ?uri a <http://dbpedia.org/ontology/Company> . ?uri <http://dbpedia.org/ontology/industry> <http://dbpedia.org/resource/Electronics> . ?uri <http://dbpedia.org/ontology/foundationPlace> <http://dbpedia.org/resource/Beijing> . }"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Lenovo"
 						}
 					}]
 				}
@@ -4618,6 +6503,72 @@
 			}]
 		},
 		{
+			"id": "84",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which of Tim Burton's films had the highest budget?",
+					"keywords": "highest budget, film, Tim Burton"
+				},
+				{
+					"language": "de",
+					"string": "Welcher von Tim Burtons Filmen hatte das höchste Budget?",
+					"keywords": "höchstes Budget, Film, Tim Burton"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuál es la película de Tim Burton con el mayor presupuesto?",
+					"keywords": "película de Tim Burton, mayor presupuesto"
+				},
+				{
+					"language": "it",
+					"string": "Quali film di Tim Burton hanno avuto il budget più alto?",
+					"keywords": "budget più alto, film, Tim Burton"
+				},
+				{
+					"language": "fr",
+					"string": "Quel film de Tim Burton a le budget le plus haut?",
+					"keywords": "budget le plus haut, Tim Burton"
+				},
+				{
+					"language": "nl",
+					"string": "Welke van Tim Burton's films had het hoogste budget?",
+					"keywords": "film, Tim Burton, hoogste budget"
+				},
+				{
+					"language": "hi_IN",
+					"string": "टिम बर्टन की फिल्मों में से कौन सी का सबसे ज्यादा बजट था?",
+					"keywords": "टिम बर्टन, फिल्मो, सबसे ज्यादा बजट"
+				},
+				{
+					"language": "ro",
+					"string": "Care dintre filmele lui Tom Burton a avut cel mai mare buget?",
+					"keywords": "cel mai mare buget, film, Tim Burton"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE { \n        ?uri dbo:director res:Tim_Burton .\n        ?uri dbo:budget ?b .\n}\nORDER BY ?b\nOFFSET 0 LIMIT 1"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Big_Eyes"
+						}
+					}]
+				}
+			}]
+		},
+		{
 			"id": "85",
 			"answertype": "boolean",
 			"aggregation": true,
@@ -4861,7 +6812,209 @@
 				}
 			}]
 		},
-
+		{
+			"id": "89",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which movies starring Mickey Rourke were directed by Guy Ritchie?",
+					"keywords": "movies, starring, Mickey Rourke, directed, Guy Ritchie"
+				},
+				{
+					"language": "fa",
+					"string": "چه فیلم هایی با بازی میکی رورک توسط گای ریچی کارگردانی شدند؟",
+					"keywords": "فیلم هایی، بازی، میکی رورک، گای ریچی، کارگردانی"
+				},
+				{
+					"language": "de",
+					"string": "Bei welchen Filmen, in denen Mickey Rourke mitspielt, hat Guy Ritchie Regie geführt?",
+					"keywords": "Filme, mitspielen, Mickey Rourke, Regie führen, Guy Ritchie"
+				},
+				{
+					"language": "es",
+					"string": "¿Que peliculas protagonizadas por Mickey Rourke han sido dirigidas por Guy Ritchie?",
+					"keywords": "peliculas, protagonizadas, Mickey Rourke, dirigidas, Guy Ritchie"
+				},
+				{
+					"language": "it",
+					"string": "Quali film in cui recita Mickey Rourke sono stati diretti da Guy Ritchie?",
+					"keywords": "film, attore, Mickey Rourke, diretti, Guy Ritchie"
+				},
+				{
+					"language": "fr",
+					"string": "Quels films avec Mickey Rourke furent dirigés par Guy Richtie?",
+					"keywords": "films, acteur, Mickey Rourke, directeur, Guy Richtie?"
+				},
+				{
+					"language": "nl",
+					"string": "Welke films met Mickey Rourke werden geregisseerd door Guy Ritchie?",
+					"keywords": "films, acteur, Mickey Rourke, geregisseerd, Guy Ritchie"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मिकी रोर्के अभिनीत कौन सी फिल्में गाए रिची द्वारा निर्देशित थीं?",
+					"keywords": "मिकी रोर्, अभिनीत, गाए रिची, निर्देशित"
+				},
+				{
+					"language": "ro",
+					"string": "Ce filme cu Mickey Rourke ca protagonist au fost regizate de Guy Ritchie?",
+					"keywords": "filme, Mickey Rourke, protagonist, regizate, Guy Ritchie"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> . ?uri <http://dbpedia.org/ontology/starring> <http://dbpedia.org/resource/Mickey_Rourke> . ?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Guy_Ritchie> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/The_Hire"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "90",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "When did Dracula's creator die?",
+					"keywords": "Dracula, creator, die"
+				},
+				{
+					"language": "fa",
+					"string": "چه زمانی خالق دراکولا فوت کرد؟",
+					"keywords": "خالق، دراکولا، فوت"
+				},
+				{
+					"language": "de",
+					"string": "Wann ist Draculas Schöpfer gestorben?",
+					"keywords": "Dracula, Schöpfer, gestorben"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuando murió el creador de Drácula?",
+					"keywords": "muerte, creador, Drácula"
+				},
+				{
+					"language": "it",
+					"string": "Quando è morto il creatore di Dracula?",
+					"keywords": "Dracula, creatore, morire"
+				},
+				{
+					"language": "fr",
+					"string": "Quand est mort le créateur de Dracula?",
+					"keywords": "mort, créateur, Dracula"
+				},
+				{
+					"language": "nl",
+					"string": "Wanneer stierf de bedenker van Dracula?",
+					"keywords": "stierf, bedenker, Dracula"
+				},
+				{
+					"language": "hi_IN",
+					"string": "ड्रेकुला के निर्माता का निधन कब हुआ?",
+					"keywords": "ड्रेकुला, निर्माता, निधन"
+				},
+				{
+					"language": "ro",
+					"string": "Când a murit creatorul Dracula?",
+					"keywords": "Dracula, creator, a muri"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?date WHERE {  <http://dbpedia.org/resource/Count_Dracula> <http://dbpedia.org/ontology/creator> ?x .  ?x <http://dbpedia.org/ontology/deathDate> ?date . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "1912-04-20"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "91",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which country does the creator of Miffy come from?",
+					"keywords": "Miffy, creator, country"
+				},
+				{
+					"language": "de",
+					"string": "Aus welchem Land kommt der Erfinder von Nijntje?",
+					"keywords": "Nijntje, Erfinder, Land"
+				},
+				{
+					"language": "es",
+					"string": "¿De qué país viene el creador de Nijntje?",
+					"keywords": "Njintje, creados, país"
+				},
+				{
+					"language": "it",
+					"string": "Da quale stato proviene il creatore di Miffy?",
+					"keywords": "Miffy, creatore, nazione"
+				},
+				{
+					"language": "fr",
+					"string": "De quel pays vient le créateur de Miffy?",
+					"keywords": "pays, créateur, Miffy"
+				},
+				{
+					"language": "nl",
+					"string": "Uit welk land komt de bedenker van Nijntje?",
+					"keywords": "Nijntje, bedenker, nationaliteit"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मिफ्फी के निर्माता किस देश से आते है?",
+					"keywords": "मिफ्फ, निर्माता, देश"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:Miffy dbo:creator ?x .\n\t?x dbo:nationality ?uri .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Netherlands"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "92",
 			"answertype": "string",
@@ -4886,7 +7039,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuál es el verdadero nombre de Batman?",
-					"keywords": "verdadero nombre, Batman"
+					"keywords": "verdadero nombre Batman"
 				},
 				{
 					"language": "it",
@@ -5004,7 +7157,138 @@
 				}
 			}]
 		},
-
+		{
+			"id": "94",
+			"answertype": "number",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "How many companies were founded by the founder of Facebook?",
+					"keywords": "companies, founded by, founder, Facebook"
+				},
+				{
+					"language": "fa",
+					"string": "چه تعداد شرکت توسط مؤسس فیسبوک تأسیس شدند؟",
+					"keywords": "شرکت، مؤسس، فیسبوک، تأسیس"
+				},
+				{
+					"language": "de",
+					"string": "Wieviele Firmen hat der Gründer von Facebook gegründet?",
+					"keywords": "Firmen, gegründet, Gründer, Facebook"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuantas compañías han sido fundadas por el fundador de Facebook?",
+					"keywords": "compañías, fundadas, fundador Facebook"
+				},
+				{
+					"language": "it",
+					"string": "Quante società sono state fondate dal fondatore di Facebook?",
+					"keywords": "società, fondate, fondatore, Facebook"
+				},
+				{
+					"language": "fr",
+					"string": "Combien de companies ont été fondées par le fondateur de Facebook?",
+					"keywords": "nombre, companies, fondées, fondateur, Facebook"
+				},
+				{
+					"language": "nl",
+					"string": "Hoeveel bedrijven werden opgericht door de oprichter van Facebook?",
+					"keywords": "bedrijven, opgericht, oprichter, Facebook"
+				},
+				{
+					"language": "hi_IN",
+					"string": "फेसबुक के संस्थापक द्वारा कितनी कंपनियों की स्थापना की गई थी?",
+					"keywords": "फेसबुक, संस्थापक, कंपनियों की स्थापना"
+				},
+				{
+					"language": "ro",
+					"string": "Câte companii au fost înființate de fondatorul Facebook?",
+					"keywords": "companii, înființate, fondator, Facebook"
+				}
+			],
+			"query": {
+				"sparql": "SELECT (COUNT(DISTINCT ?uri) as ?c) WHERE {  <http://dbpedia.org/resource/Facebook> <http://dbpedia.org/ontology/foundedBy> ?uri .  ?uri <http://dbpedia.org/ontology/foundedBy> ?uri . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"c"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"c": {
+							"type": "literal",
+							"value": "0"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "95",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Give me all Canadian Grunge record labels.",
+					"keywords": "record label, Canadian, Grunge"
+				},
+				{
+					"language": "de",
+					"string": "Gib mir alle kanadischen Grunge-Plattenfirmen.",
+					"keywords": "kanadisch, Plattenfirma, Grunge"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos las empresas canadienses productoras de música Grunge.",
+					"keywords": "empresa productora de música, canadiense, Grunge"
+				},
+				{
+					"language": "it",
+					"string": "Dammi tutti i produttori canadesi di musica Grunge.",
+					"keywords": "produttore di musica, canadese, Grunge"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi tous les labels discographiques canadiens de grunge.",
+					"keywords": "labels discographiques, canadiens, grunge"
+				},
+				{
+					"language": "nl",
+					"string": "Noem alle Canadese grunge-platenlabels.",
+					"keywords": "Canadees, platenlabel, Grunge"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मुझे सभी कैनेडियन ग्रांज रिकॉर्ड लेबल की सूचि दें।",
+					"keywords": "कैनेडियन, ग्रांज, रिकॉर्ड लेबल"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri \nWHERE {\n\t?uri rdf:type dbo:RecordLabel .\n        ?uri dbo:genre res:Grunge .\n        ?uri dbo:country res:Canada .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Murderecords"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "96",
 			"answertype": "number",
@@ -5194,12 +7478,40 @@
 			"query": {
 				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/> \nSELECT DISTINCT ?uri\nWHERE {\n        res:Melon_de_Bourgogne dbo:wineRegion ?uri .\n}"
 			},
-			"answers": [{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Southern_Ontario" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Loire_Valley_(wine)" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Washington_(U.S._state)" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Oregon" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Southern_Ontario"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Loire_Valley_(wine)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Oregon"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Washington_(state)"
+							}
+						}
+					]
+				}
+			}]
 		},
 		{
 			"id": "99",
@@ -5220,7 +7532,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuál es el hijo mas mayor de Meryl Streep?",
-					"keywords": "hijos mas mayor, Meryl Streep"
+					"keywords": "hijo mas mayor, Meryl Streep"
 				},
 				{
 					"language": "it",
@@ -5477,7 +7789,62 @@
 				}
 			}]
 		},
-
+		{
+			"id": "103",
+			"answertype": "boolean",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Does the Isar flow into a lake?",
+					"keywords": "Isar, flow, lake"
+				},
+				{
+					"language": "de",
+					"string": "Fließt die Isar in einen See?",
+					"keywords": "Isar, fließt, See"
+				},
+				{
+					"language": "es",
+					"string": "¿Desemboca el Isar en un lago?",
+					"keywords": "Isar, desemboca, lago"
+				},
+				{
+					"language": "it",
+					"string": "L'Isar sfocia in un lago?",
+					"keywords": "Isar, sfociare, lago"
+				},
+				{
+					"language": "fr",
+					"string": "L'Isar se déverse-t-il dans un lac?",
+					"keywords": "Isar, deverse, lac"
+				},
+				{
+					"language": "nl",
+					"string": "Mondt de Isar uit in een meer?",
+					"keywords": "Isar, uitmonden, meer"
+				},
+				{
+					"language": "hi_IN",
+					"string": "क्या ईसार एक झील में प्रवाहित होती है?",
+					"keywords": "ईसार, झील, प्रवाहित"
+				},
+				{
+					"language": "ro",
+					"string": "Isarul se varsă într-un lac?",
+					"keywords": "Isar, varsă, lac"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nASK\nWHERE {\n        ?x dbo:inflow res:Isar .\n        ?x rdf:type dbo:Lake . \n}"
+			},
+			"answers": [{
+				"head": {},
+				"results": {},
+				"boolean": true
+			}]
+		},
 		{
 			"id": "104",
 			"answertype": "resource",
@@ -5533,11 +7900,34 @@
 			"query": {
 				"sparql": "SELECT DISTINCT ?uri WHERE {  <http://dbpedia.org/resource/Yeti_Airlines> <http://dbpedia.org/ontology/targetAirport> ?uri . }"
 			},
-			"answers": [{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Biratnagar" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Pokhara" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Bhairahawa" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Pokhara"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Siddharthanagar"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Biratnagar"
+							}
+						}
+					]
+				}
+			}]
 		},
 		{
 			"id": "105",
@@ -5604,13 +7994,83 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Railway_Board"
+							"value": "http://dbpedia.org/resource/Indian_Railways"
 						}
 					}]
 				}
 			}]
 		},
-
+		{
+			"id": "106",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "What color expresses loyalty?",
+					"keywords": "color, express, loyalty"
+				},
+				{
+					"language": "fa",
+					"string": "چه رنگی وفاداری را بیان می کند؟",
+					"keywords": "رنگی، وفاداری، بیان"
+				},
+				{
+					"language": "de",
+					"string": "Welche Farbe steht für Loyalität?",
+					"keywords": "Farbe, stehen für, Loyalität"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué color expresa lealtad?",
+					"keywords": "color, expresa, lealtad"
+				},
+				{
+					"language": "it",
+					"string": "Quale colore esprime lealtà?",
+					"keywords": "colore, esprimere, lealtà"
+				},
+				{
+					"language": "fr",
+					"string": "Quelle couleur exprime la loyalité?",
+					"keywords": "couleur, loyalité"
+				},
+				{
+					"language": "nl",
+					"string": "Welke kleur staat voor loyaliteit?",
+					"keywords": "kleur, loyaliteit"
+				},
+				{
+					"language": "hi_IN",
+					"string": "कोनसा रंग वफादारी व्यक्त करता है?",
+					"keywords": "रंग, वफादारी"
+				},
+				{
+					"language": "ro",
+					"string": "Ce culoare exprimă loialitate?",
+					"keywords": "culoare, exprimă, loialitate"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/connotation> <http://dbpedia.org/resource/Loyalty> . }"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Indigo"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "107",
 			"answertype": "resource",
@@ -5671,7 +8131,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Carei"
+							"value": "http://dbpedia.org/resource/Karachi"
 						}
 					}]
 				}
@@ -5876,7 +8336,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuántos grupos étnicos viven en Eslovenia?",
-					"keywords": "grupos étnicos, Eslovenia"
+					"keywords": "grupos étnicos Eslovenia"
 				},
 				{
 					"language": "it",
@@ -5947,7 +8407,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién es el presidente de Eritrea?",
-					"keywords": "presidente,Eritrea"
+					"keywords": "presidente Eritrea"
 				},
 				{
 					"language": "it",
@@ -5976,7 +8436,7 @@
 				}
 			],
 			"query": {
-				"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eritrea> <http://dbpedia.org/ontology/leader> ?uri . <http://dbpedia.org/resource/Eritrea> <http://dbpedia.org/ontology/leaderTitle> 'President'@en . }  "
+				"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eritrea> <http://dbpedia.org/ontology/leader> ?uri .}  "
 			},
 			"answers": [{
 				"head": {
@@ -6288,8 +8748,138 @@
 				}
 			}]
 		},
-
-
+		{
+			"id": "116",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who is the youngest player in the Premier League?",
+					"keywords": "player, Premier League, youngest"
+				},
+				{
+					"language": "de",
+					"string": "Wer ist der jüngste Spieler in der Premier League?",
+					"keywords": "Spieler, Premier League, jüngste"
+				},
+				{
+					"language": "es",
+					"string": "¿Quién es el jugador más jóven de la Premier League?",
+					"keywords": "jugador, más jóven, Premier League"
+				},
+				{
+					"language": "it",
+					"string": "Chi è il giocatore più giovane della Premier League?",
+					"keywords": "giocatore, Premier League, più giovane"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le joueur le plus jeune de la Premier League?",
+					"keywords": "joueur, Premier League, plus jeune"
+				},
+				{
+					"language": "nl",
+					"string": "Wie is de jongste speler in de Premier League?",
+					"keywords": "speler, jongste, Premier League"
+				},
+				{
+					"language": "hi_IN",
+					"string": "प्रीमियर लीग में सबसे कम उम्र के खिलाड़ी कौन हैं?",
+					"keywords": "प्रीमियर लीग, सबसे कम उम्र, खिलाड़ी"
+				},
+				{
+					"language": "ro",
+					"string": "Cine este cel mai tânăr jucător din Premier League?",
+					"keywords": "juător, Premier League, cel mai tânăr"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX res: <http://dbpedia.org/resource/> \nSELECT DISTINCT ?uri \nWHERE { \n        ?uri dbo:team ?x . \n        ?x dbo:league res:Premier_League . \n        ?uri dbo:birthDate ?y . \n} \nORDER BY DESC(?y) \nOFFSET 0 LIMIT 1"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Ernie_Pinkney"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "117",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "What is the highest mountain in Italy?",
+					"keywords": "highest, mountain, Italy"
+				},
+				{
+					"language": "de",
+					"string": "Was ist der höchste Berg in Italien?",
+					"keywords": "höchste, Berg, Italien"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuál es la montaña mas alta en Italia?",
+					"keywords": "la montaña mas alta Italia"
+				},
+				{
+					"language": "it",
+					"string": "Qual è la montagna più alta in Italia?",
+					"keywords": "montagna, più alta, Italia"
+				},
+				{
+					"language": "fr",
+					"string": "Quelle est la plus haute montagne d'Italie?",
+					"keywords": "plus haute, plus haute, Italie"
+				},
+				{
+					"language": "nl",
+					"string": "Wat is de hoogste berg in Italië?",
+					"keywords": "hoogste, berg, Italië"
+				},
+				{
+					"language": "hi_IN",
+					"string": "इटली में सर्वोच्च पर्वत कोनसा है?",
+					"keywords": "इटली, सर्वोच्च पर्वत"
+				},
+				{
+					"language": "ro",
+					"string": "Care este cel mai înalt munte din Italia?",
+					"keywords": "cel mai înalt, munte, Italia"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri\nWHERE {\n        ?uri rdf:type dbo:Mountain .\n        ?uri dbo:locatedInArea res:Italy .\n        ?uri dbo:elevation ?num .\n}\nORDER BY DESC(?num)\nOFFSET 0 LIMIT 1"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Mont_Blanc"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "118",
 			"answertype": "number",
@@ -6417,7 +9007,72 @@
 				}
 			}]
 		},
-
+		{
+			"id": "120",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which subsidiary of Lufthansa serves both Dortmund and Berlin Tegel?",
+					"keywords": "subsidiary, Lufthansa, serve, Dortmund, Berlin Tegel"
+				},
+				{
+					"language": "de",
+					"string": "Welche Tochtergesellschaft von Lufthansa fliegt sowohl Dortmund als auch Berlin Tegel an?",
+					"keywords": "Tochtergesellschaft, Lufthansa, anfliegen, Dortmund, Berlin Tegel"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué subsidiario de Lufthansa vuela en Dortmund y en Berlin?",
+					"keywords": "subsidiario, Lufthansa, vuela, Dortmund y Berlin"
+				},
+				{
+					"language": "it",
+					"string": "Quale società sussidiaria di Lufthansa serve sia Dortmund che Berlin Tegel?",
+					"keywords": "società sussidiaria di Lufthansa, servire, Dortmund, Berlin Tegel"
+				},
+				{
+					"language": "fr",
+					"string": "Quelle subsidiaire de Lufhansa vole sur Dortmund et Berlin Tegel?",
+					"keywords": "subsidiaire, Lufhansa, vole sur, Dortmund, Berlin Tegel"
+				},
+				{
+					"language": "nl",
+					"string": "Welke dochteronderneming van Lufthansa bedient zowel Dortmund en Berlin Tegel?",
+					"keywords": "dochteronderneming, Lufthansa, bedient, Dortmund, Berlin Tegel"
+				},
+				{
+					"language": "hi_IN",
+					"string": "लुफ्तहांसा की कौन सी सहायक कंपनी डॉर्टमुंड और बर्लिन टेगल दोनों की सेवा करती है?",
+					"keywords": "लुफ्तहांसा, सहायक कंपनी, डॉर्टमुंड, बर्लिन टेगल, सेवा"
+				},
+				{
+					"language": "ro",
+					"string": "Care filială a Lufthansa deservește atât Dortmund cât și Berlin Tegel?",
+					"keywords": "filială, Lufthansa, deservește, Dortmund, Berlin Tegel"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/> \nSELECT DISTINCT ?uri \nWHERE {\n        res:Lufthansa dbo:subsidiary ?uri .\n        ?uri dbo:targetAirport res:Dortmund_Airport .\n        ?uri dbo:targetAirport res:Berlin_Tegel_Airport .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Germanwings"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "121",
 			"answertype": "resource",
@@ -6816,7 +9471,72 @@
 				}
 			}]
 		},
-
+		{
+			"id": "124",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "For which label did Elvis record his first album?",
+					"keywords": "Elvis, first, album, label"
+				},
+				{
+					"language": "de",
+					"string": "Welche Plattenfirma hat Elvis' erstes Album aufgenommen?",
+					"keywords": "Elvis, erstes, Album, Plattenfirma"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué discográfica grabó el primer album de Elvis?",
+					"keywords": "discográfica, primer album de Elvis"
+				},
+				{
+					"language": "it",
+					"string": "Quale casa discografica ha inciso il primo album di Elvis?",
+					"keywords": "Elvis, primo, album, casa discografica"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le label discographe qui a publié le premier disque d'Elvis?",
+					"keywords": "label discographe, publié, premier disque, Elvis"
+				},
+				{
+					"language": "nl",
+					"string": "Bij welk platenlabel verscheen het eerste album van Elvis Presley?",
+					"keywords": "platenlabel, eerste album, Elvis"
+				},
+				{
+					"language": "hi_IN",
+					"string": "किस लेबल के लिए एल्विस ने अपना पहला एल्बम रिकॉर्ड किया था?",
+					"keywords": "लेबल, एल्विस, पहला एल्बम, रिकॉर्ड"
+				},
+				{
+					"language": "ro",
+					"string": "Ce casă discografică a înregistrat primul album al lui Elvis?",
+					"keywords": "Elvis, prim, album, casă discografică"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri \nWHERE {\n        ?x rdf:type dbo:Album .\n        ?x dbo:artist res:Elvis_Presley .\n        ?x dbo:releaseDate ?y .\n        ?x dbo:recordLabel ?uri .\n}\nORDER BY ASC(?y) \nOFFSET 0 LIMIT 1"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Pickwick_Records"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "125",
 			"answertype": "resource",
@@ -7056,7 +9776,7 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Tiene el lugar de nacimiento de Abraham Lincoln una página web?",
+					"string": "¿Tiene el lugar de nacimiento de Abraham Lincol una página web?",
 					"keywords": "Abraham Lincoln, lugar de nacimiento, página web"
 				},
 				{
@@ -7297,7 +10017,143 @@
 				}
 			}]
 		},
-
+		{
+			"id": "132",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Give me a list of all critically endangered birds.",
+					"keywords": "list, critically endangered birds"
+				},
+				{
+					"language": "fa",
+					"string": "لیستی از پرندگان روبه انقراض را بده.",
+					"keywords": "پرندگان، روبه انقراض"
+				},
+				{
+					"language": "de",
+					"string": "Gib mir eine Liste aller stark bedrohten Vogelarten.",
+					"keywords": "Vogel, stark gefährdet"
+				},
+				{
+					"language": "es",
+					"string": "Dame una lista de todas las aves en peligro de extinción.",
+					"keywords": "aves, peligro de extinción"
+				},
+				{
+					"language": "it",
+					"string": "Dammi la lista di tutti gli uccelli in via di estinzione.",
+					"keywords": "lista, uccelli in via di estinzione"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi la liste des oiseaux en voie de disparition.",
+					"keywords": "oiseaux, voie de disparition"
+				},
+				{
+					"language": "nl",
+					"string": "Geef een lijst met alle ernstig bedreigde vogelsoorten.",
+					"keywords": "vogels, ernstig bedreigd"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मुझे समीक्षकों से लुप्तप्राय पक्षियों की सूची बतायें ।",
+					"keywords": "समीक्षकों, लुप्तप्राय पक्षियों"
+				},
+				{
+					"language": "ro",
+					"string": "Dă-mi o listă cu toate păsările în pericol ridicat de dispariție.",
+					"keywords": "listă, păsări în pericol ridicat de dispariție"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri ?p WHERE { ?uri a <http://dbpedia.org/ontology/Bird> . { ?uri <http://dbpedia.org/ontology/conservationStatus> 'CR'^^<http://www.w3.org/2001/XMLSchema#string> . } UNION { ?uri <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Critically_endangered_animals> . } }"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Chatham_pigeon"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "133",
+			"answertype": "number",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "How many inhabitants does the largest city in Canada have?",
+					"keywords": "inhabitants, largest city, Canada"
+				},
+				{
+					"language": "de",
+					"string": "Wieviele Einwohner hat die größte Stadt in Kanada?",
+					"keywords": "Einwohner, größte Stadt, Kanada"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuántos habitantes tiene la ciudad más grande de Canadá?",
+					"keywords": "número de habitantes, ciudad más grande de Canadá"
+				},
+				{
+					"language": "it",
+					"string": "Quanti abitanti ha la città più grande del Canada?",
+					"keywords": "abitanti, città più grande, Canada"
+				},
+				{
+					"language": "fr",
+					"string": "Combien d'habitants a large ville la plus grande du Canada?",
+					"keywords": "nombre dhabitants, ville la plus large, Canada"
+				},
+				{
+					"language": "nl",
+					"string": "Hoeveel inwoners heeft de grootste stadt in Canada?",
+					"keywords": "inwoners, grootste, stad, Canada"
+				},
+				{
+					"language": "hi_IN",
+					"string": "कनाडा के सबसे बड़े शहर में कितने निवासी हैं?",
+					"keywords": "कनाडा, सबसे बड़े शहर, निवासी"
+				},
+				{
+					"language": "ro",
+					"string": "Câți locuitori are cel mai are oraș din Canada?",
+					"keywords": "locuitori, cel mai mare oraș, Canada"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?num\nWHERE {\n        res:Canada dbo:largestCity ?city . \n        ?city dbo:populationTotal ?num .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"c"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"c": {
+							"type": "literal",
+							"value": "2615060"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "134",
 			"answertype": "resource",
@@ -7348,15 +10204,76 @@
 			"query": {
 				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX res: <http://dbpedia.org/resource/> \nSELECT DISTINCT ?uri \nWHERE { \n        res:T._E._Lawrence dbo:battle ?uri . \n}"
 			},
-			"answers": [
-{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Siege_of_Medina" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Arab_Revolt" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Battle_of_Megiddo_(1918)" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Battle_of_Aqaba" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/World_War_I" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Capture_of_Damascus" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Battle_of_Aqaba"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/World_War_I"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Battle_of_Fwelia"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Siege_of_Medina"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Battle_of_Deraa"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Arab_Revolt"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Battle_of_Megiddo_(1918)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Battle_of_Talifeh"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Capture_of_Damascus_(1918)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Battle_of_Aba_el_Lissan"
+							}
+						}
+					]
+				}
+			}]
 		},
 		{
 			"id": "135",
@@ -7492,7 +10409,77 @@
 				}
 			}]
 		},
-
+		{
+			"id": "137",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who is the Formula 1 race driver with the most races?",
+					"keywords": "Formula 1, race driver, races, most"
+				},
+				{
+					"language": "fa",
+					"string": "چه کسی راننده فرمول 1 با بیشترین مسابقه است؟",
+					"keywords": "راننده، فرمول 1، بیشترین، مسابقه"
+				},
+				{
+					"language": "de",
+					"string": "Wer ist der Formel-1-Fahrer mit den meisten Rennen?",
+					"keywords": "Formel 1, Rennfahrer, Rennen, die meisten"
+				},
+				{
+					"language": "es",
+					"string": "¿Quién es el conductor de Formula 1 con más carreras?",
+					"keywords": "Fconductor, órmula 1, carreras, más"
+				},
+				{
+					"language": "it",
+					"string": "Qual è il pilota di Formula 1 con più gare?",
+					"keywords": "Formula 1, pilota, maggior numero di gare"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le pilote de Formule 1 qui a gagné le plus de courses?",
+					"keywords": "Formule 1, pilote, plus de courses"
+				},
+				{
+					"language": "nl",
+					"string": "Wie is de Formule 1-coureur met de meeste races op zijn naam?",
+					"keywords": "Formule 1, coureur, races, de meeste"
+				},
+				{
+					"language": "hi_IN",
+					"string": "सबसे अधिक दौड़ वाले फॉर्मूला 1 रेस ड्रायवर कौन है?",
+					"keywords": "सबसे अधिक दौड़, फॉर्मूला 1, रेस ड्रायवर"
+				},
+				{
+					"language": "ro",
+					"string": "Cine este pilotul de curse Formula 1 cu cele mai multe curse?",
+					"keywords": "Formula 1, pilot de curse, cele mai multe"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/FormulaOneRacer> .  ?uri <http://dbpedia.org/ontology/races> ?x . } ORDER BY DESC(?x) OFFSET 0 LIMIT 1 "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Michael_Schumacher"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "138",
 			"answertype": "resource",
@@ -7638,7 +10625,77 @@
 				"boolean": true
 			}]
 		},
-
+		{
+			"id": "140",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "In which city was the president of Montenegro born?",
+					"keywords": "city, born, president of Montenegro"
+				},
+				{
+					"language": "fa",
+					"string": "رئیس جمهور مونتنگرو در کدام شهر متولد شد؟",
+					"keywords": "رئیس جمهور، مونتنگرو، کشور، متولد"
+				},
+				{
+					"language": "de",
+					"string": "In welcher Stadt ist der Präsident von Montenegro geboren?",
+					"keywords": "Präsident, Montenegro, Geburtsstadt"
+				},
+				{
+					"language": "es",
+					"string": "¿En que ciudad nació el presidente de Montenegro?",
+					"keywords": "ciudad, nació, presidente de Montenegro"
+				},
+				{
+					"language": "it",
+					"string": "In quale città è nato il presidente del Montenegro?",
+					"keywords": "città, nato, presidente del Montenegro"
+				},
+				{
+					"language": "fr",
+					"string": "Quelle est la ville de naissance du président du Monténégro?",
+					"keywords": "ville, naissance, président, Monténégro"
+				},
+				{
+					"language": "nl",
+					"string": "In welke stad is de president van Montenegro geboren?",
+					"keywords": "president, Montenegro, geboortestad"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मोंटेनेग्रो के राष्ट्रपति किस शहर में पैदा हुए थे?",
+					"keywords": "मोंटेनेग्रो, राष्ट्रपति, शहर, पैदा"
+				},
+				{
+					"language": "ro",
+					"string": "În ce oraș s-a născut președintele Muntenegrului?",
+					"keywords": "oraș, născut, președintele Muntenegrului"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/office> <http://dbpedia.org/resource/President_of_Montenegro> . ?x <http://dbpedia.org/ontology/birthPlace> ?uri . ?uri a <http://dbpedia.org/ontology/City> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Belgrade"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "141",
 			"answertype": "resource",
@@ -7794,7 +10851,72 @@
 				}
 			}]
 		},
-
+		{
+			"id": "143",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Show me the book that Muhammad Ali wrote.",
+					"keywords": "book, wrote, Muhammad Ali"
+				},
+				{
+					"language": "de",
+					"string": "Zeig mir das Buch, das Muhammad Ali geschrieben hat.",
+					"keywords": "Buch, geschrieben, Muhammad Ali"
+				},
+				{
+					"language": "es",
+					"string": "Muéstrame el libro escrito por Muhammad Ali.",
+					"keywords": "libro, autor, Muhammad Ali"
+				},
+				{
+					"language": "it",
+					"string": "Mostrami il libro scritto da Muhammad Ali.",
+					"keywords": "libro, autore, Muhammad Ali"
+				},
+				{
+					"language": "fr",
+					"string": "Donne-moi le livre écrit par Muhammad Ali.",
+					"keywords": "livre, par Muhammad Ali"
+				},
+				{
+					"language": "nl",
+					"string": "Toen het boek dat Muhammad Ali heeft geschreven.",
+					"keywords": "boek, geschreven, Muhammad Ali"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मुझे किताब बताओ जो मुहम्मद अली ने लिखी थी।",
+					"keywords": "किताब, मुहम्मद अली, लिखी"
+				},
+				{
+					"language": "ro",
+					"string": "Arată-mi cartea pe care a scris-o Muhammad Ali.",
+					"keywords": "carte, scris, Muhammad Ali"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX res: <http://dbpedia.org/resource/> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nSELECT DISTINCT ?uri \nWHERE { \n         ?uri rdf:type dbo:Book . \n         ?uri dbo:author res:Muhammad_Ali . \n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/The_Soul_of_a_Butterfly"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "144",
 			"answertype": "boolean",
@@ -7957,20 +11079,142 @@
 			"query": {
 				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri\nWHERE {\n        res:Last_Action_Hero dbo:starring ?uri . \n}"
 			},
-			"answers": [{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Anthony_Quinn" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Art_Carney" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/F._Murray_Abraham" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Frank_McRae" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Mercedes_Ruehl" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Austin_O'Brien" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Arnold_Schwarzenegger" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Charles_Dance" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Tom_Noonan" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Robert_Prosky" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Tom_Noonan"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/F._Murray_Abraham"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Arnold_Schwarzenegger"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Bridgette_Wilson"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Charles_Dance"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Art_Carney"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Austin_O'Brien"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Robert_Prosky"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Anthony_Quinn"
+							}
+						}
+					]
+				}
+			}]
 		},
-
+		{
+			"id": "147",
+			"answertype": "string",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "What are the nicknames of San Francisco?",
+					"keywords": "San Francisco, nickname"
+				},
+				{
+					"language": "fa",
+					"string": "اسم های مستعار سانفرانسیسکو چیست؟",
+					"keywords": "اسم های مستعار، سانفرانسیسکو"
+				},
+				{
+					"language": "de",
+					"string": "Was sind die Spitznamen von San Francisco?",
+					"keywords": "San Francisco, Spitzname"
+				},
+				{
+					"language": "es",
+					"string": "¿Cuál es el apodo de San Francisco?",
+					"keywords": "San Francisco, apodo"
+				},
+				{
+					"language": "it",
+					"string": "Quali sono i soprannomi di San Francisco?",
+					"keywords": "San Francisco, soprannome"
+				},
+				{
+					"language": "fr",
+					"string": "Quels sont les surnoms de San Francisco?",
+					"keywords": "surnoms, San Francisco"
+				},
+				{
+					"language": "nl",
+					"string": "Wat zijn bijnamen van San Francisco?",
+					"keywords": "bijnaam, San Francisco"
+				},
+				{
+					"language": "hi_IN",
+					"string": "सैन फ्रांसिस्को के उपनाम क्या हैं?",
+					"keywords": "सैन फ्रांसिस्को, उपनाम"
+				},
+				{
+					"language": "ro",
+					"string": "Care sunt poreclele pentru San Francisco?",
+					"keywords": "San Francisco, poreclă"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?string WHERE {  <http://dbpedia.org/resource/San_Francisco> <http://dbpedia.org/property/nickname> ?string . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"string"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"string": {
+							"type": "literal",
+							"value": "The City by the Bay; Fog City; San Fran; Frisco ; The City that Knows How ; Baghdad by the Bay ; The Paris of the West"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "148",
 			"answertype": "resource",
@@ -8060,8 +11304,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Por qué países fluye el río Amazonas?",
-					"keywords": "países, fluye, río Amazonas"
+					"string": "¿Por qué países fluye el río Yenisei?",
+					"keywords": "países, fluye, río Yenisei"
 				},
 				{
 					"language": "it",
@@ -8087,12 +11331,28 @@
 			"query": {
 				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbp: <http://dbpedia.org/property/>\nSELECT DISTINCT ?uri \nWHERE {\n        res:Yenisei_River dbp:country ?uri .\n}"
 			},
-			"answers": [{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Brazil" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Colombia" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Ecuador" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Peru" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Russia"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Mongolia"
+							}
+						}
+					]
+				}
+			}]
 		},
 		{
 			"id": "150",
@@ -8118,7 +11378,7 @@
 				{
 					"language": "it",
 					"string": "Quali serie televisive sono state create dalla Walt Disney?",
-					"keywords": "serie televisiva, ideata, Walt Disney?"
+					"keywords": "serie televisiva, ideata, Walt Disney"
 				},
 				{
 					"language": "fr",
@@ -8460,8 +11720,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién inspiro a Vincent Van Gogh?",
-					"keywords": "persona, inpiracion, Vincent Van Gogh"
+					"string": "¿Quién inspiro a Vincent van Gogh?",
+					"keywords": "persona, inpiracion, Vincent van Gogh"
 				},
 				{
 					"language": "it",
@@ -8499,7 +11759,12 @@
 					]
 				},
 				"results": {
-					"bindings": [
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Adolphe_Monticelli"
+							}
+						},
 						{
 							"uri": {
 								"type": "uri",
@@ -8753,7 +12018,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/John_Augustus_Roebling"
+							"value": "http://dbpedia.org/resource/John_A._Roebling"
 						}
 					}]
 				}
@@ -9162,6 +12427,77 @@
 			}]
 		},
 		{
+			"id": "163",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "To which party does the mayor of Paris belong?",
+					"keywords": "party, mayor of Paris, belong"
+				},
+				{
+					"language": "fa",
+					"string": "شهردار پاریس عضو چه حزبی است؟",
+					"keywords": "شهردار پاریس، حزب"
+				},
+				{
+					"language": "de",
+					"string": "Welcher Partei gehört die Bürgermeisterin von Paris an?",
+					"keywords": "Paris, Bürgermeisterin, Partei"
+				},
+				{
+					"language": "es",
+					"string": "¿A qué partido politico pertenece el alcalde de París?",
+					"keywords": "partido politico, alcalde de París"
+				},
+				{
+					"language": "it",
+					"string": "A quale partito polito appartiene il sindaco di Parigi?",
+					"keywords": "partito politico, sindaco di Parigi, appartiene"
+				},
+				{
+					"language": "fr",
+					"string": "Quel est le parti politique du maire de Paris?",
+					"keywords": "parti politique, maire, Paris"
+				},
+				{
+					"language": "nl",
+					"string": "Tot welke partij behoort de burgemeester van Parijs?",
+					"keywords": "partij, burgemeester, Parijs"
+				},
+				{
+					"language": "hi_IN",
+					"string": "पेरिस के महापौर किस पार्टी के हैं?",
+					"keywords": "पेरिस, महापौर, पार्टी"
+				},
+				{
+					"language": "ro",
+					"string": "Cărui partid aparține primarul Parisului?",
+					"keywords": "partid, primarul Parisului, aparține"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Paris> <http://dbpedia.org/ontology/mayor> ?x . ?x <http://dbpedia.org/ontology/party> ?uri . }"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Socialist_Party_(France)"
+						}
+					}]
+				}
+			}]
+		},
+		{
 			"id": "164",
 			"answertype": "resource",
 			"aggregation": false,
@@ -9179,8 +12515,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién escribió el libro Los pilares de la Tierra?",
-					"keywords": "escritor, libro, Los pilares de la Tierra"
+					"string": "¿Quen escribió el libro Los pilares de la Tierra?",
+					"keywords": "escritor, libro, Pilares de la Tierra"
 				},
 				{
 					"language": "it",
@@ -9228,6 +12564,72 @@
 			}]
 		},
 		{
+			"id": "165",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who was the 16th president of the United States?",
+					"keywords": "United States, 16th president"
+				},
+				{
+					"language": "de",
+					"string": "Wer war der 16. Präsident der Vereinigten Staaten?",
+					"keywords": "Vereinigte Staaten, 16. Präsident"
+				},
+				{
+					"language": "es",
+					"string": "¿Quién fue el 16th presidente de los Estados Unidos?",
+					"keywords": "estados unidos, primer presidente"
+				},
+				{
+					"language": "it",
+					"string": "Chi è stato il sedicesimo presidente degli Stati Uniti?",
+					"keywords": "Stati Uniti, sedicesimo presidente"
+				},
+				{
+					"language": "fr",
+					"string": "Qui fut le premier président des États-Unis?",
+					"keywords": "Etats-Unis, premier président"
+				},
+				{
+					"language": "nl",
+					"string": "Wie was de 16de president van de Verenigde Staten?",
+					"keywords": "Verenigde Staten, 16de president"
+				},
+				{
+					"language": "hi_IN",
+					"string": "संयुक्त राज्य के 16 वें राष्ट्रपति कौन थे?",
+					"keywords": "संयुक्त राज्य, 16 वें राष्ट्रपति"
+				},
+				{
+					"language": "ro",
+					"string": "Cine a fost primul președinte al Statelor Unite?",
+					"keywords": "Statele Unite, primul președinte"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri\nWHERE {\n         ?uri dbo:office 'President of the United States' .\n         ?uri dbo:orderInOffice '16th' .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Abraham_Lincoln"
+						}
+					}]
+				}
+			}]
+		},
+		{
 			"id": "166",
 			"answertype": "number",
 			"aggregation": false,
@@ -9245,8 +12647,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Qué alto es el Monte Manaslu?",
-					"keywords": "Monte Manaslu, altura"
+					"string": "¿Qué alto es el Monte Everest?",
+					"keywords": "Monte Everest, altura"
 				},
 				{
 					"language": "it",
@@ -9282,7 +12684,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "8163.0"
+							"value": "8848.0"
 						}
 					}]
 				}
@@ -9448,8 +12850,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Cuál es la moneda de la República Checa?",
-					"keywords": "moneda, República Checa"
+					"string": "¿Cuál es la moneda de la república checa?",
+					"keywords": "moneda, república checa"
 				},
 				{
 					"language": "it",
@@ -9627,7 +13029,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién es el hijo de Sonny y Cher?",
-					"keywords": "hijo, Sonny y Cher?"
+					"keywords": "hijo, Sonny y Cher"
 				},
 				{
 					"language": "it",
@@ -9834,7 +13236,7 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Cuándo se fundó Jack Wolfskin?",
+					"string": "¿Cúando se fundó Jack Wolfskin?",
 					"keywords": "Jack Wolfskin, fundada"
 				},
 				{
@@ -9901,7 +13303,7 @@
 				{
 					"language": "es",
 					"string": "¿Quién es el alcalde de Rotterdam?",
-					"keywords": "alcalde,Rotterdam"
+					"keywords": "alcalde de Rotterdam"
 				},
 				{
 					"language": "it",
@@ -10085,7 +13487,79 @@
 				}
 			}]
 		},
-
+		{
+			"id": "179",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who are the parents of the wife of Juan Carlos I?",
+					"keywords": "Juan Carlos I, wife, parents"
+				},
+				{
+					"language": "de",
+					"string": "Wer sind die Eltern der Frau von Juan Carlos I?",
+					"keywords": "Juan Carlos I, Frau, Eltern"
+				},
+				{
+					"language": "es",
+					"string": "¿Quién son los padres de la esposa de Juan Carlos I?",
+					"keywords": "padres, esposa, Juan Carlos I"
+				},
+				{
+					"language": "it",
+					"string": "Chi sono i genitori della moglie di Juan Carlos I?",
+					"keywords": "Juan Carlos I, moglie, genitori"
+				},
+				{
+					"language": "fr",
+					"string": "Qui sont les parents de l'épouse de Juan Carlos Ier?",
+					"keywords": "parents, épouse, Juan Carlos Ier"
+				},
+				{
+					"language": "nl",
+					"string": "Hoe heten de ouders van de vrouw van Juan Carlos I?",
+					"keywords": "ouders, vrouw van, Juan Carlos I"
+				},
+				{
+					"language": "hi_IN",
+					"string": "जुआन कार्लोस-१ की पत्नी के माता-पिता कौन हैं?",
+					"keywords": "जुआन कार्लोस-१, पत्नी, माता-पिता"
+				},
+				{
+					"language": "ro",
+					"string": "Cine sunt părinții soției lui Juan Carlos I?",
+					"keywords": "Juan Carlos I, soție, părinți"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX res: <http://dbpedia.org/resource/> \nSELECT DISTINCT ?uri \nWHERE { \n        res:Juan_Carlos_I_of_Spain dbo:spouse ?x . \n        ?x dbo:parent ?uri . \n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Frederica_of_Hanover"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Paul_of_Greece"
+							}
+						}
+					]
+				}
+			}]
+		},
 		{
 			"id": "180",
 			"answertype": "boolean",
@@ -10273,7 +13747,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Bakhdida"
+							"value": "http://dbpedia.org/resource/Greenhorn,_Oregon"
 						}
 					}]
 				}
@@ -10478,7 +13952,7 @@
 				{
 					"language": "es",
 					"string": "¿Es el lago Baikal mayor que el lago Great Bear?",
-					"keywords": "lago Baikal,mayor que,lago Great Bear"
+					"keywords": "lago Baikal, mayor,lago Great Bear"
 				},
 				{
 					"language": "it",
@@ -10577,6 +14051,127 @@
 			}]
 		},
 		{
+			"id": "188",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Give me all books by William Goldman with more than 300 pages.",
+					"keywords": "book, William Goldman, pages, more than 300"
+				},
+				{
+					"language": "de",
+					"string": "Gib mir alle Bücher von William Goldman mit mehr als 300 Seiten.",
+					"keywords": "Buch, William Goldman, Seiten, mehr als 300"
+				},
+				{
+					"language": "es",
+					"string": "Dame todos los libros de Wiliam Goldman con más de 300 páginas.",
+					"keywords": "libro, William Goldman, más de 300 páginas"
+				},
+				{
+					"language": "it",
+					"string": "Dammi tutti i libri di Wiliam Goldman con più di 300 pagine.",
+					"keywords": "libro, Wiliam Goldman, pagine, più di 300"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi tous les livres de William Goldman avec plus de 300 pages.",
+					"keywords": "livres, William Goldman, plus de 300 pages"
+				},
+				{
+					"language": "nl",
+					"string": "Geef alle boeken van William Goldman met meer dan 300 pagina's.",
+					"keywords": "boeken, William Goldman, meer dan 300 pagina's"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मुझे ३०० से अधिक पृष्ठों के साथ विलियम गोल्डमैन की किताबें की सूचि बतायें।",
+					"keywords": "३०० से अधिक पृष्ठों, विलियम गोल्डमैन, किताबें"
+				},
+				{
+					"language": "ro",
+					"string": "Dă-mi toate carțile de William Glodman cu mai mult de 300 de pagini.",
+					"keywords": "carte, William Goldman, pagini, mai mult de 300"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri \nWHERE {\n        ?uri rdf:type dbo:Book .\n        ?uri dbo:author res:William_Goldman .\n        ?uri dbo:numberOfPages ?x .\n        FILTER (?x > 300)\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Marathon_Man_(novel)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Which_Lie_Did_I_Tell%3F"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Hype_and_Glory"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Tinsel_(novel)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Boys_and_Girls_Together"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Control_(novel)"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Color_of_Light"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/The_Princess_Bride"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Wait_Till_Next_Year"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Brothers_(Goldman_novel)"
+							}
+						}
+					]
+				}
+			}]
+		},
+		{
 			"id": "189",
 			"answertype": "resource",
 			"aggregation": false,
@@ -10631,10 +14226,82 @@
 			"query": {
 				"sparql": "SELECT DISTINCT ?uri WHERE {  <http://dbpedia.org/resource/Fort_Knox> <http://dbpedia.org/property/location> ?uri . }"
 			},
-			"answers": [{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Kentucky" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Fort_Knox__location__1" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Kentucky"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "190",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "In which U.S. state is Fort Knox located?",
+					"keywords": "Fort Knox, located, U.S. state"
+				},
+				{
+					"language": "de",
+					"string": "In welchem US-Bundesstaat liegt Fort Knox?",
+					"keywords": "Fort Knox, liegen, US-Bundesstaat"
+				},
+				{
+					"language": "es",
+					"string": "¿En qué estado american se encuentra Fort Knox?",
+					"keywords": "Fort Knox, se encuentra, estado americano"
+				},
+				{
+					"language": "it",
+					"string": "In quale stato americano si trova Fort Knox?",
+					"keywords": "Fort Knox, trovarsi, stato americano"
+				},
+				{
+					"language": "fr",
+					"string": "Dans quel état américain se trouve Fort Knox?",
+					"keywords": "état américain, Fort Knox"
+				},
+				{
+					"language": "nl",
+					"string": "In welke staat van de Verenigde Staten ligt Fort Knox?",
+					"keywords": "Fort Knox, staat van de Verenigde Staten, ligt"
+				},
+				{
+					"language": "hi_IN",
+					"string": "सैयुक्त राज्य के किस राज्य में फोर्ट नॉक्स स्थित है?",
+					"keywords": "सैयुक्त राज्य, फोर्ट नॉक्स, स्थित"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri\nWHERE {\n\tres:Fort_Knox dbp:location ?uri .\n        ?uri dbo:country res:United_States .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Kentucky"
+						}
+					}]
+				}
+			}]
 		},
 		{
 			"id": "191",
@@ -10856,7 +14523,72 @@
 				}
 			}]
 		},
-
+		{
+			"id": "194",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which scientist is known for the Manhattan Project and the Nobel Peace Prize?",
+					"keywords": "scientist, known for, Manhattan Project, Nobel Peace Prize"
+				},
+				{
+					"language": "de",
+					"string": "Welcher Wissenschaftler ist bekannt für das Manhattan-Projekt und den Friedensnobelpreis?",
+					"keywords": "Wissenschaftler, bekannt für, Manhattan-Projekt, Friedensnobelpreis"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué científicos son conocidos por el proyecto Manhattan y el premio Nobel de la Paz?",
+					"keywords": "científico, conocidos, proyecto Manhattan, premio Nobel de la Paz"
+				},
+				{
+					"language": "it",
+					"string": "Quale scienziato è conosciuto per il progetto Manhattan e per il premio Nobel per la pace?",
+					"keywords": "scienziato, conosciuto, progetto Manhattan, premio Nobel per la pace"
+				},
+				{
+					"language": "fr",
+					"string": "Quel chercheur est connu pour le projet Manhattan et le prix Nobel de la paix?",
+					"keywords": "chercheur, projet Manhattan, prix Nobel de la paix"
+				},
+				{
+					"language": "nl",
+					"string": "Welke wetenschaper staat bekend om het Manhattan Project en de Nobelprijs voor de Vrede?",
+					"keywords": "wetenschaper, bekend om, Manhattan Project, Nobelprijs voor de Vrede"
+				},
+				{
+					"language": "hi_IN",
+					"string": "कौन सा वैज्ञानिक मैनहट्टन प्रोजेक्ट और नोबेल शांति पुरस्कार के लिए जाना जाता है?",
+					"keywords": "वैज्ञानिक, मैनहट्टन प्रोजेक्ट, नोबेल, शांति पुरस्कार"
+				},
+				{
+					"language": "ro",
+					"string": "Care om de știință este cunoscut pentru proiectul Manhattan și pentru premiul Nobel pentru pace?",
+					"keywords": "om de știință, cunoscut pentru, proiect Manhattan, premiul Nobel pentru pace"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri\nWHERE {\n        ?uri dbo:knownFor res:Manhattan_Project .\n        ?uri rdf:type dbo:Scientist .\n        ?uri dbo:knownFor res:Nobel_Peace_Prize .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Joseph_Rotblat"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "195",
 			"answertype": "resource",
@@ -10990,6 +14722,86 @@
 			}]
 		},
 		{
+			"id": "196",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Give me all cities in New Jersey with more than 100000 inhabitants.",
+					"keywords": "New Jersey, city, inhabitants, more than 100000"
+				},
+				{
+					"language": "de",
+					"string": "Gib mir alle Städte in New Jersey, die mehr als 100000 Einwohner haben.",
+					"keywords": "New Jersey, Stadt, Einwohner, mehr als 100000"
+				},
+				{
+					"language": "es",
+					"string": "Dame todas las cuidades en New Jersey que tengan más de 100000 habitantes.",
+					"keywords": "New Jersey, ciudad, habitantes, más de 100000"
+				},
+				{
+					"language": "it",
+					"string": "Dammi tutte le città del New Jersey con più di 100000 abitanti.",
+					"keywords": "New Jersey, città, abitanti, più di 100000"
+				},
+				{
+					"language": "fr",
+					"string": "Donnes-moi toutes les villes du New Jersey avec plus de 100000 habitants.",
+					"keywords": "New Jersey, villes, habitants, plus de 100000"
+				},
+				{
+					"language": "nl",
+					"string": "Geef alle steden in New Jersey met meer dan 100000 inwoners.",
+					"keywords": "New Jersey, stad, inwoners, meer dan 100000"
+				},
+				{
+					"language": "hi_IN",
+					"string": "मुझे न्यू जर्सी के १००००० से अधिक निवासियों के साथ सभी शहरों की सूचि बतायें।",
+					"keywords": "न्यू जर्सी, १००००० से अधिक निवासि, शहर"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX dbp: <http://dbpedia.org/property/>\nPREFIX res: <http://dbpedia.org/resource/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?uri \nWHERE {\n\t?uri rdf:type dbo:City .\n        ?uri dbo:isPartOf res:New_Jersey .\n        ?uri dbp:populationTotal ?inhabitants .\n        FILTER (?inhabitants > 100000) .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Newark,_New_Jersey"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Jersey_City,_New_Jersey"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Elizabeth,_New_Jersey"
+							}
+						},
+						{
+							"uri": {
+								"type": "uri",
+								"value": "http://dbpedia.org/resource/Paterson,_New_Jersey"
+							}
+						}
+					]
+				}
+			}]
+		},
+		{
 			"id": "197",
 			"answertype": "resource",
 			"aggregation": true,
@@ -11054,7 +14866,7 @@
 					"bindings": [{
 						"uri": {
 							"type": "uri",
-							"value": "http://dbpedia.org/resource/Metropolitan_Museum_of_Art"
+							"value": "http://dbpedia.org/resource/Museum_of_Motherhood"
 						}
 					}]
 				}
@@ -11126,7 +14938,57 @@
 				}
 			}]
 		},
-
+		{
+			"id": "199",
+			"answertype": "boolean",
+			"aggregation": true,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Does the new Battlestar Galactica series have more episodes than the old one?",
+					"keywords": "new BattleStar Galactica series, episodes, more, old Battle Star Galactica series"
+				},
+				{
+					"language": "de",
+					"string": "Hat die neue Battlestar-Galactica-Serie mehr Episoden als die alte?",
+					"keywords": "neue Battlestar-Galactica-Serie, Episoden, mehr, alte Battlestar-Galactica-Serie"
+				},
+				{
+					"language": "es",
+					"string": "¿Tiene la nueve serie de Battlestar-Galactica más episodios que la anterior?",
+					"keywords": "nueve serie de Battlestar-Galactica, más episodios que la anterior"
+				},
+				{
+					"language": "it",
+					"string": "La nuova serie di Battlestar Galactica ha più episodi di quella precedente?",
+					"keywords": "nuova serie di Battlestar Galactica, più episodi della precedente"
+				},
+				{
+					"language": "fr",
+					"string": "A la nouvelle série de Battlestar Galactica plus d'épisodes que l'ancienne?",
+					"keywords": "nouvelle série de Battlestar Galactica, plus d'épisodes que l'ancienne"
+				},
+				{
+					"language": "nl",
+					"string": "Heeft de nieuwe Battlestar Galactica-serie meer afleveringen dan de oude?",
+					"keywords": "nieuwe Battlestar Galactica-serie, meer afleveringen, oude Battlestar Galactica-serie"
+				},
+				{
+					"language": "hi_IN",
+					"string": "क्या नई बट्ट्लैस्टार गैलेक्टिका सीरीज़ के पुराने संस्करणों की तुलना में अधिक एपिसोड हैं?",
+					"keywords": "नई बट्ट्लैस्टार गैलेक्टिका सीरीज़, पुराने संस्करणों, अधिक एपिसोड"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nASK \nWHERE {\n\t<http://dbpedia.org/resource/Battlestar_Galactica_%281978_TV_series%29> dbo:numberOfEpisodes ?x .\n\t<http://dbpedia.org/resource/Battlestar_Galactica_%282004_TV_series%29> dbo:numberOfEpisodes ?y .\n\tFILTER (?y > ?x)\n}"
+			},
+			"answers": [{
+				"head": {},
+				"results": {},
+				"boolean": false
+			}]
+		},
 		{
 			"id": "200",
 			"answertype": "resource",
@@ -11211,8 +15073,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién desarrolló el videojuego World of Warcraft?",
-					"keywords": "videojuego, World of Warcraft, desarrollar"
+					"string": "¿Quién desarrolló el videojuego Warcraft?",
+					"keywords": "videojuego, Warcraft, desarrollar"
 				},
 				{
 					"language": "it",
@@ -11254,7 +15116,72 @@
 				}
 			}]
 		},
-
+		{
+			"id": "202",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who was the pope that founded the Vatican Television?",
+					"keywords": "pope, founded, Vatican Television"
+				},
+				{
+					"language": "de",
+					"string": "Welcher Papst hat das Vatikanische Fernsehen gegründet?",
+					"keywords": "Papst, gegründet, Vatikanisches Fernsehen"
+				},
+				{
+					"language": "es",
+					"string": "¿Quien fue el papa que fundo la televisión Vaticana?",
+					"keywords": "papa, fundo, televisión Vaticana"
+				},
+				{
+					"language": "it",
+					"string": "Quale papa ha fondato la televisione vaticana?",
+					"keywords": "papa, fondare, televisione vaticana"
+				},
+				{
+					"language": "fr",
+					"string": "Quel pape est le fondateur de la télé du Vatican?",
+					"keywords": "pape, fondateur, télé du Vatican"
+				},
+				{
+					"language": "nl",
+					"string": "Welk paus richtte de Vaticaanse televisie op?",
+					"keywords": "paus, oprichter, Vaticaanse televisie"
+				},
+				{
+					"language": "hi_IN",
+					"string": "किस पोप ने वेटिकन टेलीविजन की स्थापना की थी?",
+					"keywords": "पोप, वेटिकन टेलीविजन, स्थापना"
+				},
+				{
+					"language": "ro",
+					"string": "Cine a fost papa care a creat televiziunea din Vatican?",
+					"keywords": "papa, fondat, televiziunea din Vatican"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/> \nPREFIX res: <http://dbpedia.org/resource/> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nSELECT ?uri \nWHERE { \n         ?uri rdf:type dbo:Pope . \n         res:Vatican_Television_Center dbo:foundedBy ?uri .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Pope_John_Paul_II"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "203",
 			"answertype": "resource",
@@ -11273,8 +15200,8 @@
 				},
 				{
 					"language": "es",
-					"string": "¿Quién compuso la música para Piratas del Caribe?",
-					"keywords": "Piratas del Caribe, música, compositor"
+					"string": "¿Quién compuso la música para Harold y Maude?",
+					"keywords": "Harold y Maude, música, compositor"
 				},
 				{
 					"language": "it",
@@ -11298,16 +15225,23 @@
 				}
 			],
 			"query": {
-				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:Pirates_of_the_Caribbean_(film_series) dbo:musicComposer ?uri .\n}"
+				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/>\nSELECT DISTINCT ?uri \nWHERE {\n\tres:Harold_and_Maude dbo:musicComposer ?uri .\n}"
 			},
-			"answers": [
-{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Klaus_Badelt" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Hans_Zimmer" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Eric_Whitacre" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Geoff_Zanelli" }},
-    { "uri": { "type": "uri", "value": "http://dbpedia.org/resource/Rodrigo_y_Gabriela" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Cat_Stevens"
+						}
+					}]
+				}
+			}]
 		},
 		{
 			"id": "204",
@@ -11393,8 +15327,148 @@
 				}
 			}]
 		},
-
-
+		{
+			"id": "205",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Who is starring in Spanish movies produced by Benicio del Toro?",
+					"keywords": "starring, Spanish movies, produced, Benicio del Toro"
+				},
+				{
+					"language": "fa",
+					"string": "چه کسی در فیلم های اسپانیایی تولید شده توسط بنیسیو دل تورو بازی می کند؟",
+					"keywords": "فیلم های اسپانیایی، تولید، بنیسیو دل تورو، بازی"
+				},
+				{
+					"language": "de",
+					"string": "Wer spielt alles in spanischen Filmen produziert von Benicio del Toro mit? ",
+					"keywords": "mitspielen, spanische Filme, produziert, Benicio del Toro"
+				},
+				{
+					"language": "es",
+					"string": "¿Quien protagoniza peliculas españolas producidas por Benicio del Toro?",
+					"keywords": "protagonista, peliculas españolas, productor, Benicio del Toro"
+				},
+				{
+					"language": "it",
+					"string": "Chi recita nei film spagnoli prodotti da Benicio del Toro?",
+					"keywords": "attori, film spagnoli, prodotti, Benicio del Toro"
+				},
+				{
+					"language": "fr",
+					"string": "Quels acteurs jouent dans des films dirigés par Benicio del Toro?",
+					"keywords": "acteurs, directeur, Benicio del Toro"
+				},
+				{
+					"language": "nl",
+					"string": "Wie speeld in Spaanse films geproduceerd door Benicio del Toro?",
+					"keywords": "speeld, Spaanse films, geproduceerd, Benicio del Toro"
+				},
+				{
+					"language": "hi_IN",
+					"string": "बेनिसीओ डेल टोरो द्वारा निर्मित स्पेनिश फिल्मों में कौन अभिनय करता है?",
+					"keywords": "बेनिसीओ डेल टोरो, निर्मित, स्पेनिश फिल्म, अभिनय"
+				},
+				{
+					"language": "ro",
+					"string": "Cine sunt protagoniști în filmele spaniole produse de Benicio del Toro?",
+					"keywords": "protagoniști, filmele spaniole, produse, Benicio del Toro"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { ?film <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> . ?film <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/Spain> . ?film <http://dbpedia.org/ontology/producer> <http://dbpedia.org/resource/Benicio_del_Toro> . ?film <http://dbpedia.org/ontology/starring> ?uri . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Person> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Benicio_del_Toro"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "206",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which subsidiary of TUI Travel serves both Glasgow and Dublin?",
+					"keywords": "subsidiary, TUI Travel, serve, Glasgow, Dublin"
+				},
+				{
+					"language": "fa",
+					"string": "چه شرکت های تابعی از تی.یو.آی. تراول به هر دوی گلاسگو و دوبلین سرویس دارند؟",
+					"keywords": "شرکت های تابعی، تی.یو.آی. تراول، گلاسگو، دوبلین، سرویس"
+				},
+				{
+					"language": "de",
+					"string": "Welche Tochtergesellschaft von TUI Travel fliegt sowohl Glasgow als auch Dublin an?",
+					"keywords": "Tochtergesellschaft, TUI Travel, anfliegen, Glasgow, Dublin"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué subsidiario de TUI Travel vuela en Glasgow y en Dublin?",
+					"keywords": "subsidiario, TUI Travel, vuela, Glasgow, Dublin"
+				},
+				{
+					"language": "it",
+					"string": "Quale società sussidiaria di TUI Travel serve sia Dortmund che Dublino?",
+					"keywords": "società sussidiaria di TUI Travel, servire, Glasgow, Dublin"
+				},
+				{
+					"language": "fr",
+					"string": "Quelle subsidiaire de TUI Travel vole sur Glasgow et Dublin?",
+					"keywords": "subsidiaire, TUI Travel, vole sur, Glasgow, Dublin"
+				},
+				{
+					"language": "nl",
+					"string": "Welke dochteronderneming van TUI Travel bedient zowel Glasgow en Dublin?",
+					"keywords": "dochteronderneming, TUI Travel, bedient, Glasgow, Dublin"
+				},
+				{
+					"language": "hi_IN",
+					"string": "टीयूआई ट्रैवल की कौन सी सहायक कंपनी ग्लासगो और डबलिन को सेवाएं देती है?",
+					"keywords": "टीयूआई ट्रैवल, सहायक कंपनी, ग्लासगो, डबलिन, सेवा?"
+				},
+				{
+					"language": "ro",
+					"string": "Care filială a TUI Travel deservește atât Glasgow cât și Dublin?",
+					"keywords": "filială, TUI Travel, deservește, Glasgow, Dublin"
+				}
+			],
+			"query": {
+				"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/TUI_Travel> <http://dbpedia.org/ontology/subsidiary> ?uri .  ?uri <http://dbpedia.org/ontology/targetAirport> <http://dbpedia.org/resource/Glasgow_Airport> . ?uri <http://dbpedia.org/ontology/targetAirport> <http://dbpedia.org/resource/Dublin_Airport> . } "
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Thomson_Airways"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "207",
 			"answertype": "resource",
@@ -11414,7 +15488,7 @@
 				{
 					"language": "es",
 					"string": "¿En que país se sitúa la Meca?",
-					"keywords": "pais, Meca"
+					"keywords": "pais Meca"
 				},
 				{
 					"language": "it",
@@ -11514,7 +15588,7 @@
 				}
 			],
 			"query": {
-				"sparql": "SELECT (COUNT(DISTINCT ?uri) as ?c) WHERE {<http://dbpedia.org/resource/Colombia> <http://dbpedia.org/ontology/language> ?uri . } "
+				"sparql": "SELECT (COUNT(DISTINCT ?uri) as ?c) WHERE {  ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Language> .  <http://dbpedia.org/resource/Colombia> <http://dbpedia.org/ontology/language> ?uri . } "
 			},
 			"answers": [{
 				"head": {
@@ -11526,7 +15600,7 @@
 					"bindings": [{
 						"c": {
 							"type": "literal",
-							"value": "3"
+							"value": "2"
 						}
 					}]
 				}
@@ -11556,7 +15630,7 @@
 				{
 					"language": "es",
 					"string": "¿Cuál es el estadio más grande de España?",
-					"keywords": "estadio más grande ,España"
+					"keywords": "estadio más grande España"
 				},
 				{
 					"language": "it",
@@ -11603,7 +15677,67 @@
 				}
 			}]
 		},
-
+		{
+			"id": "210",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Which professional surfers were born on the Philippines?",
+					"keywords": "professional surfer, born, Philippines"
+				},
+				{
+					"language": "de",
+					"string": "Welche Profisurfer wurden auf den Philippinen geboren?",
+					"keywords": "Profisurfer, geboren, Philippinen"
+				},
+				{
+					"language": "es",
+					"string": "¿Qué surfistas profesionales nacieron en las Filipinas?",
+					"keywords": "surfista profesional, nacido, Filipinas"
+				},
+				{
+					"language": "it",
+					"string": "Quali surfisti professionisti sono nati nelle Filippine?",
+					"keywords": "surfista professionista, nato, Filippine"
+				},
+				{
+					"language": "fr",
+					"string": "Quels surfeurs professionels sont nés aux Philippines?",
+					"keywords": "surfeurs professionels, Philippines"
+				},
+				{
+					"language": "nl",
+					"string": "Welke professionele surfers werden geboren op de Filipijnen?",
+					"keywords": "professionele surfer, Filipijnen"
+				},
+				{
+					"language": "hi_IN",
+					"string": "फिलीपींस पर कौन से पेशेवर सर्फर्स पैदा हुए थे?",
+					"keywords": "फिलीपींस, पेशेवर सर्फर्स, पैदा"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX dbo: <http://dbpedia.org/ontology/>\nPREFIX res: <http://dbpedia.org/resource/>\nSELECT DISTINCT ?uri\nWHERE {\n\t?uri dbo:occupation res:Surfing .\n\t?uri dbo:birthPlace res:Philippines .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Marcus_Adoro"
+						}
+					}]
+				}
+			}]
+		},
 		{
 			"id": "211",
 			"answertype": "resource",
@@ -11811,11 +15945,87 @@
 			"query": {
 				"sparql": "SELECT DISTINCT ?d WHERE { <http://dbpedia.org/resource/Diana,_Princess_of_Wales> <http://dbpedia.org/ontology/deathDate> ?d . }"
 			},
-			"answers": [
-{ "head": { "link": [], "vars": ["uri"] },
-  "results": { "distinct": false, "ordered": true, "bindings": [
-    { "uri": { "type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#date", "value": "1997-08-31" }},
-    { "uri": { "type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#date", "value": "1997-8-31" }} ] } }]
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "1997-08-31"
+						}
+					}]
+				}
+			}]
+		},
+		{
+			"id": "214",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": true,
+			"hybrid": false,
+			"question": [{
+					"language": "en",
+					"string": "Where in France is sparkling wine produced?",
+					"keywords": "produced, France, sparkling wine"
+				},
+				{
+					"language": "de",
+					"string": "Wo in Frankreich wird Schaumwein hergestellt?",
+					"keywords": "Frankreich, hergestellt, Schaumwein"
+				},
+				{
+					"language": "es",
+					"string": "¿Dónde en Francia se produce el vino espumoso?",
+					"keywords": "produce, Francia, vino espumoso"
+				},
+				{
+					"language": "it",
+					"string": "Dove si produce vino frizzante in Francia?",
+					"keywords": "produrre, Francia, vino frizzante"
+				},
+				{
+					"language": "fr",
+					"string": "Où produit-on du vin mousseux en France?",
+					"keywords": "france, produit, vin mousseux"
+				},
+				{
+					"language": "nl",
+					"string": "Waar in Frankrijk word mousserende wijn geproduceerd?",
+					"keywords": "Frankrijk, mousserende wijn, geproduceerd"
+				},
+				{
+					"language": "hi_IN",
+					"string": "फ्रांस में स्पार्कलिंग वाइन का उत्पादन कहाँ होता है?",
+					"keywords": "फ्रांस, स्पार्कलिंग वाइन, उत्पादन"
+				},
+				{
+					"language": "ro",
+					"string": "Unde în Franța este produs vinul spumant?",
+					"keywords": "produs, Franța, vin spumant"
+				}
+			],
+			"query": {
+				"sparql": "PREFIX res: <http://dbpedia.org/resource/>\nPREFIX dbo: <http://dbpedia.org/ontology/> \nSELECT DISTINCT ?uri\nWHERE {\n        ?uri dbo:wineProduced res:Sparkling_wine .\n        ?uri dbo:location res:France .\n}"
+			},
+			"answers": [{
+				"head": {
+					"vars": [
+						"uri"
+					]
+				},
+				"results": {
+					"bindings": [{
+						"uri": {
+							"type": "uri",
+							"value": "http://dbpedia.org/resource/Loire_Valley_(wine)"
+						}
+					}]
+				}
+			}]
 		}
 	]
 }

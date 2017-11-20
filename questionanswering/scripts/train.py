@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     print('Loading corpus...')
 
-    pathTrainData = r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json'
+    pathTrainData = r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/TrainData.json'
 
 
     with open(pathTrainData, 'r') as data_file:
@@ -36,7 +36,6 @@ if __name__ == '__main__':
     print('Loading Property Mapping extra corpus')
 
     nlp = spacy.load('es_default', parser=False)
-    propertyCorpus = [[{'leader,presidente':True}],[1]]
 
     """print('Loading StanfordCoreNLP...')
 
@@ -45,7 +44,7 @@ if __name__ == '__main__':
     """
     
     print('Training model...')
-    model = ClassAnswerType(questions=questionsSample,propCorpus=propertyCorpus,nlp=nlp)
+    model = ClassAnswerType(questions=questionsSample,nlp=nlp)
 
     print('Saving...')
     filename = opts['-o']

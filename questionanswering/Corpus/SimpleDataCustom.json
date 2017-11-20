@@ -1,0 +1,923 @@
+{
+	"dataset": {
+		"id": "qald-7-train-multilingual"
+	},
+	"questions": [{
+		"id": "3000",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quién es la consorte de Barack Obama?",
+				"keywords": "consorte,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3001",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quién es la cónyuge de Barack Obama?",
+				"keywords": "cónyuge,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3002",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quién es la compañera de Barack Obama?",
+				"keywords": "compañera,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3003",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quién es la pareja de Barack Obama?",
+				"keywords": "pareja,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3004",
+		"answertype": "number",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos habitantes tiene la Argentina?",
+				"keywords": "habitantes,Argentina"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "43417000"}}]}}]
+	},{
+		"id": "3005",
+		"answertype": "number",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos residentes tiene la Argentina?",
+				"keywords": "residentes,Argentina"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "43417000"}}]}}]
+	},{
+		"id": "3006",
+		"answertype": "number",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos pobladores tiene la Argentina?",
+				"keywords": "pobladores,Argentina"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "43417000"}}]}}]
+	},{
+		"id": "3007",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el sucesor de Sylvester Stallone?",
+				"keywords": "Sylvester Stallone,sucesor"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Sylvester_Stallone dbo:child ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Sage_Stallone"}}]}}]
+	},{
+		"id": "3008",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el retoño de Sylvester Stallone?",
+				"keywords": "Sylvester Stallone,retoño"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Sylvester_Stallone dbo:child ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Sage_Stallone"}}]}}]
+	},{
+		"id": "3009",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el heredero de Sylvester Stallone?",
+				"keywords": "Sylvester Stallone,retoño"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Sylvester_Stallone dbo:child ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Sage_Stallone"}}]}}]
+	},{
+		"id": "3010",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos empleados tiene Google?",
+				"keywords": "Google,empleados"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+	},{
+		"id": "3011",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos dependientes tiene Google?",
+				"keywords": "Google,dependientes"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+	},{
+		"id": "3012",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos trabajadores tiene Google?",
+				"keywords": "Google,trabajadores"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+	},{
+		"id": "3013",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos asalariados tiene Google?",
+				"keywords": "Google,asalariados"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+	},{
+		"id": "3014",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos visitantes recibe Louvre?",
+				"keywords": "Louvre,visitantes"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}}]
+	},{
+		"id": "3015",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos turistas recibe Louvre?",
+				"keywords": "Louvre,turistas"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}}]
+	},{
+		"id": "3016",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuantos invitados recibe Louvre?",
+				"keywords": "Louvre,invitados"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}}]
+	},{
+		"id": "3017",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el retratista de la Mona Lisa?",
+				"keywords": "Mona Lisa,retratista"
+			}
+		],
+		"query": {
+			"sparql": "select DISTINCT ?uri Where { dbr:Mona_Lisa dbo:author ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Leonardo_da_Vinci"}}]}}]
+	},{
+		"id": "3018",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el acuarelista de la Mona Lisa?",
+				"keywords": "Mona Lisa,retratista"
+			}
+		],
+		"query": {
+			"sparql": "select DISTINCT ?uri Where { dbr:Mona_Lisa dbo:author ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Leonardo_da_Vinci"}}]}}]
+	},{
+		"id": "3019",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el magistrado de Rennes?",
+				"keywords": "Rennes,magistrado"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Nathalie_Appéré"}}]}}]
+	},{
+		"id": "3020",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el regidor de Rennes?",
+				"keywords": "Rennes,regidor"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Nathalie_Appéré"}}]}}]
+	},{
+		"id": "3021",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el hospedador de BBC Special Wildlife?",
+				"keywords": "hospedador, BBC Wildlife Specials"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { dbr:BBC_Wildlife_Specials dbo:presenter ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/David_Attenborough"}}]}}]
+	},{
+		"id": "3022",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el convidante de BBC Special Wildlife?",
+				"keywords": "convidante, BBC Wildlife Specials"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { dbr:BBC_Wildlife_Specials dbo:presenter ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/David_Attenborough"}}]}}]
+	},{
+		"id": "3023",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cuanto se gasto en Pulp Fiction?",
+				"keywords": "gasto,Pulp Fiction"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://dbpedia.org/datatype/usDollar", "value": "8.0"}}]}}]
+	},{
+		"id": "3024",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual fue el precio de producir Pulp Fiction?",
+				"keywords": "precio,Pulp Fiction"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://dbpedia.org/datatype/usDollar", "value": "8.0"}}]}}]
+	},{
+		"id": "3025",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual fue el importe de producir Pulp Fiction?",
+				"keywords": "importe,Pulp Fiction"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://dbpedia.org/datatype/usDollar", "value": "8.0"}}]}}]
+	},{
+		"id": "3026",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Con quien esta vinculado Barack Obama?",
+				"keywords": "vinculado,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3027",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Con quien esta desposado Barack Obama?",
+				"keywords": "desposado,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3028",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Con quien esta unido Barack Obama?",
+				"keywords": "unido,Barack Obama"
+			}
+		],
+		"query": {
+			"sparql": "Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michelle_Obama"}}]}}]
+	},{
+		"id": "3029",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual fue la causa de fallecimiento de Bruce Carver?",
+				"keywords": "Bruce Carver, causa fallecimiento"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Cancer"}}]}}]
+	},{
+		"id": "3030",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual fue la causa de defuncion de Bruce Carver?",
+				"keywords": "Bruce Carver, causa defuncion"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Cancer"}}]}}]
+	},{
+		"id": "3031",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual fue la causa de deceso de Bruce Carver?",
+				"keywords": "Bruce Carver, causa deceso"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Cancer"}}]}}]
+	},{
+		"id": "3032",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es la talla de Claudia Schiffer?",
+				"keywords": "talla,Claudia Schiffer"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#double", "value": "1.81"}}]}}]
+	},{
+		"id": "3033",
+		"answertype": "number",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es la elevacion de Claudia Schiffer?",
+				"keywords": "elevacion,Claudia Schiffer"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}"
+		},
+		
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#double", "value": "1.81"}}]}}]
+	},{
+		"id": "3034",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el autor del libro Los pilares de la Tierra?",
+				"keywords": "autor,libro,Los pilares de la Tierra"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Ken_Follett"}}]}}]
+	},{
+		"id": "3035",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el literato del libro Los pilares de la Tierra?",
+				"keywords": "literato,libro,Los pilares de la Tierra"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Ken_Follett"}}]}}]
+	},{
+		"id": "3036",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el redactor del libro Los pilares de la Tierra?",
+				"keywords": "redactor,libro,Los pilares de la Tierra"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Ken_Follett"}}]}}]
+	},{
+		"id": "3037",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el conquistador de Eris?",
+				"keywords": "conquistador,Eris"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eris_(dwarf_planet)> <http://dbpedia.org/ontology/discoverer> ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michael_E._Brown"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Chad_Trujillo"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/David_L._Rabinowitz"}}]}}]
+	},{
+		"id": "3038",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el colonizador de Eris?",
+				"keywords": "colonizador,Eris"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eris_(dwarf_planet)> <http://dbpedia.org/ontology/discoverer> ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Michael_E._Brown"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Chad_Trujillo"}}, {"uri": {"type": "uri", "value": "http://dbpedia.org/resource/David_L._Rabinowitz"}}]}}]
+	},{
+		"id": "3039",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Que torrente cruza el Brooklyn Bridge?",
+				"keywords": "torrente,cruza,Brooklyn Bridge"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:crosses ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/East_River"}}]}}]
+	},{
+		"id": "3040",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es el lenguaje legal de Surinam?",
+				"keywords": "lenguaje legal,Surinam"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Dutch_language"}}]}}]
+	},{
+		"id": "3041",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es el habla legal de Surinam?",
+				"keywords": "habla legal,Surinam"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Dutch_language"}}]}}]
+	},{
+		"id": "3042",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es el lugar de origen de Bach?",
+				"keywords": "lugar de origen,Bach"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Johann_Sebastian_Bach dbo:birthPlace ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Eisenach"}}]}}]
+	},{
+		"id": "3043",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el inventor de Family Guy?",
+				"keywords": "inventor,Family Guy"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Seth_MacFarlane"}}]}}]
+	},{
+		"id": "3044",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien es el productor de Family Guy?",
+				"keywords": "inventor,Family Guy"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Seth_MacFarlane"}}]}}]
+	},{
+		"id": "3045",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es el dinero de China?",
+				"keywords": "dinero,China"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:China dbo:currency ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Renminbi"}}]}}]
+	},{
+		"id": "3046",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es el metálico de China?",
+				"keywords": "metálico,China"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:China dbo:currency ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Renminbi"}}]}}]
+	},{
+		"id": "3047",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien fue el delineante del Brooklyn Bridge ?",
+				"keywords": "delineante,Brooklyn Bridge"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/John_Augustus_Roebling"}}]}}]
+	},{
+		"id": "3048",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Quien fue el proyectista del Brooklyn Bridge ?",
+				"keywords": "proyectista,Brooklyn Bridge"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/John_Augustus_Roebling"}}]}}]
+	},{
+		"id": "3049",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es la patría de origen de Sitecore?",
+				"keywords": "patría, origen,Sitecore"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { dbr:Sitecore dbo:foundationPlace ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Denmark"}}]}}]
+	},{
+		"id": "3050",
+		"answertype": "resource",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Cual es el estado de procedencia de Sitecore?",
+				"keywords": "estado, procedencia,Sitecore"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { dbr:Sitecore dbo:foundationPlace ?uri . }"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Denmark"}}]}}]
+	}]}

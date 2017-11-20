@@ -1,0 +1,51 @@
+"resource","false","Quién es la consorte de Barack Obama","consorte,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"resource","false","Quién es la cónyuge de Barack Obama","cónyuge,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"resource","false","Quién es la compañera de Barack Obama","compañera,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"resource","false","Quién es la pareja de Barack Obama","pareja,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"number","false","Cuantos habitantes tiene la Argentina","habitantes,Argentina",Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }
+"number","false","Cuantos residentes tiene la Argentina","residentes,Argentina",Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }
+"number","false","Cuantos pobladores tiene la Argentina","pobladores,Argentina",Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }
+"resource","false","Quien es el sucesor de Sylvester Stallone","Sylvester Stallone,sucesor",Select distinct ?uri where { dbr:Sylvester_Stallone dbo:child ?uri }
+"resource","false","Quien es el retoño de Sylvester Stallone","Sylvester Stallone,retoño",Select distinct ?uri where { dbr:Sylvester_Stallone dbo:child ?uri }
+"resource","false","Quien es el heredero de Sylvester Stallone","Sylvester Stallone,retoño",Select distinct ?uri where { dbr:Sylvester_Stallone dbo:child ?uri }
+"number","true","Cuantos empleados tiene Google","Google,empleados",Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }
+"number","true","Cuantos dependientes tiene Google","Google,dependientes",Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }
+"number","true","Cuantos trabajadores tiene Google","Google,trabajadores",Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }
+"number","true","Cuantos asalariados tiene Google","Google,asalariados",Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }
+"number","true","Cuantos visitantes recibe Louvre","Louvre,visitantes",SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}
+"number","true","Cuantos turistas recibe Louvre","Louvre,turistas",SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}
+"number","true","Cuantos invitados recibe Louvre","Louvre,invitados",SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}
+"resource","false","Quien es el retratista de la Mona Lisa","Mona Lisa,retratista",select DISTINCT ?uri Where { dbr:Mona_Lisa dbo:author ?uri }
+"resource","false","Quien es el acuarelista de la Mona Lisa","Mona Lisa,retratista",select DISTINCT ?uri Where { dbr:Mona_Lisa dbo:author ?uri }
+"resource","false","Quien es el magistrado de Rennes","Rennes,magistrado",SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}
+"resource","false","Quien es el regidor de Rennes","Rennes,regidor",SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}
+"resource","false","Quien es el hospedador de BBC Special Wildlife","hospedador, BBC Wildlife Specials",SELECT DISTINCT ?uri WHERE { dbr:BBC_Wildlife_Specials dbo:presenter ?uri . }
+"resource","false","Quien es el convidante de BBC Special Wildlife","convidante, BBC Wildlife Specials",SELECT DISTINCT ?uri WHERE { dbr:BBC_Wildlife_Specials dbo:presenter ?uri . }
+"number","true","Cuanto se gasto en Pulp Fiction","gasto,Pulp Fiction",SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }
+"number","true","Cual fue el precio de producir Pulp Fiction","precio,Pulp Fiction",SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }
+"number","true","Cual fue el importe de producir Pulp Fiction","importe,Pulp Fiction",SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }
+"resource","false","Con quien esta vinculado Barack Obama","vinculado,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"resource","false","Con quien esta desposado Barack Obama","desposado,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"resource","false","Con quien esta unido Barack Obama","unido,Barack Obama",Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }
+"resource","false","Cual fue la causa de fallecimiento de Bruce Carver","Bruce Carver, causa fallecimiento",SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}
+"resource","false","Cual fue la causa de defuncion de Bruce Carver","Bruce Carver, causa defuncion",SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}
+"resource","false","Cual fue la causa de deceso de Bruce Carver","Bruce Carver, causa deceso",SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}
+"number","true","Cual es la talla de Claudia Schiffer","talla,Claudia Schiffer",SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}
+"number","true","Cual es la elevacion de Claudia Schiffer","elevacion,Claudia Schiffer",SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}
+"resource","false","Quien es el autor del libro Los pilares de la Tierra","autor,libro,Los pilares de la Tierra",SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}
+"resource","false","Quien es el literato del libro Los pilares de la Tierra","literato,libro,Los pilares de la Tierra",SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}
+"resource","false","Quien es el redactor del libro Los pilares de la Tierra","redactor,libro,Los pilares de la Tierra",SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}
+"resource","false","Quien es el conquistador de Eris","conquistador,Eris",SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eris_(dwarf_planet)> <http://dbpedia.org/ontology/discoverer> ?uri . }
+"resource","false","Quien es el colonizador de Eris","colonizador,Eris",SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eris_(dwarf_planet)> <http://dbpedia.org/ontology/discoverer> ?uri . }
+"resource","false","Que torrente cruza el Brooklyn Bridge","torrente,cruza,Brooklyn Bridge",SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:crosses ?uri .}
+"resource","false","Cual es el lenguaje legal de Surinam","lenguaje legal,Surinam",SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}
+"resource","false","Cual es el habla legal de Surinam","habla legal,Surinam",SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}
+"resource","false","Cual es el lugar de origen de Bach","lugar de origen,Bach",SELECT DISTINCT ?uri WHERE {dbr:Johann_Sebastian_Bach dbo:birthPlace ?uri .}
+"resource","false","Quien es el inventor de Family Guy","inventor,Family Guy",SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }
+"resource","false","Quien es el productor de Family Guy","inventor,Family Guy",SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }
+"resource","false","Cual es el dinero de China","dinero,China",SELECT DISTINCT ?uri WHERE {dbr:China dbo:currency ?uri .}
+"resource","false","Cual es el metálico de China","metálico,China",SELECT DISTINCT ?uri WHERE {dbr:China dbo:currency ?uri .}
+"resource","false","Quien fue el delineante del Brooklyn Bridge ","delineante,Brooklyn Bridge",SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}
+"resource","false","Quien fue el proyectista del Brooklyn Bridge ","proyectista,Brooklyn Bridge",SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}
+"resource","false","Cual es la patría de origen de Sitecore","patría, origen,Sitecore",SELECT DISTINCT ?uri WHERE { dbr:Sitecore dbo:foundationPlace ?uri . }
+"resource","false","Cual es el estado de procedencia de Sitecore","estado, procedencia,Sitecore",SELECT DISTINCT ?uri WHERE { dbr:Sitecore dbo:foundationPlace ?uri . }

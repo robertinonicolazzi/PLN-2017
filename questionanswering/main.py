@@ -27,7 +27,7 @@ def progress(msg, width=None):
 
 class ClassAnswerType:
 
-    def __init__(self, questions, propCorpus=[[], []], nlp=None):
+    def __init__(self, questions, nlp=None):
 
         self.nlp_api = nlp
         self.sparql = SPARQLWrapper("http://es.dbpedia.org/sparql")
@@ -85,17 +85,17 @@ class ClassAnswerType:
 
         self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)
 
-        self.pExtractor.train(train_prop_x, train_prop_y, propCorpus)
+        self.pExtractor.train(train_prop_x, train_prop_y)
         self.eExtractor = EntityExtractor(self.nlp_api)
+        self.train_prop_x = train_prop_x
+        self.train_prop_y = train_prop_y
 
     # -------------------------------------------------------------
     # --GET ANSWER TYPE--------------------------------------------
     # -------------------------------------------------------------
 
     def get_answer_type(self, st_question):
-
         question_features_test = self.features_answer_type(st_question)
-
         type_question = self.clas_tipo.classify(question_features_test)
         return type_question
 
@@ -103,29 +103,21 @@ class ClassAnswerType:
         feat = {}
         st_question = cleanQuestion(st_question)
         tag_word = self.nlp_api(st_question)
-
         tag_word = [(word.text, word.tag_) for word in tag_word]
-        # print(tag_word)
 
-        feat["ask_cuanto"] = bool(
-            re.search(
-                'cu(a|á)nt(o|a)(s|) ',
-                st_question))
+        feat["init_dame"] = bool(re.search('(D|d)ame ',st_question))
+        feat["ask_cuanto"] = bool(re.search('cu(a|á)nt(o|a)(s|) ',st_question))
         feat["init_dame"] = (st_question.split(" ")[0] == 'dame')
         feat["ask_cuando"] = bool(re.search('cu(a|á)ndo ', st_question))
-        feat["init_verb"] = 'VERB' in getFirstTag(
-            tag_word) or 'AUX' in getFirstTag(tag_word)
+        feat["init_verb"] = 'VERB' in getFirstTag(tag_word) or 'AUX' in getFirstTag(tag_word)
+        feat["init_verb2"] = 'VERB' in getFirstTag(tag_word) or 'AUX' in getFirstTag(tag_word)
 
         second_tag = getSecondTag(tag_word)
-        articulo = 'PronType=Art' in getFirstTag(
-            tag_word) and 'DET' in getFirstTag(tag_word)
+        articulo = 'PronType=Art' in getFirstTag(tag_word) and 'DET' in getFirstTag(tag_word)
 
-        feat["art_sust2"] = articulo and (
-            ('NOUN' in second_tag) or (
-                'PROPN' in second_tag))
+        feat["art_sust2"] = articulo and (('NOUN' in second_tag) or ('PROPN' in second_tag))
+        feat["art_sust"] = articulo and (('NOUN' in second_tag) or ('PROPN' in second_tag))
 
-        #feat["init_verb2"]  = getFirstTag(tag_word) == 'VERB'
-        #feat["art_sust"]   = (getFirstTag(tag_word) == 'DET') and (second_tag== 'NOUN' or second_tag=='PROPN')
         return feat
 
     # -------------------------------------------------------------
@@ -208,7 +200,6 @@ class ClassAnswerType:
 
             pr_entity_en = entities[0][1]
             sn_entity_en = entities[1][1]
-
             props, st_filter = self.two_entities_prop_filter(
                 q, pr_entity_en, sn_entity_en, k_rest)
 
@@ -276,11 +267,10 @@ class ClassAnswerType:
             return self.boolean_answerer(q, q_keys)
 
         h_agg = AggregationHelper(nlp=self.nlp_api)
-        keyAggregation = h_agg.check_aggregation(answer_type, q, q_keys)
+        agg_key = h_agg.check_aggregation(answer_type, q, q_keys)
 
-        if not keyAggregation == "none":
-            return self.aggregation_answerer(
-                h_agg, q, q_keys, keyAggregation, answer_type)
+        if not agg_key == "none":
+            return self.agg_answerer(h_agg, q, q_keys, agg_key, answer_type)
 
         entities, k_rest = self.eExtractor.get_entities(
             q_keys, answer_type)
@@ -298,7 +288,6 @@ class ClassAnswerType:
         st_property = self.pExtractor.get_question_property(
             en_entity, k_rest)
 
-        print("Entidad Espanol:", es_entity)
         print("Entidad Ingles :", en_entity)
         print("Propiedad      :", st_property)
 
@@ -326,7 +315,7 @@ class ClassAnswerType:
 
         return answers
 
-    def aggregation_answerer(self, h_agg, q,
+    def agg_answerer(self, h_agg, q,
                              q_keys, key, answer_type):
         q_keys = delete_tildes(q_keys)
         answers = []

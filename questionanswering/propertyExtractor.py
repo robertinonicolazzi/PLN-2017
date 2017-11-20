@@ -1,264 +1,325 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 from questionanswering.funaux import *
 
-from sklearn.linear_model import LogisticRegressionCV
 
-from sklearn.naive_bayes import BernoulliNB
+
 
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn import tree
+from sklearn.linear_model import LogisticRegression
+
+from questionanswering.templates import *
 import numpy as np
+import itertools
+import operator
+from questionanswering.WordReferenceWrapper import *
 np.set_printoptions(threshold=np.inf)
 
+from googletrans import Translator
+
+
 class PropertyExtractor:
-	# -------------------------------------------------------------
-	# --GET PROPERTY ----------------------------------------------
-	# -------------------------------------------------------------
+    # -------------------------------------------------------------
+    # --GET PROPERTY ----------------------------------------------
+    # -------------------------------------------------------------
 
-	def __init__(self,nlp):
-		self.sparql = SPARQLWrapper("http://es.dbpedia.org/sparql")
-		self.sparql.setReturnFormat(JSON)
-		self.sparqlEn = SPARQLWrapper("http://dbpedia.org/sparql")
-		self.sparqlEn.setReturnFormat(JSON)
-		self.nlp_api = nlp
+    def __init__(self, nlp):
+        self.sparql = SPARQLWrapper("http://es.dbpedia.org/sparql")
+        self.sparql.setReturnFormat(JSON)
+        self.sparqlEn = SPARQLWrapper("http://dbpedia.org/sparql")
+        self.sparqlEn.setReturnFormat(JSON)
+        self.nlp_api = nlp
+        self.igProp = ["wiki","abstract","thumbail","gdp","hdi","PopulatedPlace","wordnet_type"]
 
-	def train(self,train_prop_x,train_prop_y,propCorpus):
-		self.pipeline = self.init_pipeline(train_prop_x,train_prop_y,propCorpus)
+        self.translator = Translator()
+        self.pipeline = None
+        self.dbo_trans = {}
+        self.lang_trans = {}
+        self.esp_sins = {}
 
-	def only_noun_verb(self,st_keys):
-		st_result = st_keys
-		tag_word = self.nlp_api(st_keys)
-		tag_word = [(word.text,word.tag_) for word in tag_word]
-		for w,t in tag_word:
-			if "VERB" in t:
-				continue
-			if "NOUN" in t:
-				continue
-			if "ADJ" in t:
-				continue
-			st_result = st_result.replace(w,' ')
+    def train(self, x, y, classi=None):
+        vectorizer = DictVectorizer()
 
-		st_result = st_result.split()
-		return " ".join(st_result)
+        if classi == None:
+            classifier = LogisticRegression(class_weight={1:8})
+        else:
+            classifier = classi
+        self.pipeline = Pipeline([("vec", vectorizer), ("clas", classifier)])
+        x = x
+        y = y
 
+        self.pipeline.fit(x, y)
+    
 
-	def generate_train_by_entity(self, query,st_keywords):
+    # --------- LIMPIEZA KEYS ----------------------
+    def only_noun_verb(self, st_keys):
+        st_result = st_keys
+        tag_word = self.nlp_api(st_keys)
+        tag_word = [(word.text, word.tag_) for word in tag_word]
+        for w, t in tag_word:
+            if "VERB" in t:
+                continue
+            if "NOUN" in t:
+                continue
+            if "ADJ" in t:
+                continue
+            st_result = st_result.replace(w, ' ')
 
-		temp_prop_x = []
-		temp_prop_y = []
-		st_dbo = parseQuery(query)
-		if st_dbo == "":
-			return [],[]
+        st_result = st_result.split()
+        return " ".join(st_result)
 
-		st_ent = getEntity(query)
-		if st_ent == "":
-			return [],[]
-		
-		st_keywords = removeStopWords(st_keywords)
-		st_keywords = delete_tildes(st_keywords)
+    def remove_keys_with_PROPN(self, st_keywords):
+        keys = [x.strip() for x in st_keywords.split(',')]
+        keys_result = [x.strip() for x in st_keywords.split(',')]
+        for k in keys:
+            tag_word = self.nlp_api(k)
+            tag_word = [(word.text, word.tag_) for word in tag_word]
+            for w, t in tag_word:
+                if "PROPN" in t:
+                    keys_result.remove(k)
+                    break
+        return " ".join(keys_result)
 
-		keys= [x.strip() for x in st_keywords.split(',')]
-		keys_result= [x.strip() for x in st_keywords.split(',')]
-		for k in keys:
-			tag_word = self.nlp_api(k)
-			tag_word = [(word.text,word.tag_) for word in tag_word]
-			for w,t in tag_word:
-				if "PROPN" in t:
-					keys_result.remove(k)
-					break
+    def clean_dbo(self,st_dbo):
+        ls_dbo = re.split(r'([A-Z][a-z]*)', st_dbo)
 
-		st_keywords = " ".join(keys_result)
-		st_keywords = self.only_noun_verb(st_keywords)
-		#x = {'eng':st_dbo, 'esp':st_keywords}
-		key_st = st_dbo+","+st_keywords
-		x = {key_st:True}
-		y = 1
+        return (" ".join([a.lower() for a in ls_dbo])).strip()
 
-		temp_prop_x.append(x)
-		temp_prop_y.append(y)
+    def clean_keys_prop(self,st_keywords):
+        st_keywords = removeStopWords(st_keywords)      
+        st_keywords = self.remove_keys_with_PROPN(st_keywords)
+        st_keywords = self.only_noun_verb(st_keywords)
+        st_keywords = delete_tildes(st_keywords)
 
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			<http://dbpedia.org/resource/{}> ?p ?v.
-
-		}}
-		'''.format(st_ent)
-
-		sparql.setQuery(query)
-		results = sparql.query().convert()
-
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
-
-			if "wiki" in value or "abstract" in value or "thumbnail" in value:
-				continue
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				if not prop == st_dbo: 
-					#x = {'eng':prop, 'esp':st_keywords}
-					key_st = prop+","+st_keywords
-					x = {key_st:True}
-					y = 0
-					temp_prop_x.append(x)
-					temp_prop_y.append(y)
+        return st_keywords
+    #----------FINAL LIMPIEZA KEYS -----------------
 
 
-		return temp_prop_x, temp_prop_y
+    def trans_es_to_en(self,text):
+        knows=[]
+        text = list(text)
+        text_copy = list(text)
+        for i in range(len(text_copy)):
+            k = self.lang_trans.get(text_copy[i],"")
+            if not k == "":
+                knows.append((i,k))
+                text.remove(text_copy[i])
 
-	def init_pipeline(self,x,y,extraCorpus):
-		esp_stopwords = stopwords.words('spanish')
-		vectorizer = DictVectorizer()
+        result =self.translator.translate(text, dest="en", src="es")
+        result = [delete_tildes(a.text).strip() for a in result]
+        for i,k in knows:
+            result.insert(i,k)
+
+            
+        return result
+
+    def trans_en_to_es(self,text):
+        knows=[]
+        
+        text = list(text)
+        text_copy = list(text)
+        for i in range(len(text_copy)):
+            k = self.dbo_trans.get(text_copy[i],"")
+            if not k == "":
+                knows.append((i,k))
+                text.remove(text_copy[i])
+                
+        result = self.translator.translate(text, dest="es", src="en")
+        result = [delete_tildes(a.text).strip() for a in result]
+        for i,k in knows:
+            result.insert(i,k)
+
+        return result
+
+    def get_sinonimos(self,word):
+
+        sinonimos = self.esp_sins.get(word,[])
+        if sinonimos == []:
+            sinonimos = get_synoms(word)
+            self.esp_sins[word] = sinonimos
+            print("cached sins", word)
+        return sinonimos
 
 
-		classifier = tree.DecisionTreeClassifier()
-		pipeline = Pipeline([("vec", vectorizer), ("clas", classifier)])
-		x = x + extraCorpus[0]
-		y = y + extraCorpus[1]
-		pipeline.fit(x,y)
-		print("Features")
 
-		return pipeline
+    def generate_train_by_entity(self, query, st_keywords):
 
-	def get_question_property_type(self,st_type,keys):
-		st_keys = " ".join(keys)
-		
-		st_keys = removeStopWords(st_keys)
-		st_keys = delete_tildes(st_keys)
-		st_keys = self.only_noun_verb(st_keys)
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			?instance a <http://dbpedia.org/ontology/{}> . 
-         	?instance ?p ?obj .
-		}}
-		'''.format(st_type)
-		properti = ""
-		sparql.setQuery(query)
-		results = sparql.query().convert()
+        temp_prop_x = []
+        temp_prop_y = []
 
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
+        st_dbo = parseQuery(query)
+        if st_dbo == "":
+            return [], []
+        st_ent = getEntity(query)
+        if st_ent == "":
+            return [], []
+        if st_keywords == "" or st_keywords == None:
+            return [], []
 
-			if "wiki" in value or "abstract" in value or "thumbnail" in value:
-				continue
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				test = {}
-				for k in st_keys.split():
-					test[prop+","+k] = True
-				test[prop+","+st_keys] = True
+        # Limpiamos y tokenizamos Keywords y DBO
+        st_keywords = self.clean_keys_prop(st_keywords)
+        st_dbo_clean = self.clean_dbo(st_dbo)
 
-				temp = self.pipeline.predict([test])
-				if temp[0] == 1:
-					print(test)	
-					properti = prop		
+        # Obtenemos los Features
 
-		return properti
+        sinonimos = [st_keywords]
+        sinonimos_trans = []
+        dbo_props = [st_dbo_clean]
+        dbo_props_trans = []
 
-	def get_question_property_type_fast(self,st_type,keys):
-		st_keys = " ".join(keys)
-		
-		st_keys = removeStopWords(st_keys)
-		st_keys = delete_tildes(st_keys)
-		st_keys = self.only_noun_verb(st_keys)
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			?p rdfs:domain ?class . 
-  			dbo:{} rdfs:subClassOf+ ?class.
-		}}
-		'''.format(st_type)
-		properti = ""
-		sparql.setQuery(query)
-		results = sparql.query().convert()
+        # Obtenemos sinonimos si podemos
+        print("keys: ",st_keywords)
+        for k in st_keywords.split():
+            sinonimos += self.get_sinonimos(k)
 
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
+        
+        # Traducimos todos los sinonimos
+        sinonimos_trans = self.trans_es_to_en(sinonimos)
 
-			if "wiki" in value or "abstract" in value or "thumbnail" in value:
-				continue
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				test = {}
-				for k in st_keys.split():
-					test[prop+","+k] = True
-				test[prop+","+st_keys] = True
+        # Obtenemos las propiedades
+        query = templates.get('props_ent',"").format(ent=st_ent)
+        self.sparqlEn.setQuery(query)
+        results = self.sparqlEn.query().convert()
+        for result in results["results"]["bindings"]:
+            value = result["p"]["value"]
+            if any(s in value for s in self.igProp):
+                continue
 
-				temp = self.pipeline.predict([test])
-				if temp[0] == 1:
-					print(test)	
-					properti = prop		
+            if "ontology" in value or "property" in value:
+                prop = value.split('/')[4]
+                if len(prop) <= 3:
+                    continue
+                if not prop == st_dbo:
+                    dbo_props.append(self.clean_dbo(prop))
 
-		return properti
+        dbo_props_trans = self.trans_en_to_es(dbo_props)
 
-	def get_question_property(self,entity,keys):
-		st_keys = " ".join(keys)
-		
-		st_keys = removeStopWords(st_keys)
-		st_keys = self.only_noun_verb(st_keys)
-		st_keys = delete_tildes(st_keys)
-		print(st_keys)
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			<http://dbpedia.org/resource/{}> dbo:wikiPageDisambiguates* ?uri.
-			?uri ?p ?v.
-		}}
-		'''.format(entity)
-		properti = ""
-		sparql.setQuery(query)
-		results = sparql.query().convert()
+        assert(len(dbo_props_trans) == len(dbo_props))
+        assert(len(sinonimos) >= 0)
+        assert(len(sinonimos_trans) >= 0)
 
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
+        #Generamos los positivos
+        for i in range(len(sinonimos)):
+            # Guardamos traducciones de propiedades conocidas
+            self.lang_trans[sinonimos[i]] = sinonimos_trans[i]
 
-			if "wiki" in value or "abstract" in value or "thumbnail" in value:
-				continue
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				key_st = prop+","+st_keys
+            x = self.get_all_features(sinonimos[i],dbo_props[0],es_to_en=sinonimos_trans[i],en_to_es=dbo_props_trans[0],sins=sinonimos)
+            y = 1
+            temp_prop_x.append(x)
+            temp_prop_y.append(y)
 
-				test = {key_st:True}
-				temp = self.pipeline.predict([test])
-				if temp[0] == 1:
-					print(test)	
-					properti = prop		
 
-		return properti
 
-	def get_question_property_rev(self,entity,keys):
-		st_keys = " ".join(keys)
-		
-		st_keys = removeStopWords(st_keys)
-		st_keys = delete_tildes(st_keys)
-		st_keys = self.only_noun_verb(st_keys)
-		sparql = self.sparqlEn
-		query = '''
-		SELECT distinct ?p WHERE {{
-			?uri ?p <http://dbpedia.org/resource/{}>.
-		}}
-		'''.format(entity)
-		properti = ""
-		sparql.setQuery(query)
-		results = sparql.query().convert()
+        #Generamos los negativos
+        for i in range(len(dbo_props)):
+            # Guardamos traducciones de propiedades conocidas
+            self.dbo_trans[dbo_props[i]] = dbo_props_trans[i]
+            for j in range(len(sinonimos)):
+                x = self.get_all_features(sinonimos[j],dbo_props[i],es_to_en=sinonimos_trans[j],en_to_es=dbo_props_trans[i],sins=sinonimos)
+                y = 0
+                temp_prop_x.append(x)
+                temp_prop_y.append(y)
 
-		for result in results["results"]["bindings"]:
-			value = result["p"]["value"]
 
-			if "wiki" in value or "abstract" in value or "thumbnail" in value:
-				continue
-			if "ontology" in value or "property" in value:
-				prop = value.split('/')[4]
-				key_st = prop+","+st_keys
+        return temp_prop_x, temp_prop_y
 
-				test = {key_st:True}
-				temp = self.pipeline.predict([test])
+    def get_all_features(self, st_keywords, st_dbo,es_to_en="",en_to_es="",sins = []):
+        """
+        Keywords  preprocesados
+        Dbo:      birthDate -> birth | Date
+        """
 
-				if temp[0] == 1:
-					print(test)
-					properti = prop
-		
+        x = {}
+        x = {x:True for x in (st_keywords+" "+st_dbo).split()}
+        x[st_keywords+"-"+st_dbo] = True
+        x["es"] = st_keywords
+        x["en"] = st_dbo
+        x["estoen"] = es_to_en
+        x["entoes"] = en_to_es
+        x["es=entoes"] = (st_keywords in en_to_es)
+        x["en=estoen"] = (st_dbo in es_to_en)
 
-		return properti
+
+
+        for s in sins:
+            x[s+"=entoes"] = (s in en_to_es)
+            x[s] = True
+
+
+
+        return x
+
+
+    def get_properti(self,temp,entity,keys):
+        properti = ""
+        choose = []
+        ls_dbo = []
+        ls_dbo_clean = []
+        ls_dbo_trans = []
+
+        st_keys = " ".join(keys)
+
+
+        # Limpiamos los keys
+        st_keys = self.clean_keys_prop(st_keys)        
+        print("Keys analizados: ",st_keys)
+
+        # Obtenemos las propiedades
+        sparql = self.sparqlEn
+        query = templates.get(temp,"").format(ent=entity)
+        sparql.setQuery(query)
+        results = sparql.query().convert()
+
+
+        for result in results["results"]["bindings"]:
+            value = result["p"]["value"]
+            if any(s in value for s in self.igProp):
+                continue
+            if "ontology" in value or "property" in value:
+                prop = value.split('/')[4]
+                if len(prop) <= 3:
+                    continue
+            if "ontology" in value or "property" in value:
+                prop = value.split('/')[4]
+                ls_dbo_clean.append(self.clean_dbo(prop))
+                ls_dbo.append(prop)
+
+
+        # Traducimos las propiedades
+        ls_dbo_clean = ls_dbo_clean
+
+        ls_dbo_trans = self.trans_en_to_es(ls_dbo_clean)
+        assert(len(ls_dbo) == len(ls_dbo_trans))
+        sinonimos = [st_keys]
+        for k in st_keys.split():
+            sinonimos += self.get_sinonimos(k)
+
+        es_to_en = self.trans_es_to_en([st_keys])[0]
+        for i in range(len(ls_dbo_clean)):
+            test = self.get_all_features(st_keys,ls_dbo_clean[i],es_to_en=es_to_en,en_to_es=ls_dbo_trans[i],sins = sinonimos)
+            temp = self.pipeline.predict([test])
+            prob = self.pipeline.predict_proba([test])[0][1]
+
+            choose.append((ls_dbo[i],prob))
+
+        choose = sorted(choose, key=operator.itemgetter(1),reverse=True)
+        if not len(choose) == 0:
+            properti = ""
+
+            if choose[0][1] > 0.20:
+                properti = choose[0][0]
+        print (choose)
+        return properti
+
+    def get_question_property_type(self, st_type, keys):
+        properti = self.get_properti('props_type',st_type,keys)
+        return properti
+
+    def get_question_property(self, entity, keys):
+        properti = self.get_properti('props_ent_amb',entity,keys)
+        return properti
+
+    def get_question_property_rev(self, entity, keys):
+        properti = self.get_properti('props_ent_rev',entity,keys)
+        return properti

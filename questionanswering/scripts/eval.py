@@ -12,12 +12,27 @@ from docopt import docopt
 import dill as pickle
 import json
 import spacy
+from sklearn.svm import LinearSVC
 import sys
 from questionanswering.funaux import *
+from sklearn.tree import DecisionTreeClassifier
+correctas = []
+#correctas= ['0', '2', '3', '4', '5', '7', '12', '13', '17', '18', '19', '21', '22', '25', '28', '29', '32', '33', '38', '39', '42', '48', '49', '54', '70', '71', '74', '80', '11', '35', '36', '40', '41', '61', '63', '68', '72', '79', '93', '98', '104', '108', '114', '115', '118', '119', '121', '125', '126', '127', '134', '136', '153', '154']
+#correctas = ['3000', '3001', '3002', '3004', '3005', '3006', '3007', '3008', '3009', '3010', '3011', '3012', '3013']
+#13/17
+correctas = ['20', '31', '37', '55', '59', '64', '81', '85', '109', '139', '144', '180', '185', '212']
 
-#correctas = []
-correctas= ['0', '2', '3', '4', '5', '7', '11', '13', '17', '18', '19', '20', '21', '22', '28', '29', '30', '31', '32', '33', '35', '36', '37', '38', '39', '40', '41', '42', '43', '48', '49', '55', '59', '61', '68', '70', '71', '72', '74', '79', '80', '81', '87', '93', '96', '97', '98', '101', '104', '108', '109', '111', '113', '114', '115', '118', '119', '121', '125', '126', '127', '128', '134', '136', '139', '144', '145', '146', '152', '153', '154', '155', '159', '160', '162', '164', '167', '169', '171', '174', '175', '176', '180', '185', '189', '191', '192', '201', '204', '207', '212', '213', '12', '25', '54', '63', '203', '208', '24', '99', '112', '149', '182', '200', '85', '105', '107', '135', '151', '197', '166']
 
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import GaussianNB
+
+
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
+
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction import DictVectorizer
 
 def getQuestAnKey(quest):
 	idiomas = quest["question"]
@@ -64,24 +79,38 @@ if __name__ == '__main__':
 	
 	opts = docopt(__doc__)
 
+	
 	print('Loading model...')
 	filename = opts['-i']
 	f = open(filename, 'rb')
 	model = pickle.load(f)
 	f.close()
+	print('OK - Model Loaded...')
 
+	print('Loading Spacy...')
 	nlp = spacy.load('es_default', parser=False)
+	print('OK - Spacy Loaded...')
 	model.nlp_api = nlp
 	model.pExtractor.nlp_api = nlp
-	model.eExtractor.nlp_api = nlp 
+	model.eExtractor.nlp_api = nlp
+	'''
+	x = load_obj('train_x')
+	y = load_obj('train_y') 
+	print(x[0])
+	print('Train class...')
+	clasi = LogisticRegression(class_weight={1:8})
+	model.pExtractor.train(x,y,classi= clasi)
+	print('OK - Class Loaded...')
+	'''
+
 	print('Loading corpus...')
-	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json', 'r') as data_file:
+	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleData.json', 'r') as data_file:
 	  data = json.load(data_file)
 
-	vistos = ['0', '2', '3', '4', '5', '6', '7', '9', '10', '11', '12', '13', '17', '18', '19', '20', '21', '22', '23', '24', '25', '28', '29', '30', '31', '32', '33', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '48', '49', '50', '52', '54', '55', '58', '59', '60', '61', '63', '64', '65']
 
 
-	questionsSample = data["questions"][:50]
+
+	questionsSample = data["questions"]
 
 	print('Parsing...')
 	hits = len(correctas)
@@ -97,23 +126,18 @@ if __name__ == '__main__':
 	#progress(format_str.format(0.0, 0, n, 0.0, 0.0, 0.0))
 	agg = 10
 	for i, quest in enumerate(questionsSample):
-		#if 	quest["id"] in correctas:
-		#	continue;
+		if 	quest["id"] in correctas:
+			continue;
 
-		'''if quest["aggregation"]:
-			agg = agg - 1
-			vistos.append(quest["id"])
-			if agg == 0:
-				break
-		else:
+		if  not quest["answertype"] == "boolean":
 			continue
-		'''
+
 		st_quest, st_keys = getQuestAnKey(quest)
+		print(st_quest)
 		answers_gold = getAnswer(quest,quest["answertype"])
 		answers_model = model.answer_question(st_quest,st_keys)
 
 		if  quest["answertype"] == "boolean":
-			continue
 			if answers_model == answers_gold:
 				hits +=1
 				print ("CORRECTO")
@@ -158,9 +182,9 @@ if __name__ == '__main__':
 		#print (correctas)
 		print ("HITS:", hits)
 		print ("TOTAL:", total)
-	print (vistos)
+		print(correctas)
 	print ("HITS:", hits)
 	print ("TOTAL:", total)
 	print ("Accurancy:", hits/total)
-	print (correctas)
+
 	

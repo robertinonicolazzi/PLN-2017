@@ -24,6 +24,32 @@ templates = {
 				?result dbo:{prop} ?resource
 
 				}}
-				'''
+				''',
+'props_ent': '''
+		SELECT distinct ?p WHERE {{
+			<http://dbpedia.org/resource/{ent}> ?p ?v.
+
+		}}
+		''',
+'props_ent_amb': 
+		'''
+		SELECT distinct ?p WHERE {{
+			<http://dbpedia.org/resource/{ent}> dbo:wikiPageDisambiguates* ?uri.
+			?uri ?p ?v.
+		}}
+		''',
+'props_ent_rev': '''
+		SELECT distinct ?p WHERE {{
+			?p ?v <http://dbpedia.org/resource/{ent}>.
+
+		}}''',
+'props_type':'''
+		SELECT distinct ?p WHERE {{
+			?instance a <http://dbpedia.org/ontology/{ent}> . 
+         	?instance ?p ?obj .
+		}}
+		'''
+		
+		
 
 }

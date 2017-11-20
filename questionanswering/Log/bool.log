@@ -1,0 +1,73 @@
+¿La mujer del presidente Lincoln se llama Mary?
+mujer, presidente, Lincoln, se lamma, Mary
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+ASK 
+WHERE {
+        res:Abraham_Lincoln dbo:spouse ?spouse .
+        ?spouse rdfs:label ?name .
+        FILTER(regex(?name,'Mary')) 
+}---------------------------------------
+¿Nació Natalie Portman en los estados unidos de américa?
+Natalie Portman
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+ASK 
+WHERE { 
+	res:Natalie_Portman dbo:birthPlace ?city .
+      	?city dbo:country res:United_States .
+}---------------------------------------
+¿Son las ranas verdes un tipo de anfibio?
+rana verde, anfibio
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX res: <http://dbpedia.org/resource/> 
+ASK 
+WHERE { 
+        res:Hylidae dbo:class res:Amphibian . 
+}---------------------------------------
+¿La mujer del presidente Obama se llama Michelle?
+mujer, presidente, Obama, se lamma, Michelle
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+ASK 
+WHERE {
+        res:Barack_Obama dbo:spouse ?spouse .
+        ?spouse rdfs:label ?name .
+        FILTER(regex(?name,'Michelle')) 
+}---------------------------------------
+¿Tiene el lugar de nacimiento de Abraham Lincoln una página web?
+Abraham Lincoln, lugar de nacimiento, página web
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+ASK 
+WHERE {
+        res:Abraham_Lincoln dbo:deathPlace ?p .
+        ?p dbo:website ?w . 
+}---------------------------------------
+¿Estuvo el el presidente de los estados unidos Jackson involucrado en una guerra?
+presidente de los estados unidos Jackson, guerra
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+ASK 
+WHERE {
+	res:Andrew_Jackson dbo:battle ?battle .    
+}---------------------------------------
+¿Tuvo Sócrates influencia sobre Aristóteles?
+Sócrates, influencia, Aristóteles
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+ASK 
+WHERE {
+	res:Aristotle dbo:influencedBy res:Socrates .
+}---------------------------------------
+¿La proinsulina es una proteina?
+proinsulina, protein
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX res: <http://dbpedia.org/resource/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ASK 
+WHERE {
+	res:Proinsulin rdf:type dbo:Protein .
+}---------------------------------------
