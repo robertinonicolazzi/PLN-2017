@@ -91,7 +91,7 @@
 			"sparql": "Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "43417000"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "43417000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3005",
 		"answertype": "number",
@@ -109,7 +109,7 @@
 			"sparql": "Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "43417000"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "43417000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3006",
 		"answertype": "number",
@@ -127,7 +127,7 @@
 			"sparql": "Select distinct ?c where { dbr:Argentina dbo:populationTotal ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "43417000"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "43417000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3007",
 		"answertype": "resource",
@@ -199,7 +199,7 @@
 			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "57100", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3011",
 		"answertype": "number",
@@ -217,7 +217,7 @@
 			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "57100", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3012",
 		"answertype": "number",
@@ -235,7 +235,7 @@
 			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "57100", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3013",
 		"answertype": "number",
@@ -253,7 +253,7 @@
 			"sparql": "Select distinct ?c where { dbr:Google dbo:numberOfEmployees ?c }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "57100"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "57100", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3014",
 		"answertype": "number",
@@ -271,7 +271,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "1", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}, {"c": {"type": "typed-literal", "value": "2", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}, {"c": {"type": "typed-literal", "value": "9260000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3015",
 		"answertype": "number",
@@ -289,7 +289,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "1", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}, {"c": {"type": "typed-literal", "value": "2", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}, {"c": {"type": "typed-literal", "value": "9260000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3016",
 		"answertype": "number",
@@ -307,7 +307,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "1"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "2"}}, {"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", "value": "9260000"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "1", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}, {"c": {"type": "typed-literal", "value": "2", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}, {"c": {"type": "typed-literal", "value": "9260000", "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"}}]}}]
 	},{
 		"id": "3017",
 		"answertype": "resource",
@@ -433,7 +433,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://dbpedia.org/datatype/usDollar", "value": "8.0"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "8.0", "datatype": "http://dbpedia.org/datatype/usDollar"}}]}}]
 	},{
 		"id": "3024",
 		"answertype": "number",
@@ -451,7 +451,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://dbpedia.org/datatype/usDollar", "value": "8.0"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "8.0", "datatype": "http://dbpedia.org/datatype/usDollar"}}]}}]
 	},{
 		"id": "3025",
 		"answertype": "number",
@@ -469,7 +469,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://dbpedia.org/datatype/usDollar", "value": "8.0"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "8.0", "datatype": "http://dbpedia.org/datatype/usDollar"}}]}}]
 	},{
 		"id": "3026",
 		"answertype": "resource",
@@ -595,7 +595,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#double", "value": "1.81"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "1.81", "datatype": "http://www.w3.org/2001/XMLSchema#double"}}]}}]
 	},{
 		"id": "3033",
 		"answertype": "number",
@@ -613,7 +613,7 @@
 			"sparql": "SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}"
 		},
 		
-		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#double", "value": "1.81"}}]}}]
+		"answers": [{"head": {"vars": ["c"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"c": {"type": "typed-literal", "value": "1.81", "datatype": "http://www.w3.org/2001/XMLSchema#double"}}]}}]
 	},{
 		"id": "3034",
 		"answertype": "resource",
@@ -920,4 +920,220 @@
 		},
 		
 		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Denmark"}}]}}]
+	},{
+		"id": "3051",
+		"answertype": "boolean",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Tienen el príncipe Harry y el prínciple William los mismos progenitores?",
+				"keywords": "príncipe Harry, príncipe William, mismos progenitores"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE {<http://dbpedia.org/resource/Prince_William,_Duke_of_Cambridge> dbo:parent ?x . <http://dbpedia.org/resource/Prince_Harry> dbo:parent ?x .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
+	},{
+		"id": "3052",
+		"answertype": "boolean",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Tienen el príncipe Harry y el prínciple William los mismos procreadores?",
+				"keywords": "príncipe Harry, príncipe William, mismos procreadores"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE {<http://dbpedia.org/resource/Prince_William,_Duke_of_Cambridge> dbo:parent ?x . <http://dbpedia.org/resource/Prince_Harry> dbo:parent ?x .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
+	},{
+		"id": "3053",
+		"answertype": "resource",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Qué empresa de la India tiene el mayor número de dependientes?",
+				"keywords": "empresa India, mayor número dependientes"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { ?uri a <http://dbpedia.org/ontology/Company> . ?uri <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/India> . ?uri <http://dbpedia.org/ontology/numberOfEmployees> ?n . } ORDER BY DESC(?n) OFFSET 0 LIMIT 1"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Railway_Board"}}]}}]
+	},{
+		"id": "3054",
+		"answertype": "resource",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Qué empresa de la India tiene el mayor número de trabajadores?",
+				"keywords": "empresa India, mayor número trabajadores"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE { ?uri a <http://dbpedia.org/ontology/Company> . ?uri <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/India> . ?uri <http://dbpedia.org/ontology/numberOfEmployees> ?n . } ORDER BY DESC(?n) OFFSET 0 LIMIT 1"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Railway_Board"}}]}}]
+	},{
+		"id": "3055",
+		"answertype": "resource",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Que ciudad tiene la mayor cantidad habitantes?",
+				"keywords": "ciudad, mayor cantidad habitantes"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {?uri a dbo:City .  ?uri dbo:populationTotal ?pop . } ORDER BY DESC(?pop) OFFSET 0 LIMIT 1"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Carei"}}]}}]
+	},{
+		"id": "3056",
+		"answertype": "resource",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Que ciudad tiene la mayor cantidad residentes?",
+				"keywords": "ciudad, mayor cantidad residentes"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {?uri a dbo:City .  ?uri dbo:populationTotal ?pop . } ORDER BY DESC(?pop) OFFSET 0 LIMIT 1"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/Carei"}}]}}]
+	},{
+		"id": "3057",
+		"answertype": "resource",
+		"aggregation": true,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Que libro tiene el mayor cifra de paginas?",
+				"keywords": "libro, mayor cifra de paginas"
+			}
+		],
+		"query": {
+			"sparql": "SELECT DISTINCT ?uri WHERE {?uri a dbo:Book . ?uri dbo:numberOfPages ?n .} ORDER BY DESC(?n) OFFSET 0 LIMIT 1"
+		},
+		
+		"answers": [{"head": {"vars": ["uri"], "link": []}, "results": {"ordered": true, "distinct": false, "bindings": [{"uri": {"type": "uri", "value": "http://dbpedia.org/resource/The_Tolkien_Reader"}}]}}]
+	},{
+		"id": "3058",
+		"answertype": "boolean",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿interviene Christian Bale en The Fighter?",
+				"keywords": "Christian Bale, interviene, The Fighter"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE {dbr:The_Fighter dbo:starring dbr:Christian_Bale .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
+	},{
+		"id": "3059",
+		"answertype": "boolean",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Tuvo descendientes Elvis Presley?",
+				"keywords": "descendientes,Elvis Presley"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE { dbr:Elvis_Presley dbo:child ?uri .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
+	},{
+		"id": "3060",
+		"answertype": "boolean",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Tuvo herederos Elvis Presley?",
+				"keywords": "herederos,Elvis Presley"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE { dbr:Elvis_Presley dbo:child ?uri .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
+	},{
+		"id": "3061",
+		"answertype": "boolean",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Estuvo el presidente Andrew Jackson involucrado en una contienda?",
+				"keywords": "presidente Andrew Jackson,contienda"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE {dbr:Andrew_Jackson dbo:battle ?battle .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
+	},{
+		"id": "3062",
+		"answertype": "boolean",
+		"aggregation": false,
+		"onlydbo": true,
+		"hybrid": false,
+		"question": [
+			{
+				"language": "es",
+				"string": "¿Estuvo el presidente Andrew Jackson involucrado en una guerrilla?",
+				"keywords": "presidente Andrew Jackson,guerrilla"
+			}
+		],
+		"query": {
+			"sparql": "ASK WHERE {dbr:Andrew_Jackson dbo:battle ?battle .}"
+		},
+		
+		"answers": [{"boolean": true, "head": {"link": []}}]
 	}]}

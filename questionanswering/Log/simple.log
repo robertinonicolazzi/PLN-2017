@@ -1,0 +1,53 @@
+¿Quién es la pareja de Barack Obama?
+pareja,Barack Obama
+Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }RESPUESTAS 
+http://dbpedia.org/resource/Nobel_Peace_Prize----Model: 
+---------------------------------------
+¿Quien es el autor del libro Los pilares de la Tierra?
+autor,libro,Los pilares de la Tierra
+SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}RESPUESTAS 
+---------------------------------------
+¿Cual es el lenguaje legal de Surinam?
+lenguaje legal,Surinam
+SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}RESPUESTAS 
+http://dbpedia.org/resource/Javanese_people----Model: 
+http://dbpedia.org/resource/Indo-Surinamese----Model: 
+http://dbpedia.org/resource/Afro-Surinamese----Model: 
+http://dbpedia.org/resource/Multiracial----Model: 
+http://dbpedia.org/resource/Maroon_(people)----Model: 
+---------------------------------------
+¿Cual es el habla legal de Surinam?
+habla legal,Surinam
+SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}RESPUESTAS 
+http://dbpedia.org/resource/Javanese_people----Model: 
+http://dbpedia.org/resource/Indo-Surinamese----Model: 
+http://dbpedia.org/resource/Afro-Surinamese----Model: 
+http://dbpedia.org/resource/Multiracial----Model: 
+http://dbpedia.org/resource/Maroon_(people)----Model: 
+---------------------------------------
+¿Cual es el lugar de origen de Bach?
+lugar de origen,Bach
+SELECT DISTINCT ?uri WHERE {dbr:Johann_Sebastian_Bach dbo:birthPlace ?uri .}RESPUESTAS 
+---------------------------------------
+¿Quien es el inventor de Family Guy?
+inventor,Family Guy
+SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }RESPUESTAS 
+http://dbpedia.org/resource/Walter_Murphy----Model: 
+http://dbpedia.org/resource/Ron_Jones_(composer)----Model: 
+---------------------------------------
+¿Quien es el productor de Family Guy?
+inventor,Family Guy
+SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }RESPUESTAS 
+http://dbpedia.org/resource/Walter_Murphy----Model: 
+http://dbpedia.org/resource/Ron_Jones_(composer)----Model: 
+---------------------------------------
+¿Quien fue el delineante del Brooklyn Bridge ?
+delineante,Brooklyn Bridge
+SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}RESPUESTAS 
+http://dbpedia.org/resource/East_River----Model: 
+---------------------------------------
+¿Quien fue el proyectista del Brooklyn Bridge ?
+proyectista,Brooklyn Bridge
+SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}RESPUESTAS 
+http://dbpedia.org/resource/East_River----Model: 
+---------------------------------------

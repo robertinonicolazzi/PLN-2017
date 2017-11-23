@@ -3,18 +3,13 @@
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 from questionanswering.funaux import *
+from questionanswering.templates import *
 from questionanswering.booleanHelper import BooleanHelper
 from questionanswering.aggregationHelper import AggregationHelper
 from questionanswering.entityExtractor import EntityExtractor
 from questionanswering.propertyExtractor import PropertyExtractor
-from questionanswering.templates import *
-import sys
-import json
-import re
-import nltk
-import nltk.classify.util
+import sys,json,re,nltk, nltk.classify.util, spacy
 import numpy as np
-import spacy
 
 
 def progress(msg, width=None):

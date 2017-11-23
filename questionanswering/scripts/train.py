@@ -10,12 +10,8 @@ Options:
   -h --help     Show this screen.
 """
 from docopt import docopt
-import dill
-
-import json
-import spacy
+import dill, json, spacy
 from questionanswering.main import ClassAnswerType
-from stanfordcorenlp import StanfordCoreNLP
 
 
 if __name__ == '__main__':

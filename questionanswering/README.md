@@ -1,69 +1,107 @@
-El sistema maneja **Una entidad y una propiedad**, salvo en caso Booleanos
-donde se admiten dos entidades y se busca la relacion entre ellos
-### Problemas actuales
-##### Obtencion entidades
-posible solucion en Seccion
+#### Paquetes necesarios
 
-##### Definir orden de query
-No se logra definir el orden de las entidades en una query 
-por ejemplo 
-Dame las peliculas dirigidas por Campanella
-No hay criterio para definir
-{ dbr:Campanella dbo:directer ?result }
-o
-{?result dbo:directed ?dbr:Campanella }
+>
+dill==0.2.7.1
+requests==2.18.4
+numpy==1.13.3
+googletrans==2.2.0
+spacy==1.9.0
+docopt==0.6.2
+nltk==3.2.2
+SPARQLWrapper==1.8.0
+beautifulsoup4==4.6.0
+scikit_learn==0.19.1
 
-Actualmente se verifica la primero en caso de no haber datos obtenidos, se prueba en el orden inverso
+Instalación
 
-##### Query con mas de una 3 -upla
+> cd PLN-2017/questionanswering
+pip install -r requirements.txt
 
-Esta query, pide el hijo mayor de Meryl_Streep, la entidad es 1, pero requiere como una subbusqueda, actualmente no hay criterio para estos casos.
-Un posible solucion seria fijarse la cantidad de palabras que definen las propiedad, por ejemplo
-Dame la escuela de la hija de Obama (aca la propiedad la definen *hija de* y *escuela*). Pero hasta ahora no he podido implementar esto
+##### Model español Spacy
 
-{
-res:Meryl_Streep dbo:child ?uri . 
-?uri dbo:birthDate ?d .
-}
-ORDER BY ASC(?d)\nOFFSET 0 LIMIT 
+1. Descargamos el Model en español
+
+> https://github.com/explosion/spacy-models/releases/download/es_core_web_md-1.0.0/es_core_web_md-1.0.0.tar.gz
+>
+
+2. Instalamos via pip
+
+> pip install /Users/you/es_core_web_md-1.0.0.tar.gz
+
+3. Definimos Shortcut **MUY IMPORTANTE**
+
+> python -m spacy link /Users/you/model es_default #MUY IMPORTANTE
+
+### Filminas 
+
+(ejemplos y mayor detalle)
+
+[Filminas Question Answering](https://github.com/robertinonicolazzi/PLN-2017/blob/Practico4/questionanswering/filminas_QA.pdf).
+
+### Descripción Tarea
+
+Este proyecto se basa en la tarea propuesta en QALD-2017 Task 1 en el cuál se 
+presentan preguntas con distintos niveles de dificultad y que precisan 
+diferentes técnicas para procesar su respuesta.
+
+Como referencia bibliográfica principal se utilizó un paper de una edición 
+anterior sobre un sistema en francés [French Paper](https://project-hobbit.eu/wp-content/uploads/2017/05/QALD_Paper_3.pdf).
+
+Se analizan 4 tipos de preguntas
+
+- **Date**
+- **Resource**
+- **Number**
+- **Boolean**
+
+Las preguntas pueden requerir contabilizar resultados u ordenar las respuestas 
+de acuerdo a algún criterio.
+
+El **Corpus de entrenamiento** consiste de 220 preguntas, las cuales se utilizan en su totalidad
+para entrenar el *Answer Type Detector* y 120 para el *Property Extractor*.
+
+El **Corpus de evaluación** consiste de 62 preguntas donde se utilizan sinónimos de palabras conocidas
+por el sistema.
+
+### Tipo de pregunta 
+
+Analizando las preguntas del Corpus de entrenamiento, se extrajeron diferentes keywords y patrones que ocurren en los distintos tipos de preguntas. A partir de los cuales se diseñaron features viendo la presencia en cierta ubicación o no de cada patrón para entrenar un NaiveBayes Classifier 
+
+### Obtención de Entidades
+
+El proceso en la selección de entidades utilizados es el siguiente:
+    
+- Se obtienen todos los Noun Group 
+- Se verifica que el Noun Group sea una entidad en DBPEDIA Español        
+	- Si se encuentra, utilizando sameAs, se obtiene su referencia en DBPEDIA Ingles
+    - Sino se intenta encontrar la entidad utilizando la DBPEDIA Ingles directamente
+
+- Entre las entidades encontradas se elige 1 ( o 2 en Booleanas) mediante cierto orden de prioridad            
+	- Presencia de Sustantivos Propios
+	- Tamaño del Grupo
+	- Sustantivos Comunes
+
+### Property Extractor
+
+Mediante un **Pipeline** formado por **DictVectorizer** y **LogisticRegression** se intenta predecir 
+la propiedad que se intenta obtener con la pregunta.
+
+A partir del corpus de entrenamiento se obtienen diferentes features utilizando 
+Bag of Words, presencia de sinónimos, igualdad de traducciones para poder lograr un mapping correcto 
+entre las propiedad en español e ingles.
 
 
-### Notas
-> Para obtener la propiedad se utiliza CountVectorizer y LogRegresion
-> Para obtener el tipo de pregunta NaiveBayes con features
+### Preguntas Simples
 
-### Obtencion de Entidades
+Utilizando el **Property Extractor** y los keywords asociados a la pregunta, se selecciona una propiedad
 
-- Extraemos el tipo de pregunta 
-- Extraemos los Sustantivos Propios como entidades desde los keywords
-- **Si hay 2 ó mas Entidades no se puede procesar** (Solo en booleanos)
 
-- Chequeamos que la entidad encontradas este en DBPEDIA ES
-
-	- Si el keyword es entidad se guarda (**entities**)
-	- Sino mediante parseo de dependencia se buscan ***name*** y el resto 	del texto se utilizara para desambiguar (entidad,texto desambiguacion)
-	- Por último sino hay una etiqueta ***name*** se busca alguna palabra que sea sustativo Propio ***np000000*** y se guarda (entidad, texto desambiguacion)
-	>En este último caso donde se buscan sustantivos propios, por ejemplo "presidente Chirac" utilizamos 
-
-- Luego con la entidad obtenemos los **sameAs** utilizando los **wikiPageRedirects** por si acaso la entidad encontrada en *Es DBPEDIA* sea un Redirect. Ya que las propiedades aprendidas son en ingles, utilizando **sameAs** obtenemos el URI en DBPEDIA EN
-
-- Una vez obtenido la referencia en Ingles  se obtiene la propiedad clasificando el resto de los ***Keywords***
-
-- Verificamos que si la entidad es Entidad_(desambiguation), buscamos la propiedad requerida en los ***WikiPageDisambiguates***
-
-- **Para entidades ambiguas, obtenemos el abstract, para poder analizar utilizando el contenido del mismo, mediante el contexto de la entidad, con cual respuesta nos quedamos**
-
-#### Mejora posible 
-> En lugar de utilizar Sustantivos Propios, utilizar los **noum.group** y entre todos ver cuales existen en dbpedia.
-> De esta forma es posible que se abarquen preguntas que no tienen entidad propias por ejemplo
-
-Dame los ingredientes de una **tarta de zanahoria**
-> la cual actualmente no se puede procesar al no encontrar entidades propias
 
 ### Aggregation 
 
 Para detectar el tipo de aggregation vemos la existencia de ciertas palabras en la pregunta
-##### **count**
+
+##### **Count**
 Si la pregunta es de tipo *number* y empieza con **Cuántos**
 
 ##### **Order** (no implementado)
@@ -76,37 +114,32 @@ Se buscan palabras como primer, ultima, mayor, grande
 #### 1 Entidad
 
 Se detectan tres tipos 
+
 ###### Si entidad contiene propiedad
-query: { Entidad dbo:property ?result } Filter(BOUND(?result)) 
+¿Tiene hijos Barack Obama?
 
 ###### Si entidad es de cierto tipo
 se observo que generalmente el tipo solicitado se encuentra en ciertas posiciones fijas
 ¿La Coca Cola **es una** *bebida*?
 ¿Las ranas son un **tipo de** *anfibio* ?
-Y obteniendo el abstract de la entidad, se observa si las palabras que definen el tipo se encuentran
 
 ###### Si existe una entidad 
-Mediante la existencia de palabras como **Existe** o **Hay algun** se detectaron este tipo de preguntas. El tipo se encuentra generalmente acontinuacion de ciertas construcciones
+Mediante la existencia de palabras como **Existe** o **Hay algun** se detectaron este tipo de preguntas. El tipo se encuentra generalmente acontinuación de ciertas construcciones
 
 Existe **un** Videojuego
-Hay **algun** Videojuego
+
+Hay **algún** Videojuego
 
 #### Booleanas 2 Entidades
 
-Al igual que antes mediante la presencia de palabras se define el filtro comparativo entre la relacion entre ambas entidad
+Al igual que antes mediante la presencia de palabras se define el filtro comparativo entre la relación entre ambas entidad
 
 
 ###### Misma propiedad ambas
-
 Si existen palabras como misma, igual se define el query para ver si ambas propiedades tienen el mismo valor en la propiedad obtenida 
-###### Comparaciones desiguales
 
-Si existe palabras como mayor o menor, mas grande se define un filtro que compare el vlaor de la propiedad en ambas entidades
+###### Comparaciones desiguales
+Si existe palabras como mayor o menor, mas grande se define un filtro que compare el valor de la propiedad en ambas entidades
 
 ###### caso Default
-
 en caso que ninguno de las anteriores ocurra se busca si hay alguna relación entre las entidades
-
-{ dbr:Michele_Obama dbo:spouse dbr:Barack_Obama}
-
-

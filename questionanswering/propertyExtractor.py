@@ -1,21 +1,13 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 from questionanswering.funaux import *
+from questionanswering.templates import *
 
-
-
-
-from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn import tree
 from sklearn.linear_model import LogisticRegression
 
-from questionanswering.templates import *
 import numpy as np
-import itertools
-import operator
+import itertools, operator
 from questionanswering.WordReferenceWrapper import *
-np.set_printoptions(threshold=np.inf)
-
 from googletrans import Translator
 
 
@@ -289,8 +281,13 @@ class PropertyExtractor:
         # Traducimos las propiedades
         ls_dbo_clean = ls_dbo_clean
 
+        print("Traduciendo propiedades...", len(ls_dbo_clean))
+        if len(ls_dbo_clean) >= 100:
+            ls_dbo_clean = ls_dbo_clean[:100]
+            ls_dbo = ls_dbo[:100]
+            
         ls_dbo_trans = self.trans_en_to_es(ls_dbo_clean)
-        assert(len(ls_dbo) == len(ls_dbo_trans))
+        print("OK - Propiedades traducidas")
         sinonimos = [st_keys]
         for k in st_keys.split():
             sinonimos += self.get_sinonimos(k)
@@ -302,14 +299,15 @@ class PropertyExtractor:
             prob = self.pipeline.predict_proba([test])[0][1]
 
             choose.append((ls_dbo[i],prob))
+            if ls_dbo_clean[i] == "spouse":
+                print (test)
 
         choose = sorted(choose, key=operator.itemgetter(1),reverse=True)
         if not len(choose) == 0:
             properti = ""
-
             if choose[0][1] > 0.20:
                 properti = choose[0][0]
-        print (choose)
+
         return properti
 
     def get_question_property_type(self, st_type, keys):

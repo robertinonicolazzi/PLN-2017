@@ -10,29 +10,22 @@ Options:
 """
 from docopt import docopt
 import dill as pickle
-import json
-import spacy
-from sklearn.svm import LinearSVC
-import sys
+import json, spacy, sys
 from questionanswering.funaux import *
-from sklearn.tree import DecisionTreeClassifier
 correctas = []
 #correctas= ['0', '2', '3', '4', '5', '7', '12', '13', '17', '18', '19', '21', '22', '25', '28', '29', '32', '33', '38', '39', '42', '48', '49', '54', '70', '71', '74', '80', '11', '35', '36', '40', '41', '61', '63', '68', '72', '79', '93', '98', '104', '108', '114', '115', '118', '119', '121', '125', '126', '127', '134', '136', '153', '154']
-#correctas = ['3000', '3001', '3002', '3004', '3005', '3006', '3007', '3008', '3009', '3010', '3011', '3012', '3013']
+correctas = ['3000', '3001', '3002', '3004', '3005', '3006', '3007', '3008', '3009', '3010', '3011', '3012', '3013', '3017', '3018', '3019', '3020', '3021', '3022', '3023', '3024', '3025', '3026', '3027', '3028', '3029', '3030', '3031', '3032', '3033', '3035', '3036', '3037', '3038', '3039', '3045', '3046', '3049', '3050', '3051', '3052', '3059', '3060', '3061', '3062', '3053', '3054', '3055', '3056', '3057']
+
 #13/17
-correctas = ['20', '31', '37', '55', '59', '64', '81', '85', '109', '139', '144', '180', '185', '212']
+#correctas = ['20', '31', '37', '55', '59', '64', '81', '85', '109', '139', '144', '180', '185', '212']
+#correctas = ['31', '33', '39', '59', '85', '96', '99']
 
 
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.naive_bayes import GaussianNB
-
-
-from sklearn.linear_model import LogisticRegressionCV
 from sklearn.linear_model import LogisticRegression
 
 from sklearn import svm
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_extraction import DictVectorizer
 
 def getQuestAnKey(quest):
 	idiomas = quest["question"]
@@ -104,7 +97,7 @@ if __name__ == '__main__':
 	'''
 
 	print('Loading corpus...')
-	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleData.json', 'r') as data_file:
+	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleDataCustom.json', 'r') as data_file:
 	  data = json.load(data_file)
 
 
@@ -128,9 +121,6 @@ if __name__ == '__main__':
 	for i, quest in enumerate(questionsSample):
 		if 	quest["id"] in correctas:
 			continue;
-
-		if  not quest["answertype"] == "boolean":
-			continue
 
 		st_quest, st_keys = getQuestAnKey(quest)
 		print(st_quest)

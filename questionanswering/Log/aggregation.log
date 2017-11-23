@@ -1,0 +1,12 @@
+¿Cuantos visitantes recibe Louvre?
+Louvre,visitantes
+SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}RESPUESTAS 
+---------------------------------------
+¿Cuantos turistas recibe Louvre?
+Louvre,turistas
+SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}RESPUESTAS 
+---------------------------------------
+¿Cuantos invitados recibe Louvre?
+Louvre,invitados
+SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}RESPUESTAS 
+---------------------------------------
