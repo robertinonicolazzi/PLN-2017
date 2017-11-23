@@ -2,7 +2,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 import re, csv
 from questionanswering.funaux import *
 
-typesPATH = r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data/types'
+typesPATH = r'Data/types'
 
 
 

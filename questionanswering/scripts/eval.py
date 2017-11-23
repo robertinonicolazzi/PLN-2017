@@ -12,13 +12,6 @@ from docopt import docopt
 import dill as pickle
 import json, spacy, sys
 from questionanswering.funaux import *
-correctas = []
-#correctas= ['0', '2', '3', '4', '5', '7', '12', '13', '17', '18', '19', '21', '22', '25', '28', '29', '32', '33', '38', '39', '42', '48', '49', '54', '70', '71', '74', '80', '11', '35', '36', '40', '41', '61', '63', '68', '72', '79', '93', '98', '104', '108', '114', '115', '118', '119', '121', '125', '126', '127', '134', '136', '153', '154']
-correctas = ['3000', '3001', '3002', '3004', '3005', '3006', '3007', '3008', '3009', '3010', '3011', '3012', '3013', '3017', '3018', '3019', '3020', '3021', '3022', '3023', '3024', '3025', '3026', '3027', '3028', '3029', '3030', '3031', '3032', '3033', '3035', '3036', '3037', '3038', '3039', '3045', '3046', '3049', '3050', '3051', '3052', '3059', '3060', '3061', '3062', '3053', '3054', '3055', '3056', '3057']
-
-#13/17
-#correctas = ['20', '31', '37', '55', '59', '64', '81', '85', '109', '139', '144', '180', '185', '212']
-#correctas = ['31', '33', '39', '59', '85', '96', '99']
 
 
 from sklearn.linear_model import LogisticRegression
@@ -86,18 +79,9 @@ if __name__ == '__main__':
 	model.nlp_api = nlp
 	model.pExtractor.nlp_api = nlp
 	model.eExtractor.nlp_api = nlp
-	'''
-	x = load_obj('train_x')
-	y = load_obj('train_y') 
-	print(x[0])
-	print('Train class...')
-	clasi = LogisticRegression(class_weight={1:8})
-	model.pExtractor.train(x,y,classi= clasi)
-	print('OK - Class Loaded...')
-	'''
 
 	print('Loading corpus...')
-	with open(r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleDataCustom.json', 'r') as data_file:
+	with open(r'Corpus/SimpleDataCustom.json', 'r') as data_file:
 	  data = json.load(data_file)
 
 
@@ -106,8 +90,8 @@ if __name__ == '__main__':
 	questionsSample = data["questions"]
 
 	print('Parsing...')
-	hits = len(correctas)
-	total = len(correctas)
+	hits = 0
+	total = 0
 	total_gold, total_model = 0, 0
 	n = len(questionsSample)
 	#format_str = '{:3.1f}% ({}/{}) (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
@@ -119,11 +103,7 @@ if __name__ == '__main__':
 	#progress(format_str.format(0.0, 0, n, 0.0, 0.0, 0.0))
 	agg = 10
 	for i, quest in enumerate(questionsSample):
-		if 	quest["id"] in correctas:
-			continue;
-
 		st_quest, st_keys = getQuestAnKey(quest)
-		print(st_quest)
 		answers_gold = getAnswer(quest,quest["answertype"])
 		answers_model = model.answer_question(st_quest,st_keys)
 
@@ -131,7 +111,6 @@ if __name__ == '__main__':
 			if answers_model == answers_gold:
 				hits +=1
 				print ("CORRECTO")
-				correctas.append(quest["id"])
 			else:
 				out = open('Log/bool.log','a')
 				out.write(str(st_quest) + "\n")
@@ -149,17 +128,13 @@ if __name__ == '__main__':
 
 			if answers_model == set(answers_gold):
 				print ("CORRECTO")
-				correctas.append(quest["id"])
 				hits +=1
 			else:
 				if 	quest["aggregation"]:
 					out = open('Log/aggregation.log','a')
 				else:
-					st_dbo = parseQuery(quest["query"]["sparql"])
-					if st_dbo == "":
-						out = open('Log/complex.log','a')
-					else:
-						out = open('Log/simple.log','a')
+					out = open('Log/simple.log','a')
+					
 				out.write(str(st_quest) + "\n")
 				out.write(str(st_keys) + "\n")
 				out.write(quest["query"]["sparql"])
@@ -169,10 +144,8 @@ if __name__ == '__main__':
 				out.write('---------------------------------------\n')
 				out.close()
 			total +=1
-		#print (correctas)
 		print ("HITS:", hits)
 		print ("TOTAL:", total)
-		print(correctas)
 	print ("HITS:", hits)
 	print ("TOTAL:", total)
 	print ("Accurancy:", hits/total)

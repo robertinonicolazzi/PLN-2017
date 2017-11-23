@@ -4,12 +4,12 @@ from questionanswering.templates import *
 
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
+from sklearn.feature_extraction import DictVectorizer
 
 import numpy as np
 import itertools, operator
 from questionanswering.WordReferenceWrapper import *
 from googletrans import Translator
-
 
 class PropertyExtractor:
     # -------------------------------------------------------------

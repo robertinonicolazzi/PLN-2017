@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     print('Loading corpus...')
 
-    pathTrainData = r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/TrainData.json'
+    pathTrainData = r'Corpus/TrainData.json'
 
 
     with open(pathTrainData, 'r') as data_file:

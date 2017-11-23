@@ -1,16 +1,16 @@
 #### Paquetes necesarios
 
->
-dill==0.2.7.1
-requests==2.18.4
-numpy==1.13.3
-googletrans==2.2.0
-spacy==1.9.0
-docopt==0.6.2
-nltk==3.2.2
-SPARQLWrapper==1.8.0
-beautifulsoup4==4.6.0
-scikit_learn==0.19.1
+
+>dill==0.2.7.1  
+>requests==2.18.4  
+>numpy==1.13.3  
+>googletrans==2.2.0  
+>spacy==1.9.0  
+>docopt==0.6.2  
+>nltk==3.2.2  
+>SPARQLWrapper==1.8.0  
+>beautifulsoup4==4.6.0  
+>scikit_learn==0.19.1  
 
 Instalación
 
@@ -31,6 +31,10 @@ pip install -r requirements.txt
 3. Definimos Shortcut **MUY IMPORTANTE**
 
 > python -m spacy link /Users/you/model es_default #MUY IMPORTANTE
+
+##### Respoder pregunta
+
+> python scripts/testQuestion -q "question example" -k "keys, example"
 
 ### Filminas 
 

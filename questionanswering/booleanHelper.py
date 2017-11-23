@@ -2,7 +2,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from questionanswering.funaux import *
 import csv, re, json
 
-typesPATH = r'/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data/types'
+typesPATH = r'Data/types'
 
 class BooleanHelper:
 	
