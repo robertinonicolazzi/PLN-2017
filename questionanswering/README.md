@@ -1,3 +1,19 @@
+DecisionTree
+Accurancy: 0.4603174603174603
+
+
+Random Forest
+HITS: 43
+TOTAL: 63
+Accurancy: 0.6825396825396826
+
+
+LogisticCV
+HITS: 37
+TOTAL: 63
+Accurancy: 0.5873015873015873
+
+
 #### Paquetes necesarios
 
 

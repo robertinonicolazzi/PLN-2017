@@ -29,8 +29,10 @@ class PropertyExtractor:
         self.dbo_trans = {}
         self.lang_trans = {}
         self.esp_sins = {}
+        self.train_prop_x = []
+        self.train_prop_y = []
 
-    def train(self, x, y, classi=None):
+    def train(self, classi=None):
         vectorizer = DictVectorizer()
 
         if classi == None:
@@ -38,8 +40,8 @@ class PropertyExtractor:
         else:
             classifier = classi
         self.pipeline = Pipeline([("vec", vectorizer), ("clas", classifier)])
-        x = x
-        y = y
+        x = self.train_prop_x
+        y = self.train_prop_y
 
         self.pipeline.fit(x, y)
     

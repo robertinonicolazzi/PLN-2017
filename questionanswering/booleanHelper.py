@@ -14,26 +14,25 @@ class BooleanHelper:
 
 
 	def boolean_key_one_entity(self,q_clean):
-
 		q_clean = delete_tildes(q_clean)
 
-
+		# Pregunta sobre tipo
 		if "tipo" in q_clean:
 			q_list = q_clean.split(" ")
 			indextipo = q_list.index("tipo")
-
 			return "type", q_list[indextipo+2]
-
 		if "es una" in q_clean:
 			q_list = q_clean.split(" ")
 			indextipo = q_list.index("una")
 			return "type", q_list[indextipo+1]
 		
+		# Existe 
 		if "existe" in q_clean or "hay algun" in q_clean or "hay" in q_clean:
 			q_list = q_clean.split(" ")
 			indextipo = q_list.index("algun")
 			return "exist",q_list[indextipo+1]
 
+		# Propiedad sobre Entidad
 		return "properti", "none"
 
 	def get_exist_answer(self,entity, st_type):

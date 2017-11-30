@@ -14,6 +14,8 @@ from docopt import docopt
 import dill as pickle
 import json
 import spacy
+from sklearn.linear_model import LogisticRegression
+
 import sys
 from questionanswering.funaux import *
 
@@ -69,6 +71,10 @@ if __name__ == '__main__':
     model.nlp_api = nlp
     model.pExtractor.nlp_api = nlp
     model.eExtractor.nlp_api = nlp 
+    print('Training model...')
+    model.pExtractor.train(classi=LogisticRegression(class_weight={1:8}))
+    print('OK - Model Trained')
+
     st_quest = str(opts['-q'])
     st_keys = str(opts['-k'])
 

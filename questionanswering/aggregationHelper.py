@@ -34,10 +34,12 @@ class AggregationHelper:
 
 	def order_rules(self,st_question):
 		#Agarra lo mas grande
+		import pdb; pdb.set_trace()
 		complex_cont = ["NOUN","ADJ"]
 		tag_word = self.nlp_api(st_question)
 		tag_word = [(word.text,word.tag_) for word in tag_word]
 
+		# Casos especiales de fechas, el orden es inverso
 		for i,(w,t) in enumerate(tag_word):
 			if w == "mayor":
 				for a in complex_cont:
@@ -53,7 +55,8 @@ class AggregationHelper:
 				return True,"desc_menor"
 
 
-
+		# Casos generales
+		
 		desc_rules = ['mas joven','mas menor','mas grande','grande','ultima','mas alto','mas alta']
 		for rule in desc_rules:
 			if rule in st_question:
@@ -208,8 +211,6 @@ class AggregationHelper:
 	def get_aggregation_order_type(self, st_type, properti,order):
 		sparql = self.sparqlEn
 		answers = []
-
-
 
 		if "desc" in order:
 			st_order = "ORDER BY DESC(?n) OFFSET 0 LIMIT 1"

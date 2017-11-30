@@ -13,10 +13,7 @@ import dill as pickle
 import json, spacy, sys
 from questionanswering.funaux import *
 
-
 from sklearn.linear_model import LogisticRegression
-
-from sklearn import svm
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 
@@ -80,12 +77,13 @@ if __name__ == '__main__':
 	model.pExtractor.nlp_api = nlp
 	model.eExtractor.nlp_api = nlp
 
+	print('Training model...')
+	model.pExtractor.train(classi=LogisticRegression(class_weight={1:8}))
+	print('OK - Model Trained')
+
 	print('Loading corpus...')
 	with open(r'Corpus/SimpleDataCustom.json', 'r') as data_file:
 	  data = json.load(data_file)
-
-
-
 
 	questionsSample = data["questions"]
 
@@ -149,5 +147,3 @@ if __name__ == '__main__':
 	print ("HITS:", hits)
 	print ("TOTAL:", total)
 	print ("Accurancy:", hits/total)
-
-	

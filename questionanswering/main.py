@@ -10,6 +10,7 @@ from questionanswering.entityExtractor import EntityExtractor
 from questionanswering.propertyExtractor import PropertyExtractor
 import sys,json,re,nltk, nltk.classify.util, spacy
 import numpy as np
+import operator
 
 
 def progress(msg, width=None):
@@ -80,10 +81,9 @@ class ClassAnswerType:
 
         self.clas_tipo = nltk.NaiveBayesClassifier.train(train_answer_type)
 
-        self.pExtractor.train(train_prop_x, train_prop_y)
+        self.pExtractor.train_prop_x = train_prop_x
+        self.pExtractor.train_prop_y = train_prop_y
         self.eExtractor = EntityExtractor(self.nlp_api)
-        self.train_prop_x = train_prop_x
-        self.train_prop_y = train_prop_y
 
     # -------------------------------------------------------------
     # --GET ANSWER TYPE--------------------------------------------
@@ -126,11 +126,11 @@ class ClassAnswerType:
             properti = "date"
 
         query = '''
-				select distinct ?result
-				where {{
-					<http://dbpedia.org/resource/{}> dbp:{} ?result
-				}}
-				'''.format(entity, properti)
+                select distinct ?result
+                where {{
+                    <http://dbpedia.org/resource/{}> dbp:{} ?result
+                }}
+                '''.format(entity, properti)
 
         answers = resolveQuery(sparql, query)
 
@@ -143,7 +143,7 @@ class ClassAnswerType:
         answers = resolveQuery(sparql, query)
         return set(answers)
 
-    def get_english_ans(self, entity, properti):
+    def get_english_ans(self, entity, properti, contexto=""):
         sparql = self.sparqlEn
         query = templates.get('simple',"")
         query = query.format(res=entity, prop=properti)
@@ -152,8 +152,31 @@ class ClassAnswerType:
         if len(answers) == 0:
             query = templates.get('simple_amb',"")
             query = query.format(res=entity, prop=properti)
-            answers = resolveQuery(sparql, query)
+            answers, uri = resolveQueryAmb(sparql, query)
+            if len(uri) > 1:
+                sel_uri = self.desambiguar(uri,contexto)
+                answers = filter_answers(sel_uri,answers)
+
         return set(answers)
+
+    def desambiguar(self,uris, contexto):
+        uri_value = []
+        contexto = removeStopWords(contexto)
+        sparql = self.sparqlEn
+        query = templates.get('get_abstract',"")
+        for u in uris:
+            score = 0
+            query = query.format(res=u)
+            answers = resolveQuery(sparql, query)
+            abstract = ""
+            if not len(answers) == 0:
+                abstract = answers[0]
+            for a in contexto.split():
+                if a in abstract:
+                    score += 1
+            uri_value.append((u,score))
+        selected_uri = sorted(uri_value, key=operator.itemgetter(1),reverse=True)[0]
+        return selected_uri
 
     # -----------------------------------------------------------------------
     # ---------------------- PREGUNTAS BOOLEAN ------------------------------
@@ -286,7 +309,7 @@ class ClassAnswerType:
         print("Entidad Ingles :", en_entity)
         print("Propiedad      :", st_property)
 
-        answers = self.get_english_ans(en_entity, st_property)
+        answers = self.get_english_ans(en_entity, st_property,entities[0][2])
         print("Respuesta:", answers)
 
         if len(answers) == 0 and answer_type == "date":

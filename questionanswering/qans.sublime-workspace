@@ -4,168 +4,12 @@
 		"selected_items":
 		[
 			[
-				"json",
-				"json"
-			],
-			[
-				"ls",
-				"ls_dbo_clean"
-			],
-			[
-				"p",
-				"properti"
-			],
-			[
-				"get_pr",
-				"get_properti"
-			],
-			[
-				"es",
-				"esp_sins"
-			],
-			[
-				"id",
-				"id_n"
-			],
-			[
-				"st",
-				"st_query"
-			],
-			[
-				"q",
-				"q_keys"
-			],
-			[
-				"st_",
-				"st_type"
-			],
-			[
-				"get",
-				"get_text"
-			],
-			[
-				"sin",
-				"sinonimos"
-			],
-			[
-				"dbo",
-				"dbo_props_trans"
-			],
-			[
-				"tex",
-				"text_copy"
-			],
-			[
-				"k",
-				"knows"
-			],
-			[
-				"dbo_",
-				"dbo_trans"
-			],
-			[
-				"db",
-				"dbo_props_trans"
-			],
-			[
-				"ls_",
-				"ls_dbo_trans"
-			],
-			[
-				"fin",
-				"findAll"
-			],
-			[
-				"trans",
-				"trans_es_to_en"
-			],
-			[
-				"si",
-				"sinonimos"
-			],
-			[
-				"print",
-				"printGraph"
-			],
-			[
-				"clas",
-				"classifier"
-			],
-			[
-				"cla",
-				"classifier"
-			],
-			[
-				"tran",
-				"trans_dbo"
-			],
-			[
-				"retur",
-				"return_trans_dbo"
-			],
-			[
-				"ento",
-				"en_to_es"
-			],
-			[
-				"temp",
-				"temp_prop_y"
-			],
-			[
-				"ent",
-				"en_to_es"
-			],
-			[
-				"esto",
-				"es_to_en"
-			],
-			[
-				"st_d",
-				"st_dbo"
-			],
-			[
-				"tmep",
-				"temp_prop_y"
-			],
-			[
-				"ls_E",
-				"ls_en_es"
-			],
-			[
-				"tem",
-				"temp_prop_x"
-			],
-			[
-				"keys",
-				"keys_result"
+				"uri",
+				"uri_value"
 			],
 			[
 				"ans",
-				"answer_type"
-			],
-			[
-				"lo",
-				"log_dict"
-			],
-			[
-				"re",
-				"return"
-			],
-			[
-				"log",
-				"log"
-			],
-			[
-				"an",
-				"answer_type"
-			],
-			[
-				"nou",
-				"noum_group"
-			],
-			[
-				"questions",
-				"questionanswering"
+				"answers_copy"
 			],
 			[
 				"rs",
@@ -180,12 +24,28 @@
 				"st_place"
 			],
 			[
+				"st_",
+				"st_subproperty"
+			],
+			[
 				"sub",
 				"sub_prop"
 			],
 			[
 				"de",
 				"default_comparatives"
+			],
+			[
+				"an",
+				"anwer_type"
+			],
+			[
+				"q",
+				"q_id"
+			],
+			[
+				"tem",
+				"template_ans"
 			],
 			[
 				"str",
@@ -196,12 +56,28 @@
 				"key_st"
 			],
 			[
+				"nou",
+				"nouns"
+			],
+			[
+				"st",
+				"st_ket_f"
+			],
+			[
+				"get",
+				"getNounGroups"
+			],
+			[
 				"ke",
 				"keys_restantes_copy"
 			],
 			[
 				"kes",
 				"keys_restantes"
+			],
+			[
+				"tran",
+				"train_prop_x"
 			],
 			[
 				"resul",
@@ -214,6 +90,10 @@
 			[
 				"enti",
 				"entities"
+			],
+			[
+				"db",
+				"dbpedia_group"
 			],
 			[
 				"len",
@@ -240,6 +120,10 @@
 				"important_words"
 			],
 			[
+				"k",
+				"k"
+			],
+			[
 				"e",
 				"e"
 			],
@@ -254,6 +138,14 @@
 			[
 				"res",
 				"result_entities"
+			],
+			[
+				"ent",
+				"enti"
+			],
+			[
+				"temp",
+				"temp_prop_x"
 			],
 			[
 				"Extra",
@@ -306,6 +198,10 @@
 			[
 				"en",
 				"en_ent"
+			],
+			[
+				"es",
+				"es_ent"
 			],
 			[
 				"get_e",
@@ -436,6 +332,10 @@
 				"nlp_api"
 			],
 			[
+				"keys",
+				"keys_restantes"
+			],
+			[
 				"clean",
 				"cleanQuestion"
 			],
@@ -454,6 +354,10 @@
 			[
 				"spli",
 				"split_comma"
+			],
+			[
+				"clas",
+				"clas_propiedades"
 			],
 			[
 				"fea",
@@ -478,6 +382,10 @@
 			[
 				"resE",
 				"resElegido"
+			],
+			[
+				"dbo",
+				"dboElegido"
 			],
 			[
 				"keywo",
@@ -514,54 +422,153 @@
 			[
 				"ta",
 				"tagged_sent"
+			],
+			[
+				"class",
+				"classify"
+			],
+			[
+				"test",
+				"test_sentence"
+			],
+			[
+				"test_",
+				"test_sent_features"
+			],
+			[
+				"strin",
+				"string_question"
+			],
+			[
+				"aux",
+				"auxNewVar"
+			],
+			[
+				"gol",
+				"gold_parsed_sent"
+			],
+			[
+				"eva",
+				"evalBool"
+			],
+			[
+				"tre",
+				"tree_temp"
+			],
+			[
+				"parse",
+				"parsed_sents"
+			],
+			[
+				"resu",
+				"result_tree"
+			],
+			[
+				"pi",
+				"pi_y"
+			],
+			[
+				"prob",
+				"probs_dict"
+			],
+			[
+				"clasi",
+				"clasificador"
+			],
+			[
+				"his",
+				"histories"
+			],
+			[
+				"total",
+				"total"
+			],
+			[
+				"matri",
+				"matrix_confusion"
+			],
+			[
+				"matrix",
+				"matrix_confusion"
+			],
+			[
+				"most",
+				"most_frequent_taq"
+			],
+			[
+				"confusio",
+				"confusion_matrix"
+			],
+			[
+				"in",
+				"inf"
+			],
+			[
+				"log",
+				"log_prob"
+			],
+			[
+				"cou",
+				"counts_tag"
+			],
+			[
+				"hit",
+				"hits_k"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "requirements.txt",
+			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 207,
+				"buffer_size": 16533,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "scripts/eval.py",
 			"settings":
 			{
-				"buffer_size": 4066,
+				"buffer_size": 3607,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/media/robertnn/DatosLinux/PLN-2017/requirements.txt",
+			"file": "scripts/testQuestion.py",
 			"settings":
 			{
-				"buffer_size": 91,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/testMap.csv",
-			"settings":
-			{
-				"buffer_size": 10733,
+				"buffer_size": 1905,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "\n\tAnsw Type (41/226) (Preg=41, Total=226), Prop 32 keys:  principio\nSinonimos  principio\nAnsw Type (43/226) (Preg=43, Total=226), Prop 33 keys:  actor\nSinonimos  actor\nAnsw Type (44/226) (Preg=44, Total=226), Prop 34 keys:  idiomas\nSinonimos  idiomas\nAnsw Type (46/226) (Preg=46, Total=226), Prop 35 keys:  pais origen\nSinonimos  pais\nSinonimos  origen\nAnsw Type (47/226) (Preg=47, Total=226), Prop 36 keys:  ano nacio\nSinonimos  ano\nSinonimos  nacio\nAnsw Type (48/226) (Preg=48, Total=226), Prop 37 keys:  democrata\nSinonimos  democrata\nAnsw Type (49/226) (Preg=49, Total=226), Prop 38 keys:  lugar nacimiento\nSinonimos  lugar\nSinonimos  nacimiento\nAnsw Type (50/226) (Preg=50, Total=226), Prop 39 keys:  casada veces\nSinonimos  casada\nSinonimos  veces\nAnsw Type (51/226) (Preg=51, Total=226), Prop 40 keys:  primero ascender\nSinonimos  primero\nSinonimos  ascender\nAnsw Type (52/226) (Preg=52, Total=226), Prop 41 keys:  personas habitan\nSinonimos  personas\nSinonimos  habitan\nAnsw Type (53/226) (Preg=53, Total=226), Prop 42 keys:  localizacion\nSinonimos  localizacion\nAnsw Type (54/226) (Preg=54, Total=226), Prop 43 keys:  actua\nSinonimos  actua\nAnsw Type (55/226) (Preg=55, Total=226), Prop 44 keys:  pais\nSinonimos  pais\nAnsw Type (59/226) (Preg=59, Total=226), Prop 45 keys:  creador\nSinonimos  creador\n\n\nAnsw Type (63/226) (Preg=63, Total=226), Prop 48 keys:  ingredientes galleta chocolate\nSinonimos  ingredientes\nSinonimos  galleta\nSinonimos  chocolate\nAnsw Type (65/226) (Preg=65, Total=226), Prop 49 keys:  ingredientes tarta zanahorias\nSinonimos  ingredientes\nSinonimos  tarta\nSinonimos  zanahorias\nAnsw Type (66/226) (Preg=66, Total=226), Prop 50 keys:  jugador\nSinonimos  jugador\nAnsw Type (72/226) (Preg=72, Total=226), Prop 51 keys:  disolvio\nSinonimos  disolvio\nAnsw Type (74/226) (Preg=74, Total=226), Prop 52 keys:  poblacion total\nSinonimos  poblacion\nSinonimos  total\nAnsw Type (77/226) (Preg=77, Total=226), Prop 53 keys:  ciudad grande\nSinonimos  ciudad\nSinonimos  grande\nAnsw Type (79/226) (Preg=79, Total=226), Prop 54 keys:  alcalde\nSinonimos  alcalde\nAnsw Type (81/226) (Preg=81, Total=226), Prop 55 keys:  creador comic\nSinonimos  creador\nSinonimos  comic\nAnsw Type (82/226) (Preg=82, Total=226), Prop 56 keys:  actor\nSinonimos  actor\nAnsw Type (83/226) (Preg=83, Total=226), Prop 57 keys:  lenguaje programacion\nSinonimos  lenguaje\nSinonimos  programacion\nAnsw Type (84/226) (Preg=84, Total=226), Prop 58 keys:  imperio antiguo pagar granos cacao\nSinonimos  imperio\nSinonimos  antiguo\nSinonimos  pagar\nSinonimos  granos\nSinonimos  cacao\nAnsw Type (85/226) (Preg=85, Total=226), Prop 59 keys:  editor\nSinonimos  editor\nAnsw Type (90/226) (Preg=90, Total=226), Prop 60 keys:  pertenece\nSinonimos  pertenece\nAnsw Type (91/226) (Preg=91, Total=226), Prop 61 keys:  capital\nSinonimos  capital\nAnsw Type (103/226) (Preg=103, Total=226), Prop 62 keys:  \nAnsw Type (104/226) (Preg=104, Total=226), Prop 63 keys:  forma gobierno\nSinonimos  forma\nSinonimos  gobierno\n\nAnsw Type (109/226) (Preg=109, Total=226), Prop 66 keys:  region\nSinonimos  region\nAnsw Type (111/226) (Preg=111, Total=226), Prop 67 keys:  rana verde anfibio\nSinonimos  rana\nSinonimos  verde\nSinonimos  anfibio\nAnsw Type (112/226) (Preg=112, Total=226), Prop 68 keys:  actua\nSinonimos  actua\nAnsw Type (113/226) (Preg=113, Total=226), Prop 69 keys:  juegos\nSinonimos  juegos\nAnsw Type (115/226) (Preg=115, Total=226), Prop 70 keys:  aeropuertos\nSinonimos  aeropuertos\nAnsw Type (117/226) (Preg=117, Total=226), Prop 71 keys:  color expresa lealtad\nSinonimos  color\nSinonimos  expresa\nSinonimos  lealtad\n\nAnsw Type (124/226) (Preg=124, Total=226), Prop 76 keys:  peliculas director\nSinonimos  peliculas\nSinonimos  director\nAnsw Type (125/226) (Preg=125, Total=226), Prop 77 keys:  fecha acabado\nSinonimos  fecha\nSinonimos  acabado\nAnsw Type (126/226) (Preg=126, Total=226), Prop 78 keys:  numero paginas\nSinonimos  numero\nSinonimos  paginas\nAnsw Type (129/226) (Preg=129, Total=226), Prop 79 keys:  altura\nSinonimos  altura\nAnsw Type (130/226) (Preg=130, Total=226), Prop 80 keys:  vicepresidente\nSinonimos  vicepresidente\nAnsw Type (132/226) (Preg=132, Total=226), Prop 81 keys:  sucesor\nSinonimos  sucesor\nAnsw Type (133/226) (Preg=133, Total=226), Prop 82 keys:  compositor banda sonora\nSinonimos  compositor\nSinonimos  banda\nSinonimos  sonora\nAnsw Type (136/226) (Preg=136, Total=226), Prop 83 keys:  zona horaria\nSinonimos  zona\nSinonimos  horaria\n\nAnsw Type (138/226) (Preg=138, Total=226), Prop 85 keys:  desarrolladores\nSinonimos  desarrolladores\nAnsw Type (142/226) (Preg=142, Total=226), Prop 86 keys:  padre\nSinonimos  padre\nAnsw Type (145/226) (Preg=145, Total=226), Prop 87 keys:  conflicto militar\nSinonimos  conflicto\nSinonimos  militar\nAnsw Type (147/226) (Preg=147, Total=226), Prop 88 keys:  pais origen\nSinonimos  pais\nSinonimos  origen\nAnsw Type (150/226) (Preg=150, Total=226), Prop 89 keys:  hijos\nSinonimos  hijos\nAnsw Type (155/226) (Preg=155, Total=226), Prop 90 keys:  esposa\nSinonimos  esposa\nAnsw Type (156/226) (Preg=156, Total=226), Prop 91 keys:  prefijo\nSinonimos  prefijo\nAnsw Type (157/226) (Preg=157, Total=226), Prop 92 keys:  actores\nSinonimos  actores\nAnsw Type (158/226) (Preg=158, Total=226), Prop 93 keys:  apodo\nSinonimos  apodo\nAnsw Type (160/226) (Preg=160, Total=226), Prop 94 keys:  paises fluye\nSinonimos  paises\nSinonimos  fluye\nAnsw Type (163/226) (Preg=163, Total=226), Prop 95 keys:  pais origen\nSinonimos  pais\nSinonimos  origen\nAnsw Type (164/226) (Preg=164, Total=226), Prop 96 keys:  esposa\nSinonimos  esposa\nAnsw Type (165/226) (Preg=165, Total=226), Prop 97 keys:  capital\nSinonimos  capital\nAnsw Type (166/226) (Preg=166, Total=226), Prop 98 keys:  persona inpiracion\nSinonimos  persona\nSinonimos  inpiracion\nAnsw Type (168/226) (Preg=168, Total=226), Prop 99 keys:  presidente unidos guerra\nSinonimos  presidente\nSinonimos  unidos\nSinonimos  guerra\nAnsw Type (169/226) (Preg=169, Total=226), Prop 100 keys:  escritor\nSinonimos  escritor\n\n\nAnsw Type (171/226) (Preg=171, Total=226), Prop 102 keys:  fin carrera\nSinonimos  fin\nSinonimos  carrera\nAnsw Type (172/226) (Preg=172, Total=226), Prop 103 keys:  tipo uva crece\nSinonimos  tipo\nSinonimos  uva\nSinonimos  crece\nAnsw Type (173/226) (Preg=173, Total=226), Prop 104 keys:  altura\nSinonimos  altura\nAnsw Type (175/226) (Preg=175, Total=226), Prop 105 keys:  escritor libro\nSinonimos  escritor\nSinonimos  libro\nAnsw Type (177/226) (Preg=177, Total=226), Prop 106 keys:  altura\nSinonimos  altura\nAnsw Type (178/226) (Preg=178, Total=226), Prop 107 keys:  supervisor doctoral\nSinonimos  supervisor\nSinonimos  doctoral\nAnsw Type (180/226) (Preg=180, Total=226), Prop 108 keys:  moneda republica checa\nSinonimos  moneda\nSinonimos  republica\nSinonimos  checa\nAnsw Type (181/226) (Preg=181, Total=226), Prop 109 keys:  influencia\nSinonimos  influencia\nAnsw Type (182/226) (Preg=182, Total=226), Prop 110 keys:  zona horaria\nSinonimos  zona\nSinonimos  horaria\nAnsw Type (185/226) (Preg=185, Total=226), Prop 111 keys:  fundador\nSinonimos  fundador\nAnsw Type (186/226) (Preg=186, Total=226), Prop 112 keys:  fundada\nSinonimos  fundada\nAnsw Type (187/226) (Preg=187, Total=226), Prop 113 keys:  \nAnsw Type (191/226) (Preg=191, Total=226), Prop 114 keys:  premio nobel fisica\nSinonimos  premio\nSinonimos  nobel\nSinonimos  fisica\nAnsw Type (194/226) (Preg=194, Total=226), Prop 115 keys:  proinsulina\nSinonimos  proinsulina\nAnsw Type (195/226) (Preg=195, Total=226), Prop 116 keys:  padres\nSinonimos  padres\nAnsw Type (196/226) (Preg=196, Total=226), Prop 117 keys:  hijos\nSinonimos  hijos\nAnsw Type (198/226) (Preg=198, Total=226), Prop 118 keys:  ganador\nSinonimos  ganador\nAnsw Type (200/226) (Preg=200, Total=226), Prop 119 keys:  encuentra americano\nSinonimos  encuentra\nSinonimos  americano\nAnsw Type (202/226) (Preg=202, Total=226), Prop 120 keys:  enterrado\nSinonimos  enterrado\nAnsw Type (203/226) (Preg=203, Total=226), Prop 121 keys:  zona horaria\nSinonimos  zona\nSinonimos  horaria\nAnsw Type (206/226) (Preg=206, Total=226), Prop 122 keys:  libros\nSinonimos  libros\nAnsw Type (209/226) (Preg=209, Total=226), Prop 123 keys:  alta\nSinonimos  alta\nAnsw Type (212/226) (Preg=212, Total=226), Prop 124 keys:  videojuego desarrollar\nSinonimos  videojuego\nSinonimos  desarrollar\nAnsw Type (214/226) (Preg=214, Total=226), Prop 125 keys:  musica compositor\nSinonimos  musica\nSinonimos  compositor\nAnsw Type (215/226) (Preg=215, Total=226), Prop 126 keys:  miembros banda\nSinonimos  miembros\nSinonimos  banda\nAnsw Type (218/226) (Preg=218, Total=226), Prop 127 keys:  \nAnsw Type (222/226) (Preg=222, Total=226), Prop 128 keys:  condados\nSinonimos  condados\nAnsw Type (223/226) (Preg=223, Total=226), Prop 129 keys:  bebida\nSinonimos  bebida\nAnsw Type (224/226) (Preg=224, Total=226), Prop 130 keys:  fecha fallecimiento\nSinonimos  fecha\nSinonimos  fallecimiento\nAnsw Type (226/226) (Preg=226, Total=226), Prop 131 Saving...\n",
-			"file": "Sinonimos",
-			"file_size": 9245,
-			"file_write_time": 131553161993954129,
+			"file": "booleanHelper.py",
 			"settings":
 			{
-				"buffer_size": 8914,
+				"buffer_size": 3832,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "funaux.py",
+			"settings":
+			{
+				"buffer_size": 2866,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates.py",
+			"settings":
+			{
+				"buffer_size": 1232,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -573,7 +580,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 159.0,
+		"height": 392.0,
 		"last_filter": "",
 		"selected_items":
 		[
@@ -598,7 +605,7 @@
 	},
 	"console":
 	{
-		"height": 153.0,
+		"height": 310.0,
 		"history":
 		[
 			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
@@ -616,50 +623,45 @@
 	},
 	"expanded_folders":
 	[
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts"
+		"/home/robert/Facultad/PLN-2017/questionanswering",
+		"/home/robert/Facultad/PLN-2017/questionanswering/scripts"
 	],
 	"file_history":
 	[
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/main.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/train.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/aggregationHelper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleDataCustom.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/templates.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleData.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/bool.log",
-		"/media/robertnn/DatosLinux/untitled.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleDataCustom.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Sinonimos",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customEval.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/spacy",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customTrain.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/WordReferenceWrapper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testMap.csv",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/obj/x_train.pkl",
-		"/home/robertnn/.conkyrc",
+		"/home/robert/Facultad/PLN-2017/questionanswering/aggregationHelper.py",
+		"/home/robert/Facultad/PLN-2017/questionanswering/main.py",
+		"/home/robert/Facultad/PLN-2017/questionanswering/propertyExtractor.py",
+		"/home/robert/Facultad/PLN-2017/questionanswering/scripts/eval.py",
+		"/home/robert/Facultad/PLN-2017/questionanswering/README.md",
+		"/home/robert/Facultad/PLN-2017/questionanswering/booleanHelper.py",
+		"/etc/conky/Conky Icons by Carelli.ttf",
 		"/etc/conky/conky.conf",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testQuestion.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/interfaz.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/back.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/main.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/index.html",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/complex.log",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/qans.sublime-project",
+		"/home/robert/Facultad/PLN-2017/questionanswering/.gitignore",
+		"/home/robert/Escritorio/morequestions",
+		"/home/robert/Facultad/PLN-2017/questionanswering/Corpus/SimpleData.json",
+		"/etc/conky/conky_orange.lua",
+		"/home/robert/Facultad/PLN-2017/questionanswering/entityExtractor.py",
+		"/home/robert/Descargas/conkyrc",
+		"/home/robert/Facultad/PLN-2017/questionanswering/scripts/gen.py",
+		"/home/robert/Facultad/PLN-2017/questionanswering/Log/complex.log",
+		"/home/robert/Facultad/PLN-2017/questionanswering/TrainData.json",
+		"/home/robert/Facultad/PLN-2017/questionanswering/customTrain.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/train.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/simple.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/aggregation.log",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/aggregationHelper.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/main.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/bool.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/myfile",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data/types",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
 		"/media/robertnn/DatosLinux/SimpleDataCopy",
 		"/home/robertnn/Descargas/project_21812_citations.txt",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/helpers.py",
@@ -674,6 +676,7 @@
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimplesLog",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/out.txt",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/simple_questions.csv",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testQuestion.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/EvalData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/evalDev.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/script.sh",
@@ -750,15 +753,17 @@
 		"/home/robertnn/sudo",
 		"/home/robertnn/vi",
 		"/media/robertnn/DatosLinux/PLN-2017/parsing/tests/test_util.py",
-		"/media/robertnn/DatosLinux/PLN-2017/.gitignore"
+		"/media/robertnn/DatosLinux/PLN-2017/.gitignore",
+		"/media/robertnn/DatosLinux/PLN-2017/tagging/README.md",
+		"/media/robertnn/DatosLinux/PLN-2017/tagging/scripts/stats.py"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 169.0
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 463.0,
 		"where_history":
 		[
 			""
@@ -766,36 +771,16 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
-			",",
-			"-s",
-			"spouse",
-			"\\n",
-			"Natalie",
-			"origen",
-			"fecha",
-			"lugar de n",
-			"result\"",
-			"poblaci",
-			"museo",
-			"altura",
-			"episodios",
-			", ",
-			"Dame",
-			"trans_en_to_es",
-			"list",
-			"print",
-			"print ",
-			"print (",
-			"print",
-			"poblacion':",
-			"poblaci",
-			"st_ent",
-			"pri",
-			"print",
-			"import pd",
+			"train_prop_x",
+			"cpu",
+			"lua",
+			"answertype\": \"boolean\"",
+			"boolean",
+			"aggregation\": t",
+			"",
 			"h_agg",
 			"h_aggregation.",
 			"self.entExtractor",
@@ -896,18 +881,35 @@
 			"get_english_ans",
 			"get_question_property",
 			"answertype\": \"",
-			"deathDate"
+			"deathDate",
+			"print",
+			"bindin",
+			"nlp_ap",
+			"Prince",
+			"princi",
+			"nlp_api",
+			"boolean",
+			"spouse",
+			"birthDa",
+			"nació",
+			"naci",
+			"birth",
+			"number",
+			"dbo:number",
+			"dbo:nu",
+			"True",
+			"nació",
+			"True",
+			"Obama",
+			"spouse"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
-			", \\\\",
 			"",
-			"uri\"",
-			",",
 			"h_agg.",
 			"self.eExtractor",
 			"self.pExtractor",
@@ -989,90 +991,36 @@
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
-		"wrap": false
+		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "requirements.txt",
+					"file": "main.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 207,
+						"buffer_size": 16533,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								207,
-								0
+								11427,
+								11427
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4066,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								473,
-								473
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/media/robertnn/DatosLinux/PLN-2017/requirements.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 91,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								50,
-								91
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1082,25 +1030,26 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "scripts/testMap.csv",
+					"buffer": 1,
+					"file": "scripts/eval.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10733,
+						"buffer_size": 3607,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10733,
-								10733
+								320,
+								320
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1110,25 +1059,84 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "Sinonimos",
+					"buffer": 2,
+					"file": "scripts/testQuestion.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8914,
+						"buffer_size": 1905,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4270,
-								4270
+								358,
+								358
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "booleanHelper.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2892,
+								2892
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1881.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "funaux.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								367,
+								382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1136,17 +1144,46 @@
 					},
 					"stack_index": 4,
 					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								397,
+								409
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
 				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 157.0
 	},
 	"input":
 	{
-		"height": 32.0
+		"height": 157.0
 	},
 	"layout":
 	{
@@ -1179,7 +1216,7 @@
 	"project": "qans.sublime-project",
 	"replace":
 	{
-		"height": 70.0
+		"height": 310.0
 	},
 	"save_all_on_build": true,
 	"select_file":

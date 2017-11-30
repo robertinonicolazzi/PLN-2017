@@ -9,10 +9,19 @@ templates = {
 			}}
 			''',
 'simple_amb' : '''
-					select distinct ?result
+					select distinct ?result ?resource
 					where {{
 							<http://dbpedia.org/resource/{res}> dbo:wikiPageDisambiguates ?resource.
-							?resource dbo:{prop} ?result
+							?resource dbo:{prop} ?result .
+							
+					}}
+					'''
+				,
+				'get_abstract' : '''
+					select distinct ?result
+					where {{
+							<{res}> dbo:abstract ?result.
+							
 					}}
 					'''
 				,
