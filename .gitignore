@@ -1,2 +1,3 @@
-__pycache__/
-Model/
+questionanswering/__pycache__/
+questionanswering/Model/
+*.pyc
