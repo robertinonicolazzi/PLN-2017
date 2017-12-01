@@ -34,7 +34,6 @@ class AggregationHelper:
 
 	def order_rules(self,st_question):
 		#Agarra lo mas grande
-		import pdb; pdb.set_trace()
 		complex_cont = ["NOUN","ADJ"]
 		tag_word = self.nlp_api(st_question)
 		tag_word = [(word.text,word.tag_) for word in tag_word]
@@ -57,12 +56,12 @@ class AggregationHelper:
 
 		# Casos generales
 		
-		desc_rules = ['mas joven','mas menor','mas grande','grande','ultima','mas alto','mas alta']
+		desc_rules = ['mas joven','mas menor','mas grande','grande','ultima','ultimo','mas alto','mas alta']
 		for rule in desc_rules:
 			if rule in st_question:
 				return True,"desc_"+rule
 
-		asc_rules = ['chico','mas chico']
+		asc_rules = ['chico','mas chico','primero','primera','pequeño','pequeño','chico', 'mínimo', 'minúsculo', 'diminuto','mas bajo','mas baja']
 		for rule in asc_rules:
 			if rule in st_question:
 				return True,"asc_"+rule
@@ -168,7 +167,7 @@ class AggregationHelper:
 					?result dbo:{} ?n
 				}} {}
 				'''.format(entity,properti,subproperti,st_order)
-		print(query)
+
 		answers = resolveQuery(sparql,query)
 		return set(answers)
 
@@ -192,7 +191,7 @@ class AggregationHelper:
 				}} {}
 
 				'''.format(st_type,place,properti,st_order)
-		print(query)
+
 		answers = resolveQuery(sparql,query)
 		if len(answers) == 0:
 			query = '''
@@ -204,7 +203,7 @@ class AggregationHelper:
 					}} {}
 
 					'''.format(st_type,place,properti,st_order)
-			print(query)
+
 			answers = resolveQuery(sparql,query)
 		return set(answers)
 
@@ -224,7 +223,7 @@ class AggregationHelper:
 					?result dbo:{} ?n
 				}} {}
 				'''.format(st_type,properti,st_order)
-		print(query)
+
 		answers = resolveQuery(sparql,query)
 		return set(answers)
 

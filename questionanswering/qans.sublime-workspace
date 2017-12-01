@@ -4,12 +4,168 @@
 		"selected_items":
 		[
 			[
-				"uri",
-				"uri_value"
+				"ans",
+				"answers_ls"
 			],
 			[
-				"ans",
-				"answers_copy"
+				"json",
+				"json"
+			],
+			[
+				"ls",
+				"ls_dbo_clean"
+			],
+			[
+				"p",
+				"properti"
+			],
+			[
+				"get_pr",
+				"get_properti"
+			],
+			[
+				"es",
+				"esp_sins"
+			],
+			[
+				"id",
+				"id_n"
+			],
+			[
+				"st",
+				"st_query"
+			],
+			[
+				"q",
+				"q_keys"
+			],
+			[
+				"st_",
+				"st_type"
+			],
+			[
+				"get",
+				"get_text"
+			],
+			[
+				"sin",
+				"sinonimos"
+			],
+			[
+				"dbo",
+				"dbo_props_trans"
+			],
+			[
+				"tex",
+				"text_copy"
+			],
+			[
+				"k",
+				"knows"
+			],
+			[
+				"dbo_",
+				"dbo_trans"
+			],
+			[
+				"db",
+				"dbo_props_trans"
+			],
+			[
+				"ls_",
+				"ls_dbo_trans"
+			],
+			[
+				"fin",
+				"findAll"
+			],
+			[
+				"trans",
+				"trans_es_to_en"
+			],
+			[
+				"si",
+				"sinonimos"
+			],
+			[
+				"print",
+				"printGraph"
+			],
+			[
+				"clas",
+				"classifier"
+			],
+			[
+				"cla",
+				"classifier"
+			],
+			[
+				"tran",
+				"trans_dbo"
+			],
+			[
+				"retur",
+				"return_trans_dbo"
+			],
+			[
+				"ento",
+				"en_to_es"
+			],
+			[
+				"temp",
+				"temp_prop_y"
+			],
+			[
+				"ent",
+				"en_to_es"
+			],
+			[
+				"esto",
+				"es_to_en"
+			],
+			[
+				"st_d",
+				"st_dbo"
+			],
+			[
+				"tmep",
+				"temp_prop_y"
+			],
+			[
+				"ls_E",
+				"ls_en_es"
+			],
+			[
+				"tem",
+				"temp_prop_x"
+			],
+			[
+				"keys",
+				"keys_result"
+			],
+			[
+				"lo",
+				"log_dict"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"log",
+				"log"
+			],
+			[
+				"an",
+				"answer_type"
+			],
+			[
+				"nou",
+				"noum_group"
+			],
+			[
+				"questions",
+				"questionanswering"
 			],
 			[
 				"rs",
@@ -24,28 +180,12 @@
 				"st_place"
 			],
 			[
-				"st_",
-				"st_subproperty"
-			],
-			[
 				"sub",
 				"sub_prop"
 			],
 			[
 				"de",
 				"default_comparatives"
-			],
-			[
-				"an",
-				"anwer_type"
-			],
-			[
-				"q",
-				"q_id"
-			],
-			[
-				"tem",
-				"template_ans"
 			],
 			[
 				"str",
@@ -56,28 +196,12 @@
 				"key_st"
 			],
 			[
-				"nou",
-				"nouns"
-			],
-			[
-				"st",
-				"st_ket_f"
-			],
-			[
-				"get",
-				"getNounGroups"
-			],
-			[
 				"ke",
 				"keys_restantes_copy"
 			],
 			[
 				"kes",
 				"keys_restantes"
-			],
-			[
-				"tran",
-				"train_prop_x"
 			],
 			[
 				"resul",
@@ -90,10 +214,6 @@
 			[
 				"enti",
 				"entities"
-			],
-			[
-				"db",
-				"dbpedia_group"
 			],
 			[
 				"len",
@@ -120,10 +240,6 @@
 				"important_words"
 			],
 			[
-				"k",
-				"k"
-			],
-			[
 				"e",
 				"e"
 			],
@@ -138,14 +254,6 @@
 			[
 				"res",
 				"result_entities"
-			],
-			[
-				"ent",
-				"enti"
-			],
-			[
-				"temp",
-				"temp_prop_x"
 			],
 			[
 				"Extra",
@@ -198,10 +306,6 @@
 			[
 				"en",
 				"en_ent"
-			],
-			[
-				"es",
-				"es_ent"
 			],
 			[
 				"get_e",
@@ -332,10 +436,6 @@
 				"nlp_api"
 			],
 			[
-				"keys",
-				"keys_restantes"
-			],
-			[
 				"clean",
 				"cleanQuestion"
 			],
@@ -354,10 +454,6 @@
 			[
 				"spli",
 				"split_comma"
-			],
-			[
-				"clas",
-				"clas_propiedades"
 			],
 			[
 				"fea",
@@ -382,10 +478,6 @@
 			[
 				"resE",
 				"resElegido"
-			],
-			[
-				"dbo",
-				"dboElegido"
 			],
 			[
 				"keywo",
@@ -422,98 +514,6 @@
 			[
 				"ta",
 				"tagged_sent"
-			],
-			[
-				"class",
-				"classify"
-			],
-			[
-				"test",
-				"test_sentence"
-			],
-			[
-				"test_",
-				"test_sent_features"
-			],
-			[
-				"strin",
-				"string_question"
-			],
-			[
-				"aux",
-				"auxNewVar"
-			],
-			[
-				"gol",
-				"gold_parsed_sent"
-			],
-			[
-				"eva",
-				"evalBool"
-			],
-			[
-				"tre",
-				"tree_temp"
-			],
-			[
-				"parse",
-				"parsed_sents"
-			],
-			[
-				"resu",
-				"result_tree"
-			],
-			[
-				"pi",
-				"pi_y"
-			],
-			[
-				"prob",
-				"probs_dict"
-			],
-			[
-				"clasi",
-				"clasificador"
-			],
-			[
-				"his",
-				"histories"
-			],
-			[
-				"total",
-				"total"
-			],
-			[
-				"matri",
-				"matrix_confusion"
-			],
-			[
-				"matrix",
-				"matrix_confusion"
-			],
-			[
-				"most",
-				"most_frequent_taq"
-			],
-			[
-				"confusio",
-				"confusion_matrix"
-			],
-			[
-				"in",
-				"inf"
-			],
-			[
-				"log",
-				"log_prob"
-			],
-			[
-				"cou",
-				"counts_tag"
-			],
-			[
-				"hit",
-				"hits_k"
 			]
 		]
 	},
@@ -523,51 +523,25 @@
 			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 16533,
+				"buffer_size": 16998,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/eval.py",
+			"file": "propertyExtractor.py",
 			"settings":
 			{
-				"buffer_size": 3607,
+				"buffer_size": 10448,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/testQuestion.py",
+			"file": "aggregationHelper.py",
 			"settings":
 			{
-				"buffer_size": 1905,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "booleanHelper.py",
-			"settings":
-			{
-				"buffer_size": 3832,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "funaux.py",
-			"settings":
-			{
-				"buffer_size": 2866,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates.py",
-			"settings":
-			{
-				"buffer_size": 1232,
+				"buffer_size": 6179,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -580,7 +554,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 283.0,
 		"last_filter": "",
 		"selected_items":
 		[
@@ -601,11 +575,11 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 497.0
+		"width": 392.0
 	},
 	"console":
 	{
-		"height": 310.0,
+		"height": 153.0,
 		"history":
 		[
 			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
@@ -623,45 +597,55 @@
 	},
 	"expanded_folders":
 	[
-		"/home/robert/Facultad/PLN-2017/questionanswering",
-		"/home/robert/Facultad/PLN-2017/questionanswering/scripts"
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts"
 	],
 	"file_history":
 	[
-		"/home/robert/Facultad/PLN-2017/questionanswering/aggregationHelper.py",
-		"/home/robert/Facultad/PLN-2017/questionanswering/main.py",
-		"/home/robert/Facultad/PLN-2017/questionanswering/propertyExtractor.py",
-		"/home/robert/Facultad/PLN-2017/questionanswering/scripts/eval.py",
-		"/home/robert/Facultad/PLN-2017/questionanswering/README.md",
-		"/home/robert/Facultad/PLN-2017/questionanswering/booleanHelper.py",
-		"/etc/conky/Conky Icons by Carelli.ttf",
-		"/etc/conky/conky.conf",
-		"/home/robert/Facultad/PLN-2017/questionanswering/.gitignore",
-		"/home/robert/Escritorio/morequestions",
-		"/home/robert/Facultad/PLN-2017/questionanswering/Corpus/SimpleData.json",
-		"/etc/conky/conky_orange.lua",
-		"/home/robert/Facultad/PLN-2017/questionanswering/entityExtractor.py",
-		"/home/robert/Descargas/conkyrc",
-		"/home/robert/Facultad/PLN-2017/questionanswering/scripts/gen.py",
-		"/home/robert/Facultad/PLN-2017/questionanswering/Log/complex.log",
-		"/home/robert/Facultad/PLN-2017/questionanswering/TrainData.json",
-		"/home/robert/Facultad/PLN-2017/questionanswering/customTrain.json",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/templates.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/README.md",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/requirements.txt",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
+		"/usr/local/lib/python3.4/dist-packages/coursera/coursera_dl.py",
+		"/media/robertnn/DatosLinux/CursosDeepLearning/neural-networks-deep-learning/02_neural-networks-basics/01_logistic-regression-as-a-neural-network/01_binary-classification.en.txt",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testMap.csv",
+		"/media/robertnn/DatosLinux/PLN-2017/requirements.txt",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/aggregationHelper.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/train.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Sinonimos",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/main.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleDataCustom.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Corpus/SimpleData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/bool.log",
+		"/media/robertnn/DatosLinux/untitled.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleDataCustom.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimpleData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customEval.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/spacy",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/customTrain.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/WordReferenceWrapper.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/obj/x_train.pkl",
+		"/home/robertnn/.conkyrc",
+		"/etc/conky/conky.conf",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testQuestion.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/interfaz.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/back.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/main.py",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/GUI/index.html",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/complex.log",
+		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/qans.sublime-project",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/simple.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/aggregation.log",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/aggregationHelper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/main.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Log/bool.log",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/myfile",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/booleanHelper.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/propertyExtractor.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/TrainData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/Data/types",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/eval.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/funaux.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/gen.py",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/entityExtractor.py",
 		"/media/robertnn/DatosLinux/SimpleDataCopy",
 		"/home/robertnn/Descargas/project_21812_citations.txt",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/helpers.py",
@@ -676,7 +660,6 @@
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/SimplesLog",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/out.txt",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/simple_questions.csv",
-		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/testQuestion.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/EvalData.json",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/scripts/evalDev.py",
 		"/media/robertnn/DatosLinux/PLN-2017/questionanswering/script.sh",
@@ -748,22 +731,15 @@
 		"/media/robertnn/DatosLinux/PLN-2017/parsing/util.py",
 		"/media/robertnn/DatosLinux/PLN-2017/parsing/baselines.py",
 		"/media/robertnn/DatosLinux/SharedWINLIN/ProyectoFinal.tex",
-		"/media/robertnn/DatosLinux/SharedWINLIN/Proyecto-Compiladores/Lang.hs",
-		"/media/robertnn/DatosLinux/SharedWINLIN/Proyecto-Compiladores/ProyectoSublime.sublime-project",
-		"/home/robertnn/sudo",
-		"/home/robertnn/vi",
-		"/media/robertnn/DatosLinux/PLN-2017/parsing/tests/test_util.py",
-		"/media/robertnn/DatosLinux/PLN-2017/.gitignore",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/README.md",
-		"/media/robertnn/DatosLinux/PLN-2017/tagging/scripts/stats.py"
+		"/media/robertnn/DatosLinux/SharedWINLIN/Proyecto-Compiladores/Lang.hs"
 	],
 	"find":
 	{
-		"height": 169.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
-		"height": 463.0,
+		"height": 93.0,
 		"where_history":
 		[
 			""
@@ -771,16 +747,45 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
-			"train_prop_x",
-			"cpu",
-			"lua",
-			"answertype\": \"boolean\"",
+			"print",
+			"pdb",
+			"dbo:countr",
+			"\"aggregation\": true",
 			"boolean",
-			"aggregation\": t",
-			"",
+			"download_on_demand_class",
+			"download_on_de",
+			"download_class",
+			"correctas",
+			",",
+			"-s",
+			"spouse",
+			"\\n",
+			"Natalie",
+			"origen",
+			"fecha",
+			"lugar de n",
+			"result\"",
+			"poblaci",
+			"museo",
+			"altura",
+			"episodios",
+			", ",
+			"Dame",
+			"trans_en_to_es",
+			"list",
+			"print",
+			"print ",
+			"print (",
+			"print",
+			"poblacion':",
+			"poblaci",
+			"st_ent",
+			"pri",
+			"print",
+			"import pd",
 			"h_agg",
 			"h_aggregation.",
 			"self.entExtractor",
@@ -872,44 +877,18 @@
 			"aggregation\": T",
 			"aggregati",
 			"Cuántos",
-			"get_english_dbpedia",
-			"boolean",
-			"get_entity",
-			"lego",
-			"child",
-			"get_question_property",
-			"get_english_ans",
-			"get_question_property",
-			"answertype\": \"",
-			"deathDate",
-			"print",
-			"bindin",
-			"nlp_ap",
-			"Prince",
-			"princi",
-			"nlp_api",
-			"boolean",
-			"spouse",
-			"birthDa",
-			"nació",
-			"naci",
-			"birth",
-			"number",
-			"dbo:number",
-			"dbo:nu",
-			"True",
-			"nació",
-			"True",
-			"Obama",
-			"spouse"
+			"get_english_dbpedia"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			", \\\\",
 			"",
+			"uri\"",
+			",",
 			"h_agg.",
 			"self.eExtractor",
 			"self.pExtractor",
@@ -991,12 +970,12 @@
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
-		"wrap": true
+		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1005,15 +984,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16533,
+						"buffer_size": 16998,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11427,
-								11427
+								5388,
+								5388
 							]
 						],
 						"settings":
@@ -1023,7 +1002,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1898.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1031,48 +1010,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "scripts/eval.py",
+					"file": "propertyExtractor.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3607,
+						"buffer_size": 10448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								320,
-								320
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "scripts/testQuestion.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1905,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								358,
-								358
+								9781,
+								9781
 							]
 						],
 						"settings":
@@ -1082,27 +1032,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4448.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "booleanHelper.py",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "aggregationHelper.py",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3832,
+						"buffer_size": 6179,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2892,
-								2892
+								1820,
+								1820
 							]
 						],
 						"settings":
@@ -1111,67 +1061,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1881.0,
+						"translation.y": 267.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "funaux.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2866,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								367,
-								382
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "templates.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1232,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								397,
-								409
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1179,11 +1072,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 157.0
+		"height": 24.0
 	},
 	"input":
 	{
-		"height": 157.0
+		"height": 32.0
 	},
 	"layout":
 	{
@@ -1216,7 +1109,7 @@
 	"project": "qans.sublime-project",
 	"replace":
 	{
-		"height": 310.0
+		"height": 70.0
 	},
 	"save_all_on_build": true,
 	"select_file":

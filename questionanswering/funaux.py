@@ -43,14 +43,16 @@ def resolveQuery(sparql, query):
 
 def resolveQueryAmb(sparql, query):
 	answers = []
+	answers_ls = []
 	sparql.setQuery(query)
 	results = sparql.query().convert()
 	uri = set()
 	for result in results["results"]["bindings"]:
+		answers_ls.append(result["result"]["value"])
 		answers.append((result["resource"]["value"],result["result"]["value"]))
 		uri.add(result["resource"]["value"])
 
-	return answers,list(uri)
+	return answers_ls,answers,list(uri)
 
 def filter_answers(uri,answers):
 	answers_copy = []

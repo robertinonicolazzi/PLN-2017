@@ -17,13 +17,13 @@ templates = {
 					}}
 					'''
 				,
-				'get_abstract' : '''
-					select distinct ?result
-					where {{
-							<{res}> dbo:abstract ?result.
-							
-					}}
-					'''
+'get_abstract' : '''
+	select distinct ?result
+	where {{
+			<{res}> dbo:abstract ?result.
+		    FILTER (lang(?result) = 'es')			
+	}}
+	'''
 				,
 'simple_rev': '''
 				select distinct ?result

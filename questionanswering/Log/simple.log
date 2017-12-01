@@ -1,57 +1,29 @@
-¿Quien es el magistrado de Rennes?
-Rennes,magistrado
-SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}RESPUESTAS 
-211373----Model: 
+¿Quién es la pareja de Barack Obama?
+pareja,Barack Obama
+Select distinct ?uri where { dbr:Barack_Obama dbo:spouse ?uri }RESPUESTAS 
+http://dbpedia.org/resource/Nobel_Peace_Prize----Model: 
 ---------------------------------------
-¿Quien es el regidor de Rennes?
-Rennes,regidor
-SELECT DISTINCT ?uri WHERE {dbr:Rennes dbo:mayor ?uri .}RESPUESTAS 
-211373----Model: 
----------------------------------------
-¿Quien es el hospedador de BBC Special Wildlife?
-hospedador, BBC Wildlife Specials
-SELECT DISTINCT ?uri WHERE { dbr:BBC_Wildlife_Specials dbo:presenter ?uri . }RESPUESTAS 
-29----Model: 
----------------------------------------
-¿Quien es el convidante de BBC Special Wildlife?
-convidante, BBC Wildlife Specials
-SELECT DISTINCT ?uri WHERE { dbr:BBC_Wildlife_Specials dbo:presenter ?uri . }RESPUESTAS 
-29----Model: 
----------------------------------------
-¿Cual fue la causa de fallecimiento de Bruce Carver?
-Bruce Carver, causa fallecimiento
-SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}RESPUESTAS 
-http://dbpedia.org/resource/Montpelier,_Idaho----Model: 
----------------------------------------
-¿Cual fue la causa de defuncion de Bruce Carver?
-Bruce Carver, causa defuncion
-SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}RESPUESTAS 
-http://dbpedia.org/resource/Montpelier,_Idaho----Model: 
----------------------------------------
-¿Cual fue la causa de deceso de Bruce Carver?
-Bruce Carver, causa deceso
-SELECT DISTINCT ?uri WHERE {dbr:Bruce_Carver dbo:deathCause ?uri .}RESPUESTAS 
-http://dbpedia.org/resource/Montpelier,_Idaho----Model: 
----------------------------------------
-¿Quien es el conquistador de Eris?
-conquistador,Eris
-SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eris_(dwarf_planet)> <http://dbpedia.org/ontology/discoverer> ?uri . }RESPUESTAS 
-http://dbpedia.org/resource/Arachnida----Model: 
----------------------------------------
-¿Quien es el colonizador de Eris?
-colonizador,Eris
-SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Eris_(dwarf_planet)> <http://dbpedia.org/ontology/discoverer> ?uri . }RESPUESTAS 
-http://dbpedia.org/resource/Arachnida----Model: 
+¿Quien es el autor del libro Los pilares de la Tierra?
+autor,libro,Los pilares de la Tierra
+SELECT DISTINCT ?uri WHERE {dbr:The_Pillars_of_the_Earth dbo:author ?uri .}RESPUESTAS 
 ---------------------------------------
 ¿Cual es el lenguaje legal de Surinam?
 lenguaje legal,Surinam
 SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}RESPUESTAS 
-573311----Model: 
+http://dbpedia.org/resource/Indo-Surinamese----Model: 
+http://dbpedia.org/resource/Afro-Surinamese----Model: 
+http://dbpedia.org/resource/Javanese_people----Model: 
+http://dbpedia.org/resource/Multiracial----Model: 
+http://dbpedia.org/resource/Maroon_(people)----Model: 
 ---------------------------------------
 ¿Cual es el habla legal de Surinam?
 habla legal,Surinam
 SELECT DISTINCT ?uri WHERE {dbr:Suriname dbo:officialLanguage ?uri .}RESPUESTAS 
-573311----Model: 
+http://dbpedia.org/resource/Indo-Surinamese----Model: 
+http://dbpedia.org/resource/Afro-Surinamese----Model: 
+http://dbpedia.org/resource/Javanese_people----Model: 
+http://dbpedia.org/resource/Multiracial----Model: 
+http://dbpedia.org/resource/Maroon_(people)----Model: 
 ---------------------------------------
 ¿Cual es el lugar de origen de Bach?
 lugar de origen,Bach
@@ -60,30 +32,22 @@ SELECT DISTINCT ?uri WHERE {dbr:Johann_Sebastian_Bach dbo:birthPlace ?uri .}RESP
 ¿Quien es el inventor de Family Guy?
 inventor,Family Guy
 SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }RESPUESTAS 
-272----Model: 
+http://dbpedia.org/resource/Walter_Murphy----Model: 
+http://dbpedia.org/resource/Ron_Jones_(composer)----Model: 
 ---------------------------------------
 ¿Quien es el productor de Family Guy?
 inventor,Family Guy
 SELECT DISTINCT ?uri WHERE { dbr:Family_Guy dbo:creator ?uri . }RESPUESTAS 
-272----Model: 
----------------------------------------
-¿Cual es el dinero de China?
-dinero,China
-SELECT DISTINCT ?uri WHERE {dbr:China dbo:currency ?uri .}RESPUESTAS 
-1376049000----Model: 
----------------------------------------
-¿Cual es el metálico de China?
-metálico,China
-SELECT DISTINCT ?uri WHERE {dbr:China dbo:currency ?uri .}RESPUESTAS 
-1376049000----Model: 
+http://dbpedia.org/resource/Walter_Murphy----Model: 
+http://dbpedia.org/resource/Ron_Jones_(composer)----Model: 
 ---------------------------------------
 ¿Quien fue el delineante del Brooklyn Bridge ?
 delineante,Brooklyn Bridge
 SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}RESPUESTAS 
-84.2772----Model: 
+http://dbpedia.org/resource/East_River----Model: 
 ---------------------------------------
 ¿Quien fue el proyectista del Brooklyn Bridge ?
 proyectista,Brooklyn Bridge
 SELECT DISTINCT ?uri WHERE {dbr:Brooklyn_Bridge dbo:architect ?uri .}RESPUESTAS 
-84.2772----Model: 
+http://dbpedia.org/resource/East_River----Model: 
 ---------------------------------------

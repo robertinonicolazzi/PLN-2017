@@ -25,6 +25,11 @@ class BooleanHelper:
 			q_list = q_clean.split(" ")
 			indextipo = q_list.index("una")
 			return "type", q_list[indextipo+1]
+
+		if "es un" in q_clean:
+			q_list = q_clean.split(" ")
+			indextipo = q_list.index("un")
+			return "type", q_list[indextipo+1]
 		
 		# Existe 
 		if "existe" in q_clean or "hay algun" in q_clean or "hay" in q_clean:

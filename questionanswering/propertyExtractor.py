@@ -266,6 +266,7 @@ class PropertyExtractor:
         results = sparql.query().convert()
 
 
+
         for result in results["results"]["bindings"]:
             value = result["p"]["value"]
             if any(s in value for s in self.igProp):
@@ -274,19 +275,20 @@ class PropertyExtractor:
                 prop = value.split('/')[4]
                 if len(prop) <= 3:
                     continue
-            if "ontology" in value or "property" in value:
+            if "ontology" in value:
                 prop = value.split('/')[4]
-                ls_dbo_clean.append(self.clean_dbo(prop))
-                ls_dbo.append(prop)
+                if not self.clean_dbo(prop) in ls_dbo_clean:
+                    ls_dbo_clean.append(self.clean_dbo(prop))
+                    ls_dbo.append(prop)
 
 
         # Traducimos las propiedades
         ls_dbo_clean = ls_dbo_clean
 
-        print("Traduciendo propiedades...", len(ls_dbo_clean))
-        if len(ls_dbo_clean) >= 100:
-            ls_dbo_clean = ls_dbo_clean[:100]
-            ls_dbo = ls_dbo[:100]
+        print("Traduciendo propiedades...")
+        if len(ls_dbo_clean) >= 200:
+            ls_dbo_clean = ls_dbo_clean[:200]
+            ls_dbo = ls_dbo[:200]
             
         ls_dbo_trans = self.trans_en_to_es(ls_dbo_clean)
         print("OK - Propiedades traducidas")
@@ -301,8 +303,6 @@ class PropertyExtractor:
             prob = self.pipeline.predict_proba([test])[0][1]
 
             choose.append((ls_dbo[i],prob))
-            if ls_dbo_clean[i] == "spouse":
-                print (test)
 
         choose = sorted(choose, key=operator.itemgetter(1),reverse=True)
         if not len(choose) == 0:

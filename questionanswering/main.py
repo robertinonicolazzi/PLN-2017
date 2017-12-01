@@ -83,6 +83,7 @@ class ClassAnswerType:
 
         self.pExtractor.train_prop_x = train_prop_x
         self.pExtractor.train_prop_y = train_prop_y
+        self.pExtractor.train()
         self.eExtractor = EntityExtractor(self.nlp_api)
 
     # -------------------------------------------------------------
@@ -144,18 +145,24 @@ class ClassAnswerType:
         return set(answers)
 
     def get_english_ans(self, entity, properti, contexto=""):
+        contexto = " ".join([a.strip() for a in contexto.split()])
+        print(contexto)
         sparql = self.sparqlEn
         query = templates.get('simple',"")
         query = query.format(res=entity, prop=properti)
         answers = resolveQuery(sparql, query)
-
+        answers_ls = []
         if len(answers) == 0:
             query = templates.get('simple_amb',"")
             query = query.format(res=entity, prop=properti)
-            answers, uri = resolveQueryAmb(sparql, query)
+            answers_ls,answers, uri = resolveQueryAmb(sparql, query)
             if len(uri) > 1:
+
                 sel_uri = self.desambiguar(uri,contexto)
                 answers = filter_answers(sel_uri,answers)
+            else:
+                answers = answers_ls
+
 
         return set(answers)
 
@@ -166,7 +173,14 @@ class ClassAnswerType:
         query = templates.get('get_abstract',"")
         for u in uris:
             score = 0
-            query = query.format(res=u)
+            print(u)
+            query = '''
+                    select distinct ?result
+                    where {{
+                            <'''+u+'''> dbo:abstract ?result.
+                            FILTER (lang(?result) = 'es')           
+                    }}
+            '''
             answers = resolveQuery(sparql, query)
             abstract = ""
             if not len(answers) == 0:
@@ -175,7 +189,7 @@ class ClassAnswerType:
                 if a in abstract:
                     score += 1
             uri_value.append((u,score))
-        selected_uri = sorted(uri_value, key=operator.itemgetter(1),reverse=True)[0]
+        selected_uri = sorted(uri_value, key=operator.itemgetter(1),reverse=True)[0][0]
         return selected_uri
 
     # -----------------------------------------------------------------------

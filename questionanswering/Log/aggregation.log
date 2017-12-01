@@ -10,22 +10,18 @@ SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}RESPUESTAS
 Louvre,invitados
 SELECT DISTINCT ?c WHERE {dbr:Louvre dbo:numberOfVisitors ?c}RESPUESTAS 
 ---------------------------------------
-¿Cuanto se gasto en Pulp Fiction?
-gasto,Pulp Fiction
-SELECT DISTINCT ?c WHERE {  <http://dbpedia.org/resource/Pulp_Fiction> <http://dbpedia.org/ontology/budget> ?c . }RESPUESTAS 
+¿Que ciudad tiene la mayor cantidad habitantes?
+ciudad, mayor cantidad habitantes
+SELECT DISTINCT ?uri WHERE {?uri a dbo:City .  ?uri dbo:populationTotal ?pop . } ORDER BY DESC(?pop) OFFSET 0 LIMIT 1RESPUESTAS 
+http://dbpedia.org/resource/Palace_of_Buddies----Model: 
 ---------------------------------------
-¿Cual es la talla de Claudia Schiffer?
-talla,Claudia Schiffer
-SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}RESPUESTAS 
-http://dbpedia.org/resource/Matthew_Vaughn----Model: 
----------------------------------------
-¿Cual es la elevacion de Claudia Schiffer?
-elevacion,Claudia Schiffer
-SELECT DISTINCT ?c WHERE {dbr:Claudia_Schiffer dbo:height ?c .}RESPUESTAS 
-http://dbpedia.org/resource/Matthew_Vaughn----Model: 
+¿Que ciudad tiene la mayor cantidad residentes?
+ciudad, mayor cantidad residentes
+SELECT DISTINCT ?uri WHERE {?uri a dbo:City .  ?uri dbo:populationTotal ?pop . } ORDER BY DESC(?pop) OFFSET 0 LIMIT 1RESPUESTAS 
+http://dbpedia.org/resource/Palace_of_Buddies----Model: 
 ---------------------------------------
 ¿Que libro tiene el mayor cifra de paginas?
 libro, mayor cifra de paginas
 SELECT DISTINCT ?uri WHERE {?uri a dbo:Book . ?uri dbo:numberOfPages ?n .} ORDER BY DESC(?n) OFFSET 0 LIMIT 1RESPUESTAS 
-http://dbpedia.org/resource/Selling_Blue_Elephants----Model: 
+http://dbpedia.org/resource/Night_Witches----Model: 
 ---------------------------------------
